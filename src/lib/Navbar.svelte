@@ -1,0 +1,59 @@
+<!-- Navbar.svelte -->
+<script>
+  let isMenuOpen = false;
+
+  function toggleMenu() {
+    isMenuOpen = !isMenuOpen;
+  }
+</script>
+
+<nav class="bg-white text-black p-4 ">
+  <div class="p-4 flex items-center justify-between w-full  b">
+    <div class="text-xl font-semibold">
+      <a href="/">Your Logo </a>
+    </div>
+
+    <!-- Hamburger Menu Button -->
+    <button
+      class="lg:hidden focus:outline-none"
+      on:click={toggleMenu}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        />
+      </svg>
+    </button>
+
+    <!-- Navigation Links (hidden on small screens) -->
+    <div class="hidden lg:flex  space-x-8 text-lg">
+      <a href="#" class="hover:underline">Security Awareness</a>
+      <a href="#" class="hover:underline">Technology</a>
+      <a href="/art" class="hover:underline">Art</a>
+      <a href="#" class="hover:underline">Software Development</a>
+    </div>
+  </div>
+
+  <!-- Responsive Mobile Menu (shown on small screens) -->
+  {#if isMenuOpen}
+    <div class="lg:hidden mt-2 space-y-2">
+      <a href="#" class="block px-4 py-2 hover:bg-gray-700">Security Awareness</a>
+      <a href="#" class="block px-4 py-2 hover:bg-gray-700">Technology</a>
+      <a href="#" class="block px-4 py-2 hover:bg-gray-700">Art</a>
+      <a href="#" class="block px-4 py-2 hover:bg-gray-700">Software Development</a>
+    </div>
+  {/if}
+</nav>
+
+<style>
+  /* Style your navbar as needed */
+</style>
