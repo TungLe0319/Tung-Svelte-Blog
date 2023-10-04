@@ -6,13 +6,13 @@
   
   /* Apply global styles to the body */
   body {
-    background-color: #0a2540; 
+   
     @apply h-screen;
   }
 
   /* Style the container with a blue/white glow on hover */
   .container {
-    @apply max-w-screen-md p-4 shadow-md;
+    @apply max-w-screen-md p-4 shadow-sm;
  
   }
 
@@ -30,3 +30,6 @@
   a:hover {
     text-decoration: none;
   }
+
+
+  

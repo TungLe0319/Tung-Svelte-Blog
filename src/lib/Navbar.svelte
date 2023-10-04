@@ -7,10 +7,11 @@
   }
 </script>
 
-<nav class="bg-white text-black p-4 ">
-  <div class="p-4 flex items-center justify-between w-full  b">
+<nav class="bg-white text-black p-4  shadow-md navbar">
+  <div class=" flex items-center justify-between w-full  b">
     <div class="text-xl font-semibold">
-      <a href="/">Your Logo </a>
+      <a href="/">
+      <img src="src\assets\images\mushroom.png" alt="Mushroom Icon" width="60" > </a>
     </div>
 
     <!-- Hamburger Menu Button -->
@@ -54,6 +55,38 @@
   {/if}
 </nav>
 
-<style>
+<style lang="scss">
+ 
   /* Style your navbar as needed */
+ a {
+  position: relative;
+  transition: transform 0.3s;
+  text-decoration: none;
+  font-weight: 600;
+
+
+  &:hover {
+    transform: scaleX(1);
+     text-decoration: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: orange;
+    transform-origin: 0 100%;
+    transform: scaleX(0);
+    transition: transform 0.3s, width 0.3s;
+    
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+    width: 100%;
+  }
+}
 </style>
