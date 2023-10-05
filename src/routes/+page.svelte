@@ -19,9 +19,30 @@
     Top 10 Recent Posts
   </h1>
 </div>
-{#each items as item, index (item)}
+  {#each posts1 as post, index (post.title)}
+      <PostPreviewCard {post} key={index} />
+    {/each}
+</div>
+</div>
 
-<div key={index} class=" post p-3 my-2 shadow-md flex space-x-2 bg-red-300 rounded-md">
+
+<script>
+  import PostPreviewCard from "../components/post-preview-card.svelte";
+
+
+import posts from "../lib/posts.js"
+let posts1 = posts
+
+</script>
+
+
+<style>
+
+</style>
+
+
+
+<!-- <div key={index} class=" post p-3 my-2 shadow-md flex space-x-2 bg-red-300 rounded-md">
   
     <img src="https://www.zdnet.com/a/img/resize/605df164b50d7127344cce4c41e5e2a36ac951b4/2023/04/05/e0478a88-b3ed-4516-8459-e0b919b4b2bc/artificial-intelligence.jpg?auto=webp&width=1280" alt="Blog-post " class=" post-image w-1/2 rounded-md shadow-xl shadow-slate-400 hover:shadow-xl hover:shadow-red-300">
   
@@ -33,21 +54,5 @@
     Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi illo, omnis quo consectetur architecto voluptatem minima atque odio ex eaque? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Exercitationem quos animi blanditiis quibusdam quod ipsam explicabo asperiores. Consequuntur, eveniet ex?
   </div>
 </div>
-</div>
+</div> -->
 
-{/each}
-
-
-</div>
-</div>
-
-
-<script>
-import Navbar from "../lib/Navbar.svelte";
-  let items = Array(10).fill(0); // Create an array of 10 items
-</script>
-
-
-<style>
-
-</style>
