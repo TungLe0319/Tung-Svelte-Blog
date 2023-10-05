@@ -21,7 +21,7 @@
   </h1>
 </div>
   {#each posts as post, index (post.title)}
-      <PostPreviewCard {post} key={index} />
+      <PostPreviewCard {post} />
     {/each}
 </div>
 </div>
