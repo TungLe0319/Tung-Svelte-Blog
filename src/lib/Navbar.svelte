@@ -9,10 +9,12 @@
 
 <nav class="bg-white text-black p-4  shadow-md navbar">
   <div class=" flex items-center justify-between w-full  b">
-    <div class="text-xl font-semibold">
-      <a href="/">
-      <img src="src\assets\images\mushroom.png" alt="Mushroom Icon" width="60" > </a>
-    </div>
+   <div class="text-xl font-semibold icon-container">
+  <a href="/">
+    <img src="src\assets\images\mushroom.png" alt="Mushroom Icon" width="60" class="icon-img-1">
+    <img src="src\assets\images\mushroomcolor.png" alt="Mushroom Icon" width="60" class="icon-img-2">
+  </a>
+</div>
 
     <!-- Hamburger Menu Button -->
     <button
@@ -38,9 +40,9 @@
     <!-- Navigation Links (hidden on small screens) -->
     <div class="hidden lg:flex  space-x-8 text-lg">
       <a href="#" class="hover:underline">Security Awareness</a>
-      <a href="#" class="hover:underline">Technology</a>
+      <a href="/information-technology" class="hover:underline">Information Technology</a>
       <a href="/art" class="hover:underline">Art</a>
-      <a href="#" class="hover:underline">Software Development</a>
+      <a href="/software-development" class="hover:underline">Software Development</a>
     </div>
   </div>
 
@@ -48,9 +50,9 @@
   {#if isMenuOpen}
     <div class="lg:hidden mt-2 space-y-2">
       <a href="#" class="block px-4 py-2 hover:bg-gray-700">Security Awareness</a>
-      <a href="#" class="block px-4 py-2 hover:bg-gray-700">Technology</a>
-      <a href="#" class="block px-4 py-2 hover:bg-gray-700">Art</a>
-      <a href="#" class="block px-4 py-2 hover:bg-gray-700">Software Development</a>
+      <a href="/information-technology" class="block px-4 py-2 hover:bg-gray-700">Information Technology</a>
+     <a href="/art" class="hover:underline">Art</a>
+        <a href="/software-development" class="hover:underline">Software Development</a>
     </div>
   {/if}
 </nav>
@@ -88,5 +90,25 @@
     transform: scaleX(1);
     width: 100%;
   }
+}
+
+
+.icon-img-1 {
+  width: 60px;
+  transition: opacity 0.3s ease-in-out; /* Define the transition property */
+}
+.icon-img-2 {
+ 
+
+   opacity: 0;
+   width: 0;
+}
+.icon-container:hover .icon-img-1 {
+  opacity: 0; 
+  width: 0;
+}
+
+.icon-container:hover .icon-img-2 {
+  opacity: 1; width: 60px; 
 }
 </style>

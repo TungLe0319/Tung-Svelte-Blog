@@ -1,11 +1,9 @@
 
 
 
-<body>
+<div class="page-container">
 
-
- 
-</body>
+</div>
 
 
 <script>

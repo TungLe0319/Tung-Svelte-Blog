@@ -7,6 +7,6 @@
 
 <Navbar />
 
-<main class="pt-12">
+<main class="w-full">
   <slot />
 </main>
