@@ -13,13 +13,14 @@
 </div>
 
 
-<div class="posts-container  mt-2 flex flex-col justify-center bg-purple-600 p-2 ">
+<div class="posts-container  mt-2 flex flex-col justify-center p-2 ">
 <div class="text-center mb-2">
-  <h1>
+  <h1 class="text-black">
+  
     Top 10 Recent Posts
   </h1>
 </div>
-  {#each posts1 as post, index (post.title)}
+  {#each posts as post, index (post.title)}
       <PostPreviewCard {post} key={index} />
     {/each}
 </div>
@@ -31,7 +32,7 @@
 
 
 import posts from "../lib/posts.js"
-let posts1 = posts
+
 
 </script>
 

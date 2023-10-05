@@ -1,105 +1,125 @@
 const posts = [
   {
-    image: 'tech-image-1.jpg',
-    title: 'The Future of Artificial Intelligence',
-    description: 'Exploring the latest advancements and trends in AI technology.'
+    id: "7c5e38cc-5b6e-4e11-b1dd-7d92acdeff81", // Unique GUID ID
+    image:
+      "https://img.freepik.com/free-vector/robotic-artificial-intelligence-technology-smart-lerning-from-bigdata_1150-48136.jpg?w=996&t=st=1696532542~exp=1696533142~hmac=27446533c4a9846e9edc67a297c322ab94a794c103c06e67572bbcdb3280f514",
+    title: "The Future of Artificial Intelligence",
+    description:
+      "Exploring the latest advancements and trends in AI technology.",
+    author: "John Doe", // Author name
+    date: "2023-10-12", // Date of publication
+    likes: 42, // Number of likes
+    comments: [
+      {
+        id: "a7d2f9e6-2d75-4dcb-9c6e-20de04ea792f", // Unique GUID ID for comments
+        text: "Great article! Thanks for sharing.",
+        author: "Alice Smith", // Comment author
+        date: "2023-10-13", // Date of comment
+      },
+      // More comments can be added here
+    ],
   },
   {
-    image: 'tech-image-2.jpg',
-    title: 'Blockchain and Cryptocurrency Revolution',
-    description: 'Discover how blockchain technology is changing the financial industry.'
+    id: "f8e9ce3a-6b45-4b99-980a-d12ff7a568e9",
+    image:
+      "https://img.freepik.com/free-photo/medium-shot-man-wearing-vr-glasses_23-2149126949.jpg?w=1380&t=st=1696532578~exp=1696533178~hmac=3bfbf904a9933c0b284e12bf1f8f2670c24a8ad270aa6d4911b22bef344e2b84",
+    title: "The Evolution of Virtual Reality",
+    description:
+      "A journey through the development of VR technology and its applications.",
+    author: "Emily Johnson",
+    date: "2023-10-18",
+    likes: 28,
+    comments: [
+      {
+        id: "7f0ea4ac-8c59-4ebf-a8b3-46d4a5e2e6a1",
+        text: "I love VR! Can't wait to see what the future holds.",
+        author: "Mark Wilson",
+        date: "2023-10-19",
+      },
+      // More comments can be added here
+    ],
   },
   {
-    image: 'tech-image-3.jpg',
-    title: 'The Rise of Quantum Computing',
-    description: 'Explaining the principles and potential applications of quantum computing.'
+    id: "9b0ea34d-1cf6-4f61-b23d-35aa6e986b2f",
+    image:
+      "https://img.freepik.com/free-vector/technology-particle-dots-vector-5g-digital-corporate-background_53876-110570.jpg?w=1380&t=st=1696532606~exp=1696533206~hmac=7bc4b1b2a3f2436ab60415dba20f173dc01d64c2d4f0171a58813b3723fcc35b",
+    title: "The Power of 5G Networks",
+    description:
+      "Exploring the impact of 5G technology on industries and everyday life.",
+    author: "Sarah Davis",
+    date: "2023-10-20",
+    likes: 35,
+    comments: [
+      {
+        id: "4a92c982-7ff7-41a3-a28e-ec11f6e6c94d",
+        text: "5G is a game-changer!",
+        author: "Michael Lee",
+        date: "2023-10-21",
+      },
+      // More comments can be added here
+    ],
   },
   {
-    image: 'tech-image-4.jpg',
-    title: 'Internet of Things (IoT) in Everyday Life',
-    description: 'How IoT devices are transforming our homes and workplaces.'
+    id: "d865f91e-d91a-4d04-86ab-d0f90c3a7a44",
+    image:
+      "https://img.freepik.com/free-photo/spiral-colorful-lights-is-surrounded-by-galaxy-stars_1340-40227.jpg?t=st=1696532628~exp=1696536228~hmac=c9f67b3bbfdfaef9a1e5b406a97a2c5c4bcbe8f53adb4d600ac63ac2f8e742a9&w=1380",
+    title: "The Future of Quantum Internet",
+    description:
+      "A glimpse into the potential of quantum internet for secure communication.",
+    author: "Alexandra Turner",
+    date: "2023-10-22",
+    likes: 19,
+    comments: [
+      {
+        id: "3b7a9c61-546b-4b45-89de-8dc6ed45e0d7",
+        text: "Quantum internet sounds fascinating!",
+        author: "Jessica White",
+        date: "2023-10-23",
+      },
+      // More comments can be added here
+    ],
   },
   {
-    image: 'tech-image-5.jpg',
-    title: 'Cybersecurity Threats and Solutions',
-    description: 'Stay informed about the latest cybersecurity challenges and strategies.'
+    id: "75ef95a4-6f4c-4335-b7e1-c58a4637b496",
+    image:
+      "https://img.freepik.com/free-photo/creative-artists-work-painting-colorful-patterns-generated-by-ai_188544-43093.jpg?t=st=1696532665~exp=1696536265~hmac=0ba82dc7f97a36d2500f91f00e334ce515b4ca031e1feaf2e67f2dedd3e2b50f&w=1380",
+    title: "The Impact of AI in Education",
+    description:
+      "Examining how artificial intelligence is transforming the education sector.",
+    author: "Daniel Brown",
+    date: "2023-10-24",
+    likes: 42,
+    comments: [
+      {
+        id: "209e5ed5-2e01-490a-8454-8f8dd77d5ed1",
+        text: "AI has the potential to revolutionize learning!",
+        author: "Sophie Clark",
+        date: "2023-10-25",
+      },
+      // More comments can be added here
+    ],
   },
   {
-    image: 'tech-image-6.jpg',
-    title: 'Big Data Analytics: Unleashing Data Potential',
-    description: 'Harnessing the power of big data for business insights and decision-making.'
+    id: "4d6aa1c7-7f79-4c91-8c93-68a4b84d03b7",
+    image:
+      "https://img.freepik.com/free-photo/sunset-sky-powers-wind-solar-energy-generated-by-ai_188544-26193.jpg?t=st=1696532714~exp=1696536314~hmac=2808a66ba648610168a3c1d92685d5d62d5f94c995777013da7e8f4122dbc8f3&w=1380",
+    title: "The Future of Sustainable Tech",
+    description:
+      "Exploring innovative technologies for a greener and more sustainable future.",
+    author: "David Wilson",
+    date: "2023-10-26",
+    likes: 31,
+    comments: [
+      {
+        id: "b1c826e7-3a12-4840-9d70-0d2832b31a61",
+        text: "Sustainability is key to our future!",
+        author: "Olivia Smith",
+        date: "2023-10-27",
+      },
+      // More comments can be added here
+    ],
   },
-  {
-    image: 'tech-image-7.jpg',
-    title: 'Robotics and Automation in Industry',
-    description: 'Exploring the role of robots and automation in manufacturing and beyond.'
-  },
-  {
-    image: 'tech-image-8.jpg',
-    title: 'Artificial Intelligence in Healthcare',
-    description: 'How AI is revolutionizing the healthcare industry for better patient care.'
-  },
-  {
-    image: 'tech-image-9.jpg',
-    title: 'Evolving Mobile Technologies',
-    description: 'Keeping up with the latest advancements in mobile tech and smartphones.'
-  },
-  {
-    image: 'tech-image-10.jpg',
-    title: '3D Printing: Shaping the Future',
-    description: 'The innovative world of 3D printing and its applications in various fields.'
-  },
-  {
-    image: 'tech-image-11.jpg',
-    title: 'Space Exploration and Technology',
-    description: 'Updates on space missions, rockets, and the technology behind them.'
-  },
-  {
-    image: 'tech-image-12.jpg',
-    title: 'Augmented Reality (AR) in Entertainment',
-    description: 'How AR is enhancing gaming and entertainment experiences.'
-  },
-  {
-    image: 'tech-image-13.jpg',
-    title: 'Clean Energy and Sustainable Tech',
-    description: 'Advancements in renewable energy and sustainable technology solutions.'
-  },
-  {
-    image: 'tech-image-14.jpg',
-    title: 'Future of Self-Driving Cars',
-    description: 'The road ahead for autonomous vehicles and their impact on transportation.'
-  },
-  {
-    image: 'tech-image-15.jpg',
-    title: 'Advances in Biotechnology',
-    description: 'Breaking down the latest breakthroughs in the field of biotechnology.'
-  },
-  {
-    image: 'tech-image-16.jpg',
-    title: 'Smart Home Innovations',
-    description: 'Exploring the convenience and connectivity of smart home technologies.'
-  },
-  {
-    image: 'tech-image-17.jpg',
-    title: 'Emerging Tech Startups to Watch',
-    description: 'Profiles of promising tech startups disrupting various industries.'
-  },
-  {
-    image: 'tech-image-18.jpg',
-    title: 'Gaming Industry Trends',
-    description: 'Stay updated on the latest trends and developments in the gaming world.'
-  },
-  {
-    image: 'tech-image-19.jpg',
-    title: '5G Technology and Its Impact',
-    description: 'The transformative potential of 5G technology in communication.'
-  },
-  {
-    image: 'tech-image-20.jpg',
-    title: 'Futuristic Wearable Gadgets',
-    description: 'A glimpse into the world of wearable technology and its applications.'
-  }
+  // Add more posts with similar structures
 ];
-
 
 export default posts;
