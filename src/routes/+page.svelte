@@ -19,9 +19,11 @@
     Top 10 Recent Posts
   </h1>
 </div>
-<div class=" post p-3 shadow-md flex space-x-2 bg-red-300 rounded-md">
+{#each items as item, index (item)}
+
+<div key={index} class=" post p-3 my-2 shadow-md flex space-x-2 bg-red-300 rounded-md">
   
-    <img src="https://www.zdnet.com/a/img/resize/605df164b50d7127344cce4c41e5e2a36ac951b4/2023/04/05/e0478a88-b3ed-4516-8459-e0b919b4b2bc/artificial-intelligence.jpg?auto=webp&width=1280" alt="Blog-post " class=" post-image w-1/2 rounded-md shadow-xl shadow-slate-400">
+    <img src="https://www.zdnet.com/a/img/resize/605df164b50d7127344cce4c41e5e2a36ac951b4/2023/04/05/e0478a88-b3ed-4516-8459-e0b919b4b2bc/artificial-intelligence.jpg?auto=webp&width=1280" alt="Blog-post " class=" post-image w-1/2 rounded-md shadow-xl shadow-slate-400 hover:shadow-xl hover:shadow-red-300">
   
 <div class="post-body p-4 w-1/2  space-y-4  flex-col flex  items-center  bg-slate-400">
   <div class="post-title  text-xl font-bold">
@@ -33,13 +35,16 @@
 </div>
 </div>
 
+{/each}
+
+
 </div>
 </div>
 
 
 <script>
 import Navbar from "../lib/Navbar.svelte";
-
+  let items = Array(10).fill(0); // Create an array of 10 items
 </script>
 
 
