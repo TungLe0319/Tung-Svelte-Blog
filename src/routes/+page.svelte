@@ -5,7 +5,7 @@
 
 
 <div class="text-center mb-2">
-<div class=" flex justify-center">
+<div class=" flex justify-center" in:fade={intro}>
   <img src="src\assets\images\ensocircle.png" alt="" class="infinite-rotate  w-1/2  ">
 </div>
 
@@ -27,7 +27,17 @@
 
 import posts from "../lib/posts.js"
 
+ import { fade } from 'svelte/transition';
 
+  // This transition defines the animation when entering a page
+  const intro = (node) => {
+    return {
+      duration: 30,
+      delay: 0,
+      easing: 'ease',
+      css: (t) => `opacity: ${t}`,
+    };
+  };
 </script>
 
 

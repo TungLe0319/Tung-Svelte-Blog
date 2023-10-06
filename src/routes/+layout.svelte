@@ -7,7 +7,7 @@
   // This transition defines the animation when entering a page
   const intro = (node) => {
     return {
-      duration: 300,
+      duration: 3000,
       delay: 0,
       easing: 'ease',
       css: (t) => `opacity: ${t}`,
@@ -17,6 +17,6 @@
 
 <Navbar />
 
-<main class="w-full bg-red-50" transition:fade={intro}>
+<main class="w-full " transition:fade={intro}>
   <slot />
 </main>
