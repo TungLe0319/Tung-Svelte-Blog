@@ -5,7 +5,7 @@
 <!-- BlogPost.svelte -->
 
 <div class="blog-post-card ">
-  <a class="link-container" href={`technology/blog/${post.id}`}>
+  <a class="link-container" href={`blog/${post.id}`}>
     <img src={post.image} alt="Blog-post-img" class="blog-post-card-image" />
     <div class="blog-post-card-body ">
       <div class="blog-post-card-body-title-and-subtitle  ">

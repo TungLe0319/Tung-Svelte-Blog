@@ -39,8 +39,6 @@
 
     <!-- Navigation Links (hidden on small screens) -->
     <div class="hidden lg:flex  space-x-8 text-lg">
-      <a href="#" class="hover:underline">Security Awareness</a>
-    
       <a href="/technology" class="hover:underline">Technology</a>
       <a href="/art" class="hover:underline">Art</a>
       <a href="/software-development" class="hover:underline">Software Development</a>
@@ -52,7 +50,6 @@
   <!-- Responsive Mobile Menu (shown on small screens) -->
   {#if isMenuOpen}
     <div class="lg:hidden mt-2 space-y-2">
-      <a href="#" class="block px-4 py-2 hover:bg-gray-700">Security Awareness</a>
       <a href="/technology" class="block px-4 py-2 hover:bg-gray-700">Technology</a>
      <a href="/art" class="hover:underline">Art</a>
         <a href="/software-development" class="hover:underline">Software Development</a>

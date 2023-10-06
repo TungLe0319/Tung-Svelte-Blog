@@ -9,12 +9,12 @@
   <img src="src\assets\images\ensocircle.png" alt="" class="infinite-rotate  w-1/2  ">
 </div>
 
-<div class="posts-container shadow-xl  mt-2 flex flex-col justify-center p-2 m-10 ">
-
-</div>
+<div class="posts-container   mt-2 flex flex-col justify-center p-2 m-10 px-10 ">
   {#each posts as post, index (post.title)}
       <BlogPostCard {post} />
     {/each}
+</div>
+
 </div>
 </div>
 

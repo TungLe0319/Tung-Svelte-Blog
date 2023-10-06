@@ -12,7 +12,7 @@
 </script>
 
 <script>
-  import BlogPost from '../../../../components/BlogPost.svelte'; // Adjust the path as needed
+  import BlogPost from '../../../components/BlogPost.svelte'; // Adjust the path as needed
 </script>
 
 <BlogPost />

@@ -1,6 +1,7 @@
 <script>
 
   import "../assets/scss/main.scss"
+  import Footer from "../lib/Footer.svelte";
   import Navbar from "../lib/Navbar.svelte";
    import { fade } from 'svelte/transition';
 
@@ -20,3 +21,5 @@
 <main class="w-full " transition:fade={intro}>
   <slot />
 </main>
+
+<Footer/>
