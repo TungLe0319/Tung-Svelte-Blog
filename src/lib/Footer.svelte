@@ -1,7 +1,7 @@
 <footer class="bg-zinc-200 text-black ">
-  <div class="container mx-auto flex justify-between flex-col lg:flex-row lg:items-center">
+  <div class="container mx-auto flex justify-between items-start  flex-col lg:flex-row lg:items-center">
     <!-- Legal Column -->
-    <div class="text-lg lg:text-base">
+    <div class="text-lg lg:text-base bg-red-50   ">
       <h3 class="text-xl font-semibold mb-2">Legal</h3>
       <ul class="list-none">
         <li><a href="#" class="hover:underline">Terms of Service</a></li>
@@ -11,7 +11,7 @@
     </div>
 
     <!-- Contact Info Column -->
-    <div class="text-lg lg:text-base mt-4 lg:mt-0">
+    <div class="text-lg lg:text-base mt-4 lg:mt-0 ">
       <h3 class="text-xl font-semibold mb-2">Contact Info</h3>
       <address>
         <p>Email: example@example.com</p>
@@ -24,10 +24,7 @@
     <div class="text-lg lg:text-base mt-4 lg:mt-0">
       <h3 class="text-xl font-semibold mb-2">Nav Links</h3>
       <ul class="list-none">
-        <li><a href="#" class="hover:underline">Security Awareness</a></li>
-        <li><a href="/technology" class="hover:underline">Technology</a></li>
-        <li><a href="/art" class="hover:underline">Art</a></li>
-        <li><a href="/software-development" class="hover:underline">Software Development</a></li>
+      
         <li><a href="/about" class="hover:underline">About</a></li>
         <li><a href="/contact" class="hover:underline">Contact</a></li>
       </ul>
@@ -35,8 +32,8 @@
   </div>
 
   <!-- Made by Tung Le Section -->
-  <section class="bg-zinc-500 text-center py-4">
-    <p class="text-lg text-white">Made by "Tung Le"</p>
+  <section class="bg-zinc-900 text-center py-2">
+    <p class="text-lg text-white">Made by Tung Le</p>
   </section>
 </footer>
 
