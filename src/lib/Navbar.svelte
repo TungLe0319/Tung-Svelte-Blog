@@ -40,9 +40,12 @@
     <!-- Navigation Links (hidden on small screens) -->
     <div class="hidden lg:flex  space-x-8 text-lg">
       <a href="#" class="hover:underline">Security Awareness</a>
+    
       <a href="/technology" class="hover:underline">Technology</a>
       <a href="/art" class="hover:underline">Art</a>
       <a href="/software-development" class="hover:underline">Software Development</a>
+        <a href="/about" class="hover:underline">About</a>
+         <a href="/contact" class="hover:underline">Contact</a>
     </div>
   </div>
 
