@@ -13,22 +13,25 @@
 </div>
 
 
-<div class="posts-container  mt-2 flex flex-col justify-center p-2 ">
 <div class="text-center mb-2">
-  <h1 class="text-black">
-  
-    Top 10 Recent Posts
+  <h1 class=" text-orange-400 text-6xl">
+  Latest Blogs
   </h1>
+
+<div class="posts-container shadow-xl  mt-2 flex flex-col justify-center p-2 m-10 ">
+
 </div>
   {#each posts as post, index (post.title)}
-      <PostPreviewCard {post} />
+      <BlogPostCard {post} />
     {/each}
 </div>
 </div>
 
 
 <script>
-  import PostPreviewCard from "../components/post-preview-card.svelte";
+
+
+  import BlogPostCard from "../components/BlogPostCard.svelte";
 
 
 import posts from "../lib/posts.js"

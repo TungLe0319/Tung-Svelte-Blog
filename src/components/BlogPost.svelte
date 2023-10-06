@@ -6,10 +6,11 @@
         <div class="post-image flex justify-center">
           <img src={blog.image} alt="Blog-post" class="w-1/2 rounded-md shadow-xl shadow-slate-400 ">
         </div>
-        <div class="post-info text-sm text-gray-500">
+        <div class="post-info   pt-5 text-sm text-gray-500">
           <p>Published on {blog.date} by {blog.author}</p>
         </div>
         <div class="post-title text-xl font-bold my-2">{blog.title}</div>
+        <div class="post-subtitle">{blog.subtitle}</div>
         <div class="post-description">{blog.description}</div>
       </div>
     </div>
