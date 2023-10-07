@@ -16,11 +16,11 @@
         />
 
         <div
-          class="absolute z-20 w-full opacity-0 transition-opacity duration-300"
+          class="absolute z-20 flex justify-center w-full opacity-0 transition-opacity duration-300"
         >
-          <div class="text-white text-center">
+          <div class=" ">
             <h4
-              class="text-xl text-yellow-100 text-shadow font-bold mt-10 mb-10 fire-effect-milo"
+              class=" fire-effect-milo text-shadow"
             >
           {post.title}
             </h4>
@@ -36,14 +36,15 @@
 
         
   .fire-effect-milo {
+    @apply text-xl text-yellow-100 font-bold mt-10 mb-10 ;
     padding: 0 10px 0 0;
     width: 75%;
     border-right: 1px solid #fff;
     text-align: right;
     opacity: 1;
-    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+ 
     transition: opacity 0.35s, transform 0.35s;
-    -webkit-transform: translate3d(-40px, 0, 0);
+ 
     transform: translate3d(0px, 0, 0);
     text-shadow: 0 0 2px #000000;
   }
