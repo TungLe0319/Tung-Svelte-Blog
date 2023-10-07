@@ -13,6 +13,15 @@
       "restart": true,
       "console": "integratedTerminal"
     },
-
+    {
+      "name": "npm run dev",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["nuxi", "dev", "--dotenv", ".env.example"],
+      "restart": true,
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}"
+    }
   ]
 }

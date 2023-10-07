@@ -12,9 +12,9 @@ async function main() {
        // @ts-ignore
        create: {
          title: "Hello World",
-         subtitle:" test",
-         category:"Art"
-         
+         subtitle: " test",
+         category: "Art",
+         datePublished: new Date().toISOString(),
        },
      },
    },
