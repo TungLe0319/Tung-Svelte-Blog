@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "ES6", // Adjust the target as needed
+    "module": "CommonJS", // Adjust the module type as needed
+    "outDir": "./dist" // Specify your output directory
+    // Other compiler options...
+  },
+  "include": ["**/*.ts", "script.js"],
+  "exclude": ["node_modules"]
+}
