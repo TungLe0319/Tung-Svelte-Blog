@@ -4,22 +4,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   // ... you will write your Prisma Client queries here
- const user = await prisma.user.create({
-   data: {
-     name: "Bob",
-     email: "bob@prisma.io",
-     posts: {
-       // @ts-ignore
-       create: {
-         title: "Hello World",
-         subtitle: " test",
-         category: "Art",
-         datePublished: new Date().toISOString(),
-       },
-     },
-   },
- });
- console.log(user);
+const allposts = await prisma.post.findMany()
 }
 
 main()

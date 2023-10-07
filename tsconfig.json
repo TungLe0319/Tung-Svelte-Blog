@@ -5,6 +5,6 @@
     "outDir": "./dist" // Specify your output directory
     // Other compiler options...
   },
-  "include": ["**/*.ts", "script.js"],
+  "include": ["**/*.ts", "script.js", "src/lib/prisma.js"],
   "exclude": ["node_modules"]
 }

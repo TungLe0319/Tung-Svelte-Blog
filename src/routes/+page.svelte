@@ -1,25 +1,23 @@
 <script>
+
   import BlogPostCard from "../components/BlogPostCard.svelte";
   import FeaturedBlogPost from "../components/FeaturedBlogPost.svelte";
-
+  import { onMount } from 'svelte';
   import posts from "../lib/posts.js";
 
-  import { fade } from "svelte/transition";
 
-  // This transition defines the animation when entering a page
-  const intro = (node) => {
-    return {
-      duration: 30,
-      delay: 0,
-      easing: "ease",
-      css: (t) => `opacity: ${t}`,
-    };
-  };
+
+
+
+
+
+  
 </script>
 
-<div class="page-container">
+<div class="page-container" >
+  <!-- <div>{@html data.post.content}</div> -->
   <div class="text-center mb-2 flex flex-col items-center">
-    <div class=" flex justify-center" in:fade={intro}>
+    <div class=" flex justify-center" >
       <img
         src="src\assets\images\ensocircle.png"
         alt=""
@@ -28,6 +26,7 @@
     </div>
 
 
+  
 <!-- {#each posts as post1, index (post1.title)}
   <FeaturedBlogPost {posts}/>
 {/each} -->

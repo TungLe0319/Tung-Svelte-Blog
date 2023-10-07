@@ -1,6 +1,6 @@
 
     <script>
-  export let post
+
     import posts from "../lib/posts.js";
 </script> 
      

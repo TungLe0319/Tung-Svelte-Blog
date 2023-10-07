@@ -18,10 +18,9 @@
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["nuxi", "dev", "--dotenv", ".env.example"],
       "restart": true,
       "console": "integratedTerminal",
-      "cwd": "${workspaceFolder}"
+
     }
   ]
 }
