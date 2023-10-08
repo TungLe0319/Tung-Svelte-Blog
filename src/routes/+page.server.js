@@ -1,15 +1,30 @@
-// import { PrismaClient } from "@prisma/client";
-// import { error } from "@sveltejs/kit";
+// @ts-nocheck
 
+import { PrismaClient } from "@prisma/client";
+import { error } from "@sveltejs/kit";
 
-// // /** @type {import('./$types').PageServerLoad} */
-// // const db = new PrismaClient()
-// export async function load() {
-//   // const post = await  db.post.findMany()
-// console.log('test');
-//   // if (post) {
-//   //   return post;
-//   // }
+const db = new PrismaClient();
+/** @type {import('./$types').PageServerLoad} */
+export async function load() {
+  try {
+    const posts = await db.post.findMany({
+      // include: {
+      //   users: true
+      // }
+    })
 
-//   throw error(404, "Not found");
-// }
+    if (posts) {
+    
+        return {
+          body: {
+            posts,
+          },
+        };
+    } else {
+      throw error(404, "Post not found");
+    }
+  } catch (error) {
+    console.error("Error fetching post:", error);
+    throw error(500, "Internal server error");
+  }
+}

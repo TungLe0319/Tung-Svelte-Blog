@@ -6,14 +6,14 @@
 
 <div class="blog-post-card ">
   <a class="link-container" href={`blog/${post.id}`}>
-    <img src={post.image} alt="Blog-post-img" class="blog-post-card-image" />
+    <img src={post.img} alt="Blog-post-img" class="blog-post-card-image" />
     <div class="blog-post-card-body ">
       <div class="blog-post-card-body-title-and-subtitle  ">
         <div class="blog-post-card-title ">{post.title}</div>
         <div class="blog-post-card-subtitle "> {post.subtitle}</div>
       </div>
       <div class="blog-post-card-date-author-category flex justify-between">
-        Created on {post.date} by {post.author} 
+        Created on { new Date(post.datePublished).toLocaleString() } by {post.author?.name} 
     <div class="text-sm font-semibold category-badge">
   {post.category}
 </div>

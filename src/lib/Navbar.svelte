@@ -11,8 +11,9 @@
   <div class=" flex items-center justify-between w-full  b">
    <div class="text-xl font-semibold icon-container">
   <a href="/">
-    <img src="src\assets\images\mushroom.png" alt="Mushroom Icon" width="60" class="icon-img-1">
-    <img src="src\assets\images\mushroomcolor.png" alt="Mushroom Icon" width="60" class="icon-img-2">
+    <!-- <img src="src\assets\images\mushroom.png" alt="Mushroom Icon" width="60" class="icon-img-1">
+    <img src="src\assets\images\mushroomcolor.png" alt="Mushroom Icon" width="60" class="icon-img-2"> -->
+    home
   </a>
 </div>
 
@@ -93,22 +94,22 @@
 }
 
 
-.icon-img-1 {
-  width: 60px;
-  transition: opacity 0.3s ease-in-out; /* Define the transition property */
-}
-.icon-img-2 {
+// .icon-img-1 {
+//   width: 60px;
+//   transition: opacity 0.3s ease-in-out; /* Define the transition property */
+// }
+// .icon-img-2 {
  
 
-   opacity: 0;
-   width: 0;
-}
-.icon-container:hover .icon-img-1 {
-  opacity: 0; 
-  width: 0;
-}
+//    opacity: 0;
+//    width: 0;
+// }
+// .icon-container:hover .icon-img-1 {
+//   opacity: 0; 
+//   width: 0;
+// }
 
-.icon-container:hover .icon-img-2 {
-  opacity: 1; width: 60px; 
-}
+// .icon-container:hover .icon-img-2 {
+//   opacity: 1; width: 60px; 
+// }
 </style>

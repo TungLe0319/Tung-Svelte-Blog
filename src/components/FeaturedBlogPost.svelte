@@ -1,17 +1,18 @@
 
     <script>
 
-    import posts from "../lib/posts.js";
+    // import posts from "../lib/posts.js";
+    export let post
 </script> 
      
-<div class="flex space-x-2  mb-20">
-       {#each posts.slice(0, 3) as post (post.title)}
+
+  
    <div
         class=" featured-blogpost relative shadow-xl hover:shadow-green-300 product-card rounded-lg"
       >
         <img
           class="object-cover image rounded-lg shadow-xl shadow-slate-400 transition-all"
-          src={post.image} 
+          src={post.img} 
           alt="post"
         />
 
@@ -28,9 +29,9 @@
         </div>
       </div>
   
-{/each}
+
   
-</div>
+
 
       <style lang="scss">
 
@@ -57,6 +58,7 @@
   /* ... other styles ... */
 
   &:hover {
+    // @apply border-4 border-green-600  ;
     width: 500px;
     transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
 

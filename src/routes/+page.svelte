@@ -3,9 +3,11 @@
   import BlogPostCard from "../components/BlogPostCard.svelte";
   import FeaturedBlogPost from "../components/FeaturedBlogPost.svelte";
   import { onMount } from 'svelte';
-  import posts from "../lib/posts.js";
+  // import posts from "../lib/posts.js";
+  // import posts from "../lib/posts.js";
 
 
+export let data
 
 
 
@@ -24,21 +26,24 @@
         class="infinite-rotate w-1/6"
       />
     </div>
+<ul>
 
 
-  
-<!-- {#each posts as post1, index (post1.title)}
-  <FeaturedBlogPost {posts}/>
-{/each} -->
 
-   <FeaturedBlogPost />
+</ul>
 
- 
+   <div class=" flex space-x-2 mb-20">
+    {#each data.body.posts.slice(0,3) as post, index (post.title)}
+          <FeaturedBlogPost {post} />
+      {/each}
+
+   </div>
+
 
     <div
       class="posts-container mt-2 flex flex-col justify-center p-2 m-10 px-10"
     >
-      {#each posts as post, index (post.title)}
+      {#each data.body.posts as post, index (post.title)}
         <BlogPostCard {post} />
       {/each}
     </div>
