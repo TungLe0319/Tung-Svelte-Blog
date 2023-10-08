@@ -10,6 +10,7 @@
   recentPosts = data?.body?.recentPosts;
 
  
+console.log(data.body.post);
 
 </script>
 
@@ -56,12 +57,13 @@
             <div class="text-sm font-semibold flex-wrap break-words">
               {recentPost.title}
             </div>
-            <div class=" text-xs font-bold text-gray-500">
+            <div class=" text-xs font-bold text-gray-500 flex justify-between">
               {new Date(recentPost.datePublished).toLocaleDateString("en-US", {
                 month: "short",
                 day: "numeric",
                 year: "2-digit",
-              })}
+              })} -
+              {recentPost.author.name}
             </div>
           </div>
         </div>

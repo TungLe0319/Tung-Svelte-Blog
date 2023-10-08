@@ -8,10 +8,10 @@ const db = new PrismaClient();
 export async function load() {
   try {
     const posts = await db.post.findMany({
-      // include: {
-      //   users: true
-      // }
-    })
+      include: {
+        author: true, // Include the "author" relation
+      },
+    });
 
     if (posts) {
     

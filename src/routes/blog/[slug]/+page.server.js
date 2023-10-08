@@ -15,19 +15,25 @@ export async function load({ params,query }) {
       where: {
         id: postId,
       },
+      include: {
+        author: true, // Include the "author" relation
+      },
     });
 
     // Find the top 3 most recent posts by date published
     const recentPosts = await db.post.findMany({
       where: {
         id: {
-          not: postId, 
+          not: postId,
         },
       },
       orderBy: {
-        datePublished: "desc", 
+        datePublished: "desc",
       },
-      take: 3, 
+      include: {
+        author: true, // Include the "author" relation
+      },
+      take: 3,
     });
 
    
