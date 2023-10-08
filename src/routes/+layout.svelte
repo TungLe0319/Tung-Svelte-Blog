@@ -17,7 +17,7 @@
 </script>
 
 <Navbar />
-<div class="wrapper justify-between">
+<div class="wrapper justify-between  ">
 
   
   <main class="w-full background "  transition:fade={intro}>

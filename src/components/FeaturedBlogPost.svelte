@@ -24,7 +24,7 @@
     @apply relative shadow-xl hover:shadow-green-300 product-card rounded-lg;
 
     img {
-      @apply object-cover  rounded-lg shadow-xl shadow-slate-400 transition-all;
+      @apply object-cover  rounded-lg shadow-xl shadow-slate-800 transition-all;
     }
   }
 
