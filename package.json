@@ -6,8 +6,7 @@
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
-    "updateprismadb" : "npx prisma migrate dev --name init"
-    
+    "updateprismadb": "npx prisma migrate dev --name init"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^2.0.0",

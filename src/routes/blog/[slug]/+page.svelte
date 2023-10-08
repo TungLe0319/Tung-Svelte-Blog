@@ -23,7 +23,7 @@
         </div>
         <div class="post-title text-xl font-bold my-2">{data.post?.title}</div>
         <div class="post-subtitle">{data.post?.subtitle}</div>
-        <!-- <div class="post-description">{data.post.description}</div> -->
+        <div class="post-content">{@html data.post?.content}</div>
       </div>
     </div>
  
@@ -35,3 +35,26 @@
  {/if}
 
 <!-- <BlogPost {data?.post} /> -->
+<style lang="scss" >
+  
+  
+:global(a) {
+  @apply rounded-md shadow-md; /* Apply rounded corners and box shadow */
+}
+
+:global(h1) {
+  @apply text-4xl text-gray-700 font-semibold; /* Apply text styles */
+}
+
+:global(h2) {
+  @apply text-2xl text-gray-400 font-semibold; /* Apply text styles */
+}
+
+:global(p) {
+  @apply text-gray-600; /* Apply text color */
+}
+
+:global(img) {
+  @apply rounded-md shadow-md shadow-slate-600 my-14; /* Apply rounded corners and box shadow */
+}
+</style>
