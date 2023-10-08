@@ -25,6 +25,7 @@
   "type": "module",
   "dependencies": {
     "@prisma/client": "^5.4.1",
+    "@tinymce/tinymce-svelte": "^1.0.1",
     "sass": "^1.68.0",
     "svelte-preprocess": "^5.0.4"
   },

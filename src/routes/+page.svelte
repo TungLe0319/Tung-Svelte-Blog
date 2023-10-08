@@ -2,6 +2,7 @@
   import BlogPostCard from "../components/BlogPostCard.svelte";
   import FeaturedBlogPost from "../components/FeaturedBlogPost.svelte";
   import { onMount } from "svelte";
+ 
   // import posts from "../lib/posts.js";
   // import posts from "../lib/posts.js";
 
@@ -11,6 +12,7 @@
 </script>
 
 <div class="page-container">
+    
   <!-- <div>{@html data.post.content}</div> -->
   <div class="text-center mb-2 flex flex-col items-center">
     <div class=" flex justify-center">

@@ -1,6 +1,7 @@
 <!-- CreateBlogPost.svelte -->
 
 <script>
+    import Editor from '@tinymce/tinymce-svelte';
   let title = '';
   let img = '';
   let subtitle = '';
@@ -50,10 +51,25 @@
       <label for="img" class="block text-gray-600">Image URL</label>
       <input type="text" id="img" bind:value={img} class="w-full border rounded px-3 py-2">
     </div>
-    <div class="mb-4">
-      <label for="content" class="block text-gray-600">Content</label>
-      <textarea id="content" bind:value={content} class="w-full border rounded px-3 py-2"></textarea>
+
+    <div class="two-column">
+       <div class="editor-column">
+      <div class="mb-4">
+        <label for="content" class="block text-gray-600">Content</label>
+        <Editor bind:value={content} />
+     
+      </div>
     </div>
+    <div class="preview-column">
+      <div class="mb-4">
+        <label for="content preview" class="block text-gray-600">Preview</label>
+        <div class="rounded px-3 py-2  "  >
+          {@html content} <!-- Display the content as HTML in the preview -->
+        </div>
+      </div>
+    </div>
+    </div>
+
     <div class="mb-4">
       <label for="category" class="block text-gray-600">Category</label>
       <select id="category" bind:value={category} class="w-full border rounded px-3 py-2">
@@ -73,3 +89,21 @@
     </div>
   </form>
 </div>
+
+
+<style lang="scss"  scoped>
+   .two-column {
+    display: flex;
+    gap: 20px;
+  }
+
+  .editor-column {
+    flex: 1;
+  }
+
+  .preview-column {
+    @apply h-full;
+    flex: 1;
+    
+  }
+</style>
