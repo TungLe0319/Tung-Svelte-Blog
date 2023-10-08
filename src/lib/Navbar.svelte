@@ -40,6 +40,7 @@
 
     <!-- Navigation Links (hidden on small screens) -->
     <div class="hidden lg:flex  space-x-8 text-lg">
+      <a href="/blog/create" class="hover:underline">Create</a>
       <a href="/category/technology" class="hover:underline">Technology</a>
       <a href="/art" class="hover:underline">Art</a>
       <a href="/software-development" class="hover:underline">Software Development</a>
