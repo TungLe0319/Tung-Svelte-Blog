@@ -10,6 +10,7 @@
 export let data
 
 
+let posts = data.body?.posts
 
 
 
@@ -17,6 +18,8 @@ export let data
 </script>
 
 <div class="page-container" >
+
+
   <!-- <div>{@html data.post.content}</div> -->
   <div class="text-center mb-2 flex flex-col items-center">
     <div class=" flex justify-center" >
@@ -33,7 +36,7 @@ export let data
 </ul>
 
    <div class=" flex space-x-2 mb-20">
-    {#each data.body.posts.slice(0,3) as post, index (post.title)}
+    {#each posts.slice(0,3) as post, index (post.title)}
           <FeaturedBlogPost {post} />
       {/each}
 
@@ -43,7 +46,7 @@ export let data
     <div
       class="posts-container mt-2 flex flex-col justify-center p-2 m-10 px-10"
     >
-      {#each data.body.posts as post, index (post.title)}
+      {#each posts as post, index (post.title)}
         <BlogPostCard {post} />
       {/each}
     </div>
