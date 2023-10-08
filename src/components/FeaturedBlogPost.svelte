@@ -36,19 +36,7 @@
       <style lang="scss">
 
         
-  .fire-effect-milo {
-    @apply text-xl text-yellow-100 font-bold mt-10 mb-10 ;
-    padding: 0 10px 0 0;
-    width: 75%;
-    border-right: 1px solid #fff;
-    text-align: right;
-    opacity: 1;
- 
-    transition: opacity 0.35s, transform 0.35s;
- 
-    transform: translate3d(0px, 0, 0);
-    text-shadow: 0 0 2px #000000;
-  }
+
   .product-card {
   transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
   width: 350px;
