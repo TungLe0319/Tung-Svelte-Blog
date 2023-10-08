@@ -7,7 +7,7 @@
   }
 </script>
 
-<nav class="bg-white text-black p-4  shadow-md navbar">
+<nav class=" bg-transparent text-white p-4  shadow-md navbar absolute ">
   <div class=" flex items-center justify-between w-full  b">
    <div class="text-xl font-semibold icon-container">
   <a href="/">

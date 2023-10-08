@@ -24,7 +24,7 @@
 class="blog-post-card  {getCategoryColorClass(post?.category)}"
 
 >
-  <a class="link-container" href={`blog/${post?.id}`}>
+  <a class="link-container" href={`/blog/${post?.id}`}>
     <img src={post?.img} alt="Blog-post-img" class="blog-post-card-image" />
   </a>
     <div class="blog-post-card-body">

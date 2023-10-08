@@ -1,62 +1,53 @@
+<script>
+  // import posts from "../lib/posts.js";
+  export let post;
+</script>
 
-    <script>
+<a href={`/blog/${post?.id}`}>
+  <div class=" featured-blogpost">
+    <img class="featured-blogpost-img" src={post.img} alt="post" />
 
-    // import posts from "../lib/posts.js";
-    export let post
-</script> 
-     
-
-  
-   <div
-        class=" featured-blogpost relative shadow-xl hover:shadow-green-300 product-card rounded-lg"
-      >
-        <img
-          class="object-cover image rounded-lg shadow-xl shadow-slate-400 transition-all"
-          src={post.img} 
-          alt="post"
-        />
-
-        <div
-          class="absolute z-20 flex justify-center w-full opacity-0 transition-opacity duration-300"
-        >
-          <div class=" ">
-            <h4
-              class=" fire-effect-milo text-shadow"
-            >
+    <div
+      class="absolute z-20 flex justify-center w-full opacity-0 transition-opacity duration-300"
+    >
+      <div>
+        <h4 class=" fire-effect-milo text-shadow">
           {post.title}
-            </h4>
-          </div>
-        </div>
+        </h4>
       </div>
-  
+    </div>
+  </div>
+</a>
 
-  
+<style lang="scss">
+  .featured-blogpost {
+    @apply relative shadow-xl hover:shadow-green-300 product-card rounded-lg;
 
-
-      <style lang="scss">
-
-        
-
-  .product-card {
-  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-  width: 350px;
-  height: 500px;
-  float: left; /* Add this to make cards align horizontally */
-
-  /* ... other styles ... */
-
-  &:hover {
-    // @apply border-4 border-green-600  ;
-    width: 500px;
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-
-    /* Decrease width of other product-cards when hovering */
-
+    img {
+      @apply object-cover  rounded-lg shadow-xl shadow-slate-400 transition-all;
+    }
   }
 
-  /* ... other styles ... */
-}
+ 
 
+  .product-card {
+    transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    width: 350px;
+    height: 500px;
+    float: left; /* Add this to make cards align horizontally */
+
+    /* ... other styles ... */
+
+    &:hover {
+      // @apply border-4 border-green-600  ;
+      width: 500px;
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+
+      /* Decrease width of other product-cards when hovering */
+    }
+
+    /* ... other styles ... */
+  }
 
   .product-card img {
     height: 100%;
@@ -91,4 +82,4 @@
       transition: all 3.3s ease-out !important;
     }
   }
-      </style>
+</style>
