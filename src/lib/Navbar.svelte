@@ -1,7 +1,7 @@
 <!-- Navbar.svelte -->
 <script>
   import { onDestroy, onMount, } from "svelte";
-
+ import { page } from "$app/stores"
   
   let isMenuOpen = false;
 
@@ -58,7 +58,13 @@
 
     <!-- Navigation Links (hidden on small screens) -->
     <div class="hidden lg:flex space-x-8 text-lg">
-      <a href="/blog/create" class="hover:underline">Create</a>
+      {#if !$page.data.session}
+   <a href="/login" class="hover:underline">Login</a>
+      {:else}
+         <!-- else content here -->
+         <a href="/authenticated/account" class="hover:underline">Account</a>
+      {/if}
+      <a href="/authenticated/create" class="hover:underline">Create</a>
       <a href="/category/technology" class="hover:underline">Technology</a>
       <a href="/art" class="hover:underline">Art</a>
       <a href="/software-development" class="hover:underline"
