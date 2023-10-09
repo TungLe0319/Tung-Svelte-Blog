@@ -15,10 +15,9 @@
           {post.title}
         </h4>
       </div>
-
-      
-  </div>
-</a>
+    </div>
+  </div></a
+>
 
 <style lang="scss">
   .featured-blogpost {
@@ -28,8 +27,6 @@
       @apply object-cover  rounded-lg shadow-xl shadow-slate-800 transition-all;
     }
   }
-
- 
 
   .product-card {
     transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
