@@ -11,7 +11,7 @@
         return "border-r-4 border-r-purple-400";
       case "Software-development":
         return "border-r-4 border-r-red-400";
-         case "Health":
+      case "Health":
         return "border-r-4 border-r-green-400";
       default:
         return ""; // Default color for other categories
@@ -19,30 +19,38 @@
   }
 </script>
 
-<div class="blog-post-card {getCategoryColorClass(post?.category)}">
+<div class="blogPost ">
   <a class="link-container" href={`/blog/${post?.id}`}>
-    <img src={post?.img} alt="Blog-post-img" class="blog-post-card-image" />
+    <img src={post?.img} alt="Blog-post-img" class="blogPost-image" />
   </a>
-  <div class="blog-post-card-body">
-    <div class="blog-post-card-body-title-and-subtitle">
+  <div class="blogPost-body">
+    <div class="blogPost-body-title-and-subtitle">
       <a
-        class=" hover:text-orange-500 transition-all duration-200 hover:underline hover:underline-offset-2"
+        class=" blogPost-link-title"
         href={`blog/${post?.id}`}
       >
-        <div class="blog-post-card-title">{post?.title}</div>
+        {post?.title}
       </a>
-      <div class="blog-post-card-subtitle">{post?.subtitle}</div>
+      <div class="blogPost-subtitle">{post?.subtitle}</div>
     </div>
-    <div class="blog-post-card-date-author-category flex justify-between">
-      Published {new Date(post?.datePublished).toLocaleDateString("en-US", {
+
+    <div class="blogPost-categories">
+      {#each post?.categories as categories}
+        <div class="">
+          {categories.name}
+        </div>
+      {/each}
+    </div>
+  </div>
+
+
+    <div class="blogPost-date ">
+       {new Date(post?.datePublished).toLocaleDateString("en-US", {
         month: "short",
         day: "numeric",
         year: "2-digit",
-      })} by {post?.author?.name}
-
-      <CategoryBadge category={post?.category} />
-    </div>
-  </div>
+      })} 
+      </div>
 </div>
 
 <style lang="scss">
@@ -50,10 +58,10 @@
     @apply flex space-x-4;
   }
 
-  .blog-post-card {
-    @apply p-3 my-2 shadow-lg flex rounded-l-md;
+  .blogPost {
+    @apply p-3 my-2 shadow-lg flex rounded-l-md relative;
   }
-  .blog-post-card-image {
+  .blogPost-image {
     @apply w-1/2 rounded-md  shadow-2xl shadow-gray-400  transition-all   duration-300 ease-in-out
   hover:shadow-xl  hover:brightness-50;
 
@@ -62,22 +70,29 @@
     object-fit: cover;
   }
 
-  .blog-post-card-body {
+  .blogPost-body {
     @apply p-4 w-1/2 flex flex-col justify-between;
   }
 
-  .blog-post-card-body-title-and-subtitle {
+  .blogPost-body-title-and-subtitle {
     @apply flex-col  space-y-10  flex items-center;
   }
 
-  .blog-post-card-title {
-    @apply text-4xl font-extrabold;
+  .blogPost-link-title {
+    @apply text-4xl mt-4 font-extrabold hover:text-orange-500 transition-all duration-200 hover:underline hover:underline-offset-2;
   }
-  .blog-post-card-subtitle {
+  .blogPost-subtitle {
     @apply text-2xl font-semibold text-gray-400;
   }
 
-  // .blog-post-card-date-and-author{
+  .blogPost-categories {
+    @apply flex text-sm  font-semibold space-x-4 text-orange-400;
+  }
+
+  .blogPost-date {
+    @apply absolute top-3 right-4 font-semibold text-sm text-orange-400;
+  }
+  // .blogPost-date-and-author{
   //   @apply
   // }
 </style>

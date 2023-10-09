@@ -17,6 +17,7 @@ export async function load({ params,query }) {
       },
       include: {
         author: true, // Include the "author" relation
+        categories:true,
       },
     });
 

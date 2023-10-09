@@ -34,14 +34,31 @@ const categoriesData = [
 
 
 
-  const createdCategories = await Promise.all(
-    categoriesData.map(async (category) => {
-      return await db.category.create({
-        data: category,
-      });
-    })
-  );
-
+  const createdCategories = await db.category.createMany({
+    data: [
+      { name: "News" },
+      { name: "How-To Guides" },
+      { name: "Tips and Tricks" },
+      { name: "Opinion/Editorial" },
+      { name: "Reviews" },
+      { name: "Guide" },
+      { name: "Tutorials" },
+      { name: "Technology" },
+      { name: "Art and Culture" },
+      { name: "Health and Wellness" },
+      { name: "Education" },
+      { name: "Finance" },
+      { name: "Food and Cooking" },
+      { name: "Environment" },
+      { name: "Business" },
+      { name: "Case Studies" },
+      { name: "FAQs" },
+      { name: "Guest Posts" },
+      { name: "Featured Stories" },
+      { name: "Events" },
+    ],
+    skipDuplicates: true
+  });
 
 
 
@@ -49,7 +66,7 @@ const categoriesData = [
   } catch (error) {
     console.error('Error creating categories:', error);
   } finally {
-    await prisma.$disconnect();
+    await db.$disconnect();
   }
 }
 

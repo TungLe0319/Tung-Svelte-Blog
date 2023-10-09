@@ -11,6 +11,10 @@ export async function load() {
     // where:{
     //   category: "Technology",
     // }
+    include:{
+      categories:true,
+      author: true,
+    }
     });
 
     if (posts) {

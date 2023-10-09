@@ -11,6 +11,10 @@
   export let data;
 
   let posts = data.body?.posts;
+
+  let featuredPosts = data.body?.posts.filter((post) => post.categories.includes("Featured Posts"));
+
+console.log(posts);
 </script>
 
 <div class="">
@@ -35,8 +39,8 @@
         <h3 class="text-4xl mb-10 permanent-marker-font text-white ">Featured Posts</h3>
       </div>
       <div class="flex justify-center space-x-2 mb-20">
-        {#each posts.slice(0, 3) as post, index (post.title)}
-          <FeaturedBlogPost {post} />
+        {#each featuredPosts as featuredPost, index ( featuredPost.id)}
+          <FeaturedBlogPost {featuredPost} />
         {/each}
       </div>
     </div>

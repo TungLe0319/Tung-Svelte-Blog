@@ -10,6 +10,7 @@ export async function load() {
     const posts = await db.post.findMany({
       include: {
         author: true, 
+        categories:true,
       },
     });
 
