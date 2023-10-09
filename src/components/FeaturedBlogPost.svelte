@@ -15,7 +15,8 @@
           {post.title}
         </h4>
       </div>
-    </div>
+
+      
   </div>
 </a>
 

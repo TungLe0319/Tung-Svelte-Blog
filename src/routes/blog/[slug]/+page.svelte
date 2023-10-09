@@ -15,7 +15,7 @@ console.log(data.body.post);
 </script>
 
 {#if data}
-  <div class=" flex" >
+  <div class=" flex mt-16" >
     <div class="w-3/4 mt-8">
       <div class="post p-3 shadow-md flex justify-center space-x-2 rounded-md">
         <div class="post-body p-4 space-y-2 flex-col flex items-center">
@@ -35,6 +35,8 @@ console.log(data.body.post);
         </div>
       </div>
     </div>
+
+    <!-- Recent Post Section to the right -->
     <div class="w=1/4 mt-8 px-4">
       <h4
         class="  border-l-2 pl-2 border-l-orange-300 text-shadow font-semibold text-gray-500"
@@ -54,9 +56,11 @@ console.log(data.body.post);
             </a>
           </div>
           <div class="flex flex-col justify-between">
-            <div class="text-sm font-semibold flex-wrap break-words">
-              {recentPost.title}
-            </div>
+               <a class="hover:text-orange-500 transition-all duration-150" href={`/blog/${recentPost?.id}`}>
+                <div class="text-sm font-semibold flex-wrap break-words">
+                  {recentPost.title}
+                </div>
+              </a>
             <div class=" text-xs font-bold text-gray-500 flex justify-between">
               {new Date(recentPost.datePublished).toLocaleDateString("en-US", {
                 month: "short",
@@ -68,6 +72,13 @@ console.log(data.body.post);
           </div>
         </div>
       {/each}
+
+   <div class="mt-10 flex items-center">
+  <a href="https://www.linkedin.com/in/tung-le0319/" target="_blank" class="flex items-center space-x-2">
+    <img src="https://media.licdn.com/dms/image/D5603AQHXRnhq5heTzA/profile-displayphoto-shrink_100_100/0/1668461106434?e=1702512000&v=beta&t=33NYfv1mItUA6k5ntGdAv9rZ98bJDR1PTEbRUhlsw20" alt="linkedin profile" class="w-16 h-16 rounded-full shadow-md shadow-slate-500 hover:brightness-75 transition-all duration-150">
+    <span class="text-blue-500 font-semibold ">LinkedIn</span>
+  </a>
+</div>
     </div>
   </div>
 {:else}

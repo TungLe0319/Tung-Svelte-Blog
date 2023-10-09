@@ -1,13 +1,34 @@
 <!-- Navbar.svelte -->
 <script>
+  import { onDestroy, onMount, } from "svelte";
+
+  
   let isMenuOpen = false;
 
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
   }
+// const scrollNavBar = 60
+// 	let show = false
+
+  
+// 	onMount(() => {
+// 		window.onscroll = () => {
+// 			if (window.scrollY > scrollNavBar) {
+// 				show = true
+// 			} else {
+// 				show = false
+// 			}
+// 		}
+// 	})
+	
+// 	onDestroy(() => {
+// 		window.onscroll = () => {}
+// 	})
+
 </script>
 
-<nav class=" navbar  ">
+<nav class=" navbar" id="navbar"  >
   <div class=" flex items-center justify-between w-full b">
     <div class="text-xl font-semibold icon-container">
       <a href="/">
@@ -63,19 +84,25 @@
 </nav>
 
 <style lang="scss">
+  .scrolled {
+		
+		transform: translate(0,calc(-100% - 1rem))
+	}
+  .navbar {
+    @apply bg-transparent text-white p-4 pb-20  absolute w-full;
 
-  .navbar{
-    @apply bg-transparent text-white p-4 pb-20  absolute w-full ;
-    
-background: rgb(119,119,119);
-background: linear-gradient(180deg, rgba(119,119,119,0.5186449579831933) 0%, rgba(82,199,8,0) 93%);
-
+    background: rgb(119, 119, 119);
+    background: linear-gradient(
+      180deg,
+      rgba(119, 119, 119, 0.5186449579831933) 0%,
+      rgba(82, 199, 8, 0) 93%
+    );
   }
 
   /* Style your navbar as needed */
   a {
     @apply relative transition-transform duration-200  text-2xl;
-   
+
     text-decoration: none;
     font-weight: 600;
     font-family: "Shadows Into Light", cursive;

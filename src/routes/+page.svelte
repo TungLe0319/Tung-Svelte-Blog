@@ -26,7 +26,14 @@
       </h2>
     </div>
 
+    <div class=" featured-post-headliner">
+<h3 class="text-2xl">
+  Featured Posts
+</h3>
+    </div>
+
     <div class="   flex justify-center space-x-2 mb-20">
+     
       {#each posts.slice(0, 3) as post, index (post.title)}
         <FeaturedBlogPost {post} />
       {/each}
@@ -60,6 +67,10 @@
     @apply flex justify-center  text-white text-center p-20  select-none hover:cursor-default  ;
     font-family: 'Shadows Into Light', cursive;
   ;}
+
+  .featured-post-headliner{
+     @apply flex justify-center mt-20 text-white text-center pt-20 select-none hover:cursor-default 
+  }
   @keyframes rotate {
     0% {
       transform: rotate(0deg);
