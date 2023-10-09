@@ -26,6 +26,13 @@
       </h2>
     </div>
 
+
+
+  </div>
+
+  <!-- <div>{@html data.post.content}</div> -->
+  <div class="text-center mb-2 flex flex-col items-center mt-12">
+
     <div class=" featured-post-headliner">
 <h3 class="text-2xl">
   Featured Posts
@@ -38,10 +45,7 @@
         <FeaturedBlogPost {post} />
       {/each}
     </div>
-  </div>
 
-  <!-- <div>{@html data.post.content}</div> -->
-  <div class="text-center mb-2 flex flex-col items-center">
     <div
       class="posts-container mt-2 flex flex-col justify-center p-2 m-10 px-10"
     >
@@ -69,7 +73,7 @@
   ;}
 
   .featured-post-headliner{
-     @apply flex justify-center mt-20 text-white text-center pt-20 select-none hover:cursor-default 
+     @apply flex justify-center mt-20 text-black text-center pt-20 select-none hover:cursor-default 
   }
   @keyframes rotate {
     0% {
