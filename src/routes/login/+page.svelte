@@ -1,6 +1,13 @@
 <script>
   import { signIn, signOut } from "@auth/sveltekit/client";
   import { page } from "$app/stores";
+  import { redirect } from "@sveltejs/kit";
+
+
+  // if ($page.data.session) {
+  //    redirect(303, "/account")
+  // }
+
 </script>
 
 <div class="  h-screen flex justify-center items-center w-full">

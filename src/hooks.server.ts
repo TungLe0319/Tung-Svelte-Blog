@@ -9,7 +9,7 @@ async function authorization({ event, resolve }) {
   if (event.url.pathname.startsWith("/authenticated")) {
     const session = await event.locals.getSession();
     if (!session) {
-      throw redirect(303, "/auth");
+      throw redirect(303, "/login");
     }
   }
 
