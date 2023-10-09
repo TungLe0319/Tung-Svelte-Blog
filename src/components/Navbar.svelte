@@ -107,7 +107,7 @@
 
   /* Style your navbar as needed */
   a {
-    @apply relative transition-transform duration-200  text-2xl;
+    @apply  relative transition-transform duration-200  text-2xl;
 
     text-decoration: none;
     font-weight: 600;

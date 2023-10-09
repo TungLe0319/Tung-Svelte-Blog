@@ -21,7 +21,7 @@ model Post {
   img           String
   subtitle      String
   content       String?
-  category      String
+   categories    Category[]
   published     Boolean  @default(false)
   datePublished DateTime
   authorId      Int
@@ -31,4 +31,10 @@ model Post {
 enum Role {
   USER
   ADMIN
+}
+
+model Category {
+  id     Int      @id @default(autoincrement())
+  name   String   @unique
+  posts  Post[]   // Define the many-to-many relationship
 }

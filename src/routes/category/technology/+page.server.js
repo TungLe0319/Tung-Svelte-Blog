@@ -8,9 +8,9 @@ const db = new PrismaClient();
 export async function load() {
   try {
     const posts = await db.post.findMany({
-    where:{
-      category: "Technology",
-    }
+    // where:{
+    //   category: "Technology",
+    // }
     });
 
     if (posts) {

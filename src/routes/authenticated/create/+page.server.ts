@@ -5,19 +5,16 @@ import { PrismaClient } from "@prisma/client";
 const db = new PrismaClient();
 
 
-
-
-
 export const actions = {
   default: async ({ request }) => {
     try {
       const postData = await request.formData();
   
 
-      const title = postData.get("title");
+      const title = postData.get("title") || "";
       const subtitle = postData.get("subtitle") || "";
       const img = postData.get("img") || "";
-      const content = postData.get("content");
+      const content = postData.get("content") || "";
       const category = postData.get("category") || "Art";
       const published = postData.get("published") === "true";
     

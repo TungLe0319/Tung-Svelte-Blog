@@ -11,6 +11,8 @@
         return "border-r-4 border-r-purple-400";
       case "Software-development":
         return "border-r-4 border-r-red-400";
+         case "Health":
+        return "border-r-4 border-r-green-400";
       default:
         return ""; // Default color for other categories
     }

@@ -13,14 +13,15 @@
       "restart": true,
       "console": "integratedTerminal"
     },
-    {
-      "name": "npm run dev",
-      "type": "node",
-      "request": "launch",
-      "runtimeExecutable": "npx",
-      "restart": true,
-      "console": "integratedTerminal",
-
-    }
+  {
+    "type": "node",
+    "request": "launch",
+    "name": "npm run dev",
+    "runtimeExecutable": "npm",
+    "runtimeArgs": ["run", "dev"],
+    "cwd": "${workspaceFolder}",
+  
+    "console": "integratedTerminal"
+  }
   ]
 }

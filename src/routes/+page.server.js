@@ -9,7 +9,7 @@ export async function load() {
   try {
     const posts = await db.post.findMany({
       include: {
-        author: true, // Include the "author" relation
+        author: true, 
       },
     });
 

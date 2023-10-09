@@ -10,6 +10,8 @@
         return "text-purple-400";
       case "Software-development":
         return "text-red-500";
+          case "Health":
+        return "text-green-500";
       default:
         return "text-black"; // Default color for other categories
     }
