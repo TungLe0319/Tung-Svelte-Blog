@@ -1,18 +1,18 @@
 <script>
   // import posts from "../lib/posts.js";
-  export let post;
+  export let featuredPost;
 </script>
 
-<a href={`/blog/${post?.id}`}>
+<a href={`/blog/${featuredPost?.id}`}>
   <div class=" featured-blogpost">
-    <img class="featured-blogpost-img" src={post.img} alt="post" />
+    <img class="featured-blogpost-img" src={featuredPost?.img} alt="post" />
 
     <div
       class="absolute z-20 flex justify-center w-full opacity-0 transition-opacity duration-300"
     >
       <div>
         <h4 class=" fire-effect-milo text-shadow">
-          {post.title}
+          {featuredPost?.title}
         </h4>
       </div>
     </div>
@@ -21,10 +21,10 @@
 
 <style lang="scss">
   .featured-blogpost {
-    @apply relative shadow-xl hover:shadow-green-300 product-card rounded-lg;
+    @apply relative shadow-xl duration-150 hover:brightness-75 hover:shadow-orange-300 product-card rounded-lg;
 
     img {
-      @apply object-cover  rounded-lg shadow-xl shadow-slate-800 transition-all;
+      @apply object-cover  rounded-lg shadow-xl shadow-slate-500 hover:shadow-orange-200 transition-all duration-150;
     }
   }
 
@@ -38,7 +38,7 @@
 
     &:hover {
       // @apply border-4 border-green-600  ;
-      width: 500px;
+      width: 525px;
       transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
 
       /* Decrease width of other product-cards when hovering */

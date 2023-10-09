@@ -10,11 +10,10 @@
 
   export let data;
 
-  let posts = data.body?.posts;
+let posts = data.body?.posts ;
+let featuredPosts = posts.filter((post) => post.categories && post.categories.some(category => category.name === "Featured Posts"));
 
-  let featuredPosts = data.body?.posts.filter((post) => post.categories.includes("Featured Posts"));
-
-console.log(posts);
+console.log(featuredPosts);
 </script>
 
 <div class="">
@@ -39,7 +38,7 @@ console.log(posts);
         <h3 class="text-4xl mb-10 permanent-marker-font text-white ">Featured Posts</h3>
       </div>
       <div class="flex justify-center space-x-2 mb-20">
-        {#each featuredPosts as featuredPost, index ( featuredPost.id)}
+        {#each featuredPosts as featuredPost}
           <FeaturedBlogPost {featuredPost} />
         {/each}
       </div>
@@ -98,7 +97,7 @@ console.log(posts);
   .hero-image::after {
     content: "";
     position: absolute;
-    top: 700px;
+    top: 1000px;
     left: 0;
     right: 0;
     bottom: -18px;

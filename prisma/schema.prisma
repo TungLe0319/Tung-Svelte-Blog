@@ -13,6 +13,8 @@ model User {
   name  String?
    role          Role      @default(USER)
   posts Post[]
+   likes    Like[]   
+  comments Comment[] 
 }
 
 model Post {
@@ -21,11 +23,14 @@ model Post {
   img           String
   subtitle      String
   content       String?
-   categories    Category[]
+  
   published     Boolean  @default(false)
   datePublished DateTime
   authorId      Int
   author        User     @relation(fields: [authorId], references: [id])
+   likes         Like[]  
+  comments      Comment[] 
+   categories    Category[]
 }
 
 enum Role {
@@ -36,5 +41,27 @@ enum Role {
 model Category {
   id     Int      @id @default(autoincrement())
   name   String   @unique
-  posts  Post[]   // Define the many-to-many relationship
+  posts  Post[]   
+}
+
+
+model Like {
+  id       Int    @id @default(autoincrement())
+  postId   Int
+  post     Post   @relation(fields: [postId], references: [id])
+  userId   Int
+  user     User   @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Comment {
+  id       Int    @id @default(autoincrement())
+  postId   Int
+  post     Post   @relation(fields: [postId], references: [id])
+  userId   Int
+  user     User   @relation(fields: [userId], references: [id])
+  content  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
