@@ -8,23 +8,7 @@
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
   }
-// const scrollNavBar = 60
-// 	let show = false
 
-  
-// 	onMount(() => {
-// 		window.onscroll = () => {
-// 			if (window.scrollY > scrollNavBar) {
-// 				show = true
-// 			} else {
-// 				show = false
-// 			}
-// 		}
-// 	})
-	
-// 	onDestroy(() => {
-// 		window.onscroll = () => {}
-// 	})
 
 </script>
 
@@ -58,13 +42,16 @@
 
     <!-- Navigation Links (hidden on small screens) -->
     <div class="hidden lg:flex space-x-8 text-lg">
-      {#if !$page.data.session}
+      {#if !$page.data?.session}
    <a href="/login" class="hover:underline">Login</a>
       {:else}
          <!-- else content here -->
          <a href="/authenticated/account" class="hover:underline">Account</a>
       {/if}
+      <!-- {#if $page?.data?.session?.user?.email === "tung.le0319@gmailcom"}
       <a href="/authenticated/create" class="hover:underline">Create</a>
+     
+      {/if} -->
       <a href="/category/technology" class="hover:underline">Technology</a>
       <a href="/art" class="hover:underline">Art</a>
       <a href="/software-development" class="hover:underline"

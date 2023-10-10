@@ -15,7 +15,7 @@
 
 
 
-      <div class="text text-9xl p-0 absolute font-bold permanent-marker-font top-14">LOGIN</div>
+      <!-- <div class="text text-9xl p-0  absolute font-bold permanent-marker-font top-14">LOGIN</div> -->
     
   
       {#if $page.data.session}
@@ -37,16 +37,18 @@
         </button>
       {:else}
         <div class=" flex space-x-6">
-          <button on:click={() => signIn("github")} class="mt-2 inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+          <button on:click={() => signIn("github")} class="mt-2  px-4 py-2  text-white rounded">
             <img
               src="https://cdn-icons-png.flaticon.com/128/733/733609.png?ga=GA1.1.2107270949.1696371575&track=ais"
               alt="Google Icon"
+              class=""
             />
           </button>
           <button on:click={() => signIn("google")} class="">
             <img
               src="https://cdn-icons-png.flaticon.com/128/2702/2702602.png?ga=GA1.1.2107270949.1696371575"
               alt="Google Icon"
+              class=""
             />
           </button>
         </div>
@@ -65,7 +67,8 @@
 letter-spacing: 0.15em;
     margin: 1em 0;
     padding: 1.4em;
-    background-image: url("https://img.freepik.com/free-vector/hand-drawn-cherry-branch-illustration_52683-91680.jpg?t=st=1696809432~exp=1696810032~hmac=9a2674a0050a3edb397b9dcfd91dda4bab35c4426d97fc5dd0ec0d786a7e46e5");
+  background: rgb(131,58,180);
+background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
     background-size: cover;
     background-repeat: no-repeat; 
     background-position: center center; 

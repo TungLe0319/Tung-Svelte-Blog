@@ -8,9 +8,13 @@ const db = new PrismaClient();
 export async function load() {
   try {
     const posts = await db.post.findMany({
-    // where:{
-    //   category: "Technology",
-    // }
+    where:{
+      categories: {
+      some:{
+        name: "Technology"
+      }
+      }
+    },
     include:{
       categories:true,
       author: true,

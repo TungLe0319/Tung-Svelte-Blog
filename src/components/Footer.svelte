@@ -1,96 +1,134 @@
-<footer class="bg-zinc-200 text-black ">
-  <div class="container mx-auto flex justify-between items-start  flex-col lg:flex-row lg:items-center">
-    <!-- Legal Column -->
-    <div class="text-lg lg:text-base bg-red-50   ">
-      <h3 class="text-xl font-semibold mb-2">Legal</h3>
-      <ul class="list-none">
-        <li><a href="#" class="hover:underline">Terms of Service</a></li>
-        <li><a href="#" class="hover:underline">Privacy Policy</a></li>
-        <li><a href="#" class="hover:underline">Cookie Policy</a></li>
-      </ul>
+
+
+ <footer class="bg-zinc-900 text-white">
+    <div class="w-full pt-10 flex items-center justify-center bg-zinc-900">
+      <div class="md:w-2/3 w-full px-4 text-white flex flex-col">
+        <div class="md:flex">
+          <h1 class="text-6xl font-bold w-full md:w-1/2">
+            Thank you for checking out our app. Get in touch with us.
+          </h1>
+
+          <div
+            class="w-full md:w-1/2 footer-section flex justify-center flex-col items-center"
+          >
+            <div class="mt-8 flex">
+              <img
+                src="https://avatars.githubusercontent.com/u/107594367?s=400&u=279c4a706755639789d6b825966e54161df0c7aa&v=4"
+                alt=""
+                width="60"
+                class="rounded-full shadow-md"
+              />
+
+              <div class="ml-5 flex gap-5 items-center">
+                <a href="https://www.linkedin.com/in/tung-le0319/">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png"
+                    alt=""
+                    width="30"
+                    height="30"
+                  />
+                </a>
+                <div class="">
+                  <a href="https://github.com/TungLe0319">
+                    <img
+                      src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn4.iconfinder.com%2Fdata%2Ficons%2Fsocial-media-and-logos-11%2F32%2FLogo_Github-512.png&f=1&nofb=1&ipt=6cc9a130a9bb53997e07157eac5064ae54cdf9af88484f7a3e634e9bf6cf5f54&ipo=images"
+                      alt=""
+                      width="30"
+                      height="30"
+                    />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- SECTION DANIEL -->
+            <div class="mt-4 flex">
+              <img
+                src="https://avatars.githubusercontent.com/u/107774403?v=4"
+                alt=""
+                width="60"
+                class="rounded-full shadow-md"
+              />
+
+              <div class="ml-5 flex gap-5 items-center">
+                <a href="https://www.linkedin.com/in/daniel-le97/">
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/3536/3536505.png"
+                    alt=""
+                    width="30"
+                    height="30"
+                  />
+                </a>
+                <a href="https://github.com/daniel-le97">
+                  <img
+                    src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn4.iconfinder.com%2Fdata%2Ficons%2Fsocial-media-and-logos-11%2F32%2FLogo_Github-512.png&f=1&nofb=1&ipt=6cc9a130a9bb53997e07157eac5064ae54cdf9af88484f7a3e634e9bf6cf5f54&ipo=images"
+                    alt=""
+                    width="30"
+                    height="30"
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="flex mt-8 flex-col md:flex-row md:justify-center md:text-center"
+        >
+          <p class="w-full md:w-2/3 text-gray-400">
+            If you want to contact us connect and message either of us on LinkedIn!
+          </p>
+        </div>
+        <div class="flex flex-col">
+          <div class="flex mt-24 mb-5 flex-row justify-between items-end">
+            <div class="hidden md:block">
+              <!-- <img
+                src="../assets/Logo.png"
+                alt=""
+                width="80"
+                class="rounded-xl b"
+              /> -->
+            </div>
+
+            <a href="/">
+              Home
+            </a>
+            <!-- <NuxtLink to="/products" class="link" active-class="active-link">
+              Products
+            </NuxtLink>
+            <NuxtLink to="/about" class="link" active-class="active-link">
+              About
+            </NuxtLink> -->
+
+            <a href="/authenticated/account" class="link" active-class="active-link">
+              Account
+            </a>
+            <a href="/" class="link" active-class="active-link">
+              Home
+            </a>
+          </div>
+          <hr class="border-gray-600" />
+
+          <p class="text-center text-gray-300 my-10">
+            ©2022 DevOpportunitiesLLC All rights reserved.
+          </p>
+        </div>
+      </div>
     </div>
+  </footer>
 
-    <!-- Contact Info Column -->
-    <div class="text-lg lg:text-base mt-4 lg:mt-0 ">
-      <h3 class="text-xl font-semibold mb-2">Contact Info</h3>
-      <address>
-        <p>Email: example@example.com</p>
-        <p>Phone: +1 (123) 456-7890</p>
-        <p>Address: 123 Main St, City, Country</p>
-      </address>
-    </div>
-
-    <!-- Nav Links Column -->
-    <div class="text-lg lg:text-base mt-4 lg:mt-0">
-      <h3 class="text-xl font-semibold mb-2">Nav Links</h3>
-      <ul class="list-none">
-      
-        <li><a href="/about" class="hover:underline">About</a></li>
-        <li><a href="/contact" class="hover:underline">Contact</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Made by Tung Le Section -->
-  <section class="bg-zinc-900 text-center py-2">
-    <p class="text-lg text-white">Made by Tung Le</p>
-  </section>
-</footer>
+<style lang="scss" scoped>
 
 
+.footer-section {
+  flex: 1;
+}
 
-<style lang="scss">
- 
-  /* Style your navbar as needed */
- a {
-  position: relative;
-  transition: transform 0.3s;
-  text-decoration: none;
-  font-weight: 600;
-
-
-  &:hover {
-    transform: scaleX(1);
-     text-decoration: none;
+.link {
+  width: fit-content;
+  height: fit-content;
+  @media only screen and (max-width: 768px) {
+    font-size: 16px !important;
   }
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: orange;
-    transform-origin: 0 100%;
-    transform: scaleX(0);
-    transition: transform 0.3s, width 0.3s;
-    
-  }
-
-  &:hover::after {
-    transform: scaleX(1);
-    width: 100%;
-  }
-}
-
-
-.icon-img-1 {
-  width: 60px;
-  transition: opacity 0.3s ease-in-out; /* Define the transition property */
-}
-.icon-img-2 {
- 
-
-   opacity: 0;
-   width: 0;
-}
-.icon-container:hover .icon-img-1 {
-  opacity: 0; 
-  width: 0;
-}
-
-.icon-container:hover .icon-img-2 {
-  opacity: 1; width: 60px; 
 }
 </style>

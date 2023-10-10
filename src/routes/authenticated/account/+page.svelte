@@ -1,21 +1,47 @@
 <!-- YourPage.svelte -->
 
 <script>
-
-   import { signIn, signOut } from "@auth/sveltekit/client"
-  import { page } from "$app/stores"
-
+  import { signIn, signOut } from "@auth/sveltekit/client";
+  import { page } from "$app/stores";
 </script>
 
-<div class="mt-20">
-<div class="banner">
-  <!-- Banner image -->
-  <img src="https://img.freepik.com/free-vector/hand-drawn-japanese-illustration-cherry-tree-petals_23-2149601832.jpg?w=1380&t=st=1696862588~exp=1696863188~hmac=34bbc25b49f39ef342f3bf36d33683fd980eb8aecad938a1b461679052b8cbea" alt="Banner" />
-  
-  <!-- Profile picture (rounded and shadowed) -->
-  <div class="profile-picture">
-    <img src="https://avatars.githubusercontent.com/u/107594367?v=4" alt="Profile Picture" />
+<div class="relative hero-image-container">
+  <img
+    class="hero-image"
+    src="https://images.unsplash.com/photo-1562688722-369523a4a270?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+    alt="banner"
+  />
+  <div class="hero-text  flex flex-col items-center space-y-2">
+    <h1 class="text-8xl text-shadow-overlay shadow-into-light-font">Account</h1>
+ <!-- <img src={$page.data.session?.user.image} class="profile-img" alt="profile"> -->
   </div>
+
+  <div class="absolute bottom-0 right-1/2 p-2 transform translate-x-1/2">
+   
+  </div>
+</div>
+
+<div class=" px-40 py-4 mt-3 text-xl flex justify-center items-center">
+  <h2 class="description">
+    This blog project serves as an opportunity for me to strengthen my
+    development skills, troubleshooting abilities, and utilize my creativity.
+    This endeavor involves the creation of a personal blog application where I
+    can share posts about topics within the industry and things I find
+    fascinating.
+    <br /> <br />
+    As I embark on this project, my goal is to master various aspects of web development,
+    from crafting an intuitive user interface to implementing robust backend functionality.Through
+    this app, I also aim to provide readers with insightful content, whether it's
+    about the latest trends in technology, deep dives into coding challenges, or
+    explorations of intriguing subjects.
+
+    <br /><br />
+    I'm committed to delivering a seamless and enjoyable reading experience for users
+    and using this project as an opportunity to expand my knowledge, embrace secure
+    coding practices, and elevate my development skills.
+
+    <br />
+  </h2>
 </div>
 
 <div class="Auth">
@@ -41,37 +67,48 @@
   </p>
 </div>
 
-
-</div>
-<style>
+<style lang="scss" scoped>
   /* Add your CSS styles here */
-  .banner {
-    position: relative;
+  .description {
+    line-height: 1.5;
   }
-
-  .banner img {
+  .hero-image {
     width: 100%;
     height: 500px;
     object-fit: cover;
+    position: relative;
+  }
+  .hero-image-container::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    z-index: 1999;
+    left: 0;
+    width: 100%;
+    height: 10px; /* adjust height as per your need */
+    background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0),
+      #fff
+    ); /* adjust the color as per your need */
   }
 
-  .profile-picture {
+  .hero-text {
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 50%;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    overflow: hidden;
-    width: 100px; /* Adjust the size as needed */
-    height: 100px; /* Adjust the size as needed */
+    z-index: 1;
+    text-align: center;
+    color: #fff;
+    user-select: none;
+    
   }
 
-  .profile-picture img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .text-shadow-overlay {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   }
-
-  /* Add more styles for your Auth section as needed */
+  .profile-img{
+@apply rounded-full shadow-lg shadow-slate-700;
+  }
 </style>
