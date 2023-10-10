@@ -2,7 +2,7 @@
   import "../assets/scss/main.scss";
   import Navbar from "../components/Navbar.svelte";
   import Footer from "../components/Footer.svelte";
-
+// import "../app.postcss"
   import { fade } from "svelte/transition";
 
   export let data;
