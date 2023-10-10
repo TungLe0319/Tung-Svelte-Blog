@@ -61,7 +61,7 @@ let featuredPosts = posts.filter((post) => post.categories && post.categories.so
     </div>
 
 
-Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non debitis ducimus, ea excepturi quibusdam sint corrupti voluptatibus doloribus, dicta perspiciatis iste dolores blanditiis voluptate velit vitae esse a nemo at.
+
 
  <div class="posts-container mt-60 flex flex-col justify-center p-2 m-10 px-10">
     <div class="selection-bar py-10   ">
@@ -135,18 +135,18 @@ Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non debitis ducimus, e
     background-attachment: fixed;
   }
 
-  .hero-image::after {
-    content: "";
-    position: absolute;
-    top: 1000px;
-    left: 0;
-    right: 0;
-    bottom: -18px;
-    background: linear-gradient(
-      to bottom,
-      rgba(182, 50, 50, 0),
-      rgba(255, 255, 255, 1)
-    ); /* Fades to white at the bottom */
-    pointer-events: none; /* Allows clicks to pass through the overlay */
-  }
+  // .hero-image::after {
+  //   content: "";
+  //   position: absolute;
+  //   top: 1000px;
+  //   left: 0;
+  //   right: 0;
+  //   bottom: -18px;
+  //   background: linear-gradient(
+  //     to bottom,
+  //     rgba(182, 50, 50, 0),
+  //     rgba(255, 255, 255, 1)
+  //   ); /* Fades to white at the bottom */
+  //   pointer-events: none; /* Allows clicks to pass through the overlay */
+  // }
 </style>

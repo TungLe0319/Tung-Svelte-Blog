@@ -2,19 +2,28 @@
   import "../assets/scss/main.scss";
   import Navbar from "../components/Navbar.svelte";
   import Footer from "../components/Footer.svelte";
+
+  import { fade } from "svelte/transition";
+
+  export let data;
 </script>
 
 <Navbar />
 <div class="wrapper">
-  <main class="w-full background">
-    <slot />
-  </main>
+  {#key data.pathname}
+    <main
+      class="w-full background "
+      in:fade={{ duration: 300}}
+      out:fade={{ duration: 300 }}
+    >
+      <slot />
+    </main>
+  {/key}
 
   <Footer />
 </div>
 
 <style lang="scss" scoped>
-
   .wrapper {
     display: flex;
     flex-direction: column;
