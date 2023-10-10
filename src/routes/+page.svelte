@@ -11,9 +11,9 @@
   export let data;
 
 let posts = data.body?.posts ;
-let featuredPosts = posts.filter((post) => post.categories && post.categories.some(category => category.name === "Featured Posts"));
+let featuredPosts = posts.filter((post) => post.categories && post.categories.some(category => category.name === "Featured"));
 
-console.log(featuredPosts);
+// console.log(featuredPosts);
 </script>
 
 <div class="">

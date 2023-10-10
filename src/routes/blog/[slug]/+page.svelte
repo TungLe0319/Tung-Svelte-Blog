@@ -1,5 +1,6 @@
 <script>
   import { fade } from "svelte/transition";
+
   export let data;
   let post;
   let recentPosts;

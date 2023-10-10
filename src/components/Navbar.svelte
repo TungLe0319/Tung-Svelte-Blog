@@ -28,7 +28,7 @@
 
 </script>
 
-<nav class=" navbar" id="navbar"  >
+<nav class=" navbar z-50" id="navbar"  >
   <div class=" flex items-center justify-between w-full b">
     <div class="text-xl font-semibold icon-container">
       <a href="/">
