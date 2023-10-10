@@ -78,14 +78,14 @@ font-family: 'Shadows Into Light', cursive;*/
     content: "";
     position: absolute;
     bottom: 0;
-    z-index: 1999;
+    z-index: 1;
     left: 0;
     width: 100%;
     height: 10px; /* adjust height as per your need */
     background-image: linear-gradient(
       to bottom,
       rgba(255, 255, 255, 0),
-      #fff
+      #fff, 
     ); /* adjust the color as per your need */
   }
 

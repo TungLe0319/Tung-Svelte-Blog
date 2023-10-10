@@ -29,7 +29,7 @@
 <div class="relative hero-image-container">
   <img
     class="hero-image"
-    src="https://images.unsplash.com/photo-1578301978018-3005759f48f7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2044&q=80"
+    src="https://img.freepik.com/free-photo/vibrant-colorful-abstract-spiral-wallpaper-with-ornate-shapes-generated-by-ai_188544-27890.jpg?t=st=1696968447~exp=1696972047~hmac=6c5c2d6e498c21ac10551fa8386ada84d3fa39d73f7eb30dfd289d02ece8ea32&w=1380"
     alt="banner"
   />
   <div class="hero-text">

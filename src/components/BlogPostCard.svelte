@@ -59,7 +59,7 @@
   }
 
   .blogPost {
-    @apply p-3 my-2 shadow-lg flex rounded-l-md relative;
+    @apply p-3 my-2 shadow-lg flex rounded-l-md relative hover:bg-orange-50 transition-all duration-150;
   }
   .blogPost-image {
     @apply w-1/2 rounded-md  shadow-2xl shadow-gray-400  transition-all   duration-300 ease-in-out
