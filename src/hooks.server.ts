@@ -23,13 +23,13 @@ export const handle: Handle = sequence(
         clientId: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       }),
-      // GitHub({
-      //   clientId: process.env.GITHUB_ID,
-      //   clientSecret: process.env.GITHUB_SECRET,
-      // }),
+      GitHub({
+        clientId: process.env.GITHUB_CLIENT_ID,
+        clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      }),
     ],
     trustHost: true,
-    // secret: process.env.AUTH_SECRET,
+    secret: process.env.AUTH_SECRET,
   }),
   authorization
 );
