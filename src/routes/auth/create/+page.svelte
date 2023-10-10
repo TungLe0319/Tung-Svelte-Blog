@@ -22,9 +22,8 @@
     formData.append("categories", categories);
     formData.append("published", published);
 
-
-    console.log(formData.get('categories'));
-    const response = await fetch("/authenticated/create", {
+    console.log(formData.get("categories"));
+    const response = await fetch("/auth/create", {
       method: "POST",
 
       body: formData,

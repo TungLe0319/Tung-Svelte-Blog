@@ -11,7 +11,7 @@
 </script>
 
 <nav class=" navbar z-50" id="navbar">
-  <div class=" flex items-center lg:justify-between space-x-2 w-full ">
+  <div class=" flex items-center lg:justify-between space-x-2 w-full">
     <div class="text-xl font-semibold icon-container">
       <a href="/">
         <!-- <img src="src\assets\images\mushroom.png" alt="Mushroom Icon" width="60" class="icon-img-1">
@@ -38,15 +38,15 @@
     </button>
 
     <!-- Navigation Links (hidden on small screens) -->
-    <div class="hidden lg:flex lg:space-x-8 text-lg    ">
+    <div class="hidden lg:flex lg:space-x-8 text-lg">
       {#if !$page.data?.session}
         <a href="/login" class="hover:underline">Login</a>
       {:else}
         <!-- else content here -->
-        <a href="/authenticated/account" class="hover:underline">Account</a>
+        <a href="/auth/account" class="hover:underline">Account</a>
       {/if}
       {#if $page?.data?.session?.user?.email === "tung.le0319@gmail.com"}
-        <a href="/authenticated/create" class="hover:underline">Create</a>
+        <a href="/auth/create" class="hover:underline">Create</a>
       {/if}
       <a href="/category/technology" class="hover:underline">Technology</a>
       <a href="/art" class="hover:underline">Art</a>
@@ -60,17 +60,18 @@
 
   <!-- Responsive Mobile Menu (shown on small screens) -->
   {#if isMenuOpen}
-    <div class="lg:hidden mt-2 flex flex-col space-y-2 w-fit ">
+    <div class="lg:hidden mt-2 flex flex-col space-y-2 w-fit">
       {#if !$page.data?.session}
         <a href="/login" class="hover:underline w-fit">Login</a>
       {:else}
         <!-- else content here -->
-        <a href="/authenticated/account" class="hover:underline w-fit">Account</a>
+        <a href="/auth/account" class="hover:underline w-fit">Account</a>
       {/if}
       {#if $page?.data?.session?.user?.email === "tung.le0319@gmail.com"}
-        <a href="/authenticated/create" class="hover:underline w-fit">Create</a>
+        <a href="/auth/create" class="hover:underline w-fit">Create</a>
       {/if}
-      <a href="/category/technology" class="hover:underline w-fit">Technology</a>
+      <a href="/category/technology" class="hover:underline w-fit">Technology</a
+      >
       <a href="/art" class="hover:underline">Art</a>
       <a href="/software-development" class="hover:underline w-fit"
         >Software Development</a
