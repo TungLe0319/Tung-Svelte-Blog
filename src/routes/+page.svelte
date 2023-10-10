@@ -50,13 +50,13 @@
     <div class="hero-text text-shadow-overlay">
       <div class="  headliner">
         <h1 class="text-6xl">
-          there is no education like adversity and curiosity
+          there is no education like curiosity 
         </h1>
       </div>
 
       <div class="headliner-2">
         <h2 class="text-4xl">
-          How Art, Curiosity, and Passion Fuel My Creative Drive
+          How Art Technology and Curiosity Fuel My Life
         </h2>
       </div>
     </div>
