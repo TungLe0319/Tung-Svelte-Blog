@@ -24,7 +24,7 @@ console.log(data.body.post);
             <img
               src={post?.img}
               alt="Blog-post"
-              class=" w-3/4 rounded-md shadow-xl shadow-slate-400"
+              class=" rounded-md shadow-xl shadow-slate-400"
             />
           </div>
           <div class="post-info pt-5 text-sm text-gray-500">
@@ -88,21 +88,50 @@ console.log(data.body.post);
 
 <!-- <BlogPost {data?.post} /> -->
 <style lang="scss">
-  .post-content :global(h1) {
-    @apply text-6xl text-gray-700 font-semibold; 
-  }
+.post-content :global(h1) {
+  @apply text-4xl text-gray-800 font-semibold my-4 mb-10;
+}
 
-  .post-content :global(h2) {
-    @apply text-4xl text-gray-400 font-semibold my-2; 
-  }
+.post-content :global(h2) {
+  @apply text-3xl text-orange-300 font-semibold my-4;
+}
 
-  .post-content :global(p) {
-    @apply text-gray-600 text-xl; 
-  }
+.post-content :global(h3) {
+  @apply text-2xl text-gray-600 font-semibold my-4;
+}
 
-  .post-content :global(img) {
-    @apply rounded-md shadow-md shadow-slate-600 my-14; 
-  }
+.post-content :global(p) {
+  @apply text-gray-700 text-lg leading-7 my-4;
+}
+
+.post-content :global(ul),
+.post-content :global(ol) {
+  @apply text-gray-700 text-lg leading-7 my-4;
+}
+
+.post-content :global(li) {
+  @apply list-disc ml-6 my-4   text-base font-medium;
+}
+
+.post-content :global(a) {
+  @apply text-blue-500 hover:underline;
+}
+
+.post-content :global(img) {
+  @apply rounded-md shadow-md shadow-slate-600 my-6;
+}
+
+.post-content :global(blockquote) {
+  @apply border-l-4 border-gray-300 pl-4 my-6;
+}
+
+.post-content :global(pre) {
+  @apply bg-gray-100 p-4 rounded-md my-6;
+}
+
+.post-content :global(code) {
+  @apply font-mono bg-gray-100 rounded-md p-1;
+}
 
   .recent-post-img {
     @apply w-16 h-16 object-cover rounded-md hover:brightness-75 transition-all duration-300;

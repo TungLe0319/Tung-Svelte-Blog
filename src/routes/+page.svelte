@@ -56,7 +56,7 @@
 
       <div class="headliner-2">
         <h2 class="text-4xl">
-          How Art Technology and Curiosity Fuel My Life
+          How Art, Technology and Curiosity Fuel My Life
         </h2>
       </div>
     </div>
