@@ -6,6 +6,11 @@ import { error } from "@sveltejs/kit";
 const db = new PrismaClient();
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
+  console.log("GOOGLE_CLIENT_ID:", process.env.GOOGLE_CLIENT_ID);
+console.log("GOOGLE_CLIENT_SECRET:", process.env.GOOGLE_CLIENT_SECRET);
+console.log("GITHUB_ID:", process.env.GITHUB_ID);
+console.log("GITHUB_SECRET:", process.env.GITHUB_SECRET);
+
   try {
     const posts = await db.post.findMany({
       include: {

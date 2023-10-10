@@ -4,7 +4,9 @@
     "module": "CommonJS", // Adjust the module type as needed
     "outDir": "./dist" // Specify your output directory
     // Other compiler options...
+    
   },
   "include": ["**/*.ts", "script.js", "src/lib/prisma.js"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  
 }

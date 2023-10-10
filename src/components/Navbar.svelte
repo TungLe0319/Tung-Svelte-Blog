@@ -1,19 +1,17 @@
 <!-- Navbar.svelte -->
 <script>
-  import { onDestroy, onMount, } from "svelte";
- import { page } from "$app/stores"
-  
+  import { onDestroy, onMount } from "svelte";
+  import { page } from "$app/stores";
+
   let isMenuOpen = false;
 
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
   }
-
-
 </script>
 
-<nav class=" navbar z-50   " id="navbar"  >
-  <div class=" flex items-center justify-between w-full b">
+<nav class=" navbar z-50" id="navbar">
+  <div class=" flex items-center lg:justify-between space-x-2 w-full ">
     <div class="text-xl font-semibold icon-container">
       <a href="/">
         <!-- <img src="src\assets\images\mushroom.png" alt="Mushroom Icon" width="60" class="icon-img-1">
@@ -22,7 +20,6 @@
       </a>
     </div>
 
-    <!-- Hamburger Menu Button -->
     <button class="lg:hidden focus:outline-none" on:click={toggleMenu}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -41,17 +38,16 @@
     </button>
 
     <!-- Navigation Links (hidden on small screens) -->
-    <div class="hidden lg:flex space-x-8 text-lg">
+    <div class="hidden lg:flex lg:space-x-8 text-lg    ">
       {#if !$page.data?.session}
-   <a href="/login" class="hover:underline">Login</a>
+        <a href="/login" class="hover:underline">Login</a>
       {:else}
-         <!-- else content here -->
-         <a href="/authenticated/account" class="hover:underline">Account</a>
+        <!-- else content here -->
+        <a href="/authenticated/account" class="hover:underline">Account</a>
       {/if}
-      <!-- {#if $page?.data?.session?.user?.email === "tung.le0319@gmailcom"}
-      <a href="/authenticated/create" class="hover:underline">Create</a>
-     
-      {/if} -->
+      {#if $page?.data?.session?.user?.email === "tung.le0319@gmail.com"}
+        <a href="/authenticated/create" class="hover:underline">Create</a>
+      {/if}
       <a href="/category/technology" class="hover:underline">Technology</a>
       <a href="/art" class="hover:underline">Art</a>
       <a href="/software-development" class="hover:underline"
@@ -64,23 +60,30 @@
 
   <!-- Responsive Mobile Menu (shown on small screens) -->
   {#if isMenuOpen}
-    <div class="lg:hidden mt-2 space-y-2">
-      <a href="/technology" class="block px-4 py-2 hover:bg-gray-700"
-        >Technology</a
-      >
+    <div class="lg:hidden mt-2 flex flex-col space-y-2 w-fit ">
+      {#if !$page.data?.session}
+        <a href="/login" class="hover:underline w-fit">Login</a>
+      {:else}
+        <!-- else content here -->
+        <a href="/authenticated/account" class="hover:underline w-fit">Account</a>
+      {/if}
+      {#if $page?.data?.session?.user?.email === "tung.le0319@gmail.com"}
+        <a href="/authenticated/create" class="hover:underline w-fit">Create</a>
+      {/if}
+      <a href="/category/technology" class="hover:underline w-fit">Technology</a>
       <a href="/art" class="hover:underline">Art</a>
-      <a href="/software-development" class="hover:underline"
+      <a href="/software-development" class="hover:underline w-fit"
         >Software Development</a
       >
+      <a href="/about" class="hover:underline w-fit">About</a>
     </div>
   {/if}
 </nav>
 
 <style lang="scss">
   .scrolled {
-		
-		transform: translate(0,calc(-100% - 1rem))
-	}
+    transform: translate(0, calc(-100% - 1rem));
+  }
   .navbar {
     @apply bg-transparent text-white p-4 pb-20  absolute w-full;
 
@@ -94,7 +97,7 @@
 
   /* Style your navbar as needed */
   a {
-    @apply  relative transition-transform duration-200  text-2xl;
+    @apply relative transition-transform duration-200  text-2xl;
 
     text-decoration: none;
     font-weight: 600;

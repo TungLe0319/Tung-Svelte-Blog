@@ -13,7 +13,7 @@
   />
   <div class="hero-text  flex flex-col items-center space-y-2">
     <h1 class="text-8xl text-shadow-overlay shadow-into-light-font">Account</h1>
- <!-- <img src={$page.data.session?.user.image} class="profile-img" alt="profile"> -->
+ <img src={$page.data.session?.user.image} class="profile-img" alt="profile">
   </div>
 
   <div class="absolute bottom-0 right-1/2 p-2 transform translate-x-1/2">
@@ -21,28 +21,7 @@
   </div>
 </div>
 
-<div class=" px-40 py-4 mt-3 text-xl flex justify-center items-center">
-  <h2 class="description">
-    This blog project serves as an opportunity for me to strengthen my
-    development skills, troubleshooting abilities, and utilize my creativity.
-    This endeavor involves the creation of a personal blog application where I
-    can share posts about topics within the industry and things I find
-    fascinating.
-    <br /> <br />
-    As I embark on this project, my goal is to master various aspects of web development,
-    from crafting an intuitive user interface to implementing robust backend functionality.Through
-    this app, I also aim to provide readers with insightful content, whether it's
-    about the latest trends in technology, deep dives into coding challenges, or
-    explorations of intriguing subjects.
 
-    <br /><br />
-    I'm committed to delivering a seamless and enjoyable reading experience for users
-    and using this project as an opportunity to expand my knowledge, embrace secure
-    coding practices, and elevate my development skills.
-
-    <br />
-  </h2>
-</div>
 
 <div class="Auth">
   <h1>SvelteKit Auth Example</h1>
