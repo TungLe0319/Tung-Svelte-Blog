@@ -29,9 +29,14 @@
 <div class="relative hero-image-container">
   <img
     class="hero-image"
-    src="https://img.freepik.com/free-photo/vibrant-colorful-abstract-spiral-wallpaper-with-ornate-shapes-generated-by-ai_188544-27890.jpg?t=st=1696968447~exp=1696972047~hmac=6c5c2d6e498c21ac10551fa8386ada84d3fa39d73f7eb30dfd289d02ece8ea32&w=1380"
+    src="https://media.discordapp.net/attachments/1060066788878069891/1161434758987927572/914.png?ex=65384968&is=6525d468&hm=5883c4baa5e56399db2eeec4e2c9155376f324f1ab0033e08c1188ec6d8ddc80&=&width=1408&height=676"
     alt="banner"
   />
+  <!-- <img
+    class="hero-image"
+    src="https://img.freepik.com/free-photo/vibrant-colorful-abstract-spiral-wallpaper-with-ornate-shapes-generated-by-ai_188544-27890.jpg?t=st=1696968447~exp=1696972047~hmac=6c5c2d6e498c21ac10551fa8386ada84d3fa39d73f7eb30dfd289d02ece8ea32&w=1380"
+    alt="banner"
+  /> -->
   <div class="hero-text">
     <h1 class="text-8xl text-shadow-overlay shadow-into-light-font">About</h1>
     <!-- <small class="text-xl">We Love Software Development!</small> -->
