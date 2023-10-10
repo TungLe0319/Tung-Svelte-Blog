@@ -4,19 +4,35 @@
   import { onMount } from "svelte";
   import { signIn, signOut } from "@auth/sveltekit/client";
   import { page } from "$app/stores";
-
-  // import posts from "../lib/posts.js";
-  // import posts from "../lib/posts.js";
-
+import { fade,fly } from "svelte/transition";
+  
   export let data;
+  let posts = data.body?.posts;
+  let selectedCategory = "all";
+  let filteredPosts = [];
 
-let posts = data.body?.posts ;
+  // Function to filter posts based on the selected category
+  function filterPosts(category) {
+    if (category === "all") {
+      filteredPosts = posts;
+    } else {
+      filteredPosts = posts.filter(post => post.categories && post.categories.some(cat => cat.name === category));
+    }
+  }
+
+  // Initialize filteredPosts with all posts
+  filterPosts(selectedCategory);
+
+  // Event listener for the category selection dropdown
+  function handleCategoryChange() {
+    selectedCategory = categorySelect.value;
+    filterPosts(selectedCategory);
+  }
+
 let featuredPosts = posts.filter((post) => post.categories && post.categories.some(category => category.name === "Featured"));
-
-// console.log(featuredPosts);
 </script>
 
-<div class="">
+<div >
   <div class="hero-image flex flex-col">
     <div class="  headliner">
       <h1 class="text-6xl">
@@ -44,17 +60,53 @@ let featuredPosts = posts.filter((post) => post.categories && post.categories.so
       </div>
     </div>
 
+
+Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non debitis ducimus, ea excepturi quibusdam sint corrupti voluptatibus doloribus, dicta perspiciatis iste dolores blanditiis voluptate velit vitae esse a nemo at.
+
+ <div class="posts-container mt-60 flex flex-col justify-center p-2 m-10 px-10">
+    <div class="selection-bar py-10   ">
+      <label for="categorySelect" class="mr-2">Select Category:</label>
+      <select id="categorySelect" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400  p-2.5 " on:change={handleCategoryChange}>
+        <option class="" value="all">All</option>
+        <option value="Technology">Technology</option>
+        <option value="Art and Culture">Art</option>
+        <option value="Health and Wellness">Health</option>
+        <!-- Add more category options as needed -->
+      </select>
+    </div>
+  {#each filteredPosts as post (post.id)}
+   {#key post}
     <div
+      in:fly={{ x: -100, duration: 300,opacity:1 }}  
+      out:fly={{ x: 100, duration: 300 , opacity:0}}  
+      class="fly-transition"
+    >
+      <BlogPostCard {post} />
+    </div>
+  {/key}
+  {/each}
+  </div>
+
+
+
+    <!-- <div
       class="posts-container  mt-60 flex flex-col justify-center p-2 m-10 px-10"
     >
       {#each posts as post, index (post.title)}
         <BlogPostCard {post} />
       {/each}
-    </div>
+    </div> -->
+
+
+
+
   </div>
 </div>
 
 <style lang="scss">
+  .fly-transition {
+  will-change: transform;
+}
   .headliner {
     @apply flex justify-center mt-20 text-white text-center pt-20 select-none hover:cursor-default;
 
@@ -70,18 +122,7 @@ let featuredPosts = posts.filter((post) => post.categories && post.categories.so
   .featured-post-headliner {
     @apply flex justify-center mt-20 text-black text-center pt-20 select-none hover:cursor-default;
   }
-  @keyframes rotate {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
 
-  .infinite-rotate {
-    animation: rotate 50s linear infinite; /* Adjust the duration (10s) for slower or faster rotation */
-  }
 
   .hero-image {
     height: 100vh;

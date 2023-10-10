@@ -2,6 +2,7 @@
 <script>
   import { onDestroy, onMount } from "svelte";
   import { page } from "$app/stores";
+  import { signIn, signOut } from "@auth/sveltekit/client";
 
   let isMenuOpen = false;
 
@@ -42,17 +43,24 @@
       {#if !$page.data?.session}
         <a href="/login" class="hover:underline">Login</a>
       {:else}
+        <div class="flex space-x-2 items-center">
+          <img
+            class="rounded-full w-10 h-10 shadow-md"
+            src={$page.data?.session.user.image}
+            alt="profile"
+          />
+          <div class="text-sm px-4">{$page.data?.session.user.email}</div>
+          <button on:click={() => signOut()} class="text-orange-300 sign-out-btn mb-2"
+            >Sign out</button
+          >
+        </div>
         <!-- else content here -->
-        <a href="/auth/account" class="hover:underline">Account</a>
+        <!-- <a href="/auth/account" class="hover:underline">Account</a> -->
       {/if}
       {#if $page?.data?.session?.user?.email === "tung.le0319@gmail.com"}
         <a href="/auth/create" class="hover:underline">Create</a>
       {/if}
-      <a href="/category/technology" class="hover:underline">Technology</a>
-      <a href="/art" class="hover:underline">Art</a>
-      <a href="/software-development" class="hover:underline"
-        >Software Development</a
-      >
+
       <a href="/about" class="hover:underline">About</a>
       <a href="/contact" class="hover:underline">Contact</a>
     </div>
@@ -65,17 +73,12 @@
         <a href="/login" class="hover:underline w-fit">Login</a>
       {:else}
         <!-- else content here -->
-        <a href="/auth/account" class="hover:underline w-fit">Account</a>
+        <!-- <a href="/auth/account" class="hover:underline w-fit">Account</a> -->
       {/if}
       {#if $page?.data?.session?.user?.email === "tung.le0319@gmail.com"}
         <a href="/auth/create" class="hover:underline w-fit">Create</a>
       {/if}
-      <a href="/category/technology" class="hover:underline w-fit">Technology</a
-      >
-      <a href="/art" class="hover:underline">Art</a>
-      <a href="/software-development" class="hover:underline w-fit"
-        >Software Development</a
-      >
+
       <a href="/about" class="hover:underline w-fit">About</a>
     </div>
   {/if}
@@ -91,13 +94,14 @@
     background: rgb(119, 119, 119);
     background: linear-gradient(
       180deg,
-      rgba(119, 119, 119, 0.5186449579831933) 0%,
-      rgba(82, 199, 8, 0) 93%
+    rgba(164, 191, 196, 0.116) 0%,
+      rgba(6, 7, 6, 0) 100%
     );
   }
 
   /* Style your navbar as needed */
-  a {
+  a,
+  .sign-out-btn {
     @apply relative transition-transform duration-200  text-2xl;
 
     text-decoration: none;

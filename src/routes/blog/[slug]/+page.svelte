@@ -89,19 +89,19 @@ console.log(data.body.post);
 <!-- <BlogPost {data?.post} /> -->
 <style lang="scss">
   .post-content :global(h1) {
-    @apply text-6xl text-gray-700 font-semibold; /* Apply text styles */
+    @apply text-6xl text-gray-700 font-semibold; 
   }
 
   .post-content :global(h2) {
-    @apply text-4xl text-gray-400 font-semibold my-2; /* Apply text styles */
+    @apply text-4xl text-gray-400 font-semibold my-2; 
   }
 
   .post-content :global(p) {
-    @apply text-gray-600 text-xl; /* Apply text color */
+    @apply text-gray-600 text-xl; 
   }
 
   .post-content :global(img) {
-    @apply rounded-md shadow-md shadow-slate-600 my-14; /* Apply rounded corners and box shadow */
+    @apply rounded-md shadow-md shadow-slate-600 my-14; 
   }
 
   .recent-post-img {

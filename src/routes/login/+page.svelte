@@ -47,6 +47,11 @@
               <div class=" sign-in-text">Continue with Google</div>
           </button>
         </div>
+
+
+        <div class=" p-2 text0center text-sm px-10 mt-14   ">
+          Copyright © 2022 DevOpportunities, LLC  <br>Bloginweb™ 
+        </div>
   
       <!-- {#if $page.data.session}
         {#if $page.data.session.user?.image}
@@ -73,7 +78,7 @@
   <div class="w-3/4 bg-red-50">
  <img
     class="hero-image"
-    src="https://images.unsplash.com/photo-1578301978018-3005759f48f7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2044&q=80"
+    src="https://images.unsplash.com/photo-1542417938-e59c0a54102b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
     alt="banner"
   />
 
@@ -111,5 +116,13 @@ background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%,
   }
   .sign-in-text{
     @apply text-lg font-semibold ;
+  }
+
+  .hero-image{
+        width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    position: relative;
   }
 </style>
