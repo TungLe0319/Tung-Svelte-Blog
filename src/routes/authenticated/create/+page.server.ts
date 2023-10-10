@@ -9,16 +9,20 @@ export const actions = {
   default: async ({ request }) => {
     try {
       const postData = await request.formData();
-  
+   console.log(postData);
 
       const title = postData.get("title") || "";
       const subtitle = postData.get("subtitle") || "";
       const img = postData.get("img") || "";
       const content = postData.get("content") || "";
-      const category = postData.get("category") || "Art";
+      const categories = postData.get("categories") || "Art";
       const published = postData.get("published") === "true";
     
      const datePublished = new Date().toISOString();
+
+
+    
+     
 
       const newPost = await db.post.create({
         data: {
@@ -26,7 +30,7 @@ export const actions = {
           subtitle,
           img,
           content,
-          category,
+         
           published,
           datePublished,
           author: {
@@ -34,6 +38,11 @@ export const actions = {
               id: 1,
             },
           },
+          categories:{
+            connect:{
+              name: categories
+            }
+          }
         },
       });
 

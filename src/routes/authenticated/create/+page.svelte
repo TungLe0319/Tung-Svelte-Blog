@@ -9,7 +9,7 @@
   let img = "";
   let subtitle = "";
   let content = "";
-  let category = "";
+  let categories = "";
   let published = false;
 
   // Function to handle form submission
@@ -19,10 +19,12 @@
     formData.append("img", img);
     formData.append("subtitle", subtitle);
     formData.append("content", content);
-    formData.append("category", category);
+    formData.append("categories", categories);
     formData.append("published", published);
 
-    const response = await fetch("/blog/create", {
+
+    console.log(formData.get('categories'));
+    const response = await fetch("/authenticated/create", {
       method: "POST",
 
       body: formData,
@@ -38,7 +40,7 @@
     img = "";
     subtitle = "";
     content = "";
-    category = "Art";
+    categories = "Art";
     published = false;
   }
 </script>
@@ -104,7 +106,7 @@
       <select
         id="category"
         name="category"
-        bind:value={category}
+        bind:value={categories}
         class="w-full border rounded px-3 py-2"
       >
         <option value="Art">Art</option>
