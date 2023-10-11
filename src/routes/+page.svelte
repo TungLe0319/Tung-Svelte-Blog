@@ -5,6 +5,7 @@
   import { signIn, signOut } from "@auth/sveltekit/client";
   import { page } from "$app/stores";
   import { fade, fly } from "svelte/transition";
+ 
 
   export let data;
   let posts = data.body?.posts;
@@ -38,6 +39,9 @@
       post.categories &&
       post.categories.some((category) => category.name === "Featured")
   );
+
+
+
 </script>
 
 <div>

@@ -6,7 +6,7 @@
     // Other compiler options...
     
   },
-  "include": ["**/*.ts", "script.js", "src/lib/prisma.js"],
+  "include": ["**/*.ts", "script.js", "src/lib/prisma.js", "src/stores/comments.ts"],
   "exclude": ["node_modules"],
   
 }

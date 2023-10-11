@@ -1,4 +1,5 @@
 <script>
+
   let stackData = [
     {
       iconUrl:
@@ -24,6 +25,12 @@
       link: "https://tailwindcss.com/",
     },
   ];
+
+
+
+
+
+
 </script>
 
 <div class="relative hero-image-container">
@@ -67,6 +74,19 @@
     <br />
   </h2>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <div class=" text-center my-2 text-4xl shadow-into-light-font font-bold">Tech Stack</div>
 <ul class="list grid grid-cols-2 py-4 mt-10 px-28">
