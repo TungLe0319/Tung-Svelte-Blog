@@ -2,49 +2,24 @@
   import { page } from "$app/stores";
   import { error } from "@sveltejs/kit";
   import { onMount } from "svelte";
-  import { fade } from "svelte/transition";
+  import { fade, fly } from "svelte/transition";
   import CommentCard from "../../../components/Comments/CommentCard.svelte";
   import CommentForm from "../../../components/Comments/CommentForm.svelte";
 
   export let data;
   let post;
   let recentPosts;
-  let comments;
-  let postId;
-  let userEmail;
-  let content = "";
+  let comments = [];
+
   $: {
     post = data?.body.post;
     recentPosts = data?.body?.recentPosts;
     comments = data?.body?.post?.comments;
   }
 
-  onMount(() => {
-    postId = post?.id;
-    userEmail = $page.data.session?.user?.email;
-  });
-
-  // console.log(comments);
-
-  async function submitComment() {
-    let formData = new FormData();
-    formData.append("postId", postId);
-    formData.append("content", content);
-    formData.append("userEmail", userEmail);
-
-    const response = await fetch("/api/comments", {
-      method: "POST",
-
-      body: formData,
-    });
-
-    if (response.ok) {
-      console.log("Post created successfully");
-    } else {
-      console.error("Error in creating Post");
-    }
-
-    content = "";
+  function handleCommentCreated(event) {
+    const newComment = event.detail;
+    comments = [...comments, newComment]; // Add the new comment to the list
   }
 </script>
 
@@ -71,89 +46,81 @@
       </div>
       <!-- COMMENT FORM  -->
       {#if $page.data.session}
-        <!-- <form
-          on:submit|preventDefault={submitComment}
-          method="PUT"
-          action="?/put"
-        >
-          <div
-            class=" p-2 shadow-md w-full bg-red-50 flex justify-center flex-col"
-          >
-            <label for="content">Content:</label>
-            <textarea
-              id="content"
-              bind:value={content}
-              required
-              class="p-2 rounded focus:outline-none shadow-md"
-            />
-
-            <button type="submit">Submit Comment</button>
-          </div>
-        </form> -->
-
-        <CommentForm {post} />
+        <CommentForm on:commentCreated={handleCommentCreated} {post} />
       {/if}
       <!-- COMMENT SECTION  -->
       <div class="comment-container">
         {#each comments as comment (comment.id)}
-          <CommentCard {comment} />
+          <div
+            in:fly={{ x: -100, duration: 300, opacity: 1 }}
+            out:fly={{ x: 100, duration: 300, opacity: 0 }}
+          >
+            <CommentCard {comment} />
+          </div>
         {/each}
       </div>
     </div>
 
     <!-- Recent Post Section to the right -->
-    <div class="w=1/4 mt-8 px-4">
-      <h4
-        class="  border-l-2 pl-2 border-l-orange-300 text-shadow font-semibold text-gray-500"
-      >
-        Recent Posts
-      </h4>
+    <div class="w-1/4 mt-8 px-4">
+      <div class="sticky top-5 z-10">
+        <h4
+          class="  border-l-2 pl-2 border-l-orange-300 text-shadow font-semibold text-gray-500"
+        >
+          Recent Posts
+        </h4>
 
-      {#each recentPosts as recentPost, index (recentPost.id)}
-        <div class="flex space-x-2 my-2 p-2 pb-4 border-b-2">
-          <div class="">
-            <a href={`/blog/${recentPost?.id}`}>
-              <img
-                src={recentPost.img}
-                class="recent-post-img"
-                alt="post illustration"
-              />
-            </a>
-          </div>
-          <div class="flex flex-col justify-between">
-            <a
-              class="hover:text-orange-500 transition-all duration-150"
-              href={`/blog/${recentPost?.id}`}
-            >
-              <div class="text-sm font-semibold flex-wrap break-words">
-                {recentPost.title}
+        {#each recentPosts as recentPost, index (recentPost.id)}
+          <div class="flex space-x-2 my-2 p-2 pb-4 border-b-2">
+            <div class="">
+              <a href={`/blog/${recentPost?.id}`}>
+                <img
+                  src={recentPost.img}
+                  class="recent-post-img"
+                  alt="post illustration"
+                />
+              </a>
+            </div>
+            <div class="flex flex-col justify-between">
+              <a
+                class="hover:text-orange-500 transition-all duration-150"
+                href={`/blog/${recentPost?.id}`}
+              >
+                <div class="text-sm font-semibold flex-wrap break-words">
+                  {recentPost.title}
+                </div>
+              </a>
+              <div
+                class=" text-xs font-bold text-gray-500 flex justify-between"
+              >
+                {new Date(recentPost.datePublished).toLocaleDateString(
+                  "en-US",
+                  {
+                    month: "short",
+                    day: "numeric",
+                    year: "2-digit",
+                  }
+                )} -
+                {recentPost.author.name}
               </div>
-            </a>
-            <div class=" text-xs font-bold text-gray-500 flex justify-between">
-              {new Date(recentPost.datePublished).toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-                year: "2-digit",
-              })} -
-              {recentPost.author.name}
             </div>
           </div>
-        </div>
-      {/each}
+        {/each}
 
-      <div class="mt-10 flex items-center">
-        <a
-          href="https://www.linkedin.com/in/tung-le0319/"
-          target="_blank"
-          class="flex items-center space-x-2"
-        >
-          <img
-            src="https://media.licdn.com/dms/image/D5603AQHXRnhq5heTzA/profile-displayphoto-shrink_100_100/0/1668461106434?e=1702512000&v=beta&t=33NYfv1mItUA6k5ntGdAv9rZ98bJDR1PTEbRUhlsw20"
-            alt="linkedin profile"
-            class="w-16 h-16 rounded-full shadow-md shadow-slate-500 hover:brightness-75 transition-all duration-150"
-          />
-          <span class="text-blue-500 font-semibold">LinkedIn</span>
-        </a>
+        <div class="mt-10 flex items-center">
+          <a
+            href="https://www.linkedin.com/in/tung-le0319/"
+            target="_blank"
+            class="flex items-center space-x-2"
+          >
+            <img
+              src="https://media.licdn.com/dms/image/D5603AQHXRnhq5heTzA/profile-displayphoto-shrink_100_100/0/1668461106434?e=1702512000&v=beta&t=33NYfv1mItUA6k5ntGdAv9rZ98bJDR1PTEbRUhlsw20"
+              alt="linkedin profile"
+              class="w-16 h-16 rounded-full shadow-md shadow-slate-500 hover:brightness-75 transition-all duration-150"
+            />
+            <span class="text-blue-500 font-semibold">LinkedIn</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
