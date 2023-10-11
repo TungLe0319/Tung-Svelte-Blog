@@ -4,6 +4,7 @@
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
   import CommentCard from "../../../components/Comments/CommentCard.svelte";
+  import CommentForm from "../../../components/Comments/CommentForm.svelte";
 
   export let data;
   let post;
@@ -14,19 +15,16 @@
   let content = "";
   $: {
     post = data?.body.post;
-    comments = data?.body?.post?.comments;
     recentPosts = data?.body?.recentPosts;
+    comments = data?.body?.post?.comments;
   }
-
-0
 
   onMount(() => {
     postId = post?.id;
     userEmail = $page.data.session?.user?.email;
   });
 
-
-  console.log($page.data.session.user);
+  // console.log(comments);
 
   async function submitComment() {
     let formData = new FormData();
@@ -34,7 +32,7 @@
     formData.append("content", content);
     formData.append("userEmail", userEmail);
 
-    const response = await fetch("/api/comment", {
+    const response = await fetch("/api/comments", {
       method: "POST",
 
       body: formData,
@@ -53,7 +51,8 @@
 {#if data}
   <div class=" flex mt-16">
     <div class="w-3/4 mt-8">
-      <div class="post p-3 shadow-md flex justify-center space-x-2 rounded-md">
+      <!-- POST  -->
+      <div class="post">
         <div class="post-body p-4 space-y-2 flex-col flex items-center">
           <div class="post-image flex justify-center">
             <img
@@ -69,6 +68,36 @@
           <div class="post-subtitle">{post?.subtitle}</div>
           <div class="post-content">{@html post?.content}</div>
         </div>
+      </div>
+      <!-- COMMENT FORM  -->
+      {#if $page.data.session}
+        <!-- <form
+          on:submit|preventDefault={submitComment}
+          method="PUT"
+          action="?/put"
+        >
+          <div
+            class=" p-2 shadow-md w-full bg-red-50 flex justify-center flex-col"
+          >
+            <label for="content">Content:</label>
+            <textarea
+              id="content"
+              bind:value={content}
+              required
+              class="p-2 rounded focus:outline-none shadow-md"
+            />
+
+            <button type="submit">Submit Comment</button>
+          </div>
+        </form> -->
+
+        <CommentForm {post} />
+      {/if}
+      <!-- COMMENT SECTION  -->
+      <div class="comment-container">
+        {#each comments as comment (comment.id)}
+          <CommentCard {comment} />
+        {/each}
       </div>
     </div>
 
@@ -132,56 +161,17 @@
   <div class="">NO POST</div>
 {/if}
 
-
-
 <!-- COMMENT FORM -->
-
-{#if $page.data.session}
-  <form on:submit|preventDefault={submitComment}>
-    <div class=" p-2 shadow-md w-full bg-red-50 flex justify-center flex-col">
-      <label for="content">Content:</label>
-      <textarea
-        id="content"
-        bind:value={content}
-        required
-        class="p-2 rounded focus:outline-none shadow-md"
-      />
-
-      <button type="submit">Submit Comment</button>
-    </div>
-  </form>
-{/if}
-
-
-
-
-
-
-
-
-
-  {#each comments as comment (comment.id)}
-    <CommentCard {comment} />
-  {/each}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!-- <BlogPost {data?.post} /> -->
 <style lang="scss">
+  .post {
+    @apply p-3 shadow-md flex justify-center space-x-2 rounded-md;
+  }
+
+  .comment-container {
+    @apply p-4 my-2 flex flex-col;
+  }
   .post-content :global(h1) {
     @apply text-4xl text-gray-800 font-semibold my-4 mb-10;
   }
