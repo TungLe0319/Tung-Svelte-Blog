@@ -17,6 +17,12 @@ export async function load({ params }) {
       include: {
         author: true,
         categories: true,
+        comments: {
+          include:{
+            user:true
+          }
+        },
+        likes:true
       },
     });
 
