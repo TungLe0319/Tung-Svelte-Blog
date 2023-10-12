@@ -7,7 +7,6 @@
   import { page } from "$app/stores";
 
   export let data;
-  
 </script>
 
 <Navbar />
@@ -25,7 +24,13 @@
   <Footer />
 </div>
 
-<style lang="scss" scoped>
+
+
+
+
+
+
+<style lang="scss">
   .wrapper {
     display: flex;
     flex-direction: column;

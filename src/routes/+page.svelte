@@ -5,7 +5,7 @@
   import { signIn, signOut } from "@auth/sveltekit/client";
   import { page } from "$app/stores";
   import { fade, fly } from "svelte/transition";
- 
+  
 
   export let data;
   let posts = data.body?.posts;
@@ -80,27 +80,15 @@
       </div>
     </div>
 
-    <!-- <div class="hero-image flex flex-col">
-    <div class="  headliner">
-      <h1 class="text-6xl">
-        there is no education like adversity and curiosity
-      </h1>
-    </div>
-
-    <div class="headliner-2">
-      <h2 class="text-4xl">
-        How Art, Curiosity, and Passion Fuel My Creative Drive
-      </h2>
-    </div>
-  </div> -->
-
-    <!-- <div>{@html data.post.content}</div> -->
 
     <div
       class="posts-container mt-60 flex flex-col justify-center p-2 m-10 px-10"
     >
       <div class="selection-bar py-10">
         <label for="categorySelect" class="mr-2">Select Category:</label>
+        <div class="p-8">
+
+</div>
         <select
           id="categorySelect"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 p-2.5"

@@ -3,7 +3,13 @@
   import { onDestroy, onMount } from "svelte";
   import { page } from "$app/stores";
   import { signIn, signOut } from "@auth/sveltekit/client";
-
+  import {
+    Avatar,
+    Dropdown,
+    DropdownHeader,
+    DropdownItem,
+    DropdownDivider,
+  } from "flowbite-svelte";
   let isMenuOpen = false;
 
   function toggleMenu() {
@@ -50,18 +56,26 @@
         <a href="/login" class="hover:underline">Login</a>
       {:else}
         <div class="flex space-x-2 items-center">
-          <img
-            class="rounded-full w-10 h-10 shadow-md"
+          <Avatar
+            id="user-drop"
             src={$page.data?.session.user.image}
-            alt="profile"
+            class="cursor-pointer"
           />
-          <div class="text-sm px-4 text-shadow-overlay">
-            {$page.data?.session.user.email}
-          </div>
-          <button
-            on:click={() => signOut()}
-            class="text-orange-300 sign-out-btn mb-2">Sign out</button
-          >
+          <Dropdown triggeredBy="#user-drop">
+            <DropdownHeader>
+              <span class="block text-sm">{$page.data?.session.user.name}</span>
+              <span class="block truncate text-sm font-medium">
+                {$page.data?.session.user.email}</span
+              >
+            </DropdownHeader>
+
+            <DropdownItem >
+              <button
+                on:click={() => signOut()}
+                class=" m-1">Sign out</button
+              ></DropdownItem
+            >
+          </Dropdown>
         </div>
         <!-- else content here -->
         <!-- <a href="/auth/account" class="hover:underline">Account</a> -->

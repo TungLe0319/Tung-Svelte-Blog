@@ -2,12 +2,10 @@
   import { page } from "$app/stores";
   import { createEventDispatcher } from "svelte";
   import { fly } from "svelte/transition";
-
+  import { Avatar, Tooltip } from "flowbite-svelte";
   export let post;
 
-  
-
-  let liked = false; 
+  let liked = false;
 
   async function toggleLikePost() {
     let formData = new FormData();
@@ -46,37 +44,40 @@
 
 <div class=" mt-10">
   {#if $page.data.session}
-  <button class="like-btn" on:click={toggleLikePost}>
-  {#if liked }
-      <img
-        title="like"
-        src="https://cdn-icons-png.flaticon.com/128/4118/4118906.png"
-        alt="heart"
-        class="w-10"
-      />
-      <div class=" shadow-into-light-font font-semibold text-2xl">UNLIKE</div>
-    {:else}
-      <img
-        title="like"
-        src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png"
-        alt="heart"
-        class="w-10"
-      />
-      <div class=" shadow-into-light-font font-semibold text-2xl">LIKE</div>
-    {/if}</button
-  >
+    <button class="like-btn" on:click={toggleLikePost}>
+      {#if liked}
+        <img
+          title="like"
+          src="https://cdn-icons-png.flaticon.com/128/4118/4118906.png"
+          alt="heart"
+          class="w-10"
+        />
+        <div class=" shadow-into-light-font font-semibold text-2xl">UNLIKE</div>
+      {:else}
+        <img
+          title="like"
+          src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png"
+          alt="heart"
+          class="w-10"
+        />
+        <div class=" shadow-into-light-font font-semibold text-2xl">LIKE</div>
+      {/if}</button
+    >
   {/if}
 
-  <div class="mt-5 grid grid-cols-6 gap-y-2">
+  <div class="mt-5 flex">
     {#each post.likes as l (l.id)}
-      <div class="flex items-center">
-        <img
-          in:fly={{ x: -100, duration: 300, opacity: 1 }}
-  out:fly={{ x: 100, duration: 400, opacity: 0 }}
-          src={l.user?.image}
-          alt=""
-          class="w-10 h-10 rounded-full shadow-md shadow-slate-400 object-cover"
-        />
+      <div
+        in:fly={{ x: -100, duration: 300, opacity: 1 }}
+        out:fly={{ x: 100, duration: 400, opacity: 0 }}
+      >
+        <Avatar data-name={l.user.name} class="rounded-full shadow-md shadow-slate-400" src={l.user?.image} />
+        <Tooltip
+          triggeredBy="[data-name]"
+          on:show={(e) => (name = e.target.dataset.name)}>{name}</Tooltip
+        >
+
+  
       </div>
     {/each}
   </div>
