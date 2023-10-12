@@ -83,8 +83,8 @@
           </div>
           <div class="post-info pt-5 text-sm text-gray-500">
             <p>Published {new Date(post.datePublished).toDateString()}  by {post.author.name}</p>
-     <div class="flex justify-center my-2 space-x-4">
-         <img title="like" src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png" alt="heart" class="w-10">
+     <div class="flex justify-center items-center my-2 space-x-4">
+         <img title="like" src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png" alt="heart" class="w-6 h-6">
     <div class=" font-semibold text-2xl text-black">
    {post.likes.length}
     </div>
