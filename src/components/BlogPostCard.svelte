@@ -2,6 +2,7 @@
   import CategoryBadge from "./CategoryBadge.svelte";
 
   export let post;
+  let commentsLength = post.comments.length;
 
   function getCategoryColorClass(category) {
     switch (category) {
@@ -19,38 +20,65 @@
   }
 </script>
 
-<div class="blogPost ">
+<div class="blogPost">
   <a class="link-container" href={`/blog/${post?.id}`}>
     <img src={post?.img} alt="Blog-post-img" class="blogPost-image" />
   </a>
   <div class="blogPost-body">
     <div class="blogPost-body-title-and-subtitle">
-      <a
-        class=" blogPost-link-title"
-        href={`blog/${post?.id}`}
-      >
+      <a class=" blogPost-link-title" href={`blog/${post?.id}`}>
         {post?.title}
       </a>
       <div class="blogPost-subtitle">{post?.subtitle}</div>
     </div>
 
-    <div class="blogPost-categories">
-      {#each post?.categories as categories}
-        <div class="">
-          {categories.name}
+    <div class="flex justify-between">
+      <div class="blogPost-categories">
+        {#each post?.categories as categories}
+          <div class="">
+            {categories.name}
+          </div>
+        {/each}
+      </div>
+
+      <div class="flex justify-center items-center space-x-4">
+    {#if commentsLength > 0}
+      <div class="flex space-x-1">
+          <img
+            src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png"
+            alt="comment box"
+            class="w-10"
+          />
+          <div class="">
+            {commentsLength}
+          </div>
         </div>
-      {/each}
+    {/if}
+
+    
+    {#if commentsLength > 0}
+      <div class="flex space-x-0.5">
+          <img
+            src="https://cdn-icons-png.flaticon.com/128/3475/3475079.png"
+            alt="comment box"
+            class="w-10"
+          />
+          <div class="">
+            {commentsLength}
+          </div>
+        </div>
+    {/if}
+      </div>
     </div>
   </div>
 
-
-    <div class="blogPost-date ">
-       {new Date(post?.datePublished).toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "2-digit",
-      })} 
-      </div>
+  <div class="blogPost-date">
+    {new Date(post?.datePublished).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "2-digit",
+    })}
+  </div>
 </div>
 
 <style lang="scss">

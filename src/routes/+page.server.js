@@ -12,6 +12,8 @@ export async function load() {
       include: {
         author: true, 
         categories:true,
+        likes: true,
+        comments:true,
       },
     });
 

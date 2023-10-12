@@ -8,8 +8,8 @@
   let post;
   let recentPosts;
   let comments = [];
-  let userEmail = $page.data.session.user.email;
-  
+  let userEmail = $page.data.session?.user?.email;
+
   $: {
     post = data?.body.post;
     recentPosts = data?.body?.recentPosts;
@@ -25,6 +25,7 @@
     try {
       const formData = new FormData();
       formData.append("id", commentId);
+      // COMMENT CREATOR
       formData.append("userEmail", userEmail);
 
       // console.log(formData.get('commentId'));
@@ -82,23 +83,27 @@
           >
             <CommentCard {comment} />
 
-            <button
-              class="ellipsis-menu absolute top-0 right-0"
-            on:click={() => toggleShowOptionMenu(comment.id)}
-            >
-              <img
-                src="https://cdn-icons-png.flaticon.com/128/7168/7168581.png"
-                alt=""
-                class="w-5"
-              />
-              {#if showOptionMenu[comment.id] }
-                <div class="popup-menu p-2 bg-slate-800 text-white absolute -top-10 transition-all duration-150 rounded-md shadow-sm hover:shadow-lg hover:shadow-slate-400" >
-                  <button on:click={deleteComment(comment.id)} class=""
-                    >Delete</button
+            {#if comment?.user?.id === $page.data?.session?.user?.email}
+              <button
+                class="ellipsis-menu absolute top-0 right-0"
+                on:click={() => toggleShowOptionMenu(comment.id)}
+              >
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/7168/7168581.png"
+                  alt=""
+                  class="w-5"
+                />
+                {#if showOptionMenu[comment.id]}
+                  <div
+                    class="popup-menu p-2 bg-slate-800 text-white absolute -top-10 transition-all duration-150 rounded-md shadow-sm hover:shadow-lg hover:shadow-slate-400"
                   >
-                </div>
-              {/if}
-            </button>
+                    <button on:click={deleteComment(comment.id)} class=""
+                      >Delete</button
+                    >
+                  </div>
+                {/if}
+              </button>
+            {/if}
           </div>
         {/each}
       </div>
