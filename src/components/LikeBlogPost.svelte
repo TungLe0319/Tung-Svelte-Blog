@@ -7,7 +7,7 @@
 
   
 
- 
+  let liked = false; 
 
   async function toggleLikePost() {
     let formData = new FormData();
@@ -29,7 +29,8 @@
   }
 
   function handleToggledLikePost(likeData) {
-   
+    const newLike = likeData;
+
     // Check if the newLike.id is already in the likes array
     const likeIndex = post.likes.findIndex((like) => like.id === newLike.id);
 
@@ -44,8 +45,9 @@
 </script>
 
 <div class=" mt-10">
+  {#if $page.data.session}
   <button class="like-btn" on:click={toggleLikePost}>
-    {#if $page.data.session}
+  {#if liked }
       <img
         title="like"
         src="https://cdn-icons-png.flaticon.com/128/4118/4118906.png"
@@ -63,6 +65,7 @@
       <div class=" shadow-into-light-font font-semibold text-2xl">LIKE</div>
     {/if}</button
   >
+  {/if}
 
   <div class="mt-5 grid grid-cols-6 gap-y-2">
     {#each post.likes as l (l.id)}

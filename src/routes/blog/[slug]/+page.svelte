@@ -1,6 +1,6 @@
 <script>
   import { page } from "$app/stores";
-  import { fade, fly } from "svelte/transition";
+
   import CommentCard from "../../../components/Comments/CommentCard.svelte";
   import CommentForm from "../../../components/Comments/CommentForm.svelte";
   import LikeBlogPost from "../../../components/LikeBlogPost.svelte";
@@ -12,7 +12,6 @@
   let recentPosts;
   let comments = [];
   let likes = [];
-  let userEmail = $page.data.session?.user?.email;
 
   $: {
     post = data?.body.post;
@@ -20,32 +19,6 @@
     comments = data?.body?.post?.comments;
     likes = data?.body?.post?.likes;
   }
-
-  // let showOptionMenu = Array(comments.length).fill(false);
-
-  // function toggleShowOptionMenu(index) {
-  //   showOptionMenu[index] = !showOptionMenu[index];
-  // }
-  // async function deleteComment(commentId) {
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append("id", commentId);
-  //     // COMMENT CREATOR
-  //     formData.append("userEmail", userEmail);
-
-  //     // console.log(formData.get('commentId'));
-  //     const response = await fetch(`/api/comments`, {
-  //       method: "DELETE",
-  //       body: formData,
-  //     });
-
-  //     const deletedComment = await response.json();
-
-  //     comments = comments.filter((comment) => comment.id !== deletedComment.id);
-  //   } catch (error) {
-  //     console.error("Failed to Delete");
-  //   }
-  // }
 
   function handleCommentCreated(event) {
     const newComment = event.detail;
@@ -72,6 +45,7 @@
   <div class=" flex mt-16">
     <div class="w-3/4 mt-8">
       <!-- POST  -->
+
       <div class="post">
         <div class="post-body p-4 space-y-2 flex-col flex items-center">
           <div class="post-image flex justify-center">
@@ -110,12 +84,10 @@
       <!-- COMMENT SECTION  -->
       <div class="comment-container">
         {#each comments as comment (comment.id)}
-     
-            <CommentCard
-              on:commentDeleted={handleCommentDeleted(comment.id)}
-              {comment}
-            />
-     
+          <CommentCard
+            on:commentDeleted={handleCommentDeleted(comment.id)}
+            {comment}
+          />
         {/each}
       </div>
     </div>
@@ -127,9 +99,7 @@
         <!-- LINKED IN  -->
         <LinkedInCard />
         <!--  !LIKES -->
-        {#if $page.data.session}
-          <LikeBlogPost {post} />
-        {/if}
+        <LikeBlogPost {post} />
       </div>
     </div>
   </div>

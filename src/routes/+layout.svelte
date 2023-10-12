@@ -2,18 +2,20 @@
   import "$lib/assets/scss/main.scss";
   import Navbar from "../components/Navbar.svelte";
   import Footer from "../components/Footer.svelte";
-// import "../app.postcss"
+  // import "../app.postcss"
   import { fade } from "svelte/transition";
+  import { page } from "$app/stores";
 
   export let data;
+  
 </script>
 
 <Navbar />
 <div class="wrapper">
-  {#key data.pathname}
+  {#key data?.pathname}
     <main
-      class="w-full background "
-      in:fade={{ duration: 300, delay:300}}
+      class="w-full background"
+      in:fade={{ duration: 300, delay: 300 }}
       out:fade={{ duration: 300 }}
     >
       <slot />
