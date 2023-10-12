@@ -1,6 +1,6 @@
 <script>
   import { page } from "$app/stores";
-import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher } from "svelte";
   export let post;
   let content = "";
   const dispatch = createEventDispatcher();
@@ -11,51 +11,39 @@ import { createEventDispatcher } from "svelte";
     formData.append("content", content);
     formData.append("userEmail", $page.data?.session.user.email);
 
-
     const response = await fetch("/api/comments", {
       method: "POST",
       body: formData,
     });
     if (response.ok) {
+      const newComment = await response.json();
 
-       const newComment = await response.json();
-
-
-     dispatch("commentCreated", newComment);
+      dispatch("commentCreated", newComment);
     } else {
       console.error("Error in creating Post");
     }
 
     content = "";
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 
 {#if $page.data.session}
   <form on:submit|preventDefault={createComment}>
-    <div class=" p-2  w-full  flex justify-center flex-col">
-     <h1 class="shadow-into-light-font font-medium my-2"> Comment: </h1>
+    <div class=" p-2 w-full flex justify-center flex-col">
+      <h1 class="shadow-into-light-font font-medium my-2">Comment:</h1>
       <textarea
         id="content"
         name="content"
+        rows="5"
         bind:value={content}
         required
-        class="p-2 rounded focus:outline-none shadow-xl shadow-slate-500 mb-10 bg-slate-800 text-white"
+        class="comment-input"
       />
 
-      <button class="text-left w-1/2 p-2 mr-2 bg-slate-600">Submit Comment</button>
+      <button
+        class="text-left w-fit rounded-md p-2 mr-2 bg-slate-800 text-white font-medium"
+        >Submit Comment</button
+      >
     </div>
   </form>
 {:else}
@@ -63,4 +51,7 @@ import { createEventDispatcher } from "svelte";
 {/if}
 
 <style lang="scss">
+  .comment-input {
+    @apply p-2 rounded focus:outline-none shadow-xl shadow-slate-500 mb-10 bg-slate-800 text-white text-lg;
+  }
 </style>

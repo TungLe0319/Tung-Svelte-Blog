@@ -1,7 +1,5 @@
 <script>
   import { page } from "$app/stores";
-  import { error } from "@sveltejs/kit";
-  import { onMount } from "svelte";
   import { fade, fly } from "svelte/transition";
   import CommentCard from "../../../components/Comments/CommentCard.svelte";
   import CommentForm from "../../../components/Comments/CommentForm.svelte";
@@ -10,11 +8,37 @@
   let post;
   let recentPosts;
   let comments = [];
-
+  let userEmail = $page.data.session.user.email;
+  
   $: {
     post = data?.body.post;
     recentPosts = data?.body?.recentPosts;
     comments = data?.body?.post?.comments;
+  }
+
+  let showOptionMenu = Array(comments.length).fill(false);
+
+  function toggleShowOptionMenu(index) {
+    showOptionMenu[index] = !showOptionMenu[index];
+  }
+  async function deleteComment(commentId) {
+    try {
+      const formData = new FormData();
+      formData.append("id", commentId);
+      formData.append("userEmail", userEmail);
+
+      // console.log(formData.get('commentId'));
+      const response = await fetch(`/api/comments`, {
+        method: "DELETE",
+        body: formData,
+      });
+
+      const deletedComment = await response.json();
+
+      comments = comments.filter((comment) => comment.id !== deletedComment.id);
+    } catch (error) {
+      console.error("Failed to Delete");
+    }
   }
 
   function handleCommentCreated(event) {
@@ -52,10 +76,29 @@
       <div class="comment-container">
         {#each comments as comment (comment.id)}
           <div
+            class="relative group"
             in:fly={{ x: -100, duration: 300, opacity: 1 }}
             out:fly={{ x: 100, duration: 300, opacity: 0 }}
           >
             <CommentCard {comment} />
+
+            <button
+              class="ellipsis-menu absolute top-0 right-0"
+            on:click={() => toggleShowOptionMenu(comment.id)}
+            >
+              <img
+                src="https://cdn-icons-png.flaticon.com/128/7168/7168581.png"
+                alt=""
+                class="w-5"
+              />
+              {#if showOptionMenu[comment.id] }
+                <div class="popup-menu p-2 bg-slate-800 text-white absolute -top-10 transition-all duration-150 rounded-md shadow-sm hover:shadow-lg hover:shadow-slate-400" >
+                  <button on:click={deleteComment(comment.id)} class=""
+                    >Delete</button
+                  >
+                </div>
+              {/if}
+            </button>
           </div>
         {/each}
       </div>
@@ -132,12 +175,16 @@
 
 <!-- <BlogPost {data?.post} /> -->
 <style lang="scss">
+  .delete-btn {
+    @apply p-2 shadow-md shadow-slate-300 rounded-md text-white hover:shadow-xl hover:shadow-slate-500 transition-all duration-300 scale-0 group-hover:scale-100  bg-slate-800 absolute top-0 right-0;
+  }
+
   .post {
     @apply p-3 shadow-md flex justify-center space-x-2 rounded-md;
   }
 
   .comment-container {
-    @apply p-4 my-2 flex flex-col;
+    @apply p-4 my-2 mt-10  relative;
   }
   .post-content :global(h1) {
     @apply text-4xl text-gray-800 font-semibold my-4 mb-10;

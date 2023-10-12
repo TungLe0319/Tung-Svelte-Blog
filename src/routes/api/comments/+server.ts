@@ -4,51 +4,6 @@ import { error } from "@sveltejs/kit";
 
 const db = new PrismaClient();
 
-// export const actions = {
-//   default: async ({ request }) => {
-
-//   },
-
-//   put: async ({ request }) => {
-//     try {
-//       const commentData = await request.formData();
-//       const commentId = commentData.get("id");
-//       const postId = commentData.get("postId");
-//       const content = commentData.get("content") || "";
-
-//       const userEmail = commentData.get("userEmail") || "";
-
-//       const existingComment = await db.comment.findUnique({
-//         where: {
-//           id: commentId,
-//         },
-//       });
-
-//       if (!existingComment) {
-//         throw error(400, "NO Comment Found");
-//       }
-
-//       const newComment = await db.comment.update({
-//         where: {
-//           id: existingComment.id,
-//         },
-//         data: {
-//           content: content,
-//         },
-//       });
-
-//       return {
-//         body: newComment,
-//       };
-//     } catch (error) {
-//       return {
-//         status: 500,
-//         body: JSON.stringify({ error: "Failed to create a comment" }),
-//       };
-//     }
-//   },
-// };
-
 export async function POST({ request }) {
   try {
     const commentData = await request.formData();
@@ -71,9 +26,9 @@ export async function POST({ request }) {
           content,
           userId: user.id,
         },
-        include:{
-          user:true
-        }
+        include: {
+          user: true,
+        },
       });
 
       return new Response(JSON.stringify(newComment), {
@@ -104,7 +59,153 @@ export async function POST({ request }) {
   }
 }
 
-export async function PUT({ request }) {}
+export async function PUT({ request }) {
+  try {
+    const commentData = await request.formData();
 
-export async function DELETE({ request }) {}
-export async function GET() {}
+    const commentId = commentData.get("id");
+    const content = commentData.get("content") || "";
+
+    const existingComment = await db.comment.findUnique({
+      where: {
+        id: parseInt(commentId),
+      },
+    });
+
+    if (existingComment) {
+      const updatedComment = await db.comment.update({
+        where: {
+          id: existingComment.id,
+        },
+        data: {
+          content,
+        },
+        include: {
+          user: true,
+        },
+      });
+
+      return new Response(JSON.stringify(updatedComment), {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } else {
+      return new Response(JSON.stringify({ error: "Comment not found" }), {
+        status: 404,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    }
+  } catch (error) {
+    return new Response(
+      JSON.stringify({ error: "Failed to update the comment" }),
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
+}
+
+export async function DELETE({ request }) {
+  try {
+    const commentData = await request.formData();
+    const commentId = commentData.get("id");
+    const creatorEmail = commentData.get("userEmail");
+
+    const creator = await db.user.findUnique({
+      where: {
+        email: creatorEmail,
+      },
+    });
+
+    if (!creator) {
+      // Unauthorized: Creator not found
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    }
+
+    const existingComment = await db.comment.findUnique({
+      where: {
+        id: parseInt(commentId),
+      },
+    });
+
+    if (!existingComment) {
+      // Comment not found
+      return new Response(JSON.stringify({ error: "Comment not found" }), {
+        status: 404,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    }
+
+    if (existingComment.userId !== creator.id) {
+      // Unauthorized: User is not the comment creator
+      return new Response(JSON.stringify({ error: "Unauthorized" }), {
+        status: 401,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    }
+
+    // Delete the comment
+    const deletedComment = await db.comment.delete({
+      where: {
+        id: existingComment.id,
+      },
+    });
+
+    return new Response(JSON.stringify(deletedComment), {
+      status: 200, // Status code for success
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    return new Response(
+      JSON.stringify({ error: "Failed to delete the comment" }),
+      {
+        status: 500,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  }
+}
+
+export async function GET({ request }) {
+  try {
+    const comments = await db.comment.findMany({
+      include: {
+        user: true,
+      },
+    });
+
+    return new Response(JSON.stringify(comments), {
+      status: 200, // Status code for success
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ error: "Failed to fetch comments" }), {
+      status: 500, // Status code for server error
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+}

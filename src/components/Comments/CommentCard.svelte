@@ -1,6 +1,12 @@
 <!-- commentCard.svelte -->
 <script>
+  import { page } from "$app/stores";
+  import { error } from "@sveltejs/kit";
+  import { createEventDispatcher } from "svelte";
+
   export let comment;
+
+  
   function formatTimeDifference(createdAt) {
     const currentTime = new Date();
     const commentTime = new Date(createdAt);
@@ -22,7 +28,7 @@
   }
 </script>
 
-<div class="comment-card">
+<div class="comment-card group relative">
   <div class="user-info">
     <img
       class="user-image"
@@ -44,8 +50,11 @@
 </div>
 
 <style lang="scss" scoped>
+  .delete-btn {
+    @apply p-2 shadow-md shadow-slate-300 rounded-md text-white hover:shadow-xl hover:shadow-slate-500 scale-0 group-hover:scale-100 transition-all duration-300 absolute top-0 right-0 bg-slate-800;
+  }
   .comment-card {
-    @apply flex items-center  px-5 py-1 shadow-xl rounded-md;
+    @apply flex items-center  px-5 py-1 border-b-2  my-4;
   }
   .content-container {
     @apply flex flex-col w-full;
