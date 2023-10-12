@@ -9,9 +9,22 @@ export async function POST({ request }) {
     const commentData = await request.formData();
 
     const postId = commentData.get("postId");
-    const content = commentData.get("content") || "";
+    const content = commentData.get("content") 
 
     const userEmail = commentData.get("userEmail") || "";
+
+
+
+if (content === "") {
+     return new Response(JSON.stringify({ error: "User not found" }), {
+       status: 400, // Use an appropriate status code
+       headers: {
+         "Content-Type": "application/json",
+       },
+     });
+}
+
+
 
     const user = await db.user.findUnique({
       where: {

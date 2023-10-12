@@ -30,7 +30,7 @@
 {#if $page.data.session}
   <form on:submit|preventDefault={createComment}>
     <div class=" p-2 w-full flex justify-center flex-col">
-      <h1 class="shadow-into-light-font font-medium my-2">Comment:</h1>
+      <h1 class="shadow-into-light-font font-semibold my-2 ">Comment:</h1>
       <textarea
         id="content"
         name="content"
@@ -52,6 +52,6 @@
 
 <style lang="scss">
   .comment-input {
-    @apply p-2 rounded focus:outline-none shadow-xl shadow-slate-500 mb-10 bg-slate-800 text-white text-lg;
+    @apply p-2 rounded focus:outline-orange-300 shadow-xl shadow-slate-500 mb-10 bg-slate-800 text-white text-lg;
   }
 </style>

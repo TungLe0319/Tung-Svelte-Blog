@@ -1,9 +1,11 @@
 <script>
+
+
   import CategoryBadge from "./CategoryBadge.svelte";
 
   export let post;
   let commentsLength = post.comments.length;
-
+let likesLength = post.likes.length
   function getCategoryColorClass(category) {
     switch (category) {
       case "Technology":
@@ -42,15 +44,15 @@
       </div>
 
       <div class="flex justify-center items-center space-x-4">
-    {#if commentsLength > 0}
+    {#if likesLength > 0}
       <div class="flex space-x-1">
           <img
             src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png"
             alt="comment box"
-            class="w-10"
+            class="w-7"
           />
           <div class="">
-            {commentsLength}
+            {likesLength}
           </div>
         </div>
     {/if}

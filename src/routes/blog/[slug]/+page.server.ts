@@ -22,7 +22,11 @@ export async function load({ params }) {
             user:true
           }
         },
-        likes:true
+        likes:{
+          include:{
+            user:true
+          }
+        }
       },
     });
 

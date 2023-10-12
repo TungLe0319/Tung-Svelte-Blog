@@ -3,17 +3,20 @@
   import { fade, fly } from "svelte/transition";
   import CommentCard from "../../../components/Comments/CommentCard.svelte";
   import CommentForm from "../../../components/Comments/CommentForm.svelte";
+  import LikeBlogPost from "../../../components/LikeBlogPost.svelte";
 
   export let data;
   let post;
   let recentPosts;
   let comments = [];
+  let likes = [];
   let userEmail = $page.data.session?.user?.email;
 
   $: {
     post = data?.body.post;
     recentPosts = data?.body?.recentPosts;
     comments = data?.body?.post?.comments;
+    likes = data?.body?.post?.likes;
   }
 
   let showOptionMenu = Array(comments.length).fill(false);
@@ -46,6 +49,23 @@
     const newComment = event.detail;
     comments = [...comments, newComment]; // Add the new comment to the list
   }
+
+  function handleToggledLikePost(event) {
+    const newLike = event.detail;
+
+    // Check if the newLike.id is already in the likes array
+    const likeIndex = likes.findIndex((like) => like.id === newLike.id);
+
+    if (likeIndex !== -1) {
+      // If the like is already in the array, remove it
+      likes = likes.filter((like) => like.id !== newLike.id);
+    } else {
+      // If the like is not in the array, add it
+      likes = [...likes, newLike];
+    }
+  }
+
+  console.log(data?.body?.post);
 </script>
 
 {#if data}
@@ -155,6 +175,7 @@
           </div>
         {/each}
 
+        <!-- LINKED IN  -->
         <div class="mt-10 flex items-center">
           <a
             href="https://www.linkedin.com/in/tung-le0319/"
@@ -168,6 +189,25 @@
             />
             <span class="text-blue-500 font-semibold">LinkedIn</span>
           </a>
+        </div>
+
+        <!--  !LIKES -->
+
+        <div class=" mt-10 ">
+        
+      
+          <LikeBlogPost {post} on:toggledLikePost={handleToggledLikePost} />
+         <div class="mt-5 grid grid-cols-6 gap-y-2">
+  {#each likes as l (l.id)}
+    <div class="flex items-center" >
+      <img
+        src={l.user?.image}
+        alt=""
+        class="w-10 h-10 rounded-full shadow-md shadow-slate-400 object-cover"
+      />
+    </div>
+  {/each}
+</div>
         </div>
       </div>
     </div>
