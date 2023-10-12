@@ -6,12 +6,15 @@
   import LikeBlogPost from "../../../components/LikeBlogPost.svelte";
   import RecentPosts from "../../../components/RecentPosts.svelte";
   import LinkedInCard from "../../../components/LinkedInCard.svelte";
+  import { onDestroy, onMount } from "svelte";
 
   export let data;
   let post;
   let recentPosts;
   let comments = [];
   let likes = [];
+
+  let liked;
 
   $: {
     post = data?.body.post;
@@ -20,9 +23,15 @@
     likes = data?.body?.post?.likes;
   }
 
+  onMount(() => {
+    liked = data?.body?.post?.likes.some(
+      (like) => like.user.email === $page.data.session.user.email
+    );
+  });
+
   function handleCommentCreated(event) {
     const newComment = event.detail;
-    comments = [...comments, newComment]; // Add the new comment to the list
+    comments = [...comments, newComment];
   }
 
   function handleCommentDeleted(commentId) {
@@ -38,6 +47,14 @@
         ...comments.slice(commentIndex + 1),
       ];
     }
+  }
+
+  function handleLikeToggled(updatedPost) {
+    liked = updatedPost.likes.some(
+      (like) => like.user.email === $page.data.session.user.email
+    );
+
+    post = updatedPost;
   }
 </script>
 
@@ -67,7 +84,7 @@
                 alt="heart"
                 class="w-6 h-6"
               />
-              <div class=" font-semibold text-2xl text-black">
+              <div class=" font-semibold text-2xl text-black" >
                 {post.likes.length}
               </div>
             </div>
@@ -99,7 +116,7 @@
         <!-- LINKED IN  -->
         <LinkedInCard />
         <!--  !LIKES -->
-        <LikeBlogPost {post} />
+        <LikeBlogPost {post} {liked} on:likeToggled={handleLikeToggled(post)} />
       </div>
     </div>
   </div>

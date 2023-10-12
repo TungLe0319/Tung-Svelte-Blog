@@ -89,3 +89,25 @@ export async function POST({ request }) {
     });
   }
 }
+
+// export async function GET({params}) {
+
+// console.log(params.slug);
+
+
+
+//   const post = db.like.findUnique({
+//     where: {
+//       postId: parseInt(postId),
+//     },
+//   });
+
+//   if (!post) {
+//     return new Response(JSON.stringify({ error: "Post not found" }), {
+//       status: 404,
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+//   }
+// }

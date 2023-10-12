@@ -4,6 +4,14 @@
   import { error } from "@sveltejs/kit";
   import { createEventDispatcher } from "svelte";
   import { fly } from "svelte/transition";
+  import {
+    Button,
+    Dropdown,
+    DropdownItem,
+    Checkbox,
+    Helper,
+    Avatar,
+  } from "flowbite-svelte";
 
   export let comment;
   let userEmail = $page.data.session?.user?.email;
@@ -67,31 +75,39 @@
   out:fly={{ x: 100, duration: 400, opacity: 0 }}
 >
   <div class="user-info">
-    <img
-      class="user-image"
-      src={comment?.user?.image}
-      alt={comment?.user?.name}
-    />
-    {comment?.user?.name}
+
+    <div class="flex items-center space-x-4">
+  <Avatar     src={comment?.user?.image} class="shadow-md shadow-slate-500" />
+  <div class="space-y-1 font-medium dark:text-white">
+    <div>{comment?.user?.name}</div>
+    <!-- <div class="text-sm text-gray-500 dark:text-gray-400"></div> -->
+  </div>
+</div>
+  
+  
   </div>
 
   <div class="content-container">
-      {#if comment?.user?.email === userEmail}
-    <button class="ellipsis-menu flex justify-end" on:click={() => toggleShowOptionMenu()}>
-      <img
-        src="https://cdn-icons-png.flaticon.com/128/7168/7168581.png"
-        alt=""
-        class="w-5"
-      />
-      {#if showOptionMenu}
-        <div
-          class="popup-menu p-2 bg-slate-800 text-white absolute -top-8 right-0.5 transition-all duration-150 rounded-md shadow-sm hover:shadow-lg hover:shadow-slate-400 text-lg shadow-into-light-font font-semibold"
-        >
-          <button on:click={deleteComment(comment.id)} class="">Delete</button>
-        </div>
-      {/if}
-    </button>
-  {/if}
+    {#if comment?.user?.email === userEmail}
+      <Button
+        class="p-1 w-fit  bg-transparent hover:bg-opacity-40 hover:bg-orange-400"
+      >
+        <img
+          src="https://cdn-icons-png.flaticon.com/128/7168/7168581.png"
+          alt=""
+          class="w-5"
+        /></Button
+      >
+      <Dropdown class="w-60 p-3 space-y-1 text-sm shadow-lg shadow-slate-400 ">
+        <li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+          <div class="">
+            <button on:click={deleteComment(comment.id)} class="">Delete</button
+            >
+          </div>
+        </li>
+    
+      </Dropdown>
+    {/if}
     <div class="created-at">
       {formatTimeDifference(comment.createdAt)}
     </div>
@@ -100,8 +116,6 @@
       {comment?.content}
     </div>
   </div>
-
-
 </div>
 
 <style lang="scss" scoped>

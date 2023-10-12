@@ -1,12 +1,29 @@
 <script>
   import { page } from "$app/stores";
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, onMount } from "svelte";
   import { fly } from "svelte/transition";
   import { Avatar, Tooltip } from "flowbite-svelte";
   export let post;
+  export let liked;
+  // let liked = false;
 
-  let liked = false;
+  // onMount(() => {
+  //   findIfLikedPost();
+  // });
 
+  // async function findIfLikedPost() {
+  //   let formData = new FormData();
+  //   formData.append("postId", post.id);
+  //   const response = await fetch("/api/likes", {
+  //     method: "GET",
+  //   });
+  //   if (response.ok) {
+  //     liked = !liked;
+  //   } else {
+  //     console.error("Error in creating Post");
+  //   }
+  // }
+  const dispatch = createEventDispatcher();
   async function toggleLikePost() {
     let formData = new FormData();
     formData.append("postId", post.id);
@@ -21,6 +38,7 @@
       const like = await response.json();
 
       handleToggledLikePost(like);
+      dispatch("likeToggled", like);
     } else {
       console.error("Error in creating Post");
     }
@@ -33,10 +51,12 @@
     const likeIndex = post.likes.findIndex((like) => like.id === newLike.id);
 
     if (likeIndex !== -1) {
+      //  liked =false
       // If the like is already in the array, remove it
       post.likes = post.likes.filter((like) => like.id !== newLike.id);
     } else {
       // If the like is not in the array, add it
+      //  liked = true
       post.likes = [...post.likes, newLike];
     }
   }
@@ -71,13 +91,15 @@
         in:fly={{ x: -100, duration: 300, opacity: 1 }}
         out:fly={{ x: 100, duration: 400, opacity: 0 }}
       >
-        <Avatar data-name={l.user.name} class="rounded-full shadow-md shadow-slate-400" src={l.user?.image} />
+        <Avatar
+          data-name={l.user.name}
+          class="rounded-full shadow-md shadow-slate-400"
+          src={l.user?.image}
+        />
         <Tooltip
           triggeredBy="[data-name]"
           on:show={(e) => (name = e.target.dataset.name)}>{name}</Tooltip
         >
-
-  
       </div>
     {/each}
   </div>
