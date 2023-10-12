@@ -5,9 +5,9 @@
 
   export let post;
 
-  const dispatch = createEventDispatcher();
+  
 
-  let liked = false; // Initialize with false
+ 
 
   async function toggleLikePost() {
     let formData = new FormData();
@@ -29,8 +29,7 @@
   }
 
   function handleToggledLikePost(likeData) {
-    const newLike = likeData;
-
+   
     // Check if the newLike.id is already in the likes array
     const likeIndex = post.likes.findIndex((like) => like.id === newLike.id);
 
@@ -46,7 +45,7 @@
 
 <div class=" mt-10">
   <button class="like-btn" on:click={toggleLikePost}>
-    {#if liked}
+    {#if $page.data.session}
       <img
         title="like"
         src="https://cdn-icons-png.flaticon.com/128/4118/4118906.png"
