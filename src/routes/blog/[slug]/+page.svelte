@@ -82,7 +82,13 @@
             />
           </div>
           <div class="post-info pt-5 text-sm text-gray-500">
-            <!-- <p>Published on  by {data.post.author}</p> -->
+            <p>Published {new Date(post.datePublished).toDateString()}  by {post.author.name}</p>
+     <div class="flex justify-center my-2 space-x-4">
+         <img title="like" src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png" alt="heart" class="w-10">
+    <div class=" font-semibold text-2xl text-black">
+   {post.likes.length}
+    </div>
+     </div>
           </div>
           <div class="post-title text-xl font-bold my-2">{post?.title}</div>
           <div class="post-subtitle">{post?.subtitle}</div>
@@ -193,21 +199,21 @@
 
         <!--  !LIKES -->
 
-        <div class=" mt-10 ">
-        
-      
-          <LikeBlogPost {post} on:toggledLikePost={handleToggledLikePost} />
-         <div class="mt-5 grid grid-cols-6 gap-y-2">
-  {#each likes as l (l.id)}
-    <div class="flex items-center" >
-      <img
-        src={l.user?.image}
-        alt=""
-        class="w-10 h-10 rounded-full shadow-md shadow-slate-400 object-cover"
-      />
-    </div>
-  {/each}
-</div>
+        <div class=" mt-10">
+        {#if $page.data.session}
+        <LikeBlogPost {post} on:toggledLikePost={handleToggledLikePost} />
+        {/if}
+          <div class="mt-5 grid grid-cols-6 gap-y-2">
+            {#each likes as l (l.id)}
+              <div class="flex items-center">
+                <img
+                  src={l.user?.image}
+                  alt=""
+                  class="w-10 h-10 rounded-full shadow-md shadow-slate-400 object-cover"
+                />
+              </div>
+            {/each}
+          </div>
         </div>
       </div>
     </div>

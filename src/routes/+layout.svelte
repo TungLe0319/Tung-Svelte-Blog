@@ -1,5 +1,5 @@
 <script>
-  import "../assets/scss/main.scss";
+  import "$lib/assets/scss/main.scss";
   import Navbar from "../components/Navbar.svelte";
   import Footer from "../components/Footer.svelte";
 // import "../app.postcss"
