@@ -3,10 +3,13 @@
   import { page } from "$app/stores";
   import { error } from "@sveltejs/kit";
   import { createEventDispatcher } from "svelte";
+  import { fly } from "svelte/transition";
 
   export let comment;
+  let userEmail = $page.data.session?.user?.email;
+  let showOptionMenu = false;
+  const dispatch = createEventDispatcher();
 
-  
   function formatTimeDifference(createdAt) {
     const currentTime = new Date();
     const commentTime = new Date(createdAt);
@@ -26,9 +29,43 @@
       }
     }
   }
+
+  async function deleteComment(commentId) {
+    try {
+      const shouldDelete = confirm(
+        "Are you sure you want to delete this comment?"
+      );
+
+      if (shouldDelete) {
+        const formData = new FormData();
+        formData.append("id", commentId);
+        // COMMENT CREATOR
+        formData.append("userEmail", userEmail);
+
+        const response = await fetch(`/api/comments`, {
+          method: "DELETE",
+          body: formData,
+        });
+
+        const deletedComment = await response.json();
+
+        dispatch("commentDeleted", deletedComment);
+      }
+    } catch (error) {
+      console.error("Failed to Delete");
+    }
+  }
+
+  function toggleShowOptionMenu() {
+    showOptionMenu = !showOptionMenu;
+  }
 </script>
 
-<div class="comment-card group relative">
+<div
+  class="comment-card group relative"
+  in:fly={{ x: -100, duration: 300, opacity: 1 }}
+  out:fly={{ x: 100, duration: 400, opacity: 0 }}
+>
   <div class="user-info">
     <img
       class="user-image"
@@ -39,6 +76,22 @@
   </div>
 
   <div class="content-container">
+      {#if comment?.user?.email === userEmail}
+    <button class="ellipsis-menu flex justify-end" on:click={() => toggleShowOptionMenu()}>
+      <img
+        src="https://cdn-icons-png.flaticon.com/128/7168/7168581.png"
+        alt=""
+        class="w-5"
+      />
+      {#if showOptionMenu}
+        <div
+          class="popup-menu p-2 bg-slate-800 text-white absolute -top-8 right-0.5 transition-all duration-150 rounded-md shadow-sm hover:shadow-lg hover:shadow-slate-400 text-lg shadow-into-light-font font-semibold"
+        >
+          <button on:click={deleteComment(comment.id)} class="">Delete</button>
+        </div>
+      {/if}
+    </button>
+  {/if}
     <div class="created-at">
       {formatTimeDifference(comment.createdAt)}
     </div>
@@ -47,12 +100,11 @@
       {comment?.content}
     </div>
   </div>
+
+
 </div>
 
 <style lang="scss" scoped>
-  .delete-btn {
-    @apply p-2 shadow-md shadow-slate-300 rounded-md text-white hover:shadow-xl hover:shadow-slate-500 scale-0 group-hover:scale-100 transition-all duration-300 absolute top-0 right-0 bg-slate-800;
-  }
   .comment-card {
     @apply flex items-center  px-5 py-1 border-b-2  my-4;
   }

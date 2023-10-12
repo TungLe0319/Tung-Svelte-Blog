@@ -4,6 +4,8 @@
   import CommentCard from "../../../components/Comments/CommentCard.svelte";
   import CommentForm from "../../../components/Comments/CommentForm.svelte";
   import LikeBlogPost from "../../../components/LikeBlogPost.svelte";
+  import RecentPosts from "../../../components/RecentPosts.svelte";
+  import LinkedInCard from "../../../components/LinkedInCard.svelte";
 
   export let data;
   let post;
@@ -19,53 +21,51 @@
     likes = data?.body?.post?.likes;
   }
 
-  let showOptionMenu = Array(comments.length).fill(false);
+  // let showOptionMenu = Array(comments.length).fill(false);
 
-  function toggleShowOptionMenu(index) {
-    showOptionMenu[index] = !showOptionMenu[index];
-  }
-  async function deleteComment(commentId) {
-    try {
-      const formData = new FormData();
-      formData.append("id", commentId);
-      // COMMENT CREATOR
-      formData.append("userEmail", userEmail);
+  // function toggleShowOptionMenu(index) {
+  //   showOptionMenu[index] = !showOptionMenu[index];
+  // }
+  // async function deleteComment(commentId) {
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("id", commentId);
+  //     // COMMENT CREATOR
+  //     formData.append("userEmail", userEmail);
 
-      // console.log(formData.get('commentId'));
-      const response = await fetch(`/api/comments`, {
-        method: "DELETE",
-        body: formData,
-      });
+  //     // console.log(formData.get('commentId'));
+  //     const response = await fetch(`/api/comments`, {
+  //       method: "DELETE",
+  //       body: formData,
+  //     });
 
-      const deletedComment = await response.json();
+  //     const deletedComment = await response.json();
 
-      comments = comments.filter((comment) => comment.id !== deletedComment.id);
-    } catch (error) {
-      console.error("Failed to Delete");
-    }
-  }
+  //     comments = comments.filter((comment) => comment.id !== deletedComment.id);
+  //   } catch (error) {
+  //     console.error("Failed to Delete");
+  //   }
+  // }
 
   function handleCommentCreated(event) {
     const newComment = event.detail;
     comments = [...comments, newComment]; // Add the new comment to the list
   }
 
-  function handleToggledLikePost(event) {
-    const newLike = event.detail;
+  function handleCommentDeleted(commentId) {
+    // Find the index of the comment to be deleted
+    const commentIndex = comments.findIndex(
+      (comment) => comment.id === commentId
+    );
 
-    // Check if the newLike.id is already in the likes array
-    const likeIndex = likes.findIndex((like) => like.id === newLike.id);
-
-    if (likeIndex !== -1) {
-      // If the like is already in the array, remove it
-      likes = likes.filter((like) => like.id !== newLike.id);
-    } else {
-      // If the like is not in the array, add it
-      likes = [...likes, newLike];
+    if (commentIndex !== -1) {
+      // Remove the comment from the array
+      comments = [
+        ...comments.slice(0, commentIndex),
+        ...comments.slice(commentIndex + 1),
+      ];
     }
   }
-
-  console.log(data?.body?.post);
 </script>
 
 {#if data}
@@ -82,13 +82,21 @@
             />
           </div>
           <div class="post-info pt-5 text-sm text-gray-500">
-            <p>Published {new Date(post.datePublished).toDateString()}  by {post.author.name}</p>
-     <div class="flex justify-center items-center my-2 space-x-4">
-         <img title="like" src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png" alt="heart" class="w-6 h-6">
-    <div class=" font-semibold text-2xl text-black">
-   {post.likes.length}
-    </div>
-     </div>
+            <p>
+              Published {new Date(post.datePublished).toDateString()} by {post
+                .author.name}
+            </p>
+            <div class="flex justify-center items-center my-2 space-x-4">
+              <img
+                title="like"
+                src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png"
+                alt="heart"
+                class="w-6 h-6"
+              />
+              <div class=" font-semibold text-2xl text-black">
+                {post.likes.length}
+              </div>
+            </div>
           </div>
           <div class="post-title text-xl font-bold my-2">{post?.title}</div>
           <div class="post-subtitle">{post?.subtitle}</div>
@@ -102,119 +110,26 @@
       <!-- COMMENT SECTION  -->
       <div class="comment-container">
         {#each comments as comment (comment.id)}
-          <div
-            class="relative group"
-            in:fly={{ x: -100, duration: 300, opacity: 1 }}
-            out:fly={{ x: 100, duration: 300, opacity: 0 }}
-          >
-            <CommentCard {comment} />
-
-            {#if comment?.user?.id === $page.data?.session?.user?.email}
-              <button
-                class="ellipsis-menu absolute top-0 right-0"
-                on:click={() => toggleShowOptionMenu(comment.id)}
-              >
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/7168/7168581.png"
-                  alt=""
-                  class="w-5"
-                />
-                {#if showOptionMenu[comment.id]}
-                  <div
-                    class="popup-menu p-2 bg-slate-800 text-white absolute -top-10 transition-all duration-150 rounded-md shadow-sm hover:shadow-lg hover:shadow-slate-400"
-                  >
-                    <button on:click={deleteComment(comment.id)} class=""
-                      >Delete</button
-                    >
-                  </div>
-                {/if}
-              </button>
-            {/if}
-          </div>
+     
+            <CommentCard
+              on:commentDeleted={handleCommentDeleted(comment.id)}
+              {comment}
+            />
+     
         {/each}
       </div>
     </div>
 
     <!-- Recent Post Section to the right -->
-    <div class="w-1/4 mt-8 px-4">
+    <div class="w-1/4 mt-8 px-4 pb-5">
       <div class="sticky top-5 z-10">
-        <h4
-          class="  border-l-2 pl-2 border-l-orange-300 text-shadow font-semibold text-gray-500"
-        >
-          Recent Posts
-        </h4>
-
-        {#each recentPosts as recentPost, index (recentPost.id)}
-          <div class="flex space-x-2 my-2 p-2 pb-4 border-b-2">
-            <div class="">
-              <a href={`/blog/${recentPost?.id}`}>
-                <img
-                  src={recentPost.img}
-                  class="recent-post-img"
-                  alt="post illustration"
-                />
-              </a>
-            </div>
-            <div class="flex flex-col justify-between">
-              <a
-                class="hover:text-orange-500 transition-all duration-150"
-                href={`/blog/${recentPost?.id}`}
-              >
-                <div class="text-sm font-semibold flex-wrap break-words">
-                  {recentPost.title}
-                </div>
-              </a>
-              <div
-                class=" text-xs font-bold text-gray-500 flex justify-between"
-              >
-                {new Date(recentPost.datePublished).toLocaleDateString(
-                  "en-US",
-                  {
-                    month: "short",
-                    day: "numeric",
-                    year: "2-digit",
-                  }
-                )} -
-                {recentPost.author.name}
-              </div>
-            </div>
-          </div>
-        {/each}
-
+        <RecentPosts {recentPosts} />
         <!-- LINKED IN  -->
-        <div class="mt-10 flex items-center">
-          <a
-            href="https://www.linkedin.com/in/tung-le0319/"
-            target="_blank"
-            class="flex items-center space-x-2"
-          >
-            <img
-              src="https://media.licdn.com/dms/image/D5603AQHXRnhq5heTzA/profile-displayphoto-shrink_100_100/0/1668461106434?e=1702512000&v=beta&t=33NYfv1mItUA6k5ntGdAv9rZ98bJDR1PTEbRUhlsw20"
-              alt="linkedin profile"
-              class="w-16 h-16 rounded-full shadow-md shadow-slate-500 hover:brightness-75 transition-all duration-150"
-            />
-            <span class="text-blue-500 font-semibold">LinkedIn</span>
-          </a>
-        </div>
-
+        <LinkedInCard />
         <!--  !LIKES -->
-
-        <div class=" mt-10">
         {#if $page.data.session}
-        <LikeBlogPost {post} on:toggledLikePost={handleToggledLikePost} />
+          <LikeBlogPost {post} />
         {/if}
-          <div class="mt-5 grid grid-cols-6 gap-y-2">
-            {#each likes as l (l.id)}
-              <div class="flex items-center">
-                <img
-                  src={l.user?.image}
-                  alt=""
-                  class="w-10 h-10 rounded-full shadow-md shadow-slate-400 object-cover"
-                />
-              </div>
-            {/each}
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -226,10 +141,6 @@
 
 <!-- <BlogPost {data?.post} /> -->
 <style lang="scss">
-  .delete-btn {
-    @apply p-2 shadow-md shadow-slate-300 rounded-md text-white hover:shadow-xl hover:shadow-slate-500 transition-all duration-300 scale-0 group-hover:scale-100  bg-slate-800 absolute top-0 right-0;
-  }
-
   .post {
     @apply p-3 shadow-md flex justify-center space-x-2 rounded-md;
   }
@@ -280,9 +191,5 @@
 
   .post-content :global(code) {
     @apply font-mono bg-gray-100 rounded-md p-1;
-  }
-
-  .recent-post-img {
-    @apply w-16 h-16 object-cover rounded-md hover:brightness-75 transition-all duration-300;
   }
 </style>
