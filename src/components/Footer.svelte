@@ -3,7 +3,7 @@
     <div class="md:w-2/3 w-full px-4 text-white flex flex-col">
       <div class="md:flex">
         <h1 class="text-6xl font-bold w-full md:w-1/2">
-          Thank you for checking out our app. Get in touch with us.
+          Thank you for checking out the app. 
         </h1>
 
         <div

@@ -1,104 +1,87 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Shadows+Into+Light&display=swap');
-  
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Shadows+Into+Light&display=swap");
+
 /*font-family: 'Permanent Marker', cursive;
 font-family: 'Shadows Into Light', cursive;*/
-  
-  /* Apply global styles to the body */
 
-.permanent-marker-font{
-  font-family: 'Permanent Marker', cursive;
+/* Apply global styles to the body */
+
+.permanent-marker-font {
+  font-family: "Permanent Marker", cursive;
 }
-.shadow-into-light-font{
-  font-family: 'Shadows Into Light', cursive
+.shadow-into-light-font {
+  font-family: "Shadows Into Light", cursive;
 }
 
-  body {
-   
-    @apply h-screen;
-  }
+body {
+  @apply h-screen;
+}
 
+/* Style the container with a blue/white glow on hover */
+.container {
+  @apply max-w-screen-md p-4 shadow-sm;
+}
 
+.page-container {
+  @apply p-4  w-full  h-full;
+}
 
+/* Style the title */
+h1 {
+  font-size: 2rem;
+}
 
+a:hover {
+  text-decoration: none;
+}
 
+.fire-effect-milo {
+  @apply text-2xl text-orange-400 font-bold mt-10 mb-10   pr-2 border-r-4  opacity-100 text-left transition-all  delay-150   p-2  rounded-l;
 
-  /* Style the container with a blue/white glow on hover */
-  .container {
-    @apply max-w-screen-md p-4 shadow-sm;
- 
-  }
+  font-family: "Permanent Marker", cursive;
 
-  .page-container{
-    @apply  p-4  w-full  h-full
-  }
-  
+  transition: opacity 0.35s, transform 0.35s;
 
-  /* Style the title */
-  h1 {
-    font-size: 2rem;
- 
-  }
+  transform: translate3d(0px, 0, 0);
+  text-shadow: 0 0 2px #000000;
+}
 
- 
+.description {
+  line-height: 1.5;
+}
+.hero-image {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  position: relative;
+}
+.hero-image-container::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  left: 0;
+  width: 100%;
+  height: 10px; /* adjust height as per your need */
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    #fff
+  ); /* adjust the color as per your need */
+}
 
-  
-  a:hover {
-    text-decoration: none;
-  }
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  text-align: center;
+  color: #fff;
+}
 
-
-    .fire-effect-milo {
-    @apply  text-2xl text-orange-500 font-bold mt-10 mb-10   pr-2 border-r-4  opacity-100 text-left transition-all  delay-150 bg-black  bg-opacity-30 p-2  rounded-l ;
-    
-  
-   
-    font-family: 'Permanent Marker', cursive;
-   
-    transition: opacity 0.35s, transform 0.35s;
- 
-    transform: translate3d(0px, 0, 0);
-    text-shadow: 0 0 2px #000000;
-  }
-
-
-
-    .description {
-    line-height: 1.5;
-  }
-  .hero-image {
-    width: 100%;
-    height: 500px;
-    object-fit: cover;
-    position: relative;
-  }
-  .hero-image-container::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    z-index: 1;
-    left: 0;
-    width: 100%;
-    height: 10px; /* adjust height as per your need */
-    background-image: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0),
-      #fff, 
-    ); /* adjust the color as per your need */
-  }
-
-  .hero-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    text-align: center;
-    color: #fff;
-  }
-
-  .text-shadow-overlay {
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  }
+.text-shadow-overlay {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}

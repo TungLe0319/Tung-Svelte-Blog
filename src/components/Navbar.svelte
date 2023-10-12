@@ -15,9 +15,15 @@
   <div class=" flex items-center lg:justify-between space-x-2 w-full">
     <div class="text-xl font-semibold icon-container">
       <a href="/">
-        <!-- <img src="src\assets\images\mushroom.png" alt="Mushroom Icon" width="60" class="icon-img-1">
-    <img src="src\assets\images\mushroomcolor.png" alt="Mushroom Icon" width="60" class="icon-img-2"> -->
+        <img
+          src="https://cdn-icons-png.flaticon.com/128/12285/12285722.png"
+          alt="Mushroom Icon"
+          width="60"
+          class=" w-10 py-2"
+        />
+        <!-- <img src="src\assets\images\mushroomcolor.png" alt="Mushroom Icon" width="60" class="icon-img-2">
         home
+      </a> -->
       </a>
     </div>
 
@@ -49,9 +55,12 @@
             src={$page.data?.session.user.image}
             alt="profile"
           />
-          <div class="text-sm px-4">{$page.data?.session.user.email}</div>
-          <button on:click={() => signOut()} class="text-orange-300 sign-out-btn mb-2"
-            >Sign out</button
+          <div class="text-sm px-4 text-shadow-overlay">
+            {$page.data?.session.user.email}
+          </div>
+          <button
+            on:click={() => signOut()}
+            class="text-orange-300 sign-out-btn mb-2">Sign out</button
           >
         </div>
         <!-- else content here -->
@@ -94,7 +103,7 @@
     background: rgb(119, 119, 119);
     background: linear-gradient(
       180deg,
-    rgba(164, 191, 196, 0.116) 0%,
+      rgba(164, 191, 196, 0.116) 0%,
       rgba(6, 7, 6, 0) 100%
     );
   }
@@ -103,12 +112,8 @@
   a,
   .sign-out-btn {
     @apply relative transition-transform duration-200  text-2xl;
- 
 
- 
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
- 
-   
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 
     text-decoration: none;
     font-weight: 600;

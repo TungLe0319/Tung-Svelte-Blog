@@ -69,7 +69,7 @@
   <div class="text-center flex flex-col items-center mb-20 ">
     <div class="  absolute -bottom-72 z-30">
       <div class=" featured-post-headliner">
-        <h3 class="text-4xl mb-10 permanent-marker-font text-white">
+        <h3 class="text-4xl mb-10 permanent-marker-font text-white text-shadow-overla">
           Featured Posts
         </h3>
       </div>
@@ -169,6 +169,19 @@
     background-attachment: fixed;
   }
 
+
+  .hero-image-container:before {
+  content: "";
+  z-index: 1;
+  height: 200px;
+  background: rgb(255, 255, 255);
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
   // .hero-image::after {
   //   content: "";
   //   position: absolute;

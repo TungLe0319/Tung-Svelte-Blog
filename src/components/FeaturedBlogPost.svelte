@@ -21,7 +21,7 @@
 
 <style lang="scss">
   .featured-blogpost {
-    @apply relative shadow-xl duration-150 hover:brightness-75 hover:shadow-orange-300 product-card rounded-lg;
+    @apply relative shadow-xl duration-150  hover:shadow-orange-300 product-card rounded-lg;
 
     img {
       @apply object-cover  rounded-lg shadow-xl shadow-slate-500 hover:shadow-orange-200 transition-all duration-150;
