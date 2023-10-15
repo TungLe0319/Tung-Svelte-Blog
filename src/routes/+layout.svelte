@@ -7,6 +7,7 @@
   import { page } from "$app/stores";
 
   export let data;
+  export const pageSession = $page.data.session
 </script>
 
 <Navbar />
@@ -17,7 +18,7 @@
       in:fade={{ duration: 300, delay: 300 }}
       out:fade={{ duration: 300 }}
     >
-      <slot />
+      <slot {pageSession} />
     </main>
   {/key}
 

@@ -2,11 +2,10 @@
   "compilerOptions": {
     "target": "ES6", // Adjust the target as needed
     "module": "CommonJS", // Adjust the module type as needed
-    "outDir": "./dist" // Specify your output directory
+    "outDir": "./dist", // Specify your output directory
     // Other compiler options...
-    
+
   },
-  "include": ["**/*.ts", "script.js", "src/lib/prisma.js", "src/stores/comments.ts"],
-  "exclude": ["node_modules"],
-  
+  "include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.svelte"],
+  "exclude": ["node_modules"]
 }

@@ -1,14 +1,16 @@
 <script>
-  import { page } from "$app/stores";
-
   import CommentCard from "../../../components/Comments/CommentCard.svelte";
+  
+  // import CommentCard from "@components/Comments/CommentForm/svelte"
   import CommentForm from "../../../components/Comments/CommentForm.svelte";
   import LikeBlogPost from "../../../components/LikeBlogPost.svelte";
   import RecentPosts from "../../../components/RecentPosts.svelte";
   import LinkedInCard from "../../../components/LinkedInCard.svelte";
   import { onDestroy, onMount } from "svelte";
 
+
   export let data;
+
   let post;
   let recentPosts;
   let comments = [];
@@ -25,7 +27,7 @@
 
   onMount(() => {
     liked = data?.body?.post?.likes.some(
-      (like) => like.user.email === $page.data.session.user.email
+      (like) => like.user.email === data.session?.user.email
     );
   });
 
@@ -51,7 +53,7 @@
 
   function handleLikeToggled(updatedPost) {
     liked = updatedPost.likes.some(
-      (like) => like.user.email === $page.data.session.user.email
+      (like) => like.user.email === data.session?.user.email
     );
 
     post = updatedPost;
@@ -84,7 +86,7 @@
                 alt="heart"
                 class="w-6 h-6"
               />
-              <div class=" font-semibold text-2xl text-black" >
+              <div class=" font-semibold text-2xl text-black">
                 {post.likes.length}
               </div>
             </div>
@@ -95,7 +97,7 @@
         </div>
       </div>
       <!-- COMMENT FORM  -->
-      {#if $page.data.session}
+      {#if data?.session}
         <CommentForm on:commentCreated={handleCommentCreated} {post} />
       {/if}
       <!-- COMMENT SECTION  -->
