@@ -1,8 +1,7 @@
 // @ts-nocheck
 
-import { PrismaClient, Post, Category, Comment, User } from "@prisma/client";
 import { error } from "@sveltejs/kit";
-
+import { PageServerLoad} from './$types'
 const db = new PrismaClient();
 
 /** @type {import('./$types').PageServerLoad} */
@@ -10,7 +9,7 @@ export async function load({ params }) {
   try {
     const postId = parseInt(params.slug, 10);
 
-    const post: Post = await db.post.findFirstOrThrow({
+    const post = await db.post.findFirstOrThrow({
       where: {
         id: postId,
       },
@@ -30,7 +29,7 @@ export async function load({ params }) {
       },
     });
 
-    const recentPosts: Post[] = await db.post.findMany({
+    const recentPosts = await db.post.findMany({
       where: {
         id: {
           not: postId,

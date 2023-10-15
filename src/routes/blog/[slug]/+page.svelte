@@ -5,10 +5,12 @@
   import RecentPosts from "$components/RecentPosts.svelte";
   import LinkedInCard from "$components/LinkedInCard.svelte";
   import { onDestroy, onMount } from "svelte";
+  
 
+	/** @type {import('./$types').PageServerData} */
+  export let data
 
-  export let data;
-
+   
   let post;
   let recentPosts;
   let comments = [];
