@@ -83,6 +83,9 @@
         <div class=" shadow-into-light-font font-semibold text-2xl">LIKE</div>
       {/if}</button
     >
+
+    {:else}
+    <a href="/login" class="shadow-into-light-font font-semibold text-2xl text-blue-500">Login to Like</a>
   {/if}
 
   <div class="mt-5 flex">

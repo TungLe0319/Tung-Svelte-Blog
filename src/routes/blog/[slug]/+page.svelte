@@ -72,7 +72,7 @@
               class=" rounded-md shadow-xl shadow-slate-400"
             />
           </div>
-          <div class="post-info pt-5 text-sm text-gray-500">
+          <div class="post-info pt-5 text-md text-slate-400 font-bold">
             <p>
               Published {new Date(post.datePublished).toDateString()} by {post
                 .author.name}

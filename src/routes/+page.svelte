@@ -5,7 +5,6 @@
   import { signIn, signOut } from "@auth/sveltekit/client";
   import { page } from "$app/stores";
   import { fade, fly } from "svelte/transition";
-  
 
   export let data;
   let posts = data.body?.posts;
@@ -39,9 +38,6 @@
       post.categories &&
       post.categories.some((category) => category.name === "Featured")
   );
-
-
-
 </script>
 
 <div>
@@ -53,23 +49,21 @@
     />
     <div class="hero-text text-shadow-overlay">
       <div class="  headliner">
-        <h1 class="text-6xl">
-          there is no education like curiosity 
-        </h1>
+        <h1 class="text-6xl">there is no education like curiosity</h1>
       </div>
 
       <div class="headliner-2">
-        <h2 class="text-4xl">
-          How Art, Technology and Curiosity Fuel My Life
-        </h2>
+        <h2 class="text-4xl">How Art, Technology and Curiosity Fuel My Life</h2>
       </div>
     </div>
   </div>
 
-  <div class="text-center flex flex-col items-center mb-20 ">
+  <div class="text-center flex flex-col items-center mb-20">
     <div class="  absolute -bottom-72 z-30">
       <div class=" featured-post-headliner">
-        <h3 class="text-4xl mb-10 permanent-marker-font text-white text-shadow-overla">
+        <h3
+          class="text-4xl mb-10 permanent-marker-font text-white text-shadow-overla"
+        >
           Featured Posts
         </h3>
       </div>
@@ -80,15 +74,12 @@
       </div>
     </div>
 
-
     <div
       class="posts-container mt-60 flex flex-col justify-center p-2 m-10 px-10"
     >
       <div class="selection-bar py-10">
         <label for="categorySelect" class="mr-2">Select Category:</label>
-        <div class="p-8">
-
-</div>
+        <div class="p-8" />
         <select
           id="categorySelect"
           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 p-2.5"
@@ -101,7 +92,7 @@
           <!-- Add more category options as needed -->
         </select>
       </div>
-      <div class="border-b-4 border-b-orange-300 rounded-md mb-4"></div>
+      <div class="border-b-4 border-b-orange-300 rounded-md mb-4" />
       {#each filteredPosts as post (post.id)}
         {#key post}
           <div
@@ -126,19 +117,18 @@
 </div>
 
 <style lang="scss">
-  
   .fly-transition {
     will-change: transform;
   }
   .headliner {
-    @apply flex justify-center mt-20 text-white text-center pt-20 select-none hover:cursor-default;
+    @apply flex justify-center mt-10 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24 text-white text-center pt-20 select-none hover:cursor-default;
 
     transform: rotate(-2deg);
     font-family: "Permanent Marker", cursive;
   }
 
   .headliner-2 {
-    @apply flex justify-center  text-white text-center p-20  select-none hover:cursor-default;
+    @apply flex justify-center mt-10 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24  text-white text-center p-20  select-none hover:cursor-default;
     font-family: "Shadows Into Light", cursive;
   }
 
@@ -157,19 +147,18 @@
     background-attachment: fixed;
   }
 
-
   .hero-image-container:before {
-  content: "";
-  z-index: 1;
-  height: 200px;
-  background: rgb(255, 255, 255);
+    content: "";
+    z-index: 1;
+    height: 200px;
+    background: rgb(255, 255, 255);
 
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 1) 100%
-  );
-}
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 1) 100%
+    );
+  }
   // .hero-image::after {
   //   content: "";
   //   position: absolute;
