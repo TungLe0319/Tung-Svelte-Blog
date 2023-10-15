@@ -1,21 +1,37 @@
-<script  >
-  import CommentCard from "$components/Comments/CommentCard.svelte"
-  import CommentForm from '$components/Comments/CommentForm.svelte'
+<script>
+  import CommentCard from "$components/Comments/CommentCard.svelte";
+  import CommentForm from "$components/Comments/CommentForm.svelte";
   import LikeBlogPost from "$components/LikeBlogPost.svelte";
   import RecentPosts from "$components/RecentPosts.svelte";
   import LinkedInCard from "$components/LinkedInCard.svelte";
   import { onDestroy, onMount } from "svelte";
-  
 
-	/** @type {import('./$types').PageServerData} */
-  export let data
+  export let data;
 
-   
+  /**
+   * @type {import('@prisma/client').Post}
+   */
+
   let post;
+
+  /**
+   * @type {import('@prisma/client').Post[]}
+   */
   let recentPosts;
+
+  /**
+   * @type {import('@prisma/client').Comment[]}
+   */
   let comments = [];
+
+  /**
+   * @type {import('@prisma/client').Like[]}
+   */
   let likes = [];
 
+  /**
+   * @type {boolean}
+   */
   let liked;
 
   $: {
@@ -31,6 +47,11 @@
     );
   });
 
+  /**
+ * Handle a comment created event.
+ *
+ * @param {Event} event - The comment created event.
+ */
   function handleCommentCreated(event) {
     const newComment = event.detail;
     comments = [...comments, newComment];

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import { error } from "@sveltejs/kit";
-import { PageServerLoad} from './$types'
+import { PageServerLoad } from "./$types";
 const db = new PrismaClient();
 
 /** @type {import('./$types').PageServerLoad} */
@@ -9,6 +9,12 @@ export async function load({ params }) {
   try {
     const postId = parseInt(params.slug, 10);
 
+    /**
+     * Fetches a post with associated data from the database.
+     *
+     * @param {number} postId - The ID of the post to fetch.
+     * @returns {Promise<import("@prisma/client").Post>} A promise that resolves to the fetched post.
+     */
     const post = await db.post.findFirstOrThrow({
       where: {
         id: postId,
