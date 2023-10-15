@@ -72,7 +72,7 @@
           alt="heart"
           class="w-10"
         />
-        <div class=" shadow-into-light-font font-semibold text-2xl">UNLIKE</div>
+        <div class=" font-2 font-semibold text-2xl">UNLIKE</div>
       {:else}
         <img
           title="like"
@@ -80,12 +80,13 @@
           alt="heart"
           class="w-10"
         />
-        <div class=" shadow-into-light-font font-semibold text-2xl">LIKE</div>
+        <div class=" font-2 font-semibold text-2xl">LIKE</div>
       {/if}</button
     >
-
-    {:else}
-    <a href="/login" class="shadow-into-light-font font-semibold text-2xl text-blue-500">Login to Like</a>
+  {:else}
+    <a href="/login" class="font-2 font-semibold text-2xl text-blue-500"
+      >Login to Like</a
+    >
   {/if}
 
   <div class="mt-5 flex">

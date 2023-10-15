@@ -24,12 +24,6 @@
   <Footer />
 </div>
 
-
-
-
-
-
-
 <style lang="scss">
   .wrapper {
     display: flex;

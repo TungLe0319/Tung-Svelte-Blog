@@ -6,24 +6,22 @@ import { error } from "@sveltejs/kit";
 const db = new PrismaClient();
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
-
   try {
     const posts = await db.post.findMany({
       include: {
-        author: true, 
-        categories:true,
+        author: true,
+        categories: true,
         likes: true,
-        comments:true,
+        comments: true,
       },
     });
 
     if (posts) {
-    
-        return {
-          body: {
-            posts,
-          },
-        };
+      return {
+        body: {
+          posts,
+        },
+      };
     } else {
       throw error(404, "Post not found");
     }

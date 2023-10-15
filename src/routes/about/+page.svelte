@@ -1,5 +1,4 @@
 <script>
-
   let stackData = [
     {
       iconUrl:
@@ -25,12 +24,6 @@
       link: "https://tailwindcss.com/",
     },
   ];
-
-
-
-
-
-
 </script>
 
 <div class="relative hero-image-container">
@@ -45,14 +38,12 @@
     alt="banner"
   /> -->
   <div class="hero-text">
-    <h1 class="text-8xl text-shadow-overlay shadow-into-light-font">About</h1>
+    <h1 class="text-8xl text-shadow-overlay font-2">About</h1>
     <!-- <small class="text-xl">We Love Software Development!</small> -->
   </div>
 </div>
 
-<div
-  class=" px-40 py-4  mt-3 text-xl flex justify-center items-center"
->
+<div class=" px-40 py-4 mt-3 text-xl flex justify-center items-center">
   <h2 class="description">
     This blog project serves as an opportunity for me to strengthen my
     development skills, troubleshooting abilities, and utilize my creativity.
@@ -75,20 +66,7 @@
   </h2>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class=" text-center my-2 text-4xl shadow-into-light-font font-bold">Tech Stack</div>
+<div class=" text-center my-2 text-4xl font-2 font-bold">Tech Stack</div>
 <ul class="list grid grid-cols-2 py-4 mt-10 px-28">
   {#each stackData as stack}
     <li class="list-item">
@@ -102,5 +80,4 @@
 </ul>
 
 <style lang="scss" scoped>
-
 </style>

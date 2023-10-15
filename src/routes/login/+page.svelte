@@ -15,7 +15,7 @@
     alt="banner"
   />
   <div class="hero-text">
-    <h1 class="text-8xl text-shadow-overlay shadow-into-light-font">Login</h1>
+    <h1 class="text-8xl text-shadow-overlay font-2">Login</h1>
  
   </div>
 </div> -->
@@ -27,7 +27,7 @@
     <div class="">ICON OR LOGO SPOT</div>
 
     <div class="">LOGIN</div>
-    <div class=" flex flex-col items-center justify-center  ">
+    <div class=" flex flex-col items-center justify-center">
       <button on:click={() => signIn("github")} class=" sign-in-btn">
         <img
           src="https://cdn-icons-png.flaticon.com/128/733/733609.png?ga=GA1.1.2107270949.1696371575&track=ais"

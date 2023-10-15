@@ -61,9 +61,7 @@
   <div class="text-center flex flex-col items-center mb-20">
     <div class="  absolute -bottom-72 z-30">
       <div class=" featured-post-headliner">
-        <h3
-          class="text-4xl mb-10 permanent-marker-font text-white text-shadow-overla"
-        >
+        <h3 class="text-4xl mb-10 font-1 text-white text-shadow-overla">
           Featured Posts
         </h3>
       </div>

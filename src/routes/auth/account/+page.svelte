@@ -11,17 +11,17 @@
     src="https://images.unsplash.com/photo-1562688722-369523a4a270?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
     alt="banner"
   />
-  <div class="hero-text  flex flex-col items-center space-y-2">
-    <h1 class="text-8xl text-shadow-overlay shadow-into-light-font">Account</h1>
- <img src={$page.data.session?.user.image} class="profile-img" alt="profile">
+  <div class="hero-text flex flex-col items-center space-y-2">
+    <h1 class="text-8xl text-shadow-overlay font-2">Account</h1>
+    <img
+      src={$page.data.session?.user.image}
+      class="profile-img"
+      alt="profile"
+    />
   </div>
 
-  <div class="absolute bottom-0 right-1/2 p-2 transform translate-x-1/2">
-   
-  </div>
+  <div class="absolute bottom-0 right-1/2 p-2 transform translate-x-1/2" />
 </div>
-
-
 
 <div class="Auth">
   <h1>SvelteKit Auth Example</h1>
@@ -81,13 +81,12 @@
     text-align: center;
     color: #fff;
     user-select: none;
-    
   }
 
   .text-shadow-overlay {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   }
-  .profile-img{
-@apply rounded-full shadow-lg shadow-slate-700;
+  .profile-img {
+    @apply rounded-full shadow-lg shadow-slate-700;
   }
 </style>

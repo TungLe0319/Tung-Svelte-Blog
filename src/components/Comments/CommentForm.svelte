@@ -1,5 +1,6 @@
 <script>
   import { page } from "$app/stores";
+  import { redirect } from "@sveltejs/kit";
   import { createEventDispatcher } from "svelte";
   export let post;
   let content = "";
@@ -11,26 +12,39 @@
     formData.append("content", content);
     formData.append("userEmail", $page.data?.session.user.email);
 
-    const response = await fetch("/api/comments", {
-      method: "POST",
-      body: formData,
-    });
-    if (response.ok) {
-      const newComment = await response.json();
-
-      dispatch("commentCreated", newComment);
-    } else {
-      console.error("Error in creating Post");
+    if (!$page.data?.session) {
+      console.log("No User Session");
+      throw redirect(303, "/login");
     }
 
-    content = "";
+    if (!formData.has("content") || formData.get("content").trim() === "") {
+      console.log("Comment cannot be empty");
+      return; // Return early if there's an error.
+    }
+
+    try {
+      const response = await fetch("/api/comments", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const newComment = await response.json();
+        dispatch("commentCreated", newComment);
+        content = "";
+      } else {
+        console.error("Error in creating Post");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
   }
 </script>
 
 {#if $page.data.session}
   <form on:submit|preventDefault={createComment}>
-    <div class=" p-2 w-full flex justify-center flex-col">
-      <h1 class="shadow-into-light-font font-semibold my-2 ">Comment:</h1>
+    <div class="comment-form-container">
+      <h1 class="comment-form-label">Comment:</h1>
       <textarea
         id="content"
         name="content"
@@ -40,17 +54,25 @@
         class="comment-input"
       />
 
-      <button
-        class="text-left w-fit rounded-md p-2 mr-2 bg-slate-800 text-white font-medium"
-        >Submit Comment</button
-      >
+      <button class=" comment-submit-button">Submit Comment</button>
     </div>
   </form>
 {:else}
   <div>UNAUTHORIZED, NO SESSION FOUND</div>
 {/if}
 
-<style lang="scss">
+<style lang="scss" scoped>
+  .comment-form-container {
+    @apply p-2 w-full flex justify-center flex-col;
+  }
+  .comment-form-label {
+    @apply font-2 font-semibold my-2;
+  }
+
+  .comment-submit-button {
+    @apply text-left w-fit rounded-md p-2 mr-2 bg-slate-800 text-white font-medium;
+  }
+
   .comment-input {
     @apply p-2 rounded focus:outline-orange-300 shadow-xl shadow-slate-500 mb-10 bg-slate-800 text-white text-lg;
   }
