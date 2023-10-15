@@ -25,6 +25,11 @@
   // }
   const dispatch = createEventDispatcher();
   async function toggleLikePost() {
+    if (!post.id) {
+      console.error("No Post.id Found");
+      return;
+    }
+
     let formData = new FormData();
     formData.append("postId", post.id);
     formData.append("userEmail", $page.data?.session.user.email);

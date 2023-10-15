@@ -1,8 +1,6 @@
 <script>
 
 
-  import CategoryBadge from "./CategoryBadge.svelte";
-
   export let post;
   let commentsLength = post.comments.length;
 let likesLength = post.likes.length

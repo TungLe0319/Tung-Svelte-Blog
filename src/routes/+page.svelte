@@ -1,10 +1,11 @@
-<script>
+<script lang="ts">
   import BlogPostCard from "../components/BlogPostCard.svelte";
   import FeaturedBlogPost from "../components/FeaturedBlogPost.svelte";
   import { onMount } from "svelte";
   import { signIn, signOut } from "@auth/sveltekit/client";
   import { page } from "$app/stores";
   import { fade, fly } from "svelte/transition";
+  import Hero from "../components/Hero.svelte";
 
   export let data;
   let posts = data.body?.posts;
@@ -28,7 +29,7 @@
   filterPosts(selectedCategory);
 
   // Event listener for the category selection dropdown
-  function handleCategoryChange() {
+  function handleCategoryChange(categorySelect) {
     selectedCategory = categorySelect.value;
     filterPosts(selectedCategory);
   }
@@ -38,25 +39,18 @@
       post.categories &&
       post.categories.some((category) => category.name === "Featured")
   );
+
+  const heroProps = {
+    image:
+      "https://images.unsplash.com/photo-1578301978018-3005759f48f7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2044&q=80",
+    title: "there is no education like curiosity",
+    subTitle: "How Art, Technology and Curiosity Fuel My Life",
+    height: 100,
+  };
 </script>
 
 <div>
-  <div class="relative hero-image-container">
-    <img
-      class="hero-image"
-      src="https://images.unsplash.com/photo-1578301978018-3005759f48f7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2044&q=80"
-      alt="banner"
-    />
-    <div class="hero-text text-shadow-overlay">
-      <div class="  headliner">
-        <h1 class="text-6xl">there is no education like curiosity</h1>
-      </div>
-
-      <div class="headliner-2">
-        <h2 class="text-4xl">How Art, Technology and Curiosity Fuel My Life</h2>
-      </div>
-    </div>
-  </div>
+  <Hero {heroProps} />
 
   <div class="text-center flex flex-col items-center mb-20">
     <div class="  absolute -bottom-72 z-30">
@@ -117,17 +111,6 @@
 <style lang="scss">
   .fly-transition {
     will-change: transform;
-  }
-  .headliner {
-    @apply flex justify-center mt-10 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24 text-white text-center pt-20 select-none hover:cursor-default;
-
-    transform: rotate(-2deg);
-    font-family: "Permanent Marker", cursive;
-  }
-
-  .headliner-2 {
-    @apply flex justify-center mt-10 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24  text-white text-center p-20  select-none hover:cursor-default;
-    font-family: "Shadows Into Light", cursive;
   }
 
   .featured-post-headliner {

@@ -14,6 +14,11 @@
 
   // Function to handle form submission
   async function handleSubmit() {
+    if (title === "" || subtitle === "" || content === "") {
+      errorMessage = "Title, subtitle, and content are required.";
+      return;
+    }
+
     let formData = new FormData();
     formData.append("title", title);
     formData.append("img", img);
@@ -22,7 +27,6 @@
     formData.append("categories", categories);
     formData.append("published", published);
 
-    console.log(formData.get("categories"));
     const response = await fetch("/auth/create", {
       method: "POST",
 
@@ -31,16 +35,15 @@
 
     if (response.ok) {
       console.log("Post created successfully");
+      title = "";
+      img = "";
+      subtitle = "";
+      content = "";
+      categories = "Art";
+      published = false;
     } else {
       console.error("Error creating post");
     }
-
-    title = "";
-    img = "";
-    subtitle = "";
-    content = "";
-    categories = "Art";
-    published = false;
   }
 </script>
 

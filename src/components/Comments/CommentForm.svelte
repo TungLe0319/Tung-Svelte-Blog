@@ -44,7 +44,7 @@
 {#if $page.data.session}
   <form on:submit|preventDefault={createComment}>
     <div class="comment-form-container">
-      <h1 class="comment-form-label">Comment:</h1>
+      <h1 class="comment-form-label font-2">Comment:</h1>
       <textarea
         id="content"
         name="content"
@@ -66,7 +66,7 @@
     @apply p-2 w-full flex justify-center flex-col;
   }
   .comment-form-label {
-    @apply font-2 font-semibold my-2;
+    @apply font-semibold my-2;
   }
 
   .comment-submit-button {
