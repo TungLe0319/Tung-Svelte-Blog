@@ -1,11 +1,9 @@
-<script>
-  import CommentCard from "../../../components/Comments/CommentCard.svelte";
-  
-  // import CommentCard from "@components/Comments/CommentForm/svelte"
-  import CommentForm from "../../../components/Comments/CommentForm.svelte";
-  import LikeBlogPost from "../../../components/LikeBlogPost.svelte";
-  import RecentPosts from "../../../components/RecentPosts.svelte";
-  import LinkedInCard from "../../../components/LinkedInCard.svelte";
+<script  >
+  import CommentCard from "$components/Comments/CommentCard.svelte"
+  import CommentForm from '$components/Comments/CommentForm.svelte'
+  import LikeBlogPost from "$components/LikeBlogPost.svelte";
+  import RecentPosts from "$components/RecentPosts.svelte";
+  import LinkedInCard from "$components/LinkedInCard.svelte";
   import { onDestroy, onMount } from "svelte";
 
 

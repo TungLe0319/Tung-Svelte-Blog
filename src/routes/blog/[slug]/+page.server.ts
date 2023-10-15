@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import { PrismaClient } from "@prisma/client";
-import { error,  } from "@sveltejs/kit";
+import { PrismaClient, Post, Category, Comment, User } from "@prisma/client";
+import { error } from "@sveltejs/kit";
 
 const db = new PrismaClient();
 
@@ -10,7 +10,7 @@ export async function load({ params }) {
   try {
     const postId = parseInt(params.slug, 10);
 
-    const post = await db.post.findFirstOrThrow({
+    const post: Post = await db.post.findFirstOrThrow({
       where: {
         id: postId,
       },
@@ -18,19 +18,19 @@ export async function load({ params }) {
         author: true,
         categories: true,
         comments: {
-          include:{
-            user:true
-          }
+          include: {
+            user: true,
+          },
         },
-        likes:{
-          include:{
-            user:true
-          }
-        }
+        likes: {
+          include: {
+            user: true,
+          },
+        },
       },
     });
 
-    const recentPosts = await db.post.findMany({
+    const recentPosts: Post[] = await db.post.findMany({
       where: {
         id: {
           not: postId,
