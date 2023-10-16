@@ -1,6 +1,7 @@
-import type { LayoutServerLoad } from "./$types";
+// @ts-nocheck
 
-export const load: LayoutServerLoad = async (event) => {
+/** @type {import('./$types').LayoutServerLoad} */
+export const load= async (event) => {
   const { url } = event;
   return {
     session: await event.locals.getSession(),

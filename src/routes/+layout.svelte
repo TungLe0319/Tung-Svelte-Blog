@@ -15,8 +15,8 @@
   {#key data?.pathname}
     <main
       class="w-full background"
-      in:fade={{ duration: 300, delay: 300 }}
-      out:fade={{ duration: 300 }}
+      in:fade={{ duration: 200, delay: 100 }}
+      out:fade={{ duration: 200 }}
     >
       <slot {pageSession} />
     </main>

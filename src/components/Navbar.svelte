@@ -23,7 +23,7 @@
       <a href="/">
         <img
           src="https://cdn-icons-png.flaticon.com/128/12285/12285722.png"
-          alt="Mushroom Icon"
+          alt="Home"
           width="60"
           class=" w-10 py-2"
         />
@@ -51,9 +51,9 @@
     </button>
 
     <!-- Navigation Links (hidden on small screens) -->
-    <div class="hidden lg:flex lg:space-x-8 text-lg">
+    <div class="hidden   lg:flex lg:space-x-6 text-lg lg:justify-center lg:items-center">
       {#if !$page.data?.session}
-        <a href="/login" class="hover:underline">Login</a>
+        <a href="/login" class="link">Login</a>
       {:else}
         <div class="flex space-x-2 items-center">
           <Avatar
@@ -61,7 +61,10 @@
             src={$page.data?.session.user.image}
             class="cursor-pointer hover:shadow-lg hover:border-2 transition-all duration-100 shadow-md "
           />
-          <Dropdown triggeredBy="#user-drop" class="shadow-xl  shadow-slate-400">
+          <Dropdown
+            triggeredBy="#user-drop"
+            class="shadow-xl  shadow-slate-400"
+          >
             <DropdownHeader>
               <span class="block text-sm">{$page.data?.session.user.name}</span>
               <span class="block truncate text-sm font-medium">
@@ -75,14 +78,28 @@
             >
           </Dropdown>
         </div>
- 
       {/if}
       {#if $page?.data?.session?.user?.email === "tung.le0319@gmail.com"}
-        <a href="/auth/create" class="hover:underline">Create</a>
+        <a href="/auth/create" class="link">Create</a>
       {/if}
 
-      <a href="/about" class="hover:underline">About</a>
-      <a href="/contact" class="hover:underline">Contact</a>
+      <a href="/about" class="link">About</a>
+      <a href="/contact" class="link">Contact</a>
+      <a href="https://github.com/TungLe0319" target="_blank" class="w-10"
+        ><img
+          src="https://cdn-icons-png.flaticon.com/128/2111/2111432.png"
+          alt="Github"
+        /></a
+      >
+      <a
+        href="https://www.linkedin.com/in/tung-le0319/"
+        target="_blank"
+        class="w-10"
+        ><img
+          src="https://cdn-icons-png.flaticon.com/128/1384/1384014.png"
+          alt="LinkedIn"
+        /></a
+      >
     </div>
   </div>
 
@@ -120,7 +137,7 @@
   }
 
   /* Style your navbar as needed */
-  a,
+  .link,
   .sign-out-btn {
     @apply relative transition-transform duration-200  text-2xl;
 
