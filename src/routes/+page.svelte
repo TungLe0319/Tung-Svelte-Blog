@@ -1,10 +1,8 @@
-<script lang="ts">
+<script>
   import BlogPostCard from "../components/BlogPostCard.svelte";
   import FeaturedBlogPost from "../components/FeaturedBlogPost.svelte";
-  import { onMount } from "svelte";
-  import { signIn, signOut } from "@auth/sveltekit/client";
-  import { page } from "$app/stores";
-  import { fade, fly } from "svelte/transition";
+
+  import { fly } from "svelte/transition";
   import Hero from "../components/Hero.svelte";
 
   export let data;
@@ -29,7 +27,7 @@
   filterPosts(selectedCategory);
 
   // Event listener for the category selection dropdown
-  function handleCategoryChange(categorySelect) {
+  function handleCategoryChange() {
     selectedCategory = categorySelect.value;
     filterPosts(selectedCategory);
   }
@@ -55,8 +53,8 @@
   <div class="text-center flex flex-col items-center mb-20">
     <div class="  absolute -bottom-72 z-30">
       <div class=" featured-post-headliner">
-        <h3 class="text-4xl mb-10 font-1 text-white text-shadow-overla">
-          Featured Posts
+        <h3 class="text-4xl mb-10 font-1 text-white text-shadow-overlay">
+          Featured 
         </h3>
       </div>
       <div class="flex justify-center space-x-2 mb-20">
@@ -70,11 +68,13 @@
       class="posts-container mt-60 flex flex-col justify-center p-2 m-10 px-10"
     >
       <div class="selection-bar py-10">
-        <label for="categorySelect" class="mr-2">Select Category:</label>
-        <div class="p-8" />
+        <label for="categorySelect" class="font-2 font-semibold text-4xl"
+          >Select Category:</label
+        >
+        <div />
         <select
           id="categorySelect"
-          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 p-2.5"
+          class="bg-gray-50 mt-5 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 p-2.5"
           on:change={handleCategoryChange}
         >
           <option value="all">All</option>
@@ -97,14 +97,6 @@
         {/key}
       {/each}
     </div>
-
-    <!-- <div
-      class="posts-container  mt-60 flex flex-col justify-center p-2 m-10 px-10"
-    >
-      {#each posts as post, index (post.title)}
-        <BlogPostCard {post} />
-      {/each}
-    </div> -->
   </div>
 </div>
 

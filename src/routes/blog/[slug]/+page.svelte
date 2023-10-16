@@ -9,9 +9,8 @@
   export let data;
 
   /**
-   * @type {import('@prisma/client').Post}
+   * @type {import('@prisma/client').Prisma.PostInclude<comments:true,author:true,likes:true>}
    */
-
   let post;
 
   /**
@@ -48,10 +47,10 @@
   });
 
   /**
- * Handle a comment created event.
- *
- * @param {Event} event - The comment created event.
- */
+   * Handle a comment created event.
+   *
+   * @param {Event} event - The comment created event.
+   */
   function handleCommentCreated(event) {
     const newComment = event.detail;
     comments = [...comments, newComment];

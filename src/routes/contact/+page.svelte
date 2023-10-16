@@ -1,5 +1,7 @@
 <!-- Contact.svelte -->
 <script>
+  import Hero from "../../components/Hero.svelte";
+
   // Define your contact information
   let contactInfo = [
     {
@@ -13,18 +15,28 @@
       link: "mailto:tung.le0319@gmail.com",
     },
   ];
+  const heroProps = {
+    image:
+      "https://images.unsplash.com/photo-1577083862054-7324cd025fa6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1541&q=80",
+    title: "Contact Me",
+    subTitle: "Discover a Partnership",
+    height: 100,
+  };
 </script>
 
-<div class="contact-container">
-  <h1 class="text-8xl font-bold mb-3 font-2">Contact Me At:</h1>
-  {#each contactInfo as info (info.title)}
-    <div
-      class="contact-item space-x-4 flex flex-col my-2 justify-center items-center"
-    >
-      <img src={info.icon} class="contact-icon" />
-      <a href={info.link} target="_blank" class="text-lg">{info.title}</a>
-    </div>
-  {/each}
+<div>
+  <Hero {heroProps} />
+  <div class="contact-container">
+    <h1 class="text-8xl font-bold mb-3 font-2">Contact Me At:</h1>
+    {#each contactInfo as info (info.title)}
+      <div
+        class="contact-item space-x-4 flex flex-col my-2 justify-center items-center"
+      >
+        <img src={info.icon} class="contact-icon" alt="contact" />
+        <a href={info.link} target="_blank" class="text-lg">{info.title}</a>
+      </div>
+    {/each}
+  </div>
 </div>
 
 <style>

@@ -1,7 +1,5 @@
 <!-- Hero.svelte -->
 <script lang="ts">
-
-
   interface HeroProps {
     image: string;
     title: string;

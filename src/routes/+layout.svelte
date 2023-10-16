@@ -7,7 +7,7 @@
   import { page } from "$app/stores";
 
   export let data;
-  export const pageSession = $page.data.session
+  export const pageSession = $page.data?.session;
 </script>
 
 <Navbar />

@@ -59,9 +59,9 @@
           <Avatar
             id="user-drop"
             src={$page.data?.session.user.image}
-            class="cursor-pointer"
+            class="cursor-pointer hover:shadow-lg hover:border-2 transition-all duration-100 shadow-md "
           />
-          <Dropdown triggeredBy="#user-drop">
+          <Dropdown triggeredBy="#user-drop" class="shadow-xl  shadow-slate-400">
             <DropdownHeader>
               <span class="block text-sm">{$page.data?.session.user.name}</span>
               <span class="block truncate text-sm font-medium">
@@ -69,16 +69,13 @@
               >
             </DropdownHeader>
 
-            <DropdownItem >
-              <button
-                on:click={() => signOut()}
-                class=" m-1">Sign out</button
+            <DropdownItem>
+              <button on:click={() => signOut()} class=" m-1">Sign out</button
               ></DropdownItem
             >
           </Dropdown>
         </div>
-        <!-- else content here -->
-        <!-- <a href="/auth/account" class="hover:underline">Account</a> -->
+ 
       {/if}
       {#if $page?.data?.session?.user?.email === "tung.le0319@gmail.com"}
         <a href="/auth/create" class="hover:underline">Create</a>
