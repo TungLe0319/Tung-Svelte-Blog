@@ -51,7 +51,9 @@
     </button>
 
     <!-- Navigation Links (hidden on small screens) -->
-    <div class="hidden   lg:flex lg:space-x-6 text-lg lg:justify-center lg:items-center">
+    <div
+      class="hidden lg:flex lg:space-x-6 text-lg lg:justify-center lg:items-center"
+    >
       {#if !$page.data?.session}
         <a href="/login" class="link">Login</a>
       {:else}
@@ -81,6 +83,7 @@
       {/if}
       {#if $page?.data?.session?.user?.email === "tung.le0319@gmail.com"}
         <a href="/auth/create" class="link">Create</a>
+        <a href="/TKR" class="link">TKR</a>
       {/if}
 
       <a href="/about" class="link">About</a>
