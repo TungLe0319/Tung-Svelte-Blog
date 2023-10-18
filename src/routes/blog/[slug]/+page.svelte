@@ -82,7 +82,7 @@
 
 {#if data}
   <div class=" flex mt-16">
-    <div class="w-3/4 mt-8">
+    <div class="lg:w-3/4 mt-8">
       <!-- POST  -->
 
       <div class="post">
@@ -132,7 +132,7 @@
     </div>
 
     <!-- Recent Post Section to the right -->
-    <div class="w-1/4 mt-8 px-4 pb-5">
+    <div class="lg:w-1/4  mt-8 px-4 pb-5">
       <div class="sticky top-5 z-10">
         <RecentPosts {recentPosts} />
         <!-- LINKED IN  -->

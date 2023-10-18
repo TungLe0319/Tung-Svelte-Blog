@@ -10,9 +10,9 @@
   </h4>
 
   {#each recentPosts as recentPost, index (recentPost.id)}
-    <div class="flex space-x-3 my-2 pb-4 border-b-2">
+    <div class="lg:flex space-x-3 my-2 pb-4 border-b-2">
       <div class="">
-        <a href={`/blog/${recentPost?.id}`}>
+        <a class="flex justify-center" href={`/blog/${recentPost?.id}`}>
           <img
             src={recentPost.img}
             class="recent-post-img"

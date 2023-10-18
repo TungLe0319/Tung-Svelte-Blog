@@ -1,9 +1,7 @@
 <script>
-
-
   export let post;
   let commentsLength = post.comments.length;
-let likesLength = post.likes.length
+  let likesLength = post.likes.length;
   function getCategoryColorClass(category) {
     switch (category) {
       case "Technology":
@@ -32,42 +30,41 @@ let likesLength = post.likes.length
       <div class="blogPost-subtitle">{post?.subtitle}</div>
     </div>
 
-    <div class="flex justify-between">
+    <div class="lg:flex md:flex  justify-between">
       <div class="blogPost-categories">
         {#each post?.categories as categories}
-          <div class="">
+          <div class=" ">
             {categories.name}
           </div>
         {/each}
       </div>
 
-      <div class="flex justify-center items-center space-x-4">
-    {#if likesLength > 0}
-      <div class="flex space-x-1">
-          <img
-            src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png"
-            alt="comment box"
-            class="w-7"
-          />
-          <div class="">
-            {likesLength}
+      <div class="likes-comment-container">
+        {#if likesLength > 0}
+          <div class="flex space-x-1">
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png"
+              alt="comment box"
+              class="w-7"
+            />
+            <div class="">
+              {likesLength}
+            </div>
           </div>
-        </div>
-    {/if}
+        {/if}
 
-    
-    {#if commentsLength > 0}
-      <div class="flex space-x-0.5">
-          <img
-            src="https://cdn-icons-png.flaticon.com/128/3475/3475079.png"
-            alt="comment box"
-            class="w-10"
-          />
-          <div class="">
-            {commentsLength}
+        {#if commentsLength > 0}
+          <div class="flex space-x-0.5">
+            <img
+              src="https://cdn-icons-png.flaticon.com/128/3475/3475079.png"
+              alt="comment box"
+              class="w-10"
+            />
+            <div class="">
+              {commentsLength}
+            </div>
           </div>
-        </div>
-    {/if}
+        {/if}
       </div>
     </div>
   </div>
@@ -81,7 +78,10 @@ let likesLength = post.likes.length
   </div>
 </div>
 
-<style lang="scss">
+<style lang="scss" scoped>
+  .likes-comment-container {
+    @apply flex justify-center items-center space-x-4;
+  }
   .link-container {
     @apply flex space-x-4;
   }
@@ -90,31 +90,37 @@ let likesLength = post.likes.length
     @apply p-3 my-2 shadow-lg flex rounded-l-md relative hover:bg-orange-50 transition-all duration-150;
   }
   .blogPost-image {
-    @apply w-1/2 rounded-md  shadow-2xl shadow-gray-400  transition-all   duration-300 ease-in-out
+    @apply rounded-md  shadow-2xl shadow-gray-400  transition-all   duration-300 ease-in-out
   hover:shadow-xl  hover:brightness-50;
 
     width: 500px;
     height: 350px;
     object-fit: cover;
+    @media only screen and (max-width: 768px) {
+      width: 250px;
+
+      height: auto;
+    }
   }
 
   .blogPost-body {
-    @apply p-4 w-1/2 flex flex-col justify-between;
+    @apply p-4 lg:w-1/2 w-4/5 flex flex-col lg:justify-between md:justify-between;
   }
 
   .blogPost-body-title-and-subtitle {
-    @apply flex-col  space-y-10  flex items-center;
+    @apply flex-col  space-y-10  flex items-center md:mt-20;
   }
 
   .blogPost-link-title {
-    @apply text-4xl mt-4 font-extrabold hover:text-orange-500 transition-all duration-200 hover:underline hover:underline-offset-2;
+    @apply lg:text-4xl text-2xl mt-4 font-extrabold hover:text-orange-500 transition-all duration-200 hover:underline hover:underline-offset-2;
   }
   .blogPost-subtitle {
-    @apply text-2xl font-semibold text-gray-400;
+    @apply lg:text-2xl  text-base font-semibold text-gray-400 md:px-10;
+    margin-top: 8px !important;
   }
 
   .blogPost-categories {
-    @apply flex text-sm  font-semibold space-x-4 text-orange-400;
+    @apply flex  lg:text-sm lg:my-0 my-2   text-xs font-semibold space-x-4 text-orange-400;
   }
 
   .blogPost-date {

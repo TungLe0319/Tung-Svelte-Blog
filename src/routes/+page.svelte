@@ -51,13 +51,13 @@
   <Hero {heroProps} />
 
   <div class="text-center flex flex-col items-center mb-20">
-    <div class="  lg:absolute lg:-bottom-72 z-30">
+    <div class="  absolute lg:-bottom-72 -bottom-64 z-30">
       <div class=" featured-post-headliner">
         <h3 class="text-4xl mb-10 font-1 text-white text-shadow-overlay">
           Featured
         </h3>
       </div>
-      <div class="flex lg:justify-center space-x-2 mb-20 ">
+      <div class="flex lg:justify-center space-x-2 mb-20">
         {#each featuredPosts as featuredPost}
           <FeaturedBlogPost {featuredPost} />
         {/each}
@@ -65,9 +65,9 @@
     </div>
 
     <div
-      class="posts-container mt-60 flex flex-col justify-center p-2 m-10 px-10"
+      class="posts-container lg:mt-60 mt-56 flex flex-col justify-center p-2 lg:m-10 px-10"
     >
-      <div class="selection-bar py-10">
+      <div class="selection-bar lg:py-10 py-2">
         <label for="categorySelect" class="font-2 font-semibold text-4xl"
           >Select Category:</label
         >

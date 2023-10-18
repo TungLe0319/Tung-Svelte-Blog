@@ -75,9 +75,9 @@
           title="like"
           src="https://cdn-icons-png.flaticon.com/128/4118/4118906.png"
           alt="heart"
-          class="w-10"
+          class="lg:w-10 w-5"
         />
-        <div class=" font-2 font-semibold text-2xl">UNLIKE</div>
+        <div class=" font-2 font-semibold lg:text-2xl text-lg">UNLIKE</div>
       {:else}
         <img
           title="like"
