@@ -1,7 +1,5 @@
 <!-- Navbar.svelte -->
 <script>
-  import { onDestroy, onMount } from "svelte";
-  import { page } from "$app/stores";
   import { signIn, signOut } from "@auth/sveltekit/client";
   import {
     Avatar,
@@ -11,6 +9,8 @@
     DropdownDivider,
   } from "flowbite-svelte";
   let isMenuOpen = false;
+
+  export let pageSession;
 
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
@@ -27,9 +27,6 @@
           width="60"
           class=" w-10 py-2"
         />
-        <!-- <img src="src\assets\images\mushroomcolor.png" alt="Mushroom Icon" width="60" class="icon-img-2">
-        home
-      </a> -->
       </a>
     </div>
 
@@ -54,13 +51,13 @@
     <div
       class="hidden lg:flex lg:space-x-6 text-lg lg:justify-center lg:items-center"
     >
-      {#if !$page.data?.session}
+      {#if !pageSession}
         <a href="/login" class="link">Login</a>
       {:else}
         <div class="flex space-x-2 items-center">
           <Avatar
             id="user-drop"
-            src={$page.data?.session.user.image}
+            src={pageSession.user.image}
             class="cursor-pointer hover:shadow-lg hover:border-2 transition-all duration-100 shadow-md "
           />
           <Dropdown
@@ -68,9 +65,9 @@
             class="shadow-xl  shadow-slate-400"
           >
             <DropdownHeader>
-              <span class="block text-sm">{$page.data?.session.user.name}</span>
+              <span class="block text-sm">{pageSession.user.name}</span>
               <span class="block truncate text-sm font-medium">
-                {$page.data?.session.user.email}</span
+                {pageSession.user.email}</span
               >
             </DropdownHeader>
 
@@ -81,9 +78,8 @@
           </Dropdown>
         </div>
       {/if}
-      {#if $page?.data?.session?.user?.email === "tung.le0319@gmail.com"}
+      {#if pageSession?.user?.email === "tung.le0319@gmail.com"}
         <a href="/auth/create" class="link">Create</a>
-        <a href="/TKR" class="link">TKR</a>
       {/if}
 
       <a href="/about" class="link">About</a>
@@ -109,13 +105,13 @@
   <!-- Responsive Mobile Menu (shown on small screens) -->
   {#if isMenuOpen}
     <div class="lg:hidden mt-2 flex flex-col space-y-2 w-fit">
-      {#if !$page.data?.session}
+      {#if pageSession}
         <a href="/login" class="hover:underline w-fit">Login</a>
       {:else}
         <!-- else content here -->
         <!-- <a href="/auth/account" class="hover:underline w-fit">Account</a> -->
       {/if}
-      {#if $page?.data?.session?.user?.email === "tung.le0319@gmail.com"}
+      {#if pageSession?.user?.email === "tung.le0319@gmail.com"}
         <a href="/auth/create" class="hover:underline w-fit">Create</a>
       {/if}
 

@@ -8,10 +8,10 @@
     <img class="featured-blogpost-img" src={featuredPost?.img} alt="post" />
 
     <div
-      class="absolute z-20 flex justify-center w-full opacity-0 transition-opacity duration-300"
+      class="absolute z-20 flex justify-center w-full opacity-0 transition-all duration-300"
     >
       <div>
-        <h4 class=" fire-effect-milo text-shadow">
+        <h4 class=" featured-blogpost-title text-shadow-overlay">
           {featuredPost?.title}
         </h4>
       </div>
@@ -21,20 +21,11 @@
 
 <style lang="scss">
   .featured-blogpost {
-    @apply relative shadow-xl duration-150  hover:shadow-orange-300 product-card rounded-lg;
-
-    img {
-      @apply object-cover  rounded-lg shadow-xl shadow-slate-500 hover:shadow-orange-200 transition-all duration-150;
-    }
-  }
-
-  .product-card {
-    transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    @apply relative shadow-xl duration-150  hover:shadow-orange-300  rounded-lg;
     width: 350px;
     height: 500px;
     float: left; /* Add this to make cards align horizontally */
-
-    /* ... other styles ... */
+    transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
 
     &:hover {
       // @apply border-4 border-green-600  ;
@@ -42,12 +33,27 @@
       transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
 
       /* Decrease width of other product-cards when hovering */
-    }
 
-    /* ... other styles ... */
+      .featured-blogpost-title {
+        opacity: 1;
+      }
+    }
+    @media only screen and (max-width: 768px) {
+      width: 150px;
+      height: 200px;
+      &:hover {
+        width: 250px;
+      }
+    }
   }
 
-  .product-card img {
+  .featured-blogpost-title {
+    @apply text-2xl text-orange-400 font-bold mt-10 mb-10 pr-2 border-r-4 text-left opacity-0 transition-all delay-150 p-2 rounded-l;
+
+  }
+
+  .featured-blogpost img {
+    @apply object-cover  rounded-lg shadow-xl shadow-slate-500 hover:shadow-orange-200 transition-all duration-150;
     height: 100%;
     width: 100%;
     @media only screen and (max-width: 768px) {
@@ -55,7 +61,7 @@
     }
   }
 
-  .product-card .absolute {
+  .featured-blogpost .absolute {
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     transform: translateX(-50px);
     left: 0;
@@ -66,13 +72,13 @@
       opacity: 50%;
     }
   }
-  .product-card:hover .absolute {
+  .featured-blogpost:hover .absolute {
     transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     opacity: 1;
     transform: translateX(0px);
   }
-  .product-card:hover img {
+  .featured-blogpost:hover img {
     //when screen is 768px OR LESS
     @media only screen and (min-width: 768px) {
       filter: brightness(80%);

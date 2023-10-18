@@ -1,4 +1,5 @@
  {"[svelte]": {
      "editor.defaultFormatter": "svelte.svelte-vscode"
-   }
+  },
+  "nuxt.isNuxtApp": false
   } 

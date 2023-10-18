@@ -10,7 +10,7 @@
   export const pageSession = $page.data?.session;
 </script>
 
-<Navbar />
+<Navbar {pageSession} />
 <div class="wrapper">
   {#key data?.pathname}
     <main

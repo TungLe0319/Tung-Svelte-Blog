@@ -37,7 +37,7 @@
   }
 
   .hero-subtitle {
-    @apply flex justify-center mt-10 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24  text-white text-center p-20  select-none hover:cursor-default;
+    @apply flex justify-center mt-10 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24  text-white text-center lg:p-20  select-none hover:cursor-default;
     font-family: "Shadows Into Light", cursive;
   }
 

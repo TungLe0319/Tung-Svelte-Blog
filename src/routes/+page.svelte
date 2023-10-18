@@ -51,13 +51,13 @@
   <Hero {heroProps} />
 
   <div class="text-center flex flex-col items-center mb-20">
-    <div class="  absolute -bottom-72 z-30">
+    <div class="  lg:absolute lg:-bottom-72 z-30">
       <div class=" featured-post-headliner">
         <h3 class="text-4xl mb-10 font-1 text-white text-shadow-overlay">
-          Featured 
+          Featured
         </h3>
       </div>
-      <div class="flex justify-center space-x-2 mb-20">
+      <div class="flex lg:justify-center space-x-2 mb-20 ">
         {#each featuredPosts as featuredPost}
           <FeaturedBlogPost {featuredPost} />
         {/each}
@@ -106,7 +106,7 @@
   }
 
   .featured-post-headliner {
-    @apply flex justify-center mt-20 text-black text-center pt-20 select-none hover:cursor-default;
+    @apply flex justify-center lg:mt-20 text-black text-center lg:pt-20 select-none hover:cursor-default;
   }
 
   .hero-image {
