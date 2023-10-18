@@ -110,7 +110,7 @@
     @apply lg:py-10 py-2;
   }
   .selection-bar-label {
-    @apply font-semibold text-4xl;
+    @apply font-semibold text-4xl dark:text-white;
   }
   .featured-blogs-container {
     @apply flex lg:flex-row flex-col items-center justify-center lg:space-y-0 space-y-6 lg:justify-center lg:space-x-2   mx-10 lg:mx-0 mb-20;

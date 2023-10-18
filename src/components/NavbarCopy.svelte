@@ -30,7 +30,7 @@
 
   $: activeUrl = $page.url.pathname;
   let activeClass =
-    "text-white bg-green-700 md:bg-transparent md:text-orange-700 md:dark:text-white dark:bg-green-600 md:dark:bg-transparent";
+    "text-white bg-green-700 md:bg-transparent md:text-orange-700 md:dark:text-orange-400 dark:bg-green-600 md:dark:bg-transparent";
   let nonActiveClass =
     "text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent";
 
@@ -40,16 +40,16 @@
 </script>
 
 <div class="relative">
-  <Navbar class=" sm:px-4  fixed w-full z-20 top-0 left-0 border-b ">
+  <Navbar class=" sm:px-4  fixed w-full z-50 top-0 left-0 border-b p-0 m-0 ">
     <NavBrand href="/">
-      <img
+      <!-- <img
         src="/images/flowbite-svelte-icon-logo.svg"
         class="mr-3 h-6 sm:h-9"
         alt="Flowbite Logo"
-      />
+      /> -->
       <span
         class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"
-        >Flowbite</span
+        >AppLogo/Name</span
       >
     </NavBrand>
     <div class="flex items-center space-x-2 md:order-2">
