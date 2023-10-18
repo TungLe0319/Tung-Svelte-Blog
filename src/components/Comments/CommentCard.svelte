@@ -11,32 +11,18 @@
     Checkbox,
     Helper,
     Avatar,
+    Badge,
   } from "flowbite-svelte";
+  import { ClockSolid, DotsHorizontalOutline } from "flowbite-svelte-icons";
+  import { svelteTime } from "svelte-time";
 
   export let comment;
+  export let sessionUser
+  console.log(sessionUser);
+
   let userEmail = $page.data.session?.user?.email;
   let showOptionMenu = false;
   const dispatch = createEventDispatcher();
-
-  function formatTimeDifference(createdAt) {
-    const currentTime = new Date();
-    const commentTime = new Date(createdAt);
-
-    const timeDifference = currentTime - commentTime;
-    const seconds = Math.floor(timeDifference / 1000);
-
-    if (seconds < 60) {
-      return `${seconds} second${seconds === 1 ? "" : "s"} ago`;
-    } else {
-      const minutes = Math.floor(seconds / 60);
-      if (minutes < 60) {
-        return `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
-      } else {
-        const hours = Math.floor(minutes / 60);
-        return `${hours} hour${hours === 1 ? "" : "s"} ago`;
-      }
-    }
-  }
 
   async function deleteComment(commentId) {
     try {
@@ -75,29 +61,22 @@
   out:fly={{ x: 100, duration: 400, opacity: 0 }}
 >
   <div class="user-info">
-
-    <div class="flex items-center space-x-4">
-  <Avatar     src={comment?.user?.image} class="shadow-md shadow-slate-500" />
-  <div class="space-y-1 font-medium dark:text-white">
-    <div>{comment?.user?.name}</div>
-    <!-- <div class="text-sm text-gray-500 dark:text-gray-400"></div> -->
-  </div>
-</div>
-  
-  
+    <div class="flex flex-col items-center justify-center">
+      <Avatar src={comment?.user?.image} class="shadow-md shadow-slate-500" />
+      <div class="  text-center font-medium dark:text-white mt-2">
+        {comment?.user?.name}
+        <!-- <div class="text-sm text-gray-500 dark:text-gray-400"></div> -->
+      </div>
+    </div>
   </div>
 
   <div class="content-container">
     {#if comment?.user?.email === userEmail}
       <Button
-        class="p-1 w-fit  bg-transparent hover:bg-opacity-40 hover:bg-orange-400"
+        class=" absolute right-0 p-0 px-1 w-fit  bg-transparent hover:bg-opacity-40 hover:bg-orange-400"
       >
-        <img
-          src="https://cdn-icons-png.flaticon.com/128/7168/7168581.png"
-          alt=""
-          class="w-5"
-        /></Button
-      >
+        <DotsHorizontalOutline class="text-black" />
+      </Button>
       <Dropdown class="w-60 p-3 space-y-1 text-sm shadow-lg shadow-slate-400 ">
         <li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
           <div class="">
@@ -105,11 +84,21 @@
             >
           </div>
         </li>
-    
       </Dropdown>
     {/if}
     <div class="created-at">
-      {formatTimeDifference(comment.createdAt)}
+      <Badge color="dark">
+        <ClockSolid class="w-2.5 h-2.5 mr-1.5 " />
+
+        <time
+          use:svelteTime={{
+            relative: true,
+            live: true,
+            timestamp: comment.createdAt,
+            format: "MMMM D, YYYY",
+          }}
+        />
+      </Badge>
     </div>
 
     <div class="content">
@@ -120,14 +109,14 @@
 
 <style lang="scss" scoped>
   .comment-card {
-    @apply flex items-center  px-5 py-1 border-b-2  my-4;
+    @apply flex items-center  pr-5 py-1 border-b-2  my-4;
   }
   .content-container {
     @apply flex flex-col w-full;
   }
 
   .created-at {
-    @apply text-right text-sm font-medium;
+    @apply text-right text-sm font-medium pr-4;
   }
 
   .content {
@@ -135,7 +124,7 @@
   }
 
   .user-info {
-    @apply flex flex-col justify-center my-2 items-center mr-4 text-sm;
+    @apply flex w-auto flex-col justify-center my-2 items-center mr-4 text-sm;
   }
 
   .user-image {

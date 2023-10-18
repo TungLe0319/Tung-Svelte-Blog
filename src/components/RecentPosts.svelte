@@ -1,10 +1,13 @@
 <script>
+  import { Badge } from "flowbite-svelte";
+  import { ClockSolid } from "flowbite-svelte-icons";
+  import { svelteTime } from "svelte-time";
   export let recentPosts;
 </script>
 
 <div>
   <h4
-    class="  border-l-2 pl-2 border-l-orange-300 text-shadow font-semibold text-gray-500"
+    class="  border-l-2 pl-2 mb-4 border-l-orange-300 text-shadow font-semibold text-gray-500"
   >
     Recent Posts
   </h4>
@@ -25,17 +28,21 @@
           class="hover:text-orange-500 transition-all duration-150"
           href={`/blog/${recentPost?.id}`}
         >
-          <div class="text-sm font-semibold flex-wrap break-words">
+          <div class="text-sm font-semibold">
             {recentPost.title}
           </div>
         </a>
         <div class=" text-xs font-bold text-gray-500 flex justify-between">
-          {new Date(recentPost.datePublished).toLocaleDateString("en-US", {
-            month: "short",
-            day: "numeric",
-            year: "2-digit",
-          })} -
-          {recentPost.author.name}
+          <Badge color="default" border class="">
+            <ClockSolid class="w-2.5 h-2.5 mr-1.5 " />
+            <time
+              use:svelteTime={{
+                live: true,
+                timestamp: recentPost.datePublished,
+                format: "MMMM D, YYYY",
+              }}
+            />
+          </Badge>
         </div>
       </div>
     </div>

@@ -57,24 +57,22 @@
           Featured
         </h3>
       </div>
-      <div class="flex   lg:flex-row flex-col lg:space-y-0 space-y-6 lg:justify-center space-x-2 mb-20 ">
+      <div class="featured-blogs-container">
         {#each featuredPosts as featuredPost}
           <FeaturedBlogPost {featuredPost} />
         {/each}
       </div>
     </div>
 
-    <div
-      class="posts-container lg:mt-60 mt-56 flex flex-col justify-center p-2 lg:m-10 px-10"
-    >
-      <div class="selection-bar lg:py-10 py-2">
+    <div class="posts-container">
+      <div class="selection-bar">
         <label for="categorySelect" class="font-2 font-semibold text-4xl"
           >Select Category:</label
         >
         <div />
         <select
           id="categorySelect"
-          class="bg-gray-50 mt-5 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 p-2.5"
+          class="category-select"
           on:change={handleCategoryChange}
         >
           <option value="all">All</option>
@@ -84,13 +82,13 @@
           <!-- Add more category options as needed -->
         </select>
       </div>
-      <div class="border-b-4 border-b-orange-300 rounded-md mb-4" />
+      <div class="divider" />
       {#each filteredPosts as post (post.id)}
         {#key post}
           <div
             in:fly={{ x: -100, duration: 300, opacity: 1 }}
             out:fly={{ x: 100, duration: 300, opacity: 0 }}
-            class="fly-transition my-4"
+            class=" my-4"
           >
             <BlogPostCard {post} />
           </div>
@@ -101,49 +99,21 @@
 </div>
 
 <style lang="scss">
-  .fly-transition {
-    will-change: transform;
+  .category-select {
+    @apply bg-gray-50 mt-5 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 p-2.5;
+  }
+  .divider {
+    @apply border-b-4 border-b-orange-300 rounded-md mb-4;
   }
 
-  .featured-post-headliner {
-    @apply flex justify-center lg:mt-20 text-black text-center lg:pt-20 select-none hover:cursor-default;
+  .selection-bar {
+    @apply lg:py-10 py-2;
   }
 
-  .hero-image {
-    height: 100vh;
-    /* always scale the image to the appropriate size of your screen */
-    background-size: cover;
-    background-image: url(https://images.pexels.com/photos/1643409/pexels-photo-1643409.jpeg);
-
-    background-position: bottom;
-    /* keeps the image fixed while scrolling , neat effect. */
-    background-attachment: fixed;
+  .featured-blogs-container {
+    @apply flex lg:flex-row flex-col items-center justify-center lg:space-y-0 space-y-6 lg:justify-center lg:space-x-2   mx-10 lg:mx-0 mb-20;
   }
-
-  .hero-image-container:before {
-    content: "";
-    z-index: 1;
-    height: 200px;
-    background: rgb(255, 255, 255);
-
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 1) 100%
-    );
+  .posts-container {
+    @apply lg:mt-60 md:mt-56 flex flex-col justify-center p-2 lg:m-10 px-20;
   }
-  // .hero-image::after {
-  //   content: "";
-  //   position: absolute;
-  //   top: 1000px;
-  //   left: 0;
-  //   right: 0;
-  //   bottom: -18px;
-  //   background: linear-gradient(
-  //     to bottom,
-  //     rgba(182, 50, 50, 0),
-  //     rgba(255, 255, 255, 1)
-  //   ); /* Fades to white at the bottom */
-  //   pointer-events: none; /* Allows clicks to pass through the overlay */
-  // }
 </style>

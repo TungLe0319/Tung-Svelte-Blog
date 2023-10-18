@@ -8,6 +8,7 @@
 
   export let data;
 
+  // let sessionUser = data?.session
   /**
    * @type {import('@prisma/client').Prisma.PostInclude<comments:true,author:true,likes:true>}
    */
@@ -34,7 +35,7 @@
   let liked;
 
   $: {
-    post = data?.body.post;
+    post = data?.body?.post;
     recentPosts = data?.body?.recentPosts;
     comments = data?.body?.post?.comments;
     likes = data?.body?.post?.likes;
@@ -126,13 +127,14 @@
           <CommentCard
             on:commentDeleted={handleCommentDeleted(comment.id)}
             {comment}
+          
           />
         {/each}
       </div>
     </div>
 
     <!-- Recent Post Section to the right -->
-    <div class="lg:w-1/4  mt-8 px-4 pb-5">
+    <div class="lg:w-1/4 mt-8 px-4 pb-5">
       <div class="sticky top-5 z-10">
         <RecentPosts {recentPosts} />
         <!-- LINKED IN  -->

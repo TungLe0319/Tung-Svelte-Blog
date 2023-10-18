@@ -1,15 +1,15 @@
 <script>
   // import posts from "../lib/posts.js";
   export let featuredPost;
+  import { Card, Button, Toggle } from "flowbite-svelte";
+  let hCard = false;
 </script>
 
-<a href={`/blog/${featuredPost?.id}`}>
-  <div class=" featured-blogpost">
+<a class="hidden lg:block" href={`/blog/${featuredPost?.id}`}>
+  <div class=" featured-blogpost mx-1">
     <img class="featured-blogpost-img" src={featuredPost?.img} alt="post" />
 
-    <div
-      class="absolute z-20 flex justify-center w-full opacity-0 transition-all duration-300"
-    >
+    <div class="featured-blogpost-title-container">
       <div>
         <h4 class=" featured-blogpost-title text-shadow-overlay">
           {featuredPost?.title}
@@ -18,6 +18,26 @@
     </div>
   </div></a
 >
+
+<div class="lg:hidden">
+  <Card
+    img={featuredPost.img}
+    href={`/blog/${featuredPost?.id}`}
+    reverse={hCard}
+    class="mb-4 "
+  >
+    <h5
+      class="  mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+    >
+      {featuredPost?.title}
+    </h5>
+    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400 leading-tight">
+      {featuredPost?.subtitle}
+    </p>
+  </Card>
+  <!-- <Toggle bind:checked={hCard} class="italic dark:text-gray-500">Reverse</Toggle
+  > -->
+</div>
 
 <style lang="scss">
   .featured-blogpost {
@@ -47,8 +67,12 @@
     }
   }
 
-  .featured-blogpost-title {
-    @apply text-2xl text-orange-400 font-bold mt-10 mb-10 pr-2 border-r-4 text-left opacity-0 transition-all delay-150 p-2 rounded-l;
+  .featured-blogpost-title-container {
+    @apply absolute z-20 flex justify-center w-full opacity-0 transition-all duration-300;
+
+    .featured-blogpost-title {
+      @apply text-2xl text-orange-400 font-bold mt-10 mb-10 pr-2 border-r-4 text-left opacity-0 transition-all delay-150 p-2 rounded-l;
+    }
   }
 
   .featured-blogpost img {
