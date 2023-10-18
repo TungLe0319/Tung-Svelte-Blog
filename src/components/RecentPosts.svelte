@@ -1,20 +1,17 @@
 <script>
-  import { Badge } from "flowbite-svelte";
-  import { ClockSolid } from "flowbite-svelte-icons";
+  import { Badge, Tooltip } from "flowbite-svelte";
+  import { ClockSolid, InfoCircleOutline } from "flowbite-svelte-icons";
   import { svelteTime } from "svelte-time";
+
   export let recentPosts;
 </script>
 
-<div>
-  <h4
-    class="  border-l-2 pl-2 mb-4 border-l-orange-300 text-shadow font-semibold text-gray-500"
-  >
-    Recent Posts
-  </h4>
+<div >
+  <h4 class="  recent-post-text ">Recent Posts</h4>
 
   {#each recentPosts as recentPost, index (recentPost.id)}
     <div class="lg:flex space-x-3 my-2 pb-4 border-b-2">
-      <div class="">
+      <div class=" w-1/3">
         <a class="flex justify-center" href={`/blog/${recentPost?.id}`}>
           <img
             src={recentPost.img}
@@ -23,16 +20,18 @@
           />
         </a>
       </div>
-      <div class="flex flex-col justify-between">
+      <div class="flex flex-col justify-between w-2/3">
         <a
-          class="hover:text-orange-500 transition-all duration-150"
+          class="hover:text-orange-500 hover:underline transition-all duration-150"
           href={`/blog/${recentPost?.id}`}
         >
           <div class="text-sm font-semibold">
             {recentPost.title}
           </div>
         </a>
-        <div class=" text-xs font-bold text-gray-500 flex justify-between">
+        <div
+          class=" text-xs font-bold text-gray-500 flex justify-between items-center"
+        >
           <Badge color="default" border class="">
             <ClockSolid class="w-2.5 h-2.5 mr-1.5 " />
             <time
@@ -51,6 +50,10 @@
 
 <style lang="scss">
   .recent-post-img {
-    @apply w-16 h-16 object-cover rounded-md hover:brightness-75 transition-all duration-300;
+    @apply xl:w-32 xl:h-32  w-20 h-20 object-cover rounded-md hover:brightness-75 transition-all duration-300;
+  }
+
+  .recent-post-text {
+    @apply border-l-2 pl-2 mb-4 border-l-orange-300  font-semibold text-gray-500;
   }
 </style>

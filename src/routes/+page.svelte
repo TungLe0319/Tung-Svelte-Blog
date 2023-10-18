@@ -53,7 +53,7 @@
   <div class="text-center flex flex-col items-center mb-20">
     <div class="  lg:absolute lg:-bottom-72 -bottom-64 z-30">
       <div class=" featured-post-headliner">
-        <h3 class="text-4xl mb-10 font-1 text-white text-shadow-overlay">
+        <h3 class="text-4xl mb-10 font-1 lg:text-white text-shadow-overlay">
           Featured
         </h3>
       </div>
@@ -66,7 +66,7 @@
 
     <div class="posts-container">
       <div class="selection-bar">
-        <label for="categorySelect" class="font-2 font-semibold text-4xl"
+        <label for="categorySelect" class="selection-bar-label font-1"
           >Select Category:</label
         >
         <div />
@@ -109,7 +109,9 @@
   .selection-bar {
     @apply lg:py-10 py-2;
   }
-
+  .selection-bar-label {
+    @apply font-semibold text-4xl;
+  }
   .featured-blogs-container {
     @apply flex lg:flex-row flex-col items-center justify-center lg:space-y-0 space-y-6 lg:justify-center lg:space-x-2   mx-10 lg:mx-0 mb-20;
   }

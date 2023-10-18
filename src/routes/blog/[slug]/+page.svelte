@@ -82,8 +82,8 @@
 </script>
 
 {#if data}
-  <div class=" flex mt-16">
-    <div class="lg:w-3/4 mt-8">
+  <div class=" lg:flex mt-16">
+    <div class="post-container">
       <!-- POST  -->
 
       <div class="post">
@@ -127,14 +127,13 @@
           <CommentCard
             on:commentDeleted={handleCommentDeleted(comment.id)}
             {comment}
-          
           />
         {/each}
       </div>
     </div>
 
     <!-- Recent Post Section to the right -->
-    <div class="lg:w-1/4 mt-8 px-4 pb-5">
+    <div class="recent-posts-container">
       <div class="sticky top-5 z-10">
         <RecentPosts {recentPosts} />
         <!-- LINKED IN  -->
@@ -154,6 +153,10 @@
 <style lang="scss">
   .post {
     @apply p-3 shadow-md flex justify-center space-x-2 rounded-md;
+  }
+
+  .post-container{
+    @apply lg:w-3/4 xl:w-4/5 mt-8
   }
 
   .comment-container {
@@ -202,5 +205,11 @@
 
   .post-content :global(code) {
     @apply font-mono bg-gray-100 rounded-md p-1;
+  }
+
+
+
+  .recent-posts-container{
+    @apply lg:w-1/4 xl:w-1/5  mt-8 px-4 pb-5 
   }
 </style>

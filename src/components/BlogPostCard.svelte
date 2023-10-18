@@ -2,7 +2,8 @@
   export let post;
   let commentsLength = post.comments.length;
   let likesLength = post.likes.length;
-  import { Card, Badge } from "flowbite-svelte";
+  import { Card, Badge, Tooltip } from "flowbite-svelte";
+  import { svelteTime } from "svelte-time";
   import {
     HeartOutline,
     MessagesOutline,
@@ -12,65 +13,91 @@
   let hCard = false;
 </script>
 
-<div class="blogPost">
-  <a href={`/blog/${post?.id}`}>
-    <img src={post?.img} alt="Blog-post-img" class="blogPost-image" />
-  </a>
-  <div class="blogPost-body">
-    <div class="blogPost-body-title-and-subtitle">
-      <a class=" blogPost-link-title" href={`blog/${post?.id}`}>
-        {post?.title}
-      </a>
-      <div class="blogPost-subtitle">{post?.subtitle}</div>
-    </div>
-
-    <div class="lg:flex md:flex justify-between mt-5">
-      <div class="blogPost-categories">
-        {#each post?.categories as categories}
-          <div class=" category-name">
-            <Badge color="default" border class="text-orange-400">
-              {categories.name}
-            </Badge>
-          </div>
-        {/each}
+{#if post}
+  <div class="blogPost">
+    <a href={`/blog/${post?.id}`}>
+      <img src={post?.img} alt="Blog-post-img" class="blogPost-image" />
+    </a>
+    <div class="blogPost-body flex flex-col h-full justify-between">
+      <div class="blogPost-body-title-and-subtitle">
+        <a class=" blogPost-link-title font-1" href={`blog/${post?.id}`}>
+          {post?.title}
+        </a>
+        <div class="blogPost-subtitle font-3">{post?.subtitle}</div>
       </div>
 
-      <div class="likes-comment-container">
-        {#if likesLength > 0}
-          <div class="flex space-x-1">
-            <HeartOutline />
-
-            <div class="text-xs font-semibold">
-              {likesLength}
+      <div class="lg:flex md:flex justify-between mt-5">
+        <div class="blogPost-categories">
+          {#each post?.categories as categories}
+            <div class=" category-name">
+              <Badge
+                color="default"
+                border
+                class=" font-3 font-semibold text-orange-400"
+              >
+                {categories.name}
+              </Badge>
             </div>
-          </div>
-        {/if}
+          {/each}
+        </div>
 
-        {#if commentsLength > 0}
-          <div class="flex space-x-0.5">
-            <MessagesOutline />
+        <div class="likes-comment-container">
+          {#if likesLength > 0}
+            <div class="flex space-x-1">
+              <HeartOutline class="border-none outline-none" />
 
-            <div class="text-xs font-semibold">
-              {commentsLength}
+              <div class="text-xs font-semibold cursor-default">
+                {likesLength}
+              </div>
             </div>
-          </div>
-        {/if}
+          {/if}
+
+          {#if commentsLength > 0}
+            <div class="flex space-x-0.5">
+              <MessagesOutline class="border-none outline-none" />
+
+              <div class="text-xs font-semibold cursor-default">
+                {commentsLength}
+              </div>
+            </div>
+          {/if}
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="blogPost-date">
-    <Badge color="default" border class="text-orange-400">
-      <ClockSolid class="w-2.5 h-2.5 mr-1.5 " />
+    <div class="blogPost-date">
+      <Badge
+        color="default"
+        border
+        class="text-orange-400 font-3 font-semibold  cursor-default"
+      >
+        <ClockSolid class="w-2.5 h-2.5 mr-1.5 " />
 
-      {new Date(post?.datePublished).toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      })}
-    </Badge>
+        <time
+          use:svelteTime={{
+            live: true,
+            timestamp: post.datePublished,
+            format: "MMMM D, YYYY",
+          }}
+        />
+      </Badge>
+      <Tooltip
+        placement="top"
+        color="default"
+        class="shadow-lg shadow-slate-300 font-3 font-semibold text-black"
+      >
+        <time
+          use:svelteTime={{
+            relative: true,
+            live: true,
+            timestamp: post.datePublished,
+            format: "MMMM D, YYYY",
+          }}
+        />
+      </Tooltip>
+    </div>
   </div>
-</div>
+{/if}
 
 <div class="lg:hidden md:hidden">
   <Card img={post.img} href={`/blog/${post?.id}`} reverse={hCard} class="mb-4 ">
@@ -140,7 +167,7 @@
   }
 
   .blogPost-body {
-    @apply lg:p-4 md:p-4 lg:w-1/2 md:w-4/5;
+    @apply lg:p-4 md:p-4 lg:w-1/2 md:w-4/5  ;
   }
 
   .blogPost-body-title-and-subtitle {
@@ -150,7 +177,7 @@
       @apply lg:text-4xl md:text-2xl mt-4 font-extrabold hover:text-orange-500 transition-all duration-200 hover:underline hover:underline-offset-2;
     }
     .blogPost-subtitle {
-      @apply lg:text-xl md:text-sm  font-semibold text-gray-400 md:px-10;
+      @apply lg:text-base md:text-sm  font-semibold text-gray-400 md:px-10;
       margin-top: 8px !important;
 
       @media only screen and (max-width: 768px) {
@@ -163,6 +190,7 @@
     @apply flex  lg:text-sm lg:my-0 my-2   text-xs font-semibold space-x-4 text-orange-400;
 
     .category-name {
+      @apply cursor-default;
       @media only screen and (max-width: 768px) {
         font-size: 10px;
       }

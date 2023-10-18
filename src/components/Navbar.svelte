@@ -8,6 +8,8 @@
     DropdownItem,
     DropdownDivider,
   } from "flowbite-svelte";
+  import { GithubSolid, LinkedinSolid } from "flowbite-svelte-icons";
+
   let isMenuOpen = false;
 
   export let pageSession;
@@ -84,21 +86,12 @@
 
       <a href="/about" class="link">About</a>
       <a href="/contact" class="link">Contact</a>
-      <a href="https://github.com/TungLe0319" target="_blank" class="w-10"
-        ><img
-          src="https://cdn-icons-png.flaticon.com/128/2111/2111432.png"
-          alt="Github"
-        /></a
-      >
-      <a
-        href="https://www.linkedin.com/in/tung-le0319/"
-        target="_blank"
-        class="w-10"
-        ><img
-          src="https://cdn-icons-png.flaticon.com/128/1384/1384014.png"
-          alt="LinkedIn"
-        /></a
-      >
+      <a href="https://github.com/TungLe0319" target="_blank">
+        <GithubSolid class="text-black w-8 h-8" />
+      </a>
+      <a href="https://www.linkedin.com/in/tung-le0319/" target="_blank">
+        <LinkedinSolid class="text-black w-8 h-8" />
+      </a>
     </div>
   </div>
 

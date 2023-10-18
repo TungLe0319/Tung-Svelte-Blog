@@ -17,27 +17,27 @@
     alt="Hero"
     style="height: {heroProps.height}vh"
   />
-  <div class="hero-text text-shadow-overlay">
+  <div class="hero-text lg:pb-52 text-shadow-overlay">
     <div class="hero-title">
-      <h1 class="text-6xl">{heroProps.title}</h1>
+      {heroProps.title}
     </div>
 
     <div class="hero-subtitle">
-      <h2 class="text-4xl">{heroProps.subTitle}</h2>
+     {heroProps.subTitle}
     </div>
   </div>
 </div>
 
 <style lang="scss">
   .hero-title {
-    @apply flex justify-center mt-10 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24 text-white text-center pt-20 select-none hover:cursor-default;
+    @apply lg:text-6xl  text-3xl    sm:mt-12 md:mt-12 lg:mt-12 xl:mt-24 text-white text-center  select-none hover:cursor-default;
 
     transform: rotate(-2deg);
     font-family: "Permanent Marker", cursive;
   }
 
   .hero-subtitle {
-    @apply flex justify-center mt-10 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24  text-white text-center lg:p-20  select-none hover:cursor-default;
+    @apply lg:text-4xl text-2xl flex justify-center mt-10 sm:mt-12 md:mt-16 lg:mt-20 xl:mt-24  text-white text-center lg:pb-20  select-none hover:cursor-default;
     font-family: "Shadows Into Light", cursive;
   }
 
