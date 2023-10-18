@@ -24,10 +24,10 @@
   };
 </script>
 
-<div>
+<div class="relative">
   <Hero {heroProps} />
   <div class="contact-container">
-    <h1 class="text-8xl font-bold mb-3 font-2">Contact Me At:</h1>
+  
     {#each contactInfo as info (info.title)}
       <div
         class="contact-item space-x-4 flex flex-col my-2 justify-center items-center"
@@ -39,17 +39,10 @@
   </div>
 </div>
 
-<style>
+<style lang="scss">
   /* Add styling for the centered box */
   .contact-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    background-color: #ffffff;
+@apply absolute  bottom-0 left-0 right-0 z-50
   }
 
   /* Style for individual contact items */

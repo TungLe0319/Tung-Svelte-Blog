@@ -14,7 +14,7 @@
 </script>
 
 {#if post}
-  <div class="blogPost">
+  <div class="blogPost dark:bg-gray-800 dark:border dark:border-gray-200/40">
     <a href={`/blog/${post?.id}`}>
       <img src={post?.img} alt="Blog-post-img" class="blogPost-image" />
     </a>
@@ -31,9 +31,9 @@
           {#each post?.categories as categories}
             <div class=" category-name">
               <Badge
-                color="default"
+                color="default "
                 border
-                class=" font-3 font-semibold text-orange-400"
+                class=" font-3 font-semibold text-orange-400 dark:text-orange-300"
               >
                 {categories.name}
               </Badge>
@@ -84,7 +84,7 @@
       <Tooltip
         placement="top"
         color="default"
-        class="shadow-lg shadow-slate-300 font-3 font-semibold text-black"
+        class="shadow-lg shadow-slate-300 dark:shadow-slate-600 font-3 font-semibold text-black"
       >
         <time
           use:svelteTime={{
@@ -150,10 +150,10 @@
   }
 
   .blogPost {
-    @apply py-3 my-2 shadow-lg justify-between px-4 hidden lg:flex flex-col  items-center  lg:flex-row md:flex-row rounded-l-md relative hover:bg-orange-50 transition-all duration-150;
+    @apply py-3 my-2 shadow-lg justify-between px-4 hidden lg:flex flex-col  items-center  lg:flex-row md:flex-row rounded-md relative hover:bg-orange-50 transition-all duration-150 dark:hover:bg-gray-600;
   }
   .blogPost-image {
-    @apply rounded-md  shadow-2xl shadow-gray-400  transition-all   duration-300 ease-in-out
+    @apply rounded-md  shadow-2xl shadow-gray-400 dark:shadow-gray-700 transition-all   duration-300 ease-in-out
   hover:shadow-xl  hover:brightness-50;
 
     width: 400px;
@@ -167,11 +167,11 @@
   }
 
   .blogPost-body {
-    @apply lg:p-4 md:p-4 lg:w-1/2 md:w-4/5  ;
+    @apply lg:p-4 md:p-4 lg:w-1/2 md:w-4/5;
   }
 
   .blogPost-body-title-and-subtitle {
-    @apply flex-col   space-y-10  flex items-center justify-center   lg:mt-0;
+    @apply flex-col dark:text-white  space-y-10  flex items-center justify-center   lg:mt-0;
 
     .blogPost-link-title {
       @apply lg:text-4xl md:text-2xl mt-4 font-extrabold hover:text-orange-500 transition-all duration-200 hover:underline hover:underline-offset-2;

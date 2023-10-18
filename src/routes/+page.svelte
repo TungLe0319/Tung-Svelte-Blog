@@ -47,7 +47,7 @@
   };
 </script>
 
-<div>
+<div class="whatisme">
   <Hero {heroProps} />
 
   <div class="text-center flex flex-col items-center mb-20">

@@ -7,8 +7,13 @@
     DropdownHeader,
     DropdownItem,
     DropdownDivider,
+    DarkMode,
   } from "flowbite-svelte";
-  import { GithubSolid, LinkedinSolid } from "flowbite-svelte-icons";
+  import {
+    GithubSolid,
+    HomeOutline,
+    LinkedinSolid,
+  } from "flowbite-svelte-icons";
 
   let isMenuOpen = false;
 
@@ -19,16 +24,11 @@
   }
 </script>
 
-<nav class=" navbar z-50" id="navbar">
+<nav class="  navbar z-50" id="navbar">
   <div class=" flex items-center lg:justify-between space-x-2 w-full">
     <div class="text-xl font-semibold icon-container">
       <a href="/">
-        <img
-          src="https://cdn-icons-png.flaticon.com/128/12285/12285722.png"
-          alt="Home"
-          width="60"
-          class=" w-10 py-2"
-        />
+        <HomeOutline class="text-black w-8 h-8" />
       </a>
     </div>
 
@@ -92,6 +92,7 @@
       <a href="https://www.linkedin.com/in/tung-le0319/" target="_blank">
         <LinkedinSolid class="text-black w-8 h-8" />
       </a>
+      <DarkMode btnClass="text-black w-8 h-8" />
     </div>
   </div>
 
@@ -118,7 +119,7 @@
     transform: translate(0, calc(-100% - 1rem));
   }
   .navbar {
-    @apply bg-transparent text-white p-4 pb-20  absolute w-full;
+    @apply bg-transparent  p-4 pb-20  absolute w-full;
 
     background: rgb(119, 119, 119);
     background: linear-gradient(
@@ -131,9 +132,7 @@
   /* Style your navbar as needed */
   .link,
   .sign-out-btn {
-    @apply relative transition-transform duration-200  text-2xl;
-
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    @apply relative flex ml-0 pl-0  transition-transform duration-200  text-2xl;
 
     text-decoration: none;
     font-weight: 600;
@@ -150,7 +149,7 @@
       bottom: 0;
       left: 0;
       width: 0;
-      height: 2px;
+      height: 3px;
       background-color: orange;
       transform-origin: 0 100%;
       transform: scaleX(0);

@@ -6,8 +6,8 @@
   export let recentPosts;
 </script>
 
-<div >
-  <h4 class="  recent-post-text ">Recent Posts</h4>
+<div>
+  <h4 class="  recent-post-text">Recent Posts</h4>
 
   {#each recentPosts as recentPost, index (recentPost.id)}
     <div class="lg:flex space-x-3 my-2 pb-4 border-b-2">

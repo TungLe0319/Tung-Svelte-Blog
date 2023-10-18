@@ -5,16 +5,17 @@
   // import "../app.postcss"
   import { fade } from "svelte/transition";
   import { page } from "$app/stores";
+  import NavbarCopy from "../components/NavbarCopy.svelte";
 
   export let data;
   export const pageSession = $page.data?.session;
 </script>
 
-<Navbar {pageSession} />
+<NavbarCopy {pageSession} />
 <div class="wrapper">
   {#key data?.pathname}
     <main
-      class="w-full background"
+      class="w-full "
       in:fade={{ duration: 200, delay: 100 }}
       out:fade={{ duration: 200 }}
     >
