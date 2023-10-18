@@ -51,13 +51,13 @@
   <Hero {heroProps} />
 
   <div class="text-center flex flex-col items-center mb-20">
-    <div class="  absolute lg:-bottom-72 -bottom-64 z-30">
+    <div class="  lg:absolute lg:-bottom-72 -bottom-64 z-30">
       <div class=" featured-post-headliner">
         <h3 class="text-4xl mb-10 font-1 text-white text-shadow-overlay">
           Featured
         </h3>
       </div>
-      <div class="flex lg:justify-center space-x-2 mb-20">
+      <div class="flex   lg:flex-row flex-col lg:space-y-0 space-y-6 lg:justify-center space-x-2 mb-20 ">
         {#each featuredPosts as featuredPost}
           <FeaturedBlogPost {featuredPost} />
         {/each}

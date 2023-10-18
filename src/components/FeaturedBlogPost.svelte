@@ -49,7 +49,6 @@
 
   .featured-blogpost-title {
     @apply text-2xl text-orange-400 font-bold mt-10 mb-10 pr-2 border-r-4 text-left opacity-0 transition-all delay-150 p-2 rounded-l;
-
   }
 
   .featured-blogpost img {

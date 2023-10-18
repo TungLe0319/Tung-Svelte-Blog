@@ -30,7 +30,7 @@
       <div class="blogPost-subtitle">{post?.subtitle}</div>
     </div>
 
-    <div class="lg:flex md:flex  justify-between">
+    <div class="lg:flex md:flex justify-between">
       <div class="blogPost-categories">
         {#each post?.categories as categories}
           <div class=" ">
@@ -87,7 +87,7 @@
   }
 
   .blogPost {
-    @apply p-3 my-2 shadow-lg flex rounded-l-md relative hover:bg-orange-50 transition-all duration-150;
+    @apply p-3 my-2 shadow-lg justify-center flex flex-col  items-center  lg:flex-row md:flex-row rounded-l-md relative hover:bg-orange-50 transition-all duration-150;
   }
   .blogPost-image {
     @apply rounded-md  shadow-2xl shadow-gray-400  transition-all   duration-300 ease-in-out
@@ -97,14 +97,14 @@
     height: 350px;
     object-fit: cover;
     @media only screen and (max-width: 768px) {
-      width: 250px;
+      widows: auto;
 
       height: auto;
     }
   }
 
   .blogPost-body {
-    @apply p-4 lg:w-1/2 w-4/5 flex flex-col lg:justify-between md:justify-between;
+    @apply lg:p-4 md:p-4 lg:w-1/2 w-4/5 flex flex-col lg:justify-between md:justify-between justify-center;
   }
 
   .blogPost-body-title-and-subtitle {
