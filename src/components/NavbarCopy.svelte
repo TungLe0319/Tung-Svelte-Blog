@@ -25,10 +25,26 @@
   } from "flowbite-svelte-icons";
 
   let isMenuOpen = false;
+  let y = 0;
+  let lastScrollY = 0;
+  let isNavbarHidden = false;
+
+  let activeUrl = "";
 
   export let pageSession;
-
-  $: activeUrl = $page.url.pathname;
+  const handleScroll = () => {
+    if (y > lastScrollY) {
+      // Scrolling down
+      isNavbarHidden = true;
+    } else {
+      isNavbarHidden = false;
+      // Scrolling up
+    }
+    lastScrollY = y;
+  };
+  $: {
+    activeUrl = $page.url.pathname;
+  }
   let activeClass =
     "text-white bg-green-700 md:bg-transparent md:text-orange-700 md:dark:text-orange-400 dark:bg-green-600 md:dark:bg-transparent";
   let nonActiveClass =
@@ -39,20 +55,28 @@
   }
 </script>
 
-<div class="relative">
-  <Navbar class=" sm:px-4   fixed w-full z-50 top-0 left-0 border-b p-0 m-0 ">
+<Navbar class=" relative h-0  ">
+  <div
+    class:navbar-hidden={isNavbarHidden}
+    id="navi"
+    class="flex transition-transform duration-300 dark:border-none fixed w-full top-0 z-50 left-0 border-b justify-between px-6 py-1 rounded bg-white dark:bg-gray-900 shadow-md border border-gray-300"
+  >
     <NavBrand href="/">
-      <!-- <img
-        src="/images/flowbite-svelte-icon-logo.svg"
+      <img
+        src="https://imgs.search.brave.com/YWjAuewFGspuo35AEkQ2ropTlCjZx1H73-kcak5PThM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9zdHls/ZXMucmVkZGl0bWVk/aWEuY29tL3Q1XzNo/dGt6L3N0eWxlcy9j/b21tdW5pdHlJY29u/XzVnbjQ3ZGhkcDRv/MzEucG5n"
         class="mr-3 h-6 sm:h-9"
         alt="Flowbite Logo"
-      /> -->
+      />
       <span
-        class="self-center whitespace-nowrap text-xl font-semibold dark:text-white"
-        >AppLogo/Name</span
+        class="self-center whitespace-nowrap text-xl font-1 font-semibold dark:text-white"
       >
+        <span class="font-bold text-orange-500 ">B</span>rowse
+        <span class="font-bold text-orange-500 ">L</span>earn
+        <span class="font-bold text-orange-500 ">O</span>ffer
+        <span class="font-bold text-orange-500 ">G</span>row
+      </span>
     </NavBrand>
-    <div class="flex items-center space-x-4 md:order-2">
+    <div class="flex items-center justify-center space-x-5 md:order-2">
       <Avatar id="avatar-menu" src={pageSession.user.image} />
       <NavHamburger class1="w-full md:flex md:w-auto md:order-1" />
       <DarkMode btnClass=" w-6 h-6" />
@@ -71,9 +95,12 @@
           >{pageSession.user.email}</span
         >
       </DropdownHeader>
-      <DropdownItem>Dashboard</DropdownItem>
-      <DropdownItem>Settings</DropdownItem>
-      <DropdownItem>Earnings</DropdownItem>
+      {#if pageSession.user.email === "tung.le0319@gmail.com"}
+        <DropdownItem>
+          <a href="/auth/create">Create</a>
+        </DropdownItem>
+      {/if}
+
       <DropdownDivider />
       <DropdownItem>
         <button on:click={() => signOut()} class=" m-1">Sign out</button
@@ -81,30 +108,20 @@
       >
     </Dropdown>
     <NavUl {activeUrl} {activeClass} {nonActiveClass}>
-      <NavLi href="/" active={true}>Home</NavLi>
-      <NavLi href="/about">About</NavLi>
-      <NavLi href="/docs/components/navbar">Navbar</NavLi>
-      <NavLi href="/pricing">Pricing</NavLi>
-      <NavLi href="/contact">Contact</NavLi>
+      <NavLi class="text-lg font-3" href="/" active={true}>Home</NavLi>
+      <NavLi class="text-lg font-3" href="/about">About</NavLi>
+      <NavLi class="text-lg font-3" href="/contact">Contact</NavLi>
     </NavUl>
-  </Navbar>
-</div>
+  </div>
+</Navbar>
+
+<svelte:window bind:scrollY={y} on:scroll={handleScroll} />
 
 <style lang="scss">
-  // .scrolled {
-  //   transform: translate(0, calc(-100% - 1rem));
-  // }
-  // .navbar {
-  //   @apply bg-transparent  p-4 pb-20  absolute w-full;
-
-  //   background: rgb(119, 119, 119);
-  //   background: linear-gradient(
-  //     180deg,
-  //     rgba(164, 191, 196, 0.116) 0%,
-  //     rgba(6, 7, 6, 0) 100%
-  //   );
-  // }
-
+  .navbar-hidden {
+    transform: translateY(-100%);
+    transition: all 0.5s ease;
+  }
   .link,
   .sign-out-btn {
     @apply relative flex ml-0 pl-0  transition-transform duration-200  text-2xl;
