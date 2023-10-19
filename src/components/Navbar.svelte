@@ -1,7 +1,7 @@
 <!-- Navbar.svelte -->
 <script>
   import { page } from "$app/stores";
-  import { signIn, signOut } from "@auth/sveltekit/client";
+  import { signOut } from "@auth/sveltekit/client";
   import {
     Avatar,
     Dropdown,
@@ -14,52 +14,44 @@
     NavLi,
     NavUl,
     NavHamburger,
-    ImagePlaceholder,
-    Skeleton,
-    TextPlaceholder,
   } from "flowbite-svelte";
-  import {
-    GithubSolid,
-    HomeOutline,
-    LinkedinSolid,
-  } from "flowbite-svelte-icons";
+  import { GithubSolid, LinkedinSolid } from "flowbite-svelte-icons";
+  import SearchBar from "./SearchBar.svelte";
 
+  export let pageSession;
+  export let posts;
   let isMenuOpen = false;
   let y = 0;
   let lastScrollY = 0;
   let isNavbarHidden = false;
-
   let activeUrl = "";
-
-  export let pageSession;
-  const handleScroll = () => {
-    if (y > lastScrollY) {
-      // Scrolling down
-      isNavbarHidden = true;
-    } else {
-      isNavbarHidden = false;
-      // Scrolling up
-    }
-    lastScrollY = y;
-  };
-  $: {
-    activeUrl = $page.url.pathname;
-  }
   let activeClass =
     "text-white bg-green-700 md:bg-transparent md:text-orange-700 md:dark:text-orange-400 dark:bg-green-600 md:dark:bg-transparent";
   let nonActiveClass =
-    "text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent";
+    "text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-teal-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent";
 
-  function toggleMenu() {
-    isMenuOpen = !isMenuOpen;
+  $: {
+    activeUrl = $page.url.pathname;
+    if (y == 0) {
+      isNavbarHidden = false;
+    }
   }
+
+  const handleScroll = () => {
+    if (y > lastScrollY) {
+      isNavbarHidden = true;
+    } else {
+      isNavbarHidden = false;
+    }
+    lastScrollY = y;
+  };
 </script>
 
 <Navbar class=" relative h-0  ">
   <div
     class:navbar-hidden={isNavbarHidden}
     id="navi"
-    class="flex transition-transform duration-300 dark:border-none fixed w-full top-0 z-50 left-0 border-b justify-between px-6 py-1 rounded bg-white dark:bg-gray-900 shadow-md border border-gray-300"
+    class="flex transition-transform duration-300  dark:border-none fixed w-full top-0 z-50 left-0 border-b justify-between px-6 py-1 rounded bg-white dark:bg-gray-900 shadow-md border border-gray-300"
   >
     <NavBrand href="/">
       <img
@@ -70,14 +62,14 @@
       <span
         class="self-center whitespace-nowrap text-xl font-1 font-semibold dark:text-white"
       >
-        <span class="font-bold text-orange-500 ">B</span>rowse
-        <span class="font-bold text-orange-500 ">L</span>earn
-        <span class="font-bold text-orange-500 ">O</span>ffer
-        <span class="font-bold text-orange-500 ">G</span>row
+        <span class="font-bold text-orange-500">B</span>rowse
+        <span class="font-bold text-orange-500">L</span>earn
+        <span class="font-bold text-orange-500">O</span>ffer
+        <span class="font-bold text-orange-500">G</span>row
       </span>
     </NavBrand>
     <div class="flex items-center justify-center space-x-5 md:order-2">
-      <Avatar id="avatar-menu" src={pageSession.user.image} />
+      <Avatar id="avatar-menu" src={pageSession?.user?.image} />
       <NavHamburger class1="w-full md:flex md:w-auto md:order-1" />
       <DarkMode btnClass=" w-6 h-6" />
 
@@ -90,12 +82,16 @@
     </div>
     <Dropdown placement="bottom" triggeredBy="#avatar-menu">
       <DropdownHeader>
-        <span class="block text-sm">{pageSession.user.name}</span>
+        <span class="block text-sm">{pageSession?.user?.name}</span>
         <span class="block truncate text-sm font-medium"
-          >{pageSession.user.email}</span
+          >{pageSession?.user?.email}</span
         >
+
+            <DropdownItem>
+          <a href="/login">login</a>
+        </DropdownItem>
       </DropdownHeader>
-      {#if pageSession.user.email === "tung.le0319@gmail.com"}
+      {#if pageSession?.user?.email === "tung.le0319@gmail.com"}
         <DropdownItem>
           <a href="/auth/create">Create</a>
         </DropdownItem>
@@ -112,6 +108,7 @@
       <NavLi class="text-lg font-3" href="/about">About</NavLi>
       <NavLi class="text-lg font-3" href="/contact">Contact</NavLi>
     </NavUl>
+    <SearchBar {posts} />
   </div>
 </Navbar>
 

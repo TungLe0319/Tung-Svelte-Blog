@@ -14,7 +14,7 @@
 </script>
 
 {#if post}
-  <div class="blogPost dark:bg-gray-800 dark:border dark:border-gray-200/40">
+  <div class="blogPost">
     <a href={`/blog/${post?.id}`}>
       <img src={post?.img} alt="Blog-post-img" class="blogPost-image" />
     </a>
@@ -150,7 +150,7 @@
   }
 
   .blogPost {
-    @apply py-3 my-2 shadow-lg justify-between px-4 hidden lg:flex flex-col  items-center  lg:flex-row md:flex-row rounded-md relative hover:bg-orange-50 transition-all duration-150 dark:hover:bg-gray-600;
+    @apply py-3 my-2 shadow-lg justify-between px-4 hidden lg:flex flex-col  items-center  lg:flex-row md:flex-row rounded-md relative hover:bg-orange-50 transition-all duration-150 dark:hover:bg-gray-600 dark:bg-gray-800 dark:border dark:border-gray-200/40 hover:-translate-y-2;
   }
   .blogPost-image {
     @apply rounded-md  shadow-2xl shadow-gray-400 dark:shadow-gray-700/50 transition-all   duration-300 ease-in-out
@@ -187,7 +187,7 @@
   }
 
   .blogPost-categories {
-    @apply flex  lg:text-sm lg:my-0 my-2   text-xs font-semibold space-x-4 text-orange-400;
+    @apply flex  lg:text-sm lg:my-0 my-2   text-xs font-semibold space-x-4 text-teal-600;
 
     .category-name {
       @apply cursor-default;

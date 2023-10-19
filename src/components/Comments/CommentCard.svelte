@@ -17,8 +17,9 @@
   import { svelteTime } from "svelte-time";
 
   export let comment;
-  export let sessionUser
-  console.log(sessionUser);
+ 
+  
+  
 
   let userEmail = $page.data.session?.user?.email;
   let showOptionMenu = false;

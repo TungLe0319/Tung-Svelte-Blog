@@ -6,8 +6,9 @@ import { error } from "@sveltejs/kit";
 const db = new PrismaClient();
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load({ params }) {
+export async function load({ locals,params }) {
   try {
+    const session = await locals.getSession()
     const postId = parseInt(params.slug, 10);
 
 
@@ -51,6 +52,7 @@ export async function load({ params }) {
         body: {
           post,
           recentPosts,
+      
         },
       };
     } else {

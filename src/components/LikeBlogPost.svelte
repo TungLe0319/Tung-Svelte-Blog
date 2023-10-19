@@ -6,24 +6,7 @@
   import { ThumbsDownOutline, ThumbsUpOutline } from "flowbite-svelte-icons";
   export let post;
   export let liked;
-  // let liked = false;
 
-  // onMount(() => {
-  //   findIfLikedPost();
-  // });
-
-  // async function findIfLikedPost() {
-  //   let formData = new FormData();
-  //   formData.append("postId", post.id);
-  //   const response = await fetch("/api/likes", {
-  //     method: "GET",
-  //   });
-  //   if (response.ok) {
-  //     liked = !liked;
-  //   } else {
-  //     console.error("Error in creating Post");
-  //   }
-  // }
   const dispatch = createEventDispatcher();
   async function toggleLikePost() {
     if (!post.id) {

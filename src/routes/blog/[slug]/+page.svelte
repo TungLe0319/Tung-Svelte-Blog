@@ -5,10 +5,20 @@
   import RecentPosts from "$components/RecentPosts.svelte";
   import LinkedInCard from "$components/LinkedInCard.svelte";
   import { onDestroy, onMount } from "svelte";
+  import {
+    ClockOutline,
+    ClockSolid,
+    HeartOutline,
+    InfoCircleOutline,
+    MessagesOutline,
+    UserOutline,
+    UserSolid,
+  } from "flowbite-svelte-icons";
+  import { svelteTime } from "svelte-time";
+  import { Avatar, Badge } from "flowbite-svelte";
 
   export let data;
 
-  // let sessionUser = data?.session
   /**
    * @type {import('@prisma/client').Prisma.PostInclude<comments:true,author:true,likes:true>}
    */
@@ -87,33 +97,67 @@
       <!-- POST  -->
 
       <div class="post">
-        <div class="post-body p-4 space-y-2 flex-col flex items-center">
-          <div class="post-image flex justify-center">
-            <img
-              src={post?.img}
-              alt="Blog-post"
-              class=" rounded-md shadow-xl shadow-slate-400 dark:shadow-lg dark:shadow-gray-600/20"
-            />
-          </div>
-          <div class="post-info pt-5 text-md text-slate-400 font-bold">
-            <p>
-              Published {new Date(post.datePublished).toDateString()} by {post
-                .author.name}
-            </p>
-            <div class="flex justify-center items-center my-2 space-x-4">
-              <img
-                title="like"
-                src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png"
-                alt="heart"
-                class="w-6 h-6"
-              />
-              <div class=" font-semibold text-2xl ">
-                {post.likes.length}
+        <div class="post-body">
+          <img src={post?.img} alt="Blog-post" class=" post-image" />
+
+          <div class="post-info">
+            <Badge
+              color="default"
+              border
+              class="hover:-translate-y-2 transition-all duration-150  text-base cursor-default py-2 "
+            >
+              <ClockOutline class="w-6 h-6 mr-1.5 " />
+              <div class="space-x-3">
+                <time
+                  use:svelteTime={{
+                    live: true,
+                    timestamp: post.datePublished,
+                    format: "MMMM D, YYYY",
+                  }}
+                />
+
+                <time
+                  use:svelteTime={{
+                    relative: true,
+                    live: true,
+                    timestamp: post.datePublished,
+                    format: "MMMM D, YYYY",
+                  }}
+                />
               </div>
-            </div>
+            </Badge>
+
+            <Badge
+              color="default"
+              border
+              class="hover:-translate-y-2 transition-all duration-150  text-base cursor-default py-1 space-x-2"
+            >
+              <Avatar src={post.author.image} size="sm" />
+              <span> {post.author.name}</span>
+            </Badge>
+
+            <Badge
+              color="default"
+              border
+              class="hover:-translate-y-2 transition-all duration-150  text-base cursor-default py-2"
+            >
+              <HeartOutline class="w-6 h-6 mr-1.5 " />
+              {post.likes.length}
+            </Badge>
+            <Badge
+              color="default"
+              border
+              class="hover:-translate-y-2 transition-all duration-150  text-base cursor-default py-2"
+            >
+              <MessagesOutline class="w-6 h-6 mr-1.5 " />
+              {post.comments.length}
+            </Badge>
           </div>
+
+
           <div class="post-title">{post?.title}</div>
-          <div class="post-subtitle ">{post?.subtitle}</div>
+          <div class="post-subtitle">{post?.subtitle}</div>
+          <hr class="  w-full">
           <div class="post-content dark:text-white">{@html post?.content}</div>
         </div>
       </div>
@@ -134,7 +178,7 @@
 
     <!-- Recent Post Section to the right -->
     <div class="recent-posts-container">
-      <div class="sticky  top-28 z-10">
+      <div class="sticky top-28 z-10">
         <RecentPosts {recentPosts} />
         <!-- LINKED IN  -->
         <LinkedInCard />
@@ -152,48 +196,55 @@
 <!-- <BlogPost {data?.post} /> -->
 <style lang="scss">
   .post {
-    @apply p-3 shadow-md flex justify-center space-x-2 rounded-md ;
+    @apply p-3 px-6 shadow-md   space-x-2 rounded-md w-full;
+  }
+  .post-body {
+    @apply py-3 space-y-2 flex-col flex items-center;
+  }
+  .post-info {
+    @apply pt-5 text-base space-x-3 text-slate-400 font-bold flex items-center justify-center;
   }
 
-  .post-title{
-    @apply  text-4xl font-bold my-2 dark:text-white
+  .post-image {
+    @apply rounded-md shadow-xl shadow-slate-400 dark:shadow-lg dark:shadow-gray-600/20 md:w-full xl:w-1/2;
   }
-  .post-subtitle{
-    @apply  dark:text-white text-xl
+  .post-title {
+    @apply text-4xl  font-bold pt-5 dark:text-white;
+  }
+  .post-subtitle {
+    @apply dark:text-white text-xl pb-4;
   }
 
-  .post-container{
-    @apply lg:w-3/4 xl:w-4/5 mt-8 
+  .post-container {
+    @apply lg:w-3/4 xl:w-4/5 mt-8;
   }
 
   .comment-container {
     @apply p-4 my-2 mt-10  relative;
-
- 
   }
   .post-content :global(h1) {
-    @apply text-4xl  font-semibold my-4 mb-10 ;
+    @apply text-4xl  font-semibold my-4 mb-10;
   }
 
   .post-content :global(h2) {
-    @apply text-3xl text-orange-300 font-semibold my-4 ; 
+    @apply text-3xl text-orange-300 font-semibold my-4;
   }
 
   .post-content :global(h3) {
-    @apply text-2xl  font-semibold my-4 ;
+    @apply text-2xl  font-semibold my-4;
   }
 
   .post-content :global(p) {
-    @apply  text-lg leading-7 my-4 ; 
+    @apply text-lg leading-7 my-4;
   }
 
   .post-content :global(ul),
   .post-content :global(ol) {
-    @apply  text-lg leading-7 my-4 
+    @apply text-lg leading-7 my-4;
   }
 
   .post-content :global(li) {
-    @apply list-disc ml-6 my-4   text-base font-medium 
+    @apply list-disc ml-6 my-4   text-base font-medium;
   }
 
   .post-content :global(a) {
@@ -205,20 +256,18 @@
   }
 
   .post-content :global(blockquote) {
-    @apply border-l-4 border-gray-300 pl-4 my-6 
+    @apply border-l-4 border-gray-300 pl-4 my-6;
   }
 
   .post-content :global(pre) {
-    @apply bg-gray-100 p-4 rounded-md my-6 
+    @apply bg-gray-100 p-4 rounded-md my-6;
   }
 
   .post-content :global(code) {
-    @apply font-mono bg-gray-100 rounded-md p-1 
+    @apply font-mono bg-gray-100 rounded-md p-1;
   }
 
-
-
-  .recent-posts-container{
-    @apply lg:w-1/4 xl:w-1/5  mt-8 px-4 pb-5  dark:text-white
+  .recent-posts-container {
+    @apply lg:w-1/4 xl:w-1/5  mt-8 px-4 pb-5  dark:text-white;
   }
 </style>
