@@ -44,7 +44,7 @@
 {#if $page.data.session}
   <form on:submit|preventDefault={createComment}>
     <div class="comment-form-container">
-      <h1 class="comment-form-label font-2">Comment:</h1>
+      <h1 class="comment-form-label font-1 dark:text-white">Comment:</h1>
       <textarea
         id="content"
         name="content"
@@ -74,6 +74,6 @@
   }
 
   .comment-input {
-    @apply p-2 rounded focus:outline-orange-300 shadow-xl shadow-slate-500 mb-10 bg-slate-800 text-white text-lg;
+    @apply p-2 rounded focus:outline-orange-300 shadow-xl shadow-slate-500 mb-10 bg-gray-800 dark:bg-gray-500 text-white text-lg dark:shadow-gray-800;
   }
 </style>

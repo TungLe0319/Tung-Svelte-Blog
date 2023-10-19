@@ -49,31 +49,7 @@
     heroProps.image
   }
 
-  if (browser) {
-    const isDarkMode = document
-      .querySelector("html")
-      .classList.contains("dark");
-    // Update the image based on the dark mode status
-  if (isDarkMode) {
-    heroProps.image = "https://images.unsplash.com/photo-1483982258113-b72862e6cff6?auto=format&fit=crop&q=80&w=1470&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-  } else {
-    heroProps.image =
-      "https://images.unsplash.com/photo-1578301978018-3005759f48f7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2044&q=80";
-  }
-  }
-
-  // // Check if the "dark" class is present on the element
-  // const isDarkMode = document
-  //   .querySelector("html")
-  //   .classList.contains("dark");
-
-  // // Update the image based on the dark mode status
-  // if (isDarkMode) {
-  //   heroProps.image = "new_dark_image_url.jpg";
-  // } else {
-  //   heroProps.image =
-  //     "https://images.unsplash.com/photo-1578301978018-3005759f48f7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2044&q=80";
-  // }
+  
 </script>
 
 <div class="whatisme">
