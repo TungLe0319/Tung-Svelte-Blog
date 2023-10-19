@@ -2,10 +2,10 @@
 
 ## Tech Stack
 
-- [![SvelteKit](https://img.shields.io/badge/SvelteKit-%231a202c.svg?style=for-the-badge&logo=svelte&logoColor=white)](https://svelte.dev/)
-- [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-%231a202c.svg?style=for-the-badge&logo=tailwind-css&logoColor=61DAFB)](https://tailwindcss.com/)
-- [![AuthJS](https://img.shields.io/badge/AuthJS-%231a202c.svg?style=for-the-badge&logo=auth0&logoColor=61DAFB)](https://authjs.dev/)
-- [![Prisma](https://img.shields.io/badge/Prisma-%231a202c.svg?style=for-the-badge&logo=prisma&logoColor=white)](https://www.prisma.io/)
+- [![SvelteKit](https://img.shields.io/badge/SvelteKit-%23E34F26.svg?style=for-the-badge&logo=svelte&logoColor=white&style=plastic)](https://svelte.dev/)
+- [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-%23007ACC.svg?style=for-the-badge&logo=tailwind-css&logoColor=61DAFB&style=plastic)](https://tailwindcss.com/)
+- [![AuthJS](https://img.shields.io/badge/AuthJS-%239C27B0.svg?style=for-the-badge&logo=auth0&logoColor=61DAFB&style=plastic)](https://authjs.dev/)
+- [![Prisma](https://img.shields.io/badge/Prisma-%233A4E84.svg?style=for-the-badge&logo=prisma&logoColor=white&style=plastic)](https://www.prisma.io/)
 
 ## Languages
 
@@ -18,30 +18,15 @@
 
 ## Description
 
-Why I Built This Project:
+#### Why I Built This Project:
 
 - The primary motivation was to learn Svelte, a framework I was highly interested in.
-- Learn a new framework
-- strengeth my front end development skills
-- It allowed me to apply SvelteKit in a real-world scenario.
-
-Problem Solved:
-
 - The project provides a simple and efficient way to create and manage a blog using SvelteKit.
-- It offers a fast-loading, customizable platform for authors and readers.
-- Dynamic Routing and usage of SSR
 
-What I Learned:
 
-- Filed Based Routing System
-- SvelteKit framework's component-based architecture.
-- Usage of Toggled DarkMode
-- My skills in front-end development, routing, and data handling were honed.
-- This experience enriched my understanding of modern web technologies and web development foundations.
 
-## Table of Contents
+## Contents
 
-If your README is long, add a table of contents to make it easy for users to find what they need.
 
 - [Description](#description)
 - [Installation](#installation)
@@ -76,7 +61,9 @@ To get started, follow these steps:
 
 ### Authentication
 
-To get started with our platform, you can easily sign in using your GitHub or Google account. Our authentication process is powered by [![AuthJS](https://img.shields.io/badge/AuthJS-%231a202c.svg?style=for-the-badge&logo=auth0&logoColor=61DAFB)](https://authjs.dev/). Click the "Login" button and Login with either Github or Google, and follow the prompts to securely sign in.
+ Click the "Login" button and Login with either Github or Google, and follow the prompts to securely sign in. 
+ 
+ [![AuthJS](https://img.shields.io/badge/AuthJS-%239C27B0.svg?style=for-the-badge&logo=auth0&logoColor=61DAFB&style=plastic)](https://authjs.dev/)
 
 ### Browsing Blogs
 
@@ -96,38 +83,38 @@ You can interact with our blog content in various ways:
 
 - **Like:** Show your appreciation for a blog post by clicking the "Like" button. This helps others discover popular articles.
 
-- **Share:** If you find a post worth sharing, use the share options to spread the word on social media.
 
-### User Profile
 
-Your user profile allows you to manage your account settings, see your activity history, and view your liked blogs and comments.
+<!-- ### User Profile
+
+Your user profile allows you to manage your account settings, see your activity history, and view your liked blogs and comments. -->
 
 ### Troubleshooting
 
-If you encounter any issues or have questions, feel free to [contact our support](mailto:support@example.com) for assistance.
+If you encounter any issues or have questions, feel free to [contact our support](mailto:tung.le0319@gmail.com) for assistance.
 
 Enjoy your time exploring and interacting with our blog platform!
 
 
 ## Credits
 
-List your collaborators, if any, with links to their GitHub profiles.
 
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
+[![GitHub Profile Image](https://img.shields.io/badge/-daniel--le97-blue.svg?style=flat&logo=github&logoColor=white&colorA=black)](https://github.com/daniel-le97)
 
-If you followed tutorials, include links to those here as well.
 
-## License
 
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
 
----
 
-🏆 The previous sections are the bare minimum, and your project will ultimately determine the content of this document. You might also want to consider adding the following sections.
+<!-- If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section. -->
+
+- Flowbite Svelte - [Flowbite Svelte Website](https://example.com/flowbite-svelte)
+- SvelteKit - [SvelteKit Website](https://example.com/sveltekit)
+- Flaticon Icons - [Flaticon Website](https://example.com/flaticon)
+
+<!-- If you followed tutorials, include links to those here as well. -->
+
 
 ## Features
-
-Here are some of the key features of our project:
 
 - **SvelteKit Dynamic Components:** Leverage the power of SvelteKit to create dynamic and interactive components for your web application.
 
@@ -143,8 +130,29 @@ Here are some of the key features of our project:
 
 ## How to Contribute
 
-If you created an application or package and would like other developers to contribute it, you can include guidelines for how to do so. The [Contributor Covenant](https://www.contributor-covenant.org/) is an industry standard, but you can always write your own if you'd prefer.
+This project is primarily developed and maintained by the owner, and contributions from external contributors are not expected. However, if you would like to contribute or suggest changes, you can follow these general guidelines:
 
-## Tests
+1. **Fork the Repository**: If you're interested in making changes, you can fork this repository to your own GitHub account.
 
-Go the extra mile and write tests for your application. Then provide examples on how to run them here.
+2. **Create a Branch**: Create a new branch in your forked repository to work on the changes.
+
+3. **Make Changes**: Make the desired changes to the project. Feel free to customize it for your own use.
+
+4. **Commit Changes**: Commit your changes with descriptive commit messages.
+
+5. **Push Changes**: Push your changes to your forked repository.
+
+6. **Create a Pull Request**: If you believe your changes would be valuable to the project or want to share your improvements, you can create a pull request from your forked repository to the original repository. However, keep in mind that the owner may not actively review or merge these requests.
+
+7. **Open Issues**: If you encounter issues or have suggestions, you can open an issue on the project's GitHub repository.
+
+Please note that contributions from external contributors are not actively sought, and the project owner may or may not review or merge pull requests.
+
+This section is primarily included for informational purposes and as a reference for the project's development workflow.
+
+
+## License
+Copyright (c) 2023-present Tung Le
+
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/license/mit/)
+
