@@ -153,7 +153,7 @@
     @apply py-3 my-2 shadow-lg justify-between px-4 hidden lg:flex flex-col  items-center  lg:flex-row md:flex-row rounded-md relative hover:bg-orange-50 transition-all duration-150 dark:hover:bg-gray-600;
   }
   .blogPost-image {
-    @apply rounded-md  shadow-2xl shadow-gray-400 dark:shadow-gray-700 transition-all   duration-300 ease-in-out
+    @apply rounded-md  shadow-2xl shadow-gray-400 dark:shadow-gray-700/50 transition-all   duration-300 ease-in-out
   hover:shadow-xl  hover:brightness-50;
 
     width: 400px;

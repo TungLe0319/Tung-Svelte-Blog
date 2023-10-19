@@ -3,6 +3,7 @@
   import { createEventDispatcher, onMount } from "svelte";
   import { fly } from "svelte/transition";
   import { Avatar, Tooltip } from "flowbite-svelte";
+  import { ThumbsDownOutline, ThumbsUpOutline } from "flowbite-svelte-icons";
   export let post;
   export let liked;
   // let liked = false;
@@ -67,25 +68,17 @@
   }
 </script>
 
-<div class=" mt-10">
+<div class=" mt-10 dark:text-white">
   {#if $page.data.session}
     <button class="like-btn" on:click={toggleLikePost}>
       {#if liked}
-        <img
-          title="like"
-          src="https://cdn-icons-png.flaticon.com/128/4118/4118906.png"
-          alt="heart"
-          class="lg:w-10 w-5"
-        />
-        <div class=" font-2 font-semibold lg:text-2xl text-lg">UNLIKE</div>
+        <ThumbsDownOutline />
+
+        <div class=" blog-like-text font-3">UNLIKE</div>
       {:else}
-        <img
-          title="like"
-          src="https://cdn-icons-png.flaticon.com/128/1077/1077035.png"
-          alt="heart"
-          class="w-10"
-        />
-        <div class=" font-2 font-semibold text-2xl">LIKE</div>
+        <ThumbsUpOutline />
+
+        <div class=" blog-like-text font-3">LIKE</div>
       {/if}</button
     >
   {:else}
@@ -94,7 +87,7 @@
     >
   {/if}
 
-  <div class="mt-5 flex">
+  <div class="mt-5 flex space-x-0.5">
     {#each post.likes as l (l.id)}
       <div
         in:fly={{ x: -100, duration: 300, opacity: 1 }}
@@ -102,7 +95,7 @@
       >
         <Avatar
           data-name={l.user.name}
-          class="rounded-full shadow-md shadow-slate-400"
+          class="rounded-full shadow-md shadow-slate-400 dark:shadow-slate-500/20"
           src={l.user?.image}
         />
         <Tooltip
@@ -115,6 +108,9 @@
 </div>
 
 <style lang="scss">
+  .blog-like-text {
+    @apply font-semibold lg:text-2xl text-lg pl-3;
+  }
   .like-btn {
     @apply p-1  items-center rounded-md flex space-x-4 hover:underline  transition-all duration-150;
   }

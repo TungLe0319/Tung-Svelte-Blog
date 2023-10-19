@@ -92,7 +92,7 @@
             <img
               src={post?.img}
               alt="Blog-post"
-              class=" rounded-md shadow-xl shadow-slate-400"
+              class=" rounded-md shadow-xl shadow-slate-400 dark:shadow-lg dark:shadow-gray-600/20"
             />
           </div>
           <div class="post-info pt-5 text-md text-slate-400 font-bold">
@@ -107,14 +107,14 @@
                 alt="heart"
                 class="w-6 h-6"
               />
-              <div class=" font-semibold text-2xl text-black">
+              <div class=" font-semibold text-2xl ">
                 {post.likes.length}
               </div>
             </div>
           </div>
-          <div class="post-title text-xl font-bold my-2">{post?.title}</div>
-          <div class="post-subtitle">{post?.subtitle}</div>
-          <div class="post-content">{@html post?.content}</div>
+          <div class="post-title">{post?.title}</div>
+          <div class="post-subtitle ">{post?.subtitle}</div>
+          <div class="post-content dark:text-white">{@html post?.content}</div>
         </div>
       </div>
       <!-- COMMENT FORM  -->
@@ -134,7 +134,7 @@
 
     <!-- Recent Post Section to the right -->
     <div class="recent-posts-container">
-      <div class="sticky top-5 z-10">
+      <div class="sticky  top-28 z-10">
         <RecentPosts {recentPosts} />
         <!-- LINKED IN  -->
         <LinkedInCard />
@@ -152,39 +152,48 @@
 <!-- <BlogPost {data?.post} /> -->
 <style lang="scss">
   .post {
-    @apply p-3 shadow-md flex justify-center space-x-2 rounded-md;
+    @apply p-3 shadow-md flex justify-center space-x-2 rounded-md ;
+  }
+
+  .post-title{
+    @apply  text-4xl font-bold my-2 dark:text-white
+  }
+  .post-subtitle{
+    @apply  dark:text-white text-xl
   }
 
   .post-container{
-    @apply lg:w-3/4 xl:w-4/5 mt-8
+    @apply lg:w-3/4 xl:w-4/5 mt-8 
   }
 
   .comment-container {
     @apply p-4 my-2 mt-10  relative;
+
+ 
   }
   .post-content :global(h1) {
-    @apply text-4xl text-gray-800 font-semibold my-4 mb-10;
+    @apply text-4xl  font-semibold my-4 mb-10 ;
   }
 
   .post-content :global(h2) {
-    @apply text-3xl text-orange-300 font-semibold my-4;
+    @apply text-3xl text-orange-300 font-semibold my-4 ; 
   }
 
   .post-content :global(h3) {
-    @apply text-2xl text-gray-600 font-semibold my-4;
+    @apply text-2xl  font-semibold my-4 ;
   }
 
   .post-content :global(p) {
-    @apply text-gray-700 text-lg leading-7 my-4;
+    @apply  text-lg leading-7 my-4 ; 
   }
 
   .post-content :global(ul),
   .post-content :global(ol) {
-    @apply text-gray-700 text-lg leading-7 my-4;
+    @apply  text-lg leading-7 my-4 
   }
 
   .post-content :global(li) {
-    @apply list-disc ml-6 my-4   text-base font-medium;
+    @apply list-disc ml-6 my-4   text-base font-medium 
   }
 
   .post-content :global(a) {
@@ -196,20 +205,20 @@
   }
 
   .post-content :global(blockquote) {
-    @apply border-l-4 border-gray-300 pl-4 my-6;
+    @apply border-l-4 border-gray-300 pl-4 my-6 
   }
 
   .post-content :global(pre) {
-    @apply bg-gray-100 p-4 rounded-md my-6;
+    @apply bg-gray-100 p-4 rounded-md my-6 
   }
 
   .post-content :global(code) {
-    @apply font-mono bg-gray-100 rounded-md p-1;
+    @apply font-mono bg-gray-100 rounded-md p-1 
   }
 
 
 
   .recent-posts-container{
-    @apply lg:w-1/4 xl:w-1/5  mt-8 px-4 pb-5 
+    @apply lg:w-1/4 xl:w-1/5  mt-8 px-4 pb-5  dark:text-white
   }
 </style>

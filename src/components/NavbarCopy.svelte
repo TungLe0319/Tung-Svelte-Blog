@@ -40,7 +40,7 @@
 </script>
 
 <div class="relative">
-  <Navbar class=" sm:px-4  fixed w-full z-50 top-0 left-0 border-b p-0 m-0 ">
+  <Navbar class=" sm:px-4   fixed w-full z-50 top-0 left-0 border-b p-0 m-0 ">
     <NavBrand href="/">
       <!-- <img
         src="/images/flowbite-svelte-icon-logo.svg"
@@ -52,7 +52,7 @@
         >AppLogo/Name</span
       >
     </NavBrand>
-    <div class="flex items-center space-x-2 md:order-2">
+    <div class="flex items-center space-x-4 md:order-2">
       <Avatar id="avatar-menu" src={pageSession.user.image} />
       <NavHamburger class1="w-full md:flex md:w-auto md:order-1" />
       <DarkMode btnClass=" w-6 h-6" />
@@ -91,21 +91,20 @@
 </div>
 
 <style lang="scss">
-  .scrolled {
-    transform: translate(0, calc(-100% - 1rem));
-  }
-  .navbar {
-    @apply bg-transparent  p-4 pb-20  absolute w-full;
+  // .scrolled {
+  //   transform: translate(0, calc(-100% - 1rem));
+  // }
+  // .navbar {
+  //   @apply bg-transparent  p-4 pb-20  absolute w-full;
 
-    background: rgb(119, 119, 119);
-    background: linear-gradient(
-      180deg,
-      rgba(164, 191, 196, 0.116) 0%,
-      rgba(6, 7, 6, 0) 100%
-    );
-  }
+  //   background: rgb(119, 119, 119);
+  //   background: linear-gradient(
+  //     180deg,
+  //     rgba(164, 191, 196, 0.116) 0%,
+  //     rgba(6, 7, 6, 0) 100%
+  //   );
+  // }
 
-  /* Style your navbar as needed */
   .link,
   .sign-out-btn {
     @apply relative flex ml-0 pl-0  transition-transform duration-200  text-2xl;
@@ -137,22 +136,4 @@
       width: 100%;
     }
   }
-
-  // .icon-img-1 {
-  //   width: 60px;
-  //   transition: opacity 0.3s ease-in-out; /* Define the transition property */
-  // }
-  // .icon-img-2 {
-
-  //    opacity: 0;
-  //    width: 0;
-  // }
-  // .icon-container:hover .icon-img-1 {
-  //   opacity: 0;
-  //   width: 0;
-  // }
-
-  // .icon-container:hover .icon-img-2 {
-  //   opacity: 1; width: 60px;
-  // }
 </style>
