@@ -24,17 +24,16 @@
   };
 </script>
 
-<div class="relative">
+<div class="relative dark:text-white">
   <Hero {heroProps} />
-  <div class="contact-container">
-  
+  <div class="contact-container flex  items-center justify-center">
     {#each contactInfo as info (info.title)}
-      <div
-        class="contact-item space-x-4 flex flex-col my-2 justify-center items-center"
-      >
-        <img src={info.icon} class="contact-icon" alt="contact" />
-        <a href={info.link} target="_blank" class="text-lg">{info.title}</a>
-      </div>
+      <a href={info.link} target="_blank" class="badge-link">
+        <div class="contact-item badge">
+          <img src={info.icon} class="badge-icon" alt="contact" />
+        
+        </div>
+      </a>
     {/each}
   </div>
 </div>
@@ -42,7 +41,7 @@
 <style lang="scss">
   /* Add styling for the centered box */
   .contact-container {
-@apply absolute  bottom-0 left-0 right-0 z-50
+    @apply absolute  bottom-1/3 left-0 right-0 z-50;
   }
 
   /* Style for individual contact items */
@@ -50,5 +49,35 @@
   /* Style for icons */
   .contact-icon {
     @apply w-20 h-20;
+  }
+
+  .badge-link {
+    text-decoration: none;
+  }
+
+  .badge {
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 5px;
+    transition: transform 0.2s;
+  }
+
+  .badge:hover {
+    transform: translateY(-3px);
+  }
+
+  .badge-icon {
+    width: 120px;
+    height: 120px;
+    margin-right: 5px;
+  }
+
+  .badge-text {
+    font-size: 24px;
+    font-weight: bold;
   }
 </style>

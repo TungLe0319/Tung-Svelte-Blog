@@ -73,18 +73,24 @@
     position: relative;
   }
 
-  .hero-image-container::before {
-    content: "";
-    z-index: 1;
-    height: 200px;
-    background: rgb(255, 255, 255);
-
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0) 0%,
-      rgba(255, 255, 255, 1) 100%
-    );
-  }
+.hero-image-container::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  left: 0;
+  width: 100%;
+  height: 200px; /* adjust height as per your need */
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.3), /* Adjust the transparency as needed */
+    rgba(255, 255, 255, 0.5), /* Adjust the transparency as needed */
+    rgba(255, 255, 255, 0.7), /* Adjust the transparency as needed */
+    rgba(255, 255, 255, 0.9), /* Adjust the transparency as needed */
+    #fff
+  );
+}
 
   .hero-text {
     @apply lg:pb-52;

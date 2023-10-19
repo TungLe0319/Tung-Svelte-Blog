@@ -1,5 +1,6 @@
 <!-- Navbar.svelte -->
 <script>
+  import { page } from "$app/stores";
   import { signIn, signOut } from "@auth/sveltekit/client";
   import {
     Avatar,
@@ -8,6 +9,14 @@
     DropdownItem,
     DropdownDivider,
     DarkMode,
+    Navbar,
+    NavBrand,
+    NavLi,
+    NavUl,
+    NavHamburger,
+    ImagePlaceholder,
+    Skeleton,
+    TextPlaceholder,
   } from "flowbite-svelte";
   import {
     GithubSolid,
@@ -16,120 +25,103 @@
   } from "flowbite-svelte-icons";
 
   let isMenuOpen = false;
+  let y = 0;
+  let lastScrollY = 0;
+  let isNavbarHidden = false;
+
+  let activeUrl = "";
 
   export let pageSession;
+  const handleScroll = () => {
+    if (y > lastScrollY) {
+      // Scrolling down
+      isNavbarHidden = true;
+    } else {
+      isNavbarHidden = false;
+      // Scrolling up
+    }
+    lastScrollY = y;
+  };
+  $: {
+    activeUrl = $page.url.pathname;
+  }
+  let activeClass =
+    "text-white bg-green-700 md:bg-transparent md:text-orange-700 md:dark:text-orange-400 dark:bg-green-600 md:dark:bg-transparent";
+  let nonActiveClass =
+    "text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent";
 
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
   }
 </script>
 
-<nav class="  navbar z-50" id="navbar">
-  <div class=" flex items-center lg:justify-between space-x-2 w-full">
-    <div class="text-xl font-semibold icon-container">
-      <a href="/">
-        <HomeOutline class="text-black w-8 h-8" />
-      </a>
-    </div>
-
-    <button class="lg:hidden focus:outline-none" on:click={toggleMenu}>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
+<Navbar class=" relative h-0  ">
+  <div
+    class:navbar-hidden={isNavbarHidden}
+    id="navi"
+    class="flex transition-transform duration-300 dark:border-none fixed w-full top-0 z-50 left-0 border-b justify-between px-6 py-1 rounded bg-white dark:bg-gray-900 shadow-md border border-gray-300"
+  >
+    <NavBrand href="/">
+      <img
+        src="https://imgs.search.brave.com/YWjAuewFGspuo35AEkQ2ropTlCjZx1H73-kcak5PThM/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9zdHls/ZXMucmVkZGl0bWVk/aWEuY29tL3Q1XzNo/dGt6L3N0eWxlcy9j/b21tdW5pdHlJY29u/XzVnbjQ3ZGhkcDRv/MzEucG5n"
+        class="mr-3 h-6 sm:h-9"
+        alt="Flowbite Logo"
+      />
+      <span
+        class="self-center whitespace-nowrap text-xl font-1 font-semibold dark:text-white"
       >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 6h16M4 12h16M4 18h16"
-        />
-      </svg>
-    </button>
+        <span class="font-bold text-orange-500 ">B</span>rowse
+        <span class="font-bold text-orange-500 ">L</span>earn
+        <span class="font-bold text-orange-500 ">O</span>ffer
+        <span class="font-bold text-orange-500 ">G</span>row
+      </span>
+    </NavBrand>
+    <div class="flex items-center justify-center space-x-5 md:order-2">
+      <Avatar id="avatar-menu" src={pageSession.user.image} />
+      <NavHamburger class1="w-full md:flex md:w-auto md:order-1" />
+      <DarkMode btnClass=" w-6 h-6" />
 
-    <!-- Navigation Links (hidden on small screens) -->
-    <div
-      class="hidden lg:flex lg:space-x-6 text-lg lg:justify-center lg:items-center"
-    >
-      {#if !pageSession}
-        <a href="/login" class="link">Login</a>
-      {:else}
-        <div class="flex space-x-2 items-center">
-          <Avatar
-            id="user-drop"
-            src={pageSession.user.image}
-            class="cursor-pointer hover:shadow-lg hover:border-2 transition-all duration-100 shadow-md "
-          />
-          <Dropdown
-            triggeredBy="#user-drop"
-            class="shadow-xl  shadow-slate-400"
-          >
-            <DropdownHeader>
-              <span class="block text-sm">{pageSession.user.name}</span>
-              <span class="block truncate text-sm font-medium">
-                {pageSession.user.email}</span
-              >
-            </DropdownHeader>
-
-            <DropdownItem>
-              <button on:click={() => signOut()} class=" m-1">Sign out</button
-              ></DropdownItem
-            >
-          </Dropdown>
-        </div>
-      {/if}
-      {#if pageSession?.user?.email === "tung.le0319@gmail.com"}
-        <a href="/auth/create" class="link">Create</a>
-      {/if}
-
-      <a href="/about" class="link">About</a>
-      <a href="/contact" class="link">Contact</a>
       <a href="https://github.com/TungLe0319" target="_blank">
-        <GithubSolid class="text-black w-8 h-8" />
+        <GithubSolid class="w-6 h-6" />
       </a>
       <a href="https://www.linkedin.com/in/tung-le0319/" target="_blank">
-        <LinkedinSolid class="text-black w-8 h-8" />
+        <LinkedinSolid class=" w-6 h-6" />
       </a>
-      <DarkMode btnClass="text-black w-8 h-8" />
     </div>
+    <Dropdown placement="bottom" triggeredBy="#avatar-menu">
+      <DropdownHeader>
+        <span class="block text-sm">{pageSession.user.name}</span>
+        <span class="block truncate text-sm font-medium"
+          >{pageSession.user.email}</span
+        >
+      </DropdownHeader>
+      {#if pageSession.user.email === "tung.le0319@gmail.com"}
+        <DropdownItem>
+          <a href="/auth/create">Create</a>
+        </DropdownItem>
+      {/if}
+
+      <DropdownDivider />
+      <DropdownItem>
+        <button on:click={() => signOut()} class=" m-1">Sign out</button
+        ></DropdownItem
+      >
+    </Dropdown>
+    <NavUl {activeUrl} {activeClass} {nonActiveClass}>
+      <NavLi class="text-lg font-3" href="/" active={true}>Home</NavLi>
+      <NavLi class="text-lg font-3" href="/about">About</NavLi>
+      <NavLi class="text-lg font-3" href="/contact">Contact</NavLi>
+    </NavUl>
   </div>
+</Navbar>
 
-  <!-- Responsive Mobile Menu (shown on small screens) -->
-  {#if isMenuOpen}
-    <div class="lg:hidden mt-2 flex flex-col space-y-2 w-fit">
-      {#if pageSession}
-        <a href="/login" class="hover:underline w-fit">Login</a>
-      {:else}
-        <!-- else content here -->
-        <!-- <a href="/auth/account" class="hover:underline w-fit">Account</a> -->
-      {/if}
-      {#if pageSession?.user?.email === "tung.le0319@gmail.com"}
-        <a href="/auth/create" class="hover:underline w-fit">Create</a>
-      {/if}
-
-      <a href="/about" class="hover:underline w-fit">About</a>
-    </div>
-  {/if}
-</nav>
+<svelte:window bind:scrollY={y} on:scroll={handleScroll} />
 
 <style lang="scss">
-  .scrolled {
-    transform: translate(0, calc(-100% - 1rem));
+  .navbar-hidden {
+    transform: translateY(-100%);
+    transition: all 0.5s ease;
   }
-  .navbar {
-    @apply bg-transparent  p-4 pb-20  absolute w-full;
-
-    background: rgb(119, 119, 119);
-    background: linear-gradient(
-      180deg,
-      rgba(164, 191, 196, 0.116) 0%,
-      rgba(6, 7, 6, 0) 100%
-    );
-  }
-
-  /* Style your navbar as needed */
   .link,
   .sign-out-btn {
     @apply relative flex ml-0 pl-0  transition-transform duration-200  text-2xl;
@@ -161,22 +153,4 @@
       width: 100%;
     }
   }
-
-  // .icon-img-1 {
-  //   width: 60px;
-  //   transition: opacity 0.3s ease-in-out; /* Define the transition property */
-  // }
-  // .icon-img-2 {
-
-  //    opacity: 0;
-  //    width: 0;
-  // }
-  // .icon-container:hover .icon-img-1 {
-  //   opacity: 0;
-  //   width: 0;
-  // }
-
-  // .icon-container:hover .icon-img-2 {
-  //   opacity: 1; width: 60px;
-  // }
 </style>
