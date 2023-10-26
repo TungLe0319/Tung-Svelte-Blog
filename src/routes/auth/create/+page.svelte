@@ -2,7 +2,7 @@
 
 <script>
   import { PrismaClient } from "@prisma/client";
-
+  import { goto } from "$app/navigation";
   import Editor from "@tinymce/tinymce-svelte";
 
   let title = "";
@@ -11,38 +11,67 @@
   let content = "";
   let categories = "";
   let published = false;
-
+  let availableCategories = [
+    "Case Studies",
+    "Featured",
+    "FAQs",
+    "Events",
+    "News",
+    "Opinion/Editorial",
+    "Guest Posts",
+    "Guide",
+    "Art and Culture",
+    "Tutorials",
+    "Technology",
+    "Tips and Tricks",
+    "Reviews",
+    "Health and Wellness",
+    "Environment",
+    "Finance",
+    "Education",
+    "How-To Guides",
+    "Business",
+    "Food and Cooking",
+  ];
   // Function to handle form submission
   async function handleSubmit() {
-    if (title === "" || subtitle === "" || content === "") {
-      errorMessage = "Title, subtitle, and content are required.";
-      return;
-    }
+    try {
+      if (title === "" || subtitle === "" || content === "") {
+        errorMessage = "Title, subtitle, and content are required.";
+        return;
+      }
 
-    let formData = new FormData();
-    formData.append("title", title);
-    formData.append("img", img);
-    formData.append("subtitle", subtitle);
-    formData.append("content", content);
-    formData.append("categories", categories);
-    formData.append("published", published);
+      let formData = new FormData();
+      formData.append("title", title);
+      formData.append("img", img);
+      formData.append("subtitle", subtitle);
+      formData.append("content", content);
+      formData.append("categories", categories);
+      formData.append("published", published);
 
-    const response = await fetch("/auth/create", {
-      method: "POST",
+      const response = await fetch("/auth/create", {
+        method: "POST",
 
-      body: formData,
-    });
+        body: formData,
+      });
 
-    if (response.ok) {
-      console.log("Post created successfully");
-      title = "";
-      img = "";
-      subtitle = "";
-      content = "";
-      categories = "Art";
-      published = false;
-    } else {
-      console.error("Error creating post");
+      if (response.ok) {
+        const responseData = await response.json();
+
+        const parsedData = JSON.parse(responseData.data);
+        console.log(parsedData);
+        console.log("Post created successfully");
+        title = "";
+        img = "";
+        subtitle = "";
+        content = "";
+        categories = "";
+        published = false;
+
+        // goto(`/blog/${responseData.id}`);
+      }
+    } catch (error) {
+      console.error(error);
     }
   }
 </script>
@@ -50,14 +79,14 @@
 <div class="p-4 pt-20">
   <h2 class="text-2xl font-semibold mb-4">Create a New Blog Post</h2>
 
-  <form on:submit={handleSubmit}>
+  <form on:submit="{handleSubmit}">
     <div class="mb-4">
       <label for="title" class="block text-gray-600">Title</label>
       <input
         type="text"
         id="title"
         name="title"
-        bind:value={title}
+        bind:value="{title}"
         class="w-full border rounded px-3 py-2"
       />
     </div>
@@ -68,7 +97,7 @@
         type="text"
         id="subtitle"
         name="subtitle"
-        bind:value={subtitle}
+        bind:value="{subtitle}"
         class="w-full border rounded px-3 py-2"
       />
     </div>
@@ -79,7 +108,7 @@
         type="text"
         id="img"
         name="img"
-        bind:value={img}
+        bind:value="{img}"
         class="w-full border rounded px-3 py-2"
       />
     </div>
@@ -88,7 +117,7 @@
       <div class="editor-column">
         <div class="mb-4">
           <label for="content" class="block text-gray-600">Content</label>
-          <Editor bind:value={content} />
+          <Editor bind:value="{content}" />
         </div>
       </div>
       <div class="preview-column">
@@ -108,11 +137,12 @@
       <select
         id="category"
         name="category"
-        bind:value={categories}
+        bind:value="{categories}"
         class="w-full border rounded px-3 py-2"
       >
-        <option value="Art">Art</option>
-        <option value="Technology">Technology</option>
+        {#each availableCategories as categories}
+          <option value="{categories}">{categories}</option>
+        {/each}
       </select>
     </div>
 
@@ -121,7 +151,7 @@
         <input
           type="checkbox"
           name="published"
-          bind:checked={published}
+          bind:checked="{published}"
           class="mr-2"
         />
         Published
