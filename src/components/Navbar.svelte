@@ -49,9 +49,9 @@
 
 <Navbar class=" relative h-0  ">
   <div
-    class:navbar-hidden={isNavbarHidden}
+    class:navbar-hidden="{isNavbarHidden}"
     id="navi"
-    class="flex transition-transform duration-300  dark:border-none fixed w-full top-0 z-50 left-0 border-b justify-between px-6 py-1 rounded bg-white dark:bg-gray-900 shadow-md border border-gray-300"
+    class="flex transition-transform duration-300 dark:border-none fixed w-full top-0 z-50 left-0 border-b justify-between px-6 py-1 rounded bg-white dark:bg-gray-900 shadow-md border border-gray-300"
   >
     <NavBrand href="/">
       <img
@@ -69,7 +69,11 @@
       </span>
     </NavBrand>
     <div class="flex items-center justify-center space-x-5 md:order-2">
-      <Avatar id="avatar-menu" src={pageSession?.user?.image} />
+      {#if pageSession?.user}
+        <Avatar id="avatar-menu" src="{pageSession?.user?.image}" />
+      {:else}
+        <a href="/login">login</a>
+      {/if}
       <NavHamburger class1="w-full md:flex md:w-auto md:order-1" />
       <DarkMode btnClass=" w-6 h-6" />
 
@@ -80,41 +84,45 @@
         <LinkedinSolid class=" w-6 h-6" />
       </a>
     </div>
-   {#if pageSession?.user}
- <Dropdown placement="bottom" triggeredBy="#avatar-menu">
-      <DropdownHeader>
-        <span class="block text-sm">{pageSession?.user?.name}</span>
-        <span class="block truncate text-sm font-medium"
-          >{pageSession?.user?.email}</span
-        >
+    {#if pageSession?.user}
+      <Dropdown placement="bottom" triggeredBy="#avatar-menu">
+        <DropdownHeader>
+          <span class="block text-sm">{pageSession?.user?.name}</span>
+          <span class="block truncate text-sm font-medium"
+            >{pageSession?.user?.email}</span
+          >
 
-            <DropdownItem>
-          <a href="/login">login</a>
-        </DropdownItem>
-      </DropdownHeader>
-      {#if pageSession?.user?.email === "tung.le0319@gmail.com"}
+          <DropdownItem>
+            <a href="/login">login</a>
+          </DropdownItem>
+        </DropdownHeader>
+        {#if pageSession?.user?.email === "tung.le0319@gmail.com"}
+          <DropdownItem>
+            <a href="/auth/create">Create</a>
+          </DropdownItem>
+        {/if}
+
+        <DropdownDivider />
         <DropdownItem>
-          <a href="/auth/create">Create</a>
-        </DropdownItem>
-      {/if}
-
-      <DropdownDivider />
-      <DropdownItem>
-        <button on:click={() => signOut()} class=" m-1">Sign out</button
-        ></DropdownItem
-      >
-    </Dropdown>
-   {/if}
-    <NavUl {activeUrl} {activeClass} {nonActiveClass}>
-      <NavLi class="text-lg font-3" href="/" active={true}>Home</NavLi>
+          <button on:click="{() => signOut()}" class=" m-1">Sign out</button
+          ></DropdownItem
+        >
+      </Dropdown>
+    {/if}
+    <NavUl
+      activeUrl="{activeUrl}"
+      activeClass="{activeClass}"
+      nonActiveClass="{nonActiveClass}"
+    >
+      <NavLi class="text-lg font-3" href="/" active="{true}">Home</NavLi>
       <NavLi class="text-lg font-3" href="/about">About</NavLi>
       <NavLi class="text-lg font-3" href="/contact">Contact</NavLi>
     </NavUl>
-    <SearchBar {posts} />
+    <SearchBar posts="{posts}" />
   </div>
 </Navbar>
 
-<svelte:window bind:scrollY={y} on:scroll={handleScroll} />
+<svelte:window bind:scrollY="{y}" on:scroll="{handleScroll}" />
 
 <style lang="scss">
   .navbar-hidden {
