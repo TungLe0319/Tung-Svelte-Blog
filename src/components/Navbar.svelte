@@ -80,7 +80,8 @@
         <LinkedinSolid class=" w-6 h-6" />
       </a>
     </div>
-    <Dropdown placement="bottom" triggeredBy="#avatar-menu">
+   {#if pageSession?.user}
+ <Dropdown placement="bottom" triggeredBy="#avatar-menu">
       <DropdownHeader>
         <span class="block text-sm">{pageSession?.user?.name}</span>
         <span class="block truncate text-sm font-medium"
@@ -103,6 +104,7 @@
         ></DropdownItem
       >
     </Dropdown>
+   {/if}
     <NavUl {activeUrl} {activeClass} {nonActiveClass}>
       <NavLi class="text-lg font-3" href="/" active={true}>Home</NavLi>
       <NavLi class="text-lg font-3" href="/about">About</NavLi>
