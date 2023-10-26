@@ -65,6 +65,12 @@
         width: 250px;
       }
     }
+
+    //when screen is 768px OR LESS
+    @media only screen and (min-height: 700px){
+    height: 275px;
+    width: 250px;
+    }
   }
 
   .featured-blogpost-title-container {

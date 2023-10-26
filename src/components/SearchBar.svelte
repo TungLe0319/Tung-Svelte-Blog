@@ -73,6 +73,7 @@
     <div
       class="search-dropdown absolute top-12 left-0 bg-white border border-gray-300 shadow-md z-10"
     >
+    <div class=" p-1 text-xl font-1 dark:text-white">Posts:</div>
       <ul>
         {#each filteredPosts as post (post.id)}
           <li class="p-2 cursor-pointer hover:bg-gray-100">

@@ -6,19 +6,19 @@
 {#if !data.session}
   <div class="    flex h-screen">
     <div class="left-column">
-      <div class="">ICON OR LOGO SPOT</div>
+      <div class="dark:text-white">ICON OR LOGO SPOT</div>
 
-      <div class="">LOGIN</div>
+      <div class=" text-xl font-1 dark:text-white">LOGIN</div>
       <div class=" login-container">
-        <button on:click={() => signIn("github")} class=" sign-in-btn">
+        <button on:click={() => signIn("github")} class=" sign-in-btn dark:bg-white">
           <img
             src="https://cdn-icons-png.flaticon.com/128/733/733609.png?ga=GA1.1.2107270949.1696371575&track=ais"
             alt="Google Icon"
-            class="  w-10 h-10"
+            class="  w-10 h-10 "
           />
           <div class=" sign-in-text">Continue with Github</div>
         </button>
-        <button on:click={() => signIn("google")} class="sign-in-btn">
+        <button on:click={() => signIn("google")} class="sign-in-btn dark:bg-white">
           <img
             src="https://cdn-icons-png.flaticon.com/128/2702/2702602.png?ga=GA1.1.2107270949.1696371575"
             alt="Google Icon"
@@ -28,7 +28,7 @@
         </button>
       </div>
 
-      <div class=" copyright-text">
+      <div class=" copyright-text dark:text-white">
         Copyright © 2022 DevOpportunities, LLC <br />
         <!-- Bloginweb™ -->
       </div>

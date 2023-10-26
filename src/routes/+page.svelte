@@ -56,7 +56,7 @@
   <Hero {heroProps} />
 
   <div class="text-center flex flex-col items-center mb-20">
-    <div class="  lg:absolute lg:-bottom-72 -bottom-64 z-30">
+    <div class=" container-3  lg:absolute lg:-bottom-72 -bottom-64 z-30">
       <div class=" featured-post-headliner">
         <h3 class="text-4xl mb-10 font-1 lg:text-white text-shadow-overlay">
           Featured
@@ -119,6 +119,14 @@
   }
   .featured-blogs-container {
     @apply flex lg:flex-row flex-col items-center justify-center lg:space-y-0 space-y-6 lg:justify-center lg:space-x-2   mx-10 lg:mx-0 mb-20;
+    //when screen is 768px OR LESS
+  
+  }
+
+  .container-3{
+      @media only screen and (max-height: 768px){
+    bottom: -150px;
+    }
   }
   .posts-container {
     @apply lg:mt-60 md:mt-56 flex flex-col justify-center p-2 lg:m-10 px-20;

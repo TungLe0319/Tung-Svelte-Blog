@@ -41,7 +41,14 @@
 <style lang="scss">
   /* Add styling for the centered box */
   .contact-container {
-    @apply absolute  bottom-1/3 left-0 right-0 z-50;
+    @apply absolute  bottom-1/4 left-0 right-0 z-50;
+
+    //when screen is 768px OR LESS
+    @media only screen and (max-height: 500px){
+     position: absolute;
+     bottom: 175px;
+
+    }
   }
 
   /* Style for individual contact items */

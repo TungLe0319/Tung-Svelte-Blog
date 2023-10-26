@@ -70,7 +70,7 @@
     </NavBrand>
     <div class="flex items-center justify-center space-x-5 md:order-2">
       {#if pageSession?.user}
-        <Avatar id="avatar-menu" src="{pageSession?.user?.image}" />
+        <Avatar id="avatar-menu" src="{pageSession?.user?.image}" class="shadow-md cursor-pointer" />
       {:else}
         <a href="/login">login</a>
       {/if}
@@ -92,9 +92,7 @@
             >{pageSession?.user?.email}</span
           >
 
-          <DropdownItem>
-            <a href="/login">login</a>
-          </DropdownItem>
+         
         </DropdownHeader>
         {#if pageSession?.user?.email === "tung.le0319@gmail.com"}
           <DropdownItem>
@@ -108,6 +106,8 @@
           ></DropdownItem
         >
       </Dropdown>
+    
+    
     {/if}
     <NavUl
       activeUrl="{activeUrl}"
