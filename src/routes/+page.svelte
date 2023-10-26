@@ -125,7 +125,7 @@
 
   .container-3{
       @media only screen and (max-height: 768px){
-    bottom: -150px;
+    bottom: -275px;
     }
   }
   .posts-container {

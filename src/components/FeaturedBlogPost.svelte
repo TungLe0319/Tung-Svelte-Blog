@@ -68,8 +68,8 @@
 
     //when screen is 768px OR LESS
     @media only screen and (min-height: 700px){
-    height: 275px;
-    width: 250px;
+    height: 375px;
+    width: 300px;
     }
   }
 
