@@ -2,26 +2,20 @@
 
 ## Tech Stack
 
-- [![SvelteKit](https://img.shields.io/badge/SvelteKit-%23E34F26.svg?style=for-the-badge&logo=svelte&logoColor=white&style=plastic)](https://svelte.dev/)
+- [![Next.js](https://img.shields.io/badge/Next.js-%23000000.svg?style=for-the-badge&logo=next.js&logoColor=white&style=plastic)](https://nextjs.org/)
+- [![React](https://img.shields.io/badge/React-%23007ACC.svg?style=for-the-badge&logo=react&logoColor=61DAFB&style=plastic)](https://reactjs.org/)
 - [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-%23007ACC.svg?style=for-the-badge&logo=tailwind-css&logoColor=61DAFB&style=plastic)](https://tailwindcss.com/)
-- [![AuthJS](https://img.shields.io/badge/AuthJS-%239C27B0.svg?style=for-the-badge&logo=auth0&logoColor=61DAFB&style=plastic)](https://authjs.dev/)
-- [![Prisma](https://img.shields.io/badge/Prisma-%233A4E84.svg?style=for-the-badge&logo=prisma&logoColor=white&style=plastic)](https://www.prisma.io/)
+- [![PocketBase](https://img.shields.io/badge/PocketBase-%233A4E84.svg?style=for-the-badge&logo=pocketbase&logoColor=white&style=plastic)](https://www.pocketbase.com/)
 
-## Languages
 
-![Svelte](https://img.shields.io/badge/Svelte-68.6%25-%230740D9?style=for-the-badge)
-![TypeScript](https://img.shields.io/badge/TypeScript-18.0%25-%23007ACC?style=for-the-badge)
-![JavaScript](https://img.shields.io/badge/JavaScript-7.9%25-%23F7DF1E?style=for-the-badge)
-![HTML](https://img.shields.io/badge/HTML-2.0%25-%23E34F26?style=for-the-badge)
-![CSS](https://img.shields.io/badge/CSS-1.8%25-%231572B6?style=for-the-badge)
-![SCSS](https://img.shields.io/badge/SCSS-1.7%25-%23CC6699?style=for-the-badge)
+
 
 ## Description
 
-#### Why I Built This Project:
 
-- The primary motivation was to learn Svelte, a framework I was highly interested in.
-- The project provides a simple and efficient way to create and manage a blog using SvelteKit.
+- The primary motivation was to explore the power of Next.js and React while building a feature-rich Discord clone.
+- This project provides an immersive experience for creating and managing Discord-like communities with real-time messaging, support for React Markdown, and dynamic routing.
+- It leverages the efficiency of Tailwind CSS for styling and integrates with PocketBase for data storage and management.
 
 
 
@@ -38,16 +32,16 @@
 
 To get started, follow these steps:
 
-1. Clone this repository:
+1. Clone or Fork this repository:
 
    ```bash
-   git clone https://github.com/TungLe0319/Tung-Svelte-Blog.git
+   git clone https://github.com/daniel-le97/next-pocket
 
    ```
 2. CD into the project:
 
    ```bash
-    cd sveltekit-blog-project 
+    cd next-pocket
    ```
 3. Install Dependencies:
 
@@ -56,40 +50,22 @@ To get started, follow these steps:
    ```
 
 
+## Features
 
-## Usage
+- **PocketBase Database Management:** Seamlessly manage your data with PocketBase, providing efficient storage, retrieval, and user account management.
 
-### Authentication
+- **Sign In with Username and Password:** Implement secure user authentication by allowing users to sign in with their usernames and passwords.
 
- Click the "Login" button and Login with either Github or Google, and follow the prompts to securely sign in. 
- 
- [![AuthJS](https://img.shields.io/badge/AuthJS-%239C27B0.svg?style=for-the-badge&logo=auth0&logoColor=61DAFB&style=plastic)](https://authjs.dev/)
+- **Dynamic Routing:** Create a user-friendly and structured navigation system within your Discord clone application for easy content organization.
 
-### Browsing Blogs
+- **Join Servers and Channels:** Allow users to join different servers and channels, facilitating connections with communities of their choice.
 
-Once you're logged in, you can start exploring our blog content:
+- **Live Communication:** Enable real-time messaging and communication between users within your Discord clone, fostering a sense of community and engagement.
 
-1. **Homepage:** The homepage provides an introduction and  overview of the latest and featured blog posts. Scroll through the feed to discover interesting articles.
-
-2. **Search and Categories:** Use the categories to filter and find specific topics or articles that interest you.
-
-3. **Blog Details:** Click on a blog post to read it in detail. You can view the full article, images, and related information.
-
-### Interacting with Blogs
-
-You can interact with our blog content in various ways:
-
-- **Comment:** Share your thoughts and engage with the author and other readers by leaving comments on blog posts.
-
-- **Like:** Show your appreciation for a blog post by clicking the "Like" button. This helps others discover popular articles.
+- **File, Image, and Code Sharing:** Facilitate the sharing of files, images, and code snippets, making it easy for users to collaborate and share content seamlessly.
 
 
-
-<!-- ### User Profile
-
-Your user profile allows you to manage your account settings, see your activity history, and view your liked blogs and comments. -->
-
-### Troubleshooting
+## Troubleshooting
 
 If you encounter any issues or have questions, feel free to [contact our support](mailto:tung.le0319@gmail.com) for assistance.
 
@@ -103,30 +79,6 @@ Enjoy your time exploring and interacting with our blog platform!
 
 
 
-
-
-<!-- If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section. -->
-
-- Flowbite Svelte - [Flowbite Svelte Website](https://example.com/flowbite-svelte)
-- SvelteKit - [SvelteKit Website](https://example.com/sveltekit)
-- Flaticon Icons - [Flaticon Website](https://example.com/flaticon)
-
-<!-- If you followed tutorials, include links to those here as well. -->
-
-
-## Features
-
-- **SvelteKit Dynamic Components:** Leverage the power of SvelteKit to create dynamic and interactive components for your web application.
-
-- **Server-Side Rendering (SSR):** Improve performance and SEO with server-side rendering, ensuring your content is easily discoverable by search engines.
-
-- **Flexible Layout:** Utilize flexible layout options to design web pages that adapt to different screen sizes and devices.
-
-- **Tailwind CSS Integration:** Benefit from seamless integration with Tailwind CSS to streamline your styling and make your design process efficient.
-
-- **Dynamic Routing with Blog/[Slug]:** Implement dynamic routing, including a blog structure with slug-based URLs, for a user-friendly and organized content presentation.
-
-- **Prisma ORM:** Utilize Prisma as your ORM (Object-Relational Mapping) tool to interact with your database effortlessly and efficiently.
 
 ## How to Contribute
 
