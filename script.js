@@ -70,7 +70,7 @@ const categoriesData = [
   }
 }
 
-createCategories();
+
 
 
     // Create a new post using Prisma's post.create

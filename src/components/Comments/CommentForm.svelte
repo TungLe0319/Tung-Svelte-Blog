@@ -75,6 +75,6 @@
   }
 
   .comment-input {
-    @apply p-2 rounded focus:outline-orange-300 shadow-xl shadow-slate-500 mb-10 bg-gray-800 dark:bg-gray-500 text-white text-lg dark:shadow-gray-800;
+    @apply p-2 rounded   border-slate-300 shadow-md dark:bg-slate-800  mb-10;
   }
 </style>

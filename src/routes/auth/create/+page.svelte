@@ -1,8 +1,6 @@
 <!-- CreateBlogPost.svelte -->
 
 <script>
-  import { PrismaClient } from "@prisma/client";
-  import { goto } from "$app/navigation";
   import Editor from "@tinymce/tinymce-svelte";
 
   let title = "";
@@ -10,7 +8,7 @@
   let subtitle = "";
   let content = "";
   let categories = "";
-  let published = false;
+  let published = true;
   let availableCategories = [
     "Case Studies",
     "Featured",
@@ -80,7 +78,8 @@
   <h2 class="text-2xl font-semibold mb-4">Create a New Blog Post</h2>
 
   <form on:submit="{handleSubmit}">
-    <div class="mb-4">
+  <div class="flex space-x-4">
+      <div class="mb-4 w-1/2">
       <label for="title" class="block text-gray-600">Title</label>
       <input
         type="text"
@@ -91,7 +90,7 @@
       />
     </div>
 
-    <div class="mb-4">
+    <div class="mb-4 w-1/2">
       <label for="subtitle" class="block text-gray-600">Subtitle</label>
       <input
         type="text"
@@ -101,8 +100,10 @@
         class="w-full border rounded px-3 py-2"
       />
     </div>
+  </div>
 
-    <div class="mb-4">
+  <div class=" flex space-x-4 ">
+      <div class="mb-4 w-1/2">
       <label for="img" class="block text-gray-600">Image URL</label>
       <input
         type="text"
@@ -112,6 +113,35 @@
         class="w-full border rounded px-3 py-2"
       />
     </div>
+
+
+    <div class="mb-4 w-1/2">
+      <label for="category" class="block text-gray-600">Category</label>
+      <select
+        id="category"
+        name="category"
+        bind:value="{categories}"
+        class="w-full border rounded px-3 py-2"
+      >
+        {#each availableCategories as categories}
+          <option value="{categories}">{categories}</option>
+        {/each}
+      </select>
+    </div>
+  </div>
+
+    <div class="mb-4">
+      <label class="block text-gray-600">
+        <input
+          type="checkbox"
+          name="published"
+          bind:checked="{published}"
+          class="mr-2"
+        />
+        Published
+      </label>
+    </div>
+
 
     <div class="two-column">
       <div class="editor-column">
@@ -132,31 +162,6 @@
       </div>
     </div>
 
-    <div class="mb-4">
-      <label for="category" class="block text-gray-600">Category</label>
-      <select
-        id="category"
-        name="category"
-        bind:value="{categories}"
-        class="w-full border rounded px-3 py-2"
-      >
-        {#each availableCategories as categories}
-          <option value="{categories}">{categories}</option>
-        {/each}
-      </select>
-    </div>
-
-    <div class="mb-4">
-      <label class="block text-gray-600">
-        <input
-          type="checkbox"
-          name="published"
-          bind:checked="{published}"
-          class="mr-2"
-        />
-        Published
-      </label>
-    </div>
 
     <div class="mt-4">
       <button

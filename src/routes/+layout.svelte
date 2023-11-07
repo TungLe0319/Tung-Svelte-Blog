@@ -9,8 +9,8 @@
 
 /** @type {import('./$types').LayoutData} */
   export let data;
-
-export let posts = data?.posts
+export let 
+posts = data?.posts
   export let pageSession = data?.session;
 </script>
 
@@ -19,8 +19,7 @@ export let posts = data?.posts
   {#key data?.pathname}
     <main
       class="w-full"
-      in:fade={{ duration: 200, delay: 100 }}
-      out:fade={{ duration: 200 }}
+ transition:fade={{ delay: 150, duration: 200 }}
     >
       <slot {pageSession} />
     </main>
@@ -35,12 +34,5 @@ export let posts = data?.posts
     flex-direction: column;
     min-height: 100vh;
   }
-  .background {
-    background: rgb(255, 255, 255);
-    background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 1) 86%,
-      rgba(164, 191, 196, 0.3617822128851541) 100%
-    );
-  }
+
 </style>

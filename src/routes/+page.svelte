@@ -86,6 +86,8 @@
           <option value="Health and Wellness">Health</option>
           <!-- Add more category options as needed -->
         </select>
+
+  
       </div>
       <div class="divider" />
       {#each filteredPosts as post (post.id)}
@@ -103,7 +105,7 @@
   </div>
 </div>
 
-<style lang="scss">
+<style lang="scss" >
   .category-select {
     @apply bg-gray-50 mt-5 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 p-2.5;
   }

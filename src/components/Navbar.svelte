@@ -124,7 +124,7 @@
 
 <svelte:window bind:scrollY="{y}" on:scroll="{handleScroll}" />
 
-<style lang="scss">
+<style lang="scss" scoped>
   .navbar-hidden {
     transform: translateY(-100%);
     transition: all 0.5s ease;

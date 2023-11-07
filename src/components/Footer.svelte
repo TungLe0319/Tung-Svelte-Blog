@@ -69,7 +69,6 @@
           </div>
         </div>
       </div>
-
       <div
         class="flex mt-8 flex-col md:flex-row md:justify-center md:text-center"
       >
@@ -81,22 +80,8 @@
       <div class="flex flex-col">
         <div class="flex mt-24 mb-5 flex-row justify-between items-end">
           <div class="hidden md:block">
-            <!-- <img
-                src="../assets/Logo.png"
-                alt=""
-                width="80"
-                class="rounded-xl b"
-              /> -->
           </div>
-
           <a href="/"> Home </a>
-          <!-- <NuxtLink to="/products" class="link" active-class="active-link">
-              Products
-            </NuxtLink>
-            <NuxtLink to="/about" class="link" active-class="active-link">
-              About
-            </NuxtLink> -->
-
           <a href="/auth/account" class="link" active-class="active-link">
             Account
           </a>
