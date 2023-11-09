@@ -8,7 +8,7 @@ export async function POST({ request }) {
     const cursor = paginationData.get("cursor");
 
     const posts = await db.post.findMany({
-      take: 4,
+      take: 2,
       skip: 1, // Skip the cursor
       cursor: {
         id: parseInt(cursor),
@@ -21,7 +21,7 @@ export async function POST({ request }) {
       },
     });
 
-    const lastPostInResults = posts[3]; // Remember: zero-based index! :)
+    const lastPostInResults = posts[1]; // Remember: zero-based index! :)
     const myCursor = lastPostInResults.id; // Example: 52
 
 const responseObject = {
