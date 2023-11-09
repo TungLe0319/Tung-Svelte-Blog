@@ -2,12 +2,12 @@
 
 import { PrismaClient } from "@prisma/client";
 import { error } from "@sveltejs/kit";
-
-const db = new PrismaClient();
+import { db } from "$db";
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
   try {
     const posts = await db.post.findMany({
+     
       include: {
         author: true,
         categories: true,
@@ -15,12 +15,16 @@ export async function load() {
         comments: true,
       },
     });
-const categories = await db.category.findMany();
+    const categories = await db.category.findMany();
+
+    const lastPostInResults = posts[3]; // Remember: zero-based index! :)
+    const myCursor = lastPostInResults.id; // Example: 29
+
     if (posts) {
       return {
         body: {
           posts,
-          categories
+          categories,
         },
       };
     } else {

@@ -1,8 +1,10 @@
 import { redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
-import { db } from "../../lib/prisma";
+import { PrismaClient } from "@prisma/client";
+
 
 export const load: PageServerLoad = async (event) => {
+  const db = new PrismaClient();
   const session = await event.locals.getSession();
 
   if (session?.user) {

@@ -6,16 +6,22 @@ import { Search, Button, Dropdown, DropdownItem } from 'flowbite-svelte';
 
 export let categories
 
-  let selectCategory = 'All categories'
+$AppState.activeCategory 
   // export let posts;
   let searchTerm = "";
   let filteredPosts = [];
-
+	let timer;
   // Function to filter posts based on the search term
   function filterPosts() {
     filteredPosts = posts
    
   }
+	const debounce = (event) => {
+		clearTimeout(timer);
+		timer = setTimeout(() => {
+			handleInputChange(event)
+		}, 750);
+	}
 
   // Function to handle input change and filter posts
  function handleInputChange(event) {
@@ -25,6 +31,16 @@ export let categories
   );
 }
 
+function handleCategoryChange(category) {
+  $AppState.activeCategory = category;
+  console.log($AppState.activeCategory);
+  $AppState.filteredPosts = $AppState.posts.filter((p) => {
+    const categoryNames = p.categories.map(cat => cat.name);
+    return categoryNames.includes($AppState.activeCategory);
+  });
+
+ 
+}
 </script>
 
 <div class="relative items-center just-center ">
@@ -32,23 +48,23 @@ export let categories
  <form class="flex">
   <div class="relative">
     <Button class="rounded-e-none whitespace-nowrap border border-r-0 border-primary-700">
-      {selectCategory}
+      {$AppState.activeCategory}
       <ChevronDownSolid class="w-2.5 h-2.5 ml-2.5" />
     </Button>
     <Dropdown classContainer="w-40">
       {#each categories as  label }
         <DropdownItem
           on:click={() => {
-            selectCategory = label.name;
+          handleCategoryChange(label.name)
           }}
-          class=' w-full {selectCategory === label.name ? 'underline' : ''}'
+          class=' w-full {$AppState.activeCategory === label.name ? 'underline' : ''}'
         >
           {label.name}
         </DropdownItem>
       {/each}
     </Dropdown>
   </div>
-  <Search on:input={handleInputChange}  size="md" class="rounded-none py-2.5" placeholder="Search Mockups, Logos, Design Templates..." />
+  <Search on:keyup={debounce}  size="md" class="rounded-none py-2.5" placeholder="Search Mockups, Logos, Design Templates..." />
   <Button class="!p-2.5 rounded-s-none">
     <SearchOutline class="w-5 h-5" />
   </Button>

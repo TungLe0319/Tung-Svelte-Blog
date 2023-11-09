@@ -3,7 +3,7 @@
 import { PrismaClient } from "@prisma/client";
 import { error } from "@sveltejs/kit";
 
-const db = new PrismaClient();
+import { db } from "$db";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ locals,params }) {

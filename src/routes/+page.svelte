@@ -1,10 +1,14 @@
 <script>
+  import { fade } from "svelte/transition";
   import BlogPostCard from "../components/BlogPostCard.svelte";
   import FeaturedBlogPost from "../components/FeaturedBlogPost.svelte";
   import Hero from "../components/Hero.svelte";
   import SearchBarV2 from "../components/SearchBarV2.svelte";
   import { AppState } from "../store/AppState";
+  import Pagination from "../components/Pagination.svelte";
+
   export let data;
+
   let posts = data.body?.posts;
   let categories = data.body?.categories;
   let selectedCategory = "all";
@@ -66,39 +70,37 @@
     </div>
 
     <div class="  mt-64 px-24">
-      <!-- <div class="selection-bar">
-        <label for="categorySelect" class="selection-bar-label font-1"
-          >Select Category:</label
-        >
-        <div />
-        <select
-          id="categorySelect"
-          class="category-select"
-          on:change={handleCategoryChange}
-        >
-          <option value="all">All</option>
-          <option value="Technology">Technology</option>
-          <option value="Art and Culture">Art</option>
-          <option value="Health and Wellness">Health</option>
-      
-        </select>
+ 
 
-      </div> -->
+
+
+
+
       <SearchBarV2 categories="{categories}" />
-      <div class="divider"></div>
+      <div class="divider my-5"></div>
       <div class="   flex flex-col  mx-20 ">
+       {#if $AppState.filteredPosts.length >0}
         {#each $AppState.filteredPosts as post (post.id)}
-          <BlogPostCard post="{post}" />
+        <div transition:fade={{ delay: 150, duration: 200 }}>
+          <BlogPostCard   post="{post}" />
+        </div>
         {/each}
+        {:else}
+
+  <div class="w-full card p-10">
+        <div class="text-4xl font-bold dark:text-white font-1">Couldn't find a match. Please try another search.</div>
+       </div>
+
+     
+       {/if}
       </div>
     </div>
+    <Pagination/>
   </div>
 </div>
 
 <style lang="scss">
-  .category-select {
-    @apply bg-gray-50 mt-5 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 p-2.5;
-  }
+
   .divider {
     @apply border-b-4 border-b-orange-300 rounded-md mb-4;
   }

@@ -40,7 +40,7 @@
               <Badge
                 color="default "
                 border
-                class=" font-3 font-semibold text-orange-400 dark:text-orange-300"
+                class="{$AppState.activeCategory === categories.name?'!text-indigo-300 bg-indigo-500 delay-500 transition-all duration-500  absolute top-0 left-0 text-xl  drop-shadow border-none shadow-md ' :''} font-3 font-semibold text-orange-400 dark:text-orange-300"
               >
                 {categories.name}
               </Badge>

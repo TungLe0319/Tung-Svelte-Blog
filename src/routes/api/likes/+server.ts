@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { jsonResponse, HttpStatusCode } from "../../../lib/utils/apiUtils.js";
-const db = new PrismaClient();
+import { db } from "$db";
 
 // export async function POST({ request }) {
 //   try {
