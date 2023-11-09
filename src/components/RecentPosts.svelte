@@ -25,7 +25,7 @@
           class="hover:text-orange-500 hover:underline transition-all duration-150"
           href="{`/blog/${recentPost?.id}`}"
         >
-          <div class="text-sm font-semibold ">
+          <div class="text-sm font-semibold">
             {recentPost.title}
           </div>
         </a>
@@ -49,17 +49,17 @@
 
 <style lang="scss">
   .recent-post-img {
-    @apply   w-20 h-20 object-cover rounded-md hover:brightness-75 transition-all duration-300;
+    @apply w-20 h-20 object-cover rounded-md hover:brightness-75 transition-all duration-300;
     @media only screen and (min-width: 1400px) {
-      @apply  w-16 h-16;
+      @apply w-16 h-16;
     }
   }
   //when screen is 768px OR LESS
 
   .recent-post-text {
     @apply border-l-2 pl-2 mb-4 border-l-orange-300  font-semibold text-gray-500;
-     @media only screen and (min-width: 1400px) {
-      @apply  text-sm;
+    @media only screen and (min-width: 1400px) {
+      @apply text-sm;
     }
   }
 </style>

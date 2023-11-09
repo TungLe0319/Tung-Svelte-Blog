@@ -2,8 +2,9 @@
 
 import { PrismaClient } from "@prisma/client";
 
-import { db } from "$db";
+import { db } from "$lib/utils/useDb";
 
+/** @type {import('./$types').Actions} */
 export const actions = {
   post: async ({ request }) => {
     try {
@@ -92,15 +93,9 @@ export const actions = {
           },
         },
       });
-         return {
-        
-        body: updatedPost
+      return {
+        body: updatedPost,
       };
-    } catch (error) {
-
-    }
-
- 
-    }
-  }
-
+    } catch (error) {}
+  },
+};

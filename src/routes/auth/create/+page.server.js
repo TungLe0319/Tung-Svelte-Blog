@@ -1,19 +1,15 @@
 // @ts-nocheck
 
-
 import { PrismaClient } from "@prisma/client";
 
-import { db } from "$db";
+import { db } from "$lib/utils/useDb";
 
 export const actions = {
   default: async ({ request }) => {
     try {
-
-
       const postData = await request.formData();
 
-
-      console.log(postData.get('title'));
+      console.log(postData.get("title"));
       const title = postData.get("title") || "";
       const subtitle = postData.get("subtitle") || "";
       const img = postData.get("img") || "";
@@ -43,29 +39,10 @@ export const actions = {
         },
       });
 
-
-      
       return {
         status: 200,
         body: newPost,
       };
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
     } catch (error) {
       return {
         status: 500,
@@ -121,4 +98,4 @@ export const actions = {
   //     };
   //   } catch (error) {}
   // },
-}
+};

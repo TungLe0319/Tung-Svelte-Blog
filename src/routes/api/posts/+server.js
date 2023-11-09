@@ -1,16 +1,14 @@
-// import { db } from "$db";
 import { PrismaClient } from "@prisma/client";
-const db = new PrismaClient()
+import { db } from "$lib/utils/useDb";
 
-/** @type {import('./$types').PageServerLoad} */
 export async function GET({ url }) {
   try {
-const body =  url.searchParams
-     
+    const body = url.searchParams;
+
     const posts = await db.post.findMany({
       take: 4,
       skip: 1, // Skip the cursor
-   cursor:body,
+      cursor: body,
       include: {
         author: true,
         categories: true,
@@ -18,9 +16,6 @@ const body =  url.searchParams
         comments: true,
       },
     });
-   
-
-   
 
     return new Response(JSON.stringify(body), {
       status: 200, // Status code for success

@@ -15,7 +15,7 @@ posts = data?.posts
 </script>
 
 <Navbar {pageSession} {posts} />
-<div class="wrapper">
+<div class="flex flex-col min-h-screen">
   {#key data?.pathname}
     <main
       class="w-full"
@@ -28,11 +28,3 @@ posts = data?.posts
   <Footer />
 </div>
 
-<style lang="scss">
-  .wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-
-</style>

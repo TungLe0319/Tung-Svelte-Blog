@@ -2,12 +2,11 @@
 
 import { PrismaClient } from "@prisma/client";
 import { error } from "@sveltejs/kit";
-import { db } from "$db";
+import { db } from "$lib/utils/useDb";
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
   try {
     const posts = await db.post.findMany({
-     
       include: {
         author: true,
         categories: true,

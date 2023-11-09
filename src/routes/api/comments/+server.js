@@ -2,29 +2,26 @@
 import { PrismaClient } from "@prisma/client";
 import { error } from "@sveltejs/kit";
 
-import { db } from "$db";
+import { db } from "$lib/utils/useDb";
 
+/** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
   try {
     const commentData = await request.formData();
 
     const postId = commentData.get("postId");
-    const content = commentData.get("content") 
+    const content = commentData.get("content");
 
     const userEmail = commentData.get("userEmail") || "";
 
-
-
-if (content === "") {
-     return new Response(JSON.stringify({ error: "User not found" }), {
-       status: 400, // Use an appropriate status code
-       headers: {
-         "Content-Type": "application/json",
-       },
-     });
-}
-
-
+    if (content === "") {
+      return new Response(JSON.stringify({ error: "User not found" }), {
+        status: 400, // Use an appropriate status code
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    }
 
     const user = await db.user.findUnique({
       where: {
@@ -71,7 +68,7 @@ if (content === "") {
     );
   }
 }
-
+/** @type {import('./$types').RequestHandler} */
 export async function PUT({ request }) {
   try {
     const commentData = await request.formData();
@@ -124,7 +121,7 @@ export async function PUT({ request }) {
     );
   }
 }
-
+/** @type {import('./$types').RequestHandler} */
 export async function DELETE({ request }) {
   try {
     const commentData = await request.formData();
@@ -198,8 +195,8 @@ export async function DELETE({ request }) {
     );
   }
 }
-
-export async function GET({ request }) {
+/** @type {import('./$types').RequestHandler} */
+export async function GET({ url }) {
   try {
     const comments = await db.comment.findMany({
       include: {

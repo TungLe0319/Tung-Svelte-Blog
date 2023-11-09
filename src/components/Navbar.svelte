@@ -1,5 +1,5 @@
 <!-- Navbar.svelte -->
-<script>
+<script lang="ts">
   import { page } from "$app/stores";
   import { signOut } from "@auth/sveltekit/client";
   import {
@@ -20,15 +20,11 @@
 
   export let pageSession;
   export let posts;
-  let isMenuOpen = false;
-  let y = 0;
-  let lastScrollY = 0;
-  let isNavbarHidden = false;
-  let activeUrl = "";
-  let activeClass =
-    "text-white bg-green-700 md:bg-transparent md:text-orange-700 md:dark:text-orange-400 dark:bg-green-600 md:dark:bg-transparent";
-  let nonActiveClass =
-    "text-gray-700 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-teal-700 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent";
+  let isMenuOpen : false;
+  let y : 0;
+  let lastScrollY : 0;
+  let isNavbarHidden : false;
+  let activeUrl: any;
 
   $: {
     activeUrl = $page.url.pathname;
@@ -70,7 +66,11 @@
     </NavBrand>
     <div class="flex items-center justify-center space-x-5 md:order-2">
       {#if pageSession?.user}
-        <Avatar id="avatar-menu" src="{pageSession?.user?.image}" class="shadow-md cursor-pointer" />
+        <Avatar
+          id="avatar-menu"
+          src="{pageSession?.user?.image}"
+          class="shadow-md cursor-pointer"
+        />
       {:else}
         <a href="/login">login</a>
       {/if}
@@ -91,8 +91,6 @@
           <span class="block truncate text-sm font-medium"
             >{pageSession?.user?.email}</span
           >
-
-         
         </DropdownHeader>
         {#if pageSession?.user?.email === "tung.le0319@gmail.com"}
           <DropdownItem>
@@ -106,14 +104,8 @@
           ></DropdownItem
         >
       </Dropdown>
-    
-    
     {/if}
-    <NavUl
-      activeUrl="{activeUrl}"
-      activeClass="{activeClass}"
-      nonActiveClass="{nonActiveClass}"
-    >
+    <NavUl activeUrl="{activeUrl}" activeClass="active-link" nonActiveClass="">
       <NavLi class="text-lg font-3" href="/" active="{true}">Home</NavLi>
       <NavLi class="text-lg font-3" href="/about">About</NavLi>
       <NavLi class="text-lg font-3" href="/contact">Contact</NavLi>
@@ -129,35 +121,8 @@
     transform: translateY(-100%);
     transition: all 0.5s ease;
   }
-  .link,
-  .sign-out-btn {
-    @apply relative flex ml-0 pl-0  transition-transform duration-200  text-2xl;
 
-    text-decoration: none;
-    font-weight: 600;
-    font-family: "Shadows Into Light", cursive;
-
-    &:hover {
-      transform: scaleX(1);
-      text-decoration: none;
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 3px;
-      background-color: orange;
-      transform-origin: 0 100%;
-      transform: scaleX(0);
-      transition: transform 0.3s, width 0.3s;
-    }
-
-    &:hover::after {
-      transform: scaleX(1);
-      width: 100%;
-    }
+  :global(.active-link) {
+    @apply text-white bg-green-700 md:bg-transparent md:text-orange-700 md:dark:text-orange-400 dark:bg-green-600 md:dark:bg-transparent;
   }
 </style>

@@ -41,6 +41,10 @@ const next = async () => {
     Entries
   </div>
 
+
+
+
+  
   <Pagination table large>
     <button on:click="{previous}" slot="prev" class="flex items-center gap-2 text-white bg-gray-800">
       <ArrowLeftOutline class="w-3.5 h-3.5 mr-2" />
@@ -52,3 +56,4 @@ const next = async () => {
     </button>
   </Pagination>
 </div>
+

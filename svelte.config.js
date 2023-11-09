@@ -5,9 +5,9 @@ import path from "path";
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   kit: {
+  
     alias: {
       "$components": "src/components",
-      "$db":"src/lib/utils/useDb"
     },
     // adapter-auto only supports some environments, see https://kit.svelte.dev/docs/adapter-auto for a list.
     // If your environment is not supported or you settled on a specific environment, switch out the adapter.

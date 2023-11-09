@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { jsonResponse, HttpStatusCode } from "../../../lib/utils/apiUtils.js";
-import { db } from "$db";
+// @ts-ignore
+import { db } from "$lib/utils/useDb";
 
 // export async function POST({ request }) {
 //   try {

@@ -3,14 +3,13 @@
 import { PrismaClient } from "@prisma/client";
 import { error } from "@sveltejs/kit";
 
-import { db } from "$db";
+import { db } from "$lib/utils/useDb";
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load({ locals,params }) {
+export async function load({ locals, params }) {
   try {
-    const session = await locals.getSession()
+    const session = await locals.getSession();
     const postId = parseInt(params.slug, 10);
-
 
     const post = await db.post.findFirstOrThrow({
       where: {
@@ -52,7 +51,6 @@ export async function load({ locals,params }) {
         body: {
           post,
           recentPosts,
-      
         },
       };
     } else {

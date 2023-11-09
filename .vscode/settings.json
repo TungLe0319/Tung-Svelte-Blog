@@ -1,5 +1,6 @@
- {"[svelte]": {
-     "editor.defaultFormatter": "svelte.svelte-vscode"
-  },
-  "nuxt.isNuxtApp": false
-  } 
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  }
+}

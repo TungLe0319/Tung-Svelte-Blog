@@ -11,6 +11,7 @@
       alt="linkedin profile"
       class="lg:w-16 lg:h-16 w-0 rounded-full shadow-md shadow-slate-500 hover:brightness-75 transition-all duration-150"
     />
+
     <span class="text-blue-500 font-semibold">LinkedIn</span>
   </a>
 </div>
