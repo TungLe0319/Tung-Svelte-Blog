@@ -5,23 +5,17 @@
   import Hero from "../components/Hero.svelte";
   import SearchBarV2 from "../components/SearchBarV2.svelte";
   import { AppState } from "../store/AppState";
-  import Pagination from "../components/Pagination.svelte";
   import type { Post } from "../../src/lib/models/post";
 
-
-
-
-
   export let data;
-console.log(data);
+  // console.log(data);
 
-  let posts:Post[] = data.body?.posts;
+  let posts: Post[] = data.body?.posts;
   let categories = data.body?.categories;
   let selectedCategory = "all";
   let filteredPosts = [];
 
-
-$AppState.myCursor = data.body.myCursor
+  $AppState.myCursor = data.body.myCursor;
 
   $AppState.posts = data.body.posts;
   $AppState.filteredPosts = data.body.posts;
@@ -41,8 +35,6 @@ $AppState.myCursor = data.body.myCursor
   // Initialize filteredPosts with all posts
   filterPosts(selectedCategory);
 
-
-
   let featuredPosts = posts.filter(
     (post) =>
       post.categories &&
@@ -56,7 +48,6 @@ $AppState.myCursor = data.body.myCursor
     subTitle: "How Art, Technology and Curiosity Fuel My Life",
     height: 100,
   };
-
 </script>
 
 <div class="whatisme">
@@ -77,35 +68,29 @@ $AppState.myCursor = data.body.myCursor
     </div>
 
     <div class="  mt-64 px-24">
- 
-
-
-
       <SearchBarV2 categories="{categories}" />
+
       <div class="divider my-5"></div>
-      <div class="   flex flex-col  mx-20 ">
-       {#if $AppState.filteredPosts.length >0}
-        {#each $AppState.filteredPosts as post (post.id)}
-        <div transition:fade={{ delay: 150, duration: 200 }}>
-          <BlogPostCard   post="{post}" />
-        </div>
-        {/each}
+      <div class="   flex flex-col mx-20">
+        {#if $AppState.filteredPosts.length > 0}
+          {#each $AppState.filteredPosts as post (post.id)}
+            <div transition:fade="{{ delay: 150, duration: 200 }}">
+              <BlogPostCard post="{post}" />
+            </div>
+          {/each}
         {:else}
-
-  <div class="w-full card p-10">
-        <div class="text-4xl font-bold dark:text-white font-1">Couldn't find a match. Please try another search.</div>
-       </div>
-
-     
-       {/if}
+          <div class="w-full card p-10">
+            <div class="text-4xl font-bold dark:text-white font-1">
+              Couldn't find a match. Please try another search.
+            </div>
+          </div>
+        {/if}
       </div>
     </div>
-    <Pagination/>
   </div>
 </div>
 
-<style lang="scss" >
-
+<style lang="scss">
   .divider {
     @apply border-b-4 border-b-orange-300 rounded-md mb-4;
   }

@@ -7,7 +7,7 @@ import { db } from "$lib/utils/useDb";
 export async function load() {
   try {
     const posts = await db.post.findMany({
-      take: 4,
+      take: 2,
       include: {
         author: true,
         categories: true,
@@ -17,7 +17,7 @@ export async function load() {
     });
     const categories = await db.category.findMany();
 
-    const lastPostInResults = posts[3]; // Remember: zero-based index! :)
+    const lastPostInResults = posts[1]; // Remember: zero-based index! :)
     const myCursor = lastPostInResults.id; // Example: 29
 
     if (posts) {
