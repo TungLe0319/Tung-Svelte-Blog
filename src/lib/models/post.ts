@@ -1,7 +1,6 @@
 // post.ts
 
-import { Category } from "@prisma/client";
-import { Author } from "./author";
+import { Category, User } from "@prisma/client";
 
 
 
@@ -15,7 +14,7 @@ export interface Post {
   published: boolean;
   datePublished: string;
   authorId: number;
-  author: Author;
+  author: User;
   categories: Category[];
   likes: any[]; // You might want to define a type for likes
   comments: any[]; // You might want to define a type for comments

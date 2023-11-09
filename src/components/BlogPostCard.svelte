@@ -1,7 +1,5 @@
-<script>
-  export let post;
-  let commentsLength = post.comments.length;
-  let likesLength = post.likes.length;
+<script lang="ts">
+
   import { Card, Badge, Tooltip } from "flowbite-svelte";
   import { svelteTime } from "svelte-time";
   import {
@@ -10,12 +8,15 @@
     ClockSolid,
   } from "flowbite-svelte-icons";
   import { AppState } from "../store/AppState";
+ import type { Post } from "../lib/models/post";
 
-  let hCard = false;
+  let hCard : false;
 
 
 
-
+  export let post:Post;
+  let commentsLength = post.comments.length;
+  let likesLength = post.likes.length;
 
 </script>
 
@@ -106,7 +107,7 @@
   </div>
 {/if}
 
-<div class="lg:hidden md:hidden">
+<div class="lg:hidden ">
   <Card img={post.img} href={`/blog/${post?.id}`} reverse={hCard} class="mb-4 ">
     <h5
       class="mb-2 text-base font-bold tracking-tight text-gray-900 dark:text-white"

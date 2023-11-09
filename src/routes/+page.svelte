@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { fade } from "svelte/transition";
   import BlogPostCard from "../components/BlogPostCard.svelte";
   import FeaturedBlogPost from "../components/FeaturedBlogPost.svelte";
@@ -6,15 +6,22 @@
   import SearchBarV2 from "../components/SearchBarV2.svelte";
   import { AppState } from "../store/AppState";
   import Pagination from "../components/Pagination.svelte";
+  import type { Post } from "../../src/lib/models/post";
+
+
+
+
 
   export let data;
+console.log(data);
 
-  let posts = data.body?.posts;
+  let posts:Post[] = data.body?.posts;
   let categories = data.body?.categories;
   let selectedCategory = "all";
   let filteredPosts = [];
 
-  console.log(posts[0]);
+
+$AppState.myCursor = data.body.myCursor
 
   $AppState.posts = data.body.posts;
   $AppState.filteredPosts = data.body.posts;

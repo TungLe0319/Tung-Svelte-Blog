@@ -1,13 +1,13 @@
-<script>
-  // import posts from "../lib/posts.js";
-  export let featuredPost;
-  import { Card, Button, Toggle } from "flowbite-svelte";
+<script lang="ts">
+  import type { Post } from "../lib/models/post";
+  import { Card } from "flowbite-svelte";
+  export let featuredPost: Post;
   let hCard = false;
 </script>
 
-<a class="hidden lg:block" href={`/blog/${featuredPost?.id}`}>
+<a class="hidden lg:block" href="{`/blog/${featuredPost?.id}`}">
   <div class=" featured-blogpost mx-1">
-    <img class="featured-blogpost-img" src={featuredPost?.img} alt="post" />
+    <img class="featured-blogpost-img" src="{featuredPost?.img}" alt="post" />
 
     <div class="featured-blogpost-title-container">
       <div>
@@ -21,9 +21,9 @@
 
 <div class="lg:hidden">
   <Card
-    img={featuredPost.img}
-    href={`/blog/${featuredPost?.id}`}
-    reverse={hCard}
+    img="{featuredPost.img}"
+    href="{`/blog/${featuredPost?.id}`}"
+    reverse="{hCard}"
     class="mb-4 "
   >
     <h5
@@ -35,24 +35,20 @@
       {featuredPost?.subtitle}
     </p>
   </Card>
-  <!-- <Toggle bind:checked={hCard} class="italic dark:text-gray-500">Reverse</Toggle
-  > -->
+
 </div>
 
 <style lang="scss">
   .featured-blogpost {
     @apply relative shadow-xl duration-150  hover:shadow-orange-300  rounded-lg;
-    width: 350px;
-    height: 500px;
+    width: 325px;
+    height: 375px;
     float: left; /* Add this to make cards align horizontally */
     transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
 
     &:hover {
-      // @apply border-4 border-green-600  ;
       width: 525px;
       transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-
-      /* Decrease width of other product-cards when hovering */
 
       .featured-blogpost-title {
         opacity: 1;
@@ -67,9 +63,9 @@
     }
 
     //when screen is 768px OR LESS
-    @media only screen and (min-height: 700px){
-    height: 375px;
-    width: 300px;
+    @media only screen and (max-height: 700px) {
+      height: 375px;
+      width: 300px;
     }
   }
 

@@ -1,35 +1,23 @@
-<script>
+<script lang="ts">
 import { Search, Button, Dropdown, DropdownItem } from 'flowbite-svelte';
   import { SearchOutline, ChevronDownSolid } from 'flowbite-svelte-icons';
   import { AppState } from "../store/AppState";
+import {debounce} from '../lib/utils/functions'
+  import { Category } from '@prisma/client';
+ 
+export let categories:Category[]
 
 
-export let categories
-
-$AppState.activeCategory 
-  // export let posts;
-  let searchTerm = "";
-  let filteredPosts = [];
-	let timer;
-  // Function to filter posts based on the search term
-  function filterPosts() {
-    filteredPosts = posts
-   
-  }
-	const debounce = (event) => {
-		clearTimeout(timer);
-		timer = setTimeout(() => {
-			handleInputChange(event)
-		}, 750);
-	}
-
-  // Function to handle input change and filter posts
- function handleInputChange(event) {
+// Function to handle input change and filter posts
+const handleInputChange = (event) => {
   $AppState.searchQuery = event.target.value;
   $AppState.filteredPosts = $AppState.posts.filter((p) =>
     p.title.toLowerCase().includes($AppState.searchQuery.toLowerCase())
   );
-}
+};
+
+// Usage
+const debouncedHandleInputChange = debounce(handleInputChange, 750);
 
 function handleCategoryChange(category) {
   $AppState.activeCategory = category;
@@ -45,7 +33,7 @@ function handleCategoryChange(category) {
 
 <div class="relative items-center just-center ">
 
- <form class="flex">
+ <form class="flex" on:submit|preventDefault="{debouncedHandleInputChange}">
   <div class="relative">
     <Button class="rounded-e-none whitespace-nowrap border border-r-0 border-primary-700">
       {$AppState.activeCategory}
@@ -64,7 +52,8 @@ function handleCategoryChange(category) {
       {/each}
     </Dropdown>
   </div>
-  <Search on:keyup={debounce}  size="md" class="rounded-none py-2.5" placeholder="Search Mockups, Logos, Design Templates..." />
+ 
+  <Search on:keyup={debouncedHandleInputChange}  size="md" class="rounded-none py-2.5" placeholder="Search Mockups, Logos, Design Templates..." />
   <Button class="!p-2.5 rounded-s-none">
     <SearchOutline class="w-5 h-5" />
   </Button>
