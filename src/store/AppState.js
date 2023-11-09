@@ -1,5 +1,8 @@
 import { writable } from "svelte/store";
 
 export const AppState = writable({
-  listView:true
+  listView:true,
+  searchQuery : '',
+  filteredPosts : [],
+  posts:[]
 })

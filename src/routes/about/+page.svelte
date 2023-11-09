@@ -13,7 +13,7 @@
 </script>
 
 <Hero {heroProps} />
-<div class=" px-40 py-10 mt-3 text-xl flex flex-col items-center">
+<div class=" px-40 py-10 mt-3 text-xl flex flex-col items-center dark:text-white">
   <h2 class="description">
     This blog project serves as an opportunity for me to strengthen my
     development skills, troubleshooting abilities, and utilize my creativity.

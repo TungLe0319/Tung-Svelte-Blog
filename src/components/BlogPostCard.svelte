@@ -9,18 +9,25 @@
     MessagesOutline,
     ClockSolid,
   } from "flowbite-svelte-icons";
+  import { AppState } from "../store/AppState";
 
   let hCard = false;
+
+
+
+
+
 </script>
 
 {#if post}
-  <div class="blogPost">
+  <div class="blogPost "
+  >
     <a href={`/blog/${post?.id}`}>
       <img src={post?.img} alt="Blog-post-img" class="blogPost-image" />
     </a>
     <div class="blogPost-body flex flex-col h-full justify-between">
       <div class="blogPost-body-title-and-subtitle">
-        <a class=" blogPost-link-title font-1" href={`blog/${post?.id}`}>
+        <a class=" blogPost-link-title font-1 {$AppState.searchQuery !== "" ? 'text-red-500' : ''}" href={`blog/${post?.id}`}>
           {post?.title}
         </a>
         <div class="blogPost-subtitle font-3">{post?.subtitle}</div>
@@ -53,7 +60,7 @@
           {/if}
 
           {#if commentsLength > 0}
-            <div class="flex space-x-0.5">
+            <div class="flex space-x-0.5 ">
               <MessagesOutline class="border-none outline-none" />
 
               <div class="text-xs font-semibold cursor-default">
@@ -124,7 +131,7 @@
       <div class="likes-comment-container">
         {#if likesLength > 0}
           <div class="flex space-x-1">
-            <HeartOutline />
+            <HeartOutline  class="dark:text-white"/>
             <div class="">
               {likesLength}
             </div>
@@ -146,11 +153,11 @@
 
 <style lang="scss" scoped>
   .likes-comment-container {
-    @apply flex justify-center items-center space-x-4;
+    @apply flex justify-center items-center space-x-4 dark:text-white;
   }
 
   .blogPost {
-    @apply py-3 my-2 shadow-lg justify-between px-4 hidden lg:flex flex-col  items-center  lg:flex-row md:flex-row rounded-md relative hover:bg-orange-50 transition-all duration-150 dark:hover:bg-gray-600 dark:bg-gray-800 dark:border dark:border-gray-200/40 hover:-translate-y-2;
+    @apply   py-3 my-4 shadow-lg justify-between px-4 hidden lg:flex flex-col  items-center  lg:flex-row md:flex-row rounded-md relative hover:bg-orange-50 transition-all duration-150 dark:hover:bg-gray-600 dark:bg-gray-800 dark:border dark:border-gray-200/40 hover:-translate-y-2;
   }
   .blogPost-image {
     @apply rounded-md  shadow-2xl shadow-gray-400 dark:shadow-gray-700/50 transition-all   duration-300 ease-in-out

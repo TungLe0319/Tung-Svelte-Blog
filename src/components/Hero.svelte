@@ -74,6 +74,7 @@
   }
 
 .hero-image-container::before {
+  @apply  dark:bg-gradient-to-b from-transparent to-slate-900;
   content: "";
   position: absolute;
   bottom: 0;

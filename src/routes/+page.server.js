@@ -15,11 +15,12 @@ export async function load() {
         comments: true,
       },
     });
-
+const categories = await db.category.findMany();
     if (posts) {
       return {
         body: {
           posts,
+          categories
         },
       };
     } else {

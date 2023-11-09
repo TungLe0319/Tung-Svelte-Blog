@@ -20,6 +20,7 @@ export const load = async (event) => {
 const sessionData = await event.locals.getSession()
 
   return {
+    
     posts,
     session: sessionData,
     pathname: url.pathname,

@@ -1,15 +1,19 @@
 <script>
   import BlogPostCard from "../components/BlogPostCard.svelte";
   import FeaturedBlogPost from "../components/FeaturedBlogPost.svelte";
-  import { browser } from "$app/environment";
-  import { fly } from "svelte/transition";
   import Hero from "../components/Hero.svelte";
-
+  import SearchBarV2 from "../components/SearchBarV2.svelte";
+  import { AppState } from "../store/AppState";
   export let data;
   let posts = data.body?.posts;
+  let categories = data.body?.categories;
   let selectedCategory = "all";
   let filteredPosts = [];
 
+  
+
+  $AppState.posts = data.body.posts;
+  $AppState.filteredPosts = data.body.posts;
   // Function to filter posts based on the selected category
   function filterPosts(category) {
     if (category === "all") {
@@ -26,11 +30,7 @@
   // Initialize filteredPosts with all posts
   filterPosts(selectedCategory);
 
-  // Event listener for the category selection dropdown
-  function handleCategoryChange() {
-    selectedCategory = categorySelect.value;
-    filterPosts(selectedCategory);
-  }
+
 
   let featuredPosts = posts.filter(
     (post) =>
@@ -45,18 +45,14 @@
     subTitle: "How Art, Technology and Curiosity Fuel My Life",
     height: 100,
   };
-  $:{
-    heroProps.image
-  }
 
-  
 </script>
 
 <div class="whatisme">
-  <Hero {heroProps} />
+  <Hero heroProps="{heroProps}" />
 
   <div class="text-center flex flex-col items-center mb-20">
-    <div class=" container-3  lg:absolute lg:-bottom-72 -bottom-64 z-30">
+    <div class=" container-3 lg:absolute lg:-bottom-72 -bottom-64 z-30">
       <div class=" featured-post-headliner">
         <h3 class="text-4xl mb-10 font-1 lg:text-white text-shadow-overlay">
           Featured
@@ -64,13 +60,13 @@
       </div>
       <div class="featured-blogs-container">
         {#each featuredPosts as featuredPost}
-          <FeaturedBlogPost {featuredPost} />
+          <FeaturedBlogPost featuredPost="{featuredPost}" />
         {/each}
       </div>
     </div>
 
-    <div class="posts-container">
-      <div class="selection-bar">
+    <div class="  mt-64 px-24">
+      <!-- <div class="selection-bar">
         <label for="categorySelect" class="selection-bar-label font-1"
           >Select Category:</label
         >
@@ -84,28 +80,22 @@
           <option value="Technology">Technology</option>
           <option value="Art and Culture">Art</option>
           <option value="Health and Wellness">Health</option>
-          <!-- Add more category options as needed -->
+      
         </select>
 
-  
+      </div> -->
+      <SearchBarV2 categories="{categories}" />
+      <div class="divider"></div>
+      <div class="   flex flex-col  mx-20 ">
+        {#each $AppState.filteredPosts as post (post.id)}
+          <BlogPostCard post="{post}" />
+        {/each}
       </div>
-      <div class="divider" />
-      {#each filteredPosts as post (post.id)}
-        {#key post}
-          <div
-            in:fly={{ x: -100, duration: 300, opacity: 1 }}
-            out:fly={{ x: 100, duration: 300, opacity: 0 }}
-            class=" my-4"
-          >
-            <BlogPostCard {post} />
-          </div>
-        {/key}
-      {/each}
     </div>
   </div>
 </div>
 
-<style lang="scss" >
+<style lang="scss">
   .category-select {
     @apply bg-gray-50 mt-5 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-orange-400 focus:border-orange-400 p-2.5;
   }
@@ -122,15 +112,11 @@
   .featured-blogs-container {
     @apply flex lg:flex-row flex-col items-center justify-center lg:space-y-0 space-y-6 lg:justify-center lg:space-x-2   mx-10 lg:mx-0 mb-20;
     //when screen is 768px OR LESS
-  
   }
 
-  .container-3{
-      @media only screen and (max-height: 768px){
-    bottom: -275px;
+  .container-3 {
+    @media only screen and (max-height: 768px) {
+      bottom: -275px;
     }
-  }
-  .posts-container {
-    @apply lg:mt-60 md:mt-56 flex flex-col justify-center p-2 lg:m-10 px-20;
   }
 </style>

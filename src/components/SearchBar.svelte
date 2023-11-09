@@ -58,25 +58,27 @@
 
 <div class="relative flex items-center just-center">
   <div
-    class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
+    class="flex absolute inset-y-0 left-0 items-center pl-3  cursor-pointer"
   >
-    <SearchOutline class="w-4 h-4 text-black" />
+ 
+     <SearchOutline class="w-4 h-4 text-black "  />
+
   </div>
   <Input
     id="search-navbar"
     class="pl-10"
-    placeholder="Search..."
+    placeholder="Search posts..."
     on:input={handleInputChange}
   />
 
   {#if filteredPosts.length > 0}
     <div
-      class="search-dropdown absolute top-16 left-0 bg-white border border-gray-300 shadow-md z-10"
+      class="search-dropdown absolute top-16 left-0 bg-white border border-gray-300 dark:border-none shadow-md z-10"
     >
-    <div class=" p-1 text-xl font-1 dark:text-white">Posts:</div>
-      <ul>
+    <div class=" p-1 text-lg font-1 dark:bg-gray-800 dark:text-white outline-none border-none">Posts:</div>
+      <ul class="dark:bg-gray-800 outline-none border-none shadow-md w-full">
         {#each filteredPosts as post (post.id)}
-          <li class="p-2 cursor-pointer hover:bg-gray-100">
+          <li class="p-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700">
            <a href="/blog/{post.id}">
            {@html post.highlightedTitle}</a>
           </li>
