@@ -17,7 +17,9 @@
   import { svelteTime } from "svelte-time";
   import { Avatar, Badge } from "flowbite-svelte";
 
-  export let data;
+  /** @type {import('./$types').PageData} */
+export let data;
+  
 
   /**
    * @type {import('@prisma/client').Prisma.PostInclude<comments:true,author:true,likes:true>}

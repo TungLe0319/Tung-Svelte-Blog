@@ -2,14 +2,18 @@
   import { Input } from "flowbite-svelte";
   import { SearchOutline } from "flowbite-svelte-icons";
   import { onMount } from "svelte";
+  import { AppState } from "../store/AppState";
 
   export let posts;
+  
   let searchTerm = "";
-  let filteredPosts = [];
+  let filteredPosts = []
+  
+ 
 
   // Function to filter posts based on the search term
   function filterPosts() {
-    filteredPosts = posts
+    filteredPosts = $AppState.posts
       .filter((post) => {
         const lowerTitle = post.title.toLowerCase();
         const lowerSearchTerm = searchTerm.toLowerCase();
@@ -21,6 +25,7 @@
         const lowerSearchTerm = searchTerm.toLowerCase();
         const index = lowerTitle.indexOf(lowerSearchTerm);
 
+        console.log(filteredPosts);
         if (index !== -1) {
           const highlightedTitle =
             title.substring(0, index) +
