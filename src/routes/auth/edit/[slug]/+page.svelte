@@ -157,7 +157,7 @@ async function handleDelete(){
           <div class="mb-4">
             <label for="content" class="block text-gray-600">Content</label>
 
-            <Editor conf="{conf}" bind:value="{content}" />
+            <Editor  bind:value="{content}" />
           </div>
         </div>
       </div>

@@ -74,7 +74,9 @@
     </div>
 
     <div class="  mt-64 px-24">
-      <SearchBarV2 categories="{categories}" />
+   <div class=" sticky top-20 z-50">
+       <SearchBarV2 categories="{categories}" />
+   </div>
       
 
       <div class="divider my-5"></div>

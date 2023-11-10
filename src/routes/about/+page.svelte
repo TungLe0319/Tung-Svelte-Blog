@@ -9,6 +9,7 @@
     ChevronRightSolid,
     CogOutline,
     DollarSolid,
+    GithubSolid,
     LandmarkSolid,
     LinkedinSolid,
     RocketSolid,
@@ -40,6 +41,7 @@
       description: "Drives the frontend Design asthetic lorem100 23423412342",
       github: "https://github.com/TungLe0319",
       linkedIn: "https://www.linkedin.com/in/tung-le0319/",
+      portfolio:'https://tung.devfoliov2.devopportunities.dev/'
     },
     {
       href: "https://www.linkedin.com/in/daniel-le97/",
@@ -51,29 +53,54 @@
         "Drives the backend data, database manegment and type safety",
       github: "https://github.com/daniel-le97",
       linkedIn: "https://www.linkedin.com/in/daniel-le97/",
+        portfolio:'https://v2.daniel.devopportunities.dev/'
     },
   ];
 
-  const heroProps = {
-    image:
-      "https://images.unsplash.com/photo-1685391722227-df9eec0583ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1445&q=80",
-    title: "About This Project",
-    subTitle: "And a little about us",
-    height: 100,
-  };
+ 
 </script>
 
-<Hero heroProps="{heroProps}" />
+
 
 
 
 
 <div class="px-10">
+
+  <Section name="content" >
+      <HeroHeader class="max-w-screen-md mb-8 lg:mb-16" h2Class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white" pClass="text-gray-500 sm:text-xl dark:text-gray-400">
+  <svelte:fragment slot="h2">About this Project</svelte:fragment>
+<svelte:fragment slot="paragraph">This blog project serves as an opportunity for me to strengthen my
+    development skills, troubleshooting abilities, and utilize my creativity.
+    This endeavor involves the creation of a personal blog application where I
+    can share posts about topics within the industry and things I find
+    fascinating.
+    <br /> <br />
+    As I embark on this project, my goal is to master various aspects of web development,
+    from crafting an intuitive user interface to implementing robust backend functionality.Through
+    this app, I also aim to provide readers with insightful content, whether it's
+    about the latest trends in technology, deep dives into coding challenges, or
+    explorations of intriguing subjects.
+
+    <br /><br />
+    I'm committed to delivering a seamless and enjoyable reading experience for users
+    and using this project as an opportunity to expand my knowledge, embrace secure
+    coding practices, and elevate my development skills..</svelte:fragment>
+
+  </HeroHeader>
+    <a href="https://github.com/TungLe0319/Tung-Svelte-Blog" class="inline-flex items-center font-medium text-primary-600 hover:text-primary-800 dark:text-primary-500 dark:hover:text-primary-700">
+      Find out More details at the repo
+      <ChevronRightSolid class="ml-2" size="xs" />
+    </a>
+
+</Section>
+
   
-<Section name="feature">
+<Section name="feature" sectionClass="py-0 sm:py-0">
   <HeroHeader class="max-w-screen-md mb-8 lg:mb-16" h2Class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white" pClass="text-gray-500 sm:text-xl dark:text-gray-400">
-    <svelte:fragment slot="h2">Designed for business teams like yours</svelte:fragment>
-    <svelte:fragment slot="paragraph">Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</svelte:fragment>
+  <svelte:fragment slot="h2">Project Features</svelte:fragment>
+<svelte:fragment slot="paragraph">The multitude of features incorporated into this project not only facilitated the creation of the blog but also streamlined the entire process, making it seamless and efficient. These  functionalities and tools played a pivotal role in simplifying various aspects of development, from managing the user interface to optimizing backend processes, ensuring a user-friendly and robust end project.</svelte:fragment>
+
   </HeroHeader>
   <FeatureDefault>
     <FeatureItem>
@@ -127,49 +154,25 @@
   </FeatureDefault>
 </Section>
 
-<Section name="content" >
-  <Content>
-    <svelte:fragment slot="h2">About this Project</svelte:fragment>
-    <p class="mb-4 "> This blog project serves as an opportunity for me to strengthen my
-    development skills, troubleshooting abilities, and utilize my creativity.
-    This endeavor involves the creation of a personal blog application where I
-    can share posts about topics within the industry and things I find
-    fascinating.
-    <br /> <br />
-    As I embark on this project, my goal is to master various aspects of web development,
-    from crafting an intuitive user interface to implementing robust backend functionality.Through
-    this app, I also aim to provide readers with insightful content, whether it's
-    about the latest trends in technology, deep dives into coding challenges, or
-    explorations of intriguing subjects.
-
-    <br /><br />
-    I'm committed to delivering a seamless and enjoyable reading experience for users
-    and using this project as an opportunity to expand my knowledge, embrace secure
-    coding practices, and elevate my development skills.
-</p>
-    <p class="mb-4 font-medium">Deliver great service experiences fast - without the complexity of traditional ITSM solutions.Accelerate critical development work, eliminate toil, and deploy changes with ease.</p>
-    <a href="https://github.com/TungLe0319/Tung-Svelte-Blog" class="inline-flex items-center font-medium text-primary-600 hover:text-primary-800 dark:text-primary-500 dark:hover:text-primary-700">
-      Learn more
-      <ChevronRightSolid class="ml-2" size="xs" />
-    </a>
-  </Content>
-</Section>
 
 
 
 <Section name="team" sectionClass="" >
   <TeamWrapper divClass="py-0">
-    <TeamHeader>
-      <svelte:fragment slot="label">Us</svelte:fragment>
-      <p
-        class="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400"
-      >
-        Get in touch with us! Reach out to us, and let's embark on a journey of
-        collaboration and mutual growth.
-      </p>
-    </TeamHeader>
+  
+
+  <HeroHeader class="max-w-screen-md mb-8 lg:mb-16" h2Class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white" pClass="text-gray-500 sm:text-xl dark:text-gray-400">
+  <svelte:fragment slot="h2">About Us</svelte:fragment>
+<svelte:fragment slot="paragraph">I'm Tung Le, passionate about crafting seamless digital experiences. Collaborating with my brother, Daniel Le, managing the backend part of our projects has been our forte. Together we tackle challenges and  create projects that harmonize the front and backend. <br><br>
+If you want to learn more about us check out our developer portfolios and hit us up on LinkedIn.</svelte:fragment>
+
+
+  </HeroHeader>
+
+
+
     <TeamBody>
-      {#each members as { github, linkedIn, href, src, alt, name, jobTitle, description }}
+      {#each members as {portfolio, github, linkedIn, href, src, alt, name, jobTitle, description }}
         <TeamItem
           href="{href}"
           src="{src}"
@@ -181,14 +184,28 @@
             {description}
           </p>
           <svelte:fragment slot="social">
-            <Github href="{github}" />
-
+          
+     <a
+              href="{github}"
+              class="text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
+            >
+              <GithubSolid size="lg"/>
+            </a>
+           
             <a
               href="{linkedIn}"
               class="text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
             >
-              <LinkedinSolid size="sm" />
+              <LinkedinSolid size="lg" />
             </a>
+
+                 <a
+              href="{portfolio}"
+              class="text-slate-500 flex items-center hover:text-slate-700 dark:hover:text-slate-300"
+            >
+              <RocketSolid size="lg"/>
+            </a>
+            
           </svelte:fragment>
         </TeamItem>
       {/each}
@@ -200,145 +217,7 @@
 
 </div>
 
-<!-- <div
-  class=" px-40 py-10 mt-3 text-xl flex flex-col items-center dark:text-white"
->
-  <h2 class="description">
-    This blog project serves as an opportunity for me to strengthen my
-    development skills, troubleshooting abilities, and utilize my creativity.
-    This endeavor involves the creation of a personal blog application where I
-    can share posts about topics within the industry and things I find
-    fascinating.
-    <br /> <br />
-    As I embark on this project, my goal is to master various aspects of web development,
-    from crafting an intuitive user interface to implementing robust backend functionality.Through
-    this app, I also aim to provide readers with insightful content, whether it's
-    about the latest trends in technology, deep dives into coding challenges, or
-    explorations of intriguing subjects.
 
-    <br /><br />
-    I'm committed to delivering a seamless and enjoyable reading experience for users
-    and using this project as an opportunity to expand my knowledge, embrace secure
-    coding practices, and elevate my development skills.
-
-    <br />
-  </h2>
-
-  <div class=" text-center my-2 mb-16 text-4xl font-1 font-bold">The Stack</div>
-  <Timeline order="vertical">
-    <TimelineItem title="Framework" date="">
-      <svelte:fragment slot="icon">
-        <span
-          class="flex absolute -left-3 justify-center items-center w-6 h-6 bg-primary-200 rounded-full ring-8 ring-white dark:ring-gray-900 dark:bg-primary-900"
-        >
-          <CalendarWeekSolid
-            class="w-3 h-3 text-primary-600 dark:text-primary-400"
-          />
-        </span>
-      </svelte:fragment>
-
-      <div class="mt-4">
-        <img
-          src="https://res.cloudinary.com/practicaldev/image/fetch/s--k-z0ysHD--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/p3nn57r52krvpdieblta.png"
-          alt="sveltekit"
-          width="300"
-          class="mb-4"
-        />
-
-        <Button color="alternative"
-          ><a href="https://kit.svelte.dev/" target="_blank"> Check It Out</a>
-          <ArrowRightOutline class="ml-2 w-3 h-3" /></Button
-        >
-      </div>
-    </TimelineItem>
-    <TimelineItem title="Node.js | PostgreSQL Backend ORM" date="">
-      <svelte:fragment slot="icon">
-        <span
-          class="flex absolute -left-3 justify-center items-center w-6 h-6 bg-primary-200 rounded-full ring-8 ring-white dark:ring-gray-900 dark:bg-primary-900"
-        >
-          <CalendarWeekSolid
-            class="w-3 h-3 text-primary-600 dark:text-primary-400"
-          />
-        </span>
-      </svelte:fragment>
-      <div class="mt-4">
-        <img
-          src="https://cf-assets.www.cloudflare.com/slt3lc6tev37/4WJkWMYGkEpa05B0hyL88E/91dd67e91752d39d94b60cdcdfdc287d/prismalogo-freelogovectors.net_.png"
-          alt="sveltekit"
-          width="300"
-          class="mb-4"
-        />
-
-        <Button color="alternative"
-          ><a href="https://www.prisma.io/" target="_blank"> Check It Out</a>
-          <ArrowRightOutline class="ml-2 w-3 h-3" /></Button
-        >
-      </div>
-    </TimelineItem>
-    <TimelineItem title="Authentication & User Management" date="">
-      <svelte:fragment slot="icon">
-        <span
-          class="flex absolute -left-3 justify-center items-center w-6 h-6 bg-primary-200 rounded-full ring-8 ring-white dark:ring-gray-900 dark:bg-primary-900"
-        >
-          <CalendarWeekSolid
-            class="w-3 h-3 text-primary-600 dark:text-primary-400"
-          />
-        </span>
-      </svelte:fragment>
-
-      <div class="mt-4">
-        <img
-          src="https://authjs.dev/img/og-image.png"
-          alt="sveltekit"
-          width="300"
-          class="mb-4"
-        />
-
-        <Button color="alternative"
-          ><a href="https://authjs.dev/" target="_blank"> Check It Out</a>
-          <ArrowRightOutline class="ml-2 w-3 h-3" /></Button
-        >
-      </div>
-    </TimelineItem>
-    <TimelineItem title="CSS Framework" date="">
-      <svelte:fragment slot="icon">
-        <span
-          class="flex absolute -left-3 justify-center items-center w-6 h-6 bg-primary-200 rounded-full ring-8 ring-white dark:ring-gray-900 dark:bg-primary-900"
-        >
-          <CalendarWeekSolid
-            class="w-3 h-3 text-primary-600 dark:text-primary-400"
-          />
-        </span>
-      </svelte:fragment>
-      <div class="mt-4">
-        <img
-          src="https://cdnlogo.com/logos/t/34/tailwind-css.svg"
-          alt="sveltekit"
-          width="300"
-          class="mb-4"
-        />
-
-        <Button color="alternative"
-          ><a href="https://tailwindcss.com/" target="_blank"> Check It Out</a>
-          <ArrowRightOutline class="ml-2 w-3 h-3" /></Button
-        >
-      </div>
-    </TimelineItem>
-  </Timeline>
-</div> -->
-
-<!-- <div class=" text-center my-2 text-4xl font-2 font-bold">Tech Stack</div>
-<ul class="list grid grid-cols-2 py-4 mt-10 px-28">
-  {#each stackData as stack}
-    <li class="list-item">
-      <a href={stack.link} target="_blank">
-        <div class="">
-          <img src={stack.iconUrl} alt={stack.description} class="" />
-        </div>
-      </a>
-    </li>
-  {/each}
-</ul> -->
 
 <style lang="scss" scoped>
 </style>

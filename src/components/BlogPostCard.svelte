@@ -116,14 +116,16 @@ import {AdminUser} from '../store/AdminUser'
           }}"></time>
       </Tooltip>
 
+
+      <!-- EDIT BUTTON -->
       {#if user.id === AdminUser.id && user.role === AdminUser.role}
         <Button
           on:click="{handleEdit}"
           color="none"
           border
-          class="text-orange-400 font-3  font-semibold p-2  cursor-pointer"
+          class="text-orange-400 font-3 outline-none border-none font-semibold p-0.5 cursor-pointer"
         >
-          <PenSolid class=" w-2.5 " />
+          <PenSolid class=" w-4 h-4 " />
     </Button>
         <Tooltip
           placement="top"
