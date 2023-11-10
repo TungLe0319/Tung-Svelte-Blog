@@ -16,48 +16,48 @@ export async function load() {
   }
 }
 
-export const actions = {
-  default: async ({ request }) => {
+// export const actions = {
+//   default: async ({ request }) => {
     
-      const postData = await request.formData();
+//       const postData = await request.formData();
 
-      console.log(postData.get("categories"));
-      const title = postData.get("title") || "";
-      const subtitle = postData.get("subtitle") || "";
-      const img = postData.get("img") || "";
-      const content = postData.get("content") || "";
-      const categories = postData.get("categories") 
-      const published = postData.get("published") === "true";
-      const datePublished = new Date().toISOString();
-const parsedCategories = JSON.parse(categories)
-      console.log(JSON.parse(categories))
-// const mappedCategories = categories.map((c) => ({
-//   id: c.id,
-// }));
+//       console.log(postData.get("categories"));
+//       const title = postData.get("title") || "";
+//       const subtitle = postData.get("subtitle") || "";
+//       const img = postData.get("img") || "";
+//       const content = postData.get("content") || "";
+//       const categories = postData.get("categories") 
+//       const published = postData.get("published") === "true";
+//       const datePublished = new Date().toISOString();
+// const parsedCategories = JSON.parse(categories)
+//       console.log(JSON.parse(categories))
+// // const mappedCategories = categories.map((c) => ({
+// //   id: c.id,
+// // }));
 
-      const newPost = await db.post.create({
-        data: {
-          title,
-          subtitle,
-          img,
-          content,
-          published,
-          datePublished,
-          author: {
-            connect: {
-              id: 1,
-            },
-          },
-          categories: {
-            connect: parsedCategories,
-          },
-        },
-      });
-      return {
-        status: 200,
-        body: 'adsfsfasdfsgd'
-      };
+//       const newPost = await db.post.create({
+//         data: {
+//           title,
+//           subtitle,
+//           img,
+//           content,
+//           published,
+//           datePublished,
+//           author: {
+//             connect: {
+//               id: 1,
+//             },
+//           },
+//           categories: {
+//             connect: parsedCategories,
+//           },
+//         },
+//       });
+//       return {
+//         status: 200,
+//         body: 'adsfsfasdfsgd'
+//       };
    
-  },
+//   },
 
-}
+// }

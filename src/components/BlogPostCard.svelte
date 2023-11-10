@@ -23,9 +23,7 @@ import {AdminUser} from '../store/AdminUser'
   let commentsLength = post.comments.length;
   let likesLength = post.likes.length;
 
- const  handleEdit =() => {
-    console.log('sdfgsg');
-    
+ const  handleEdit =() => {   
     $AppState.activePost = post;
     goto("/auth/edit");
   }

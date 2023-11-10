@@ -3,7 +3,7 @@
 <script>
   import Editor from "@tinymce/tinymce-svelte";
   import {  MultiSelect } from "flowbite-svelte";
-import { formData, updateFormData } from "../../../store/FormData";
+import { formData } from "../../../store/FormData";
 
 
   /** @type {import('./$types').PageData} */
@@ -39,7 +39,7 @@ async function handleSubmit() {
     form.append("published", published);
 
     console.log(form.get('categories'));
-    const response = await fetch("/auth/create", {
+    const response = await fetch("/api/posts", {
       method: "POST",
       body: form,
     });
@@ -102,9 +102,7 @@ async function handleSubmit() {
          
         />
 
-  {#each $formData.categories as item}
-   {item}
-  {/each}
+
       </div>
     </div>
 
