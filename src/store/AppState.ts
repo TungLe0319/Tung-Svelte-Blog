@@ -6,9 +6,10 @@ interface AppStateData {
   searchQuery: string;
   activeCategory: string;
   myCursor: number;
-  filteredPosts: Post[]; // Adjust type as per your data structure
-  posts: Post[]; // Adjust type as per your data structure
-  activePost: any; // Adjust type as per your data structure
+  filteredPosts: Post[]; 
+  posts: Post[]; 
+  paginationPosts:Post[]
+  activePost: any; 
 }
 
 
@@ -17,9 +18,10 @@ export const AppState: Writable<AppStateData> = writable({
   searchQuery: "",
   activeCategory: "All categories",
   myCursor: 0,
-  filteredPosts: [], // Add appropriate structure for your data
-  posts: [], // Add appropriate structure for your data
-  activePost: null, // Add appropriate structure for your data
+  filteredPosts: [],
+  posts: [], 
+  paginationPosts:[],
+  activePost: null, 
 });
 
 

@@ -1,42 +1,47 @@
 <script>
   import Hero from "../../components/Hero.svelte";
   import { Timeline, TimelineItem, Button } from "flowbite-svelte";
-  import { ArrowRightOutline, CalendarWeekSolid, LinkedinSolid } from "flowbite-svelte-icons";
-import { Section, Portfolio, PortfolioItem,TeamWrapper, TeamHeader, TeamBody, TeamItem, Facebook, Github, Twitter } from 'flowbite-svelte-blocks';
+  import {
+    ArrowRightOutline,
+    CalendarWeekSolid,
+    LinkedinSolid,
+  } from "flowbite-svelte-icons";
+  import {
+    Section,
+    Portfolio,
+    PortfolioItem,
+    TeamWrapper,
+    TeamHeader,
+    TeamBody,
+    TeamItem,
+    Facebook,
+    Github,
+    Twitter,
+  } from "flowbite-svelte-blocks";
 
-
-let members = [
+  let members = [
     {
-        href: 'https://www.linkedin.com/in/tung-le0319/',
-        src: 'https://avatars.githubusercontent.com/u/107594367?s=400&u=279c4a706755639789d6b825966e54161df0c7aa&v=4',
-        alt: 'Tung Le',
-        name: 'Tung Le',
-        jobTitle: 'Software Developer',
-        description: 'Drives the frontend Design asthetic lorem100 23423412342',
-        github:'https://github.com/TungLe0319',
-        linkedIn:'https://www.linkedin.com/in/tung-le0319/'
+      href: "https://www.linkedin.com/in/tung-le0319/",
+      src: "https://avatars.githubusercontent.com/u/107594367?s=400&u=279c4a706755639789d6b825966e54161df0c7aa&v=4",
+      alt: "Tung Le",
+      name: "Tung Le",
+      jobTitle: "Software Developer",
+      description: "Drives the frontend Design asthetic lorem100 23423412342",
+      github: "https://github.com/TungLe0319",
+      linkedIn: "https://www.linkedin.com/in/tung-le0319/",
     },
     {
-        href: 'https://www.linkedin.com/in/daniel-le97/',
-        src: 'https://avatars.githubusercontent.com/u/107774403?v=4',
-        alt: 'Daniel Le',
-        name: 'Daniel Le',
-        jobTitle: 'Software Engineer',
-        description: 'Drives the backend data, database manegment and type safety',
-         github:'https://github.com/daniel-le97',
-        linkedIn:'https://www.linkedin.com/in/daniel-le97/'
+      href: "https://www.linkedin.com/in/daniel-le97/",
+      src: "https://avatars.githubusercontent.com/u/107774403?v=4",
+      alt: "Daniel Le",
+      name: "Daniel Le",
+      jobTitle: "Software Engineer",
+      description:
+        "Drives the backend data, database manegment and type safety",
+      github: "https://github.com/daniel-le97",
+      linkedIn: "https://www.linkedin.com/in/daniel-le97/",
     },
-
-];
-
-
-
-
-
-
-
-
-
+  ];
 
   const heroProps = {
     image:
@@ -45,40 +50,42 @@ let members = [
     subTitle: "And a little about us",
     height: 100,
   };
-
-
-
-
 </script>
 
-<Hero {heroProps} />
+<Hero heroProps="{heroProps}" />
 
-
-
-
-
-
-
-
-<Section name="team"  sectionClass="!py-0 m-0">
+<Section name="team" sectionClass="!py-0 m-0">
   <TeamWrapper>
     <TeamHeader>
       <svelte:fragment slot="label">Us</svelte:fragment>
-      <p class="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">Get in touch with us! Reach out to us, and let's embark on a journey of collaboration and mutual growth.</p>
+      <p
+        class="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400"
+      >
+        Get in touch with us! Reach out to us, and let's embark on a journey of
+        collaboration and mutual growth.
+      </p>
     </TeamHeader>
-    <TeamBody >
-      {#each members as { github,linkedIn,href, src, alt, name, jobTitle, description }}
-        <TeamItem {href} {src} {alt} {name} {jobTitle}>
+    <TeamBody>
+      {#each members as { github, linkedIn, href, src, alt, name, jobTitle, description }}
+        <TeamItem
+          href="{href}"
+          src="{src}"
+          alt="{alt}"
+          name="{name}"
+          jobTitle="{jobTitle}"
+        >
           <p class="mt-3 mb-4 font-light text-gray-500 dark:text-gray-400">
             {description}
           </p>
           <svelte:fragment slot="social">
-         
             <Github href="{github}" />
-        
-           <a  href="{linkedIn}" class="text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 ">
-             <LinkedinSolid  size="sm"  />
-           </a>
+
+            <a
+              href="{linkedIn}"
+              class="text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
+            >
+              <LinkedinSolid size="sm" />
+            </a>
           </svelte:fragment>
         </TeamItem>
       {/each}
@@ -86,15 +93,9 @@ let members = [
   </TeamWrapper>
 </Section>
 
-
-
-
-
-
-
-
-
-<div class=" px-40 py-10 mt-3 text-xl flex flex-col items-center dark:text-white">
+<div
+  class=" px-40 py-10 mt-3 text-xl flex flex-col items-center dark:text-white"
+>
   <h2 class="description">
     This blog project serves as an opportunity for me to strengthen my
     development skills, troubleshooting abilities, and utilize my creativity.

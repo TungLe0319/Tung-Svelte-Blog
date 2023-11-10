@@ -1,5 +1,5 @@
 <!-- Navbar.svelte -->
-<script lang="ts">
+<script >
   import { page } from "$app/stores";
   import { signOut } from "@auth/sveltekit/client";
   import {
@@ -20,11 +20,10 @@
 
   export let pageSession;
   export let posts;
-  let isMenuOpen : false;
-  let y : 0;
-  let lastScrollY : 0;
-  let isNavbarHidden : false;
-  let activeUrl: any;
+  let y = 0;
+  let lastScrollY = 0;
+  let isNavbarHidden =false;
+  let activeUrl
 
   $: {
     activeUrl = $page.url.pathname;

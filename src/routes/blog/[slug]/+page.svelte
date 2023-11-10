@@ -270,6 +270,8 @@
     @apply font-mono bg-gray-100 rounded-md p-1;
   }
 
+  
+
   .recent-posts-container {
     @apply lg:w-1/4 xl:w-1/5  mt-8 px-4 pb-5  dark:text-white;
   }

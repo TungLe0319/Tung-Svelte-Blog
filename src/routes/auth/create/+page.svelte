@@ -38,7 +38,7 @@ async function handleSubmit() {
     form.append("categories", categoriesJsonString);
     form.append("published", published);
 
-    console.log(form.get('categories'));
+    // console.log(form.get('categories'));
     const response = await fetch("/api/posts", {
       method: "POST",
       body: form,
@@ -46,7 +46,7 @@ async function handleSubmit() {
 
     if (response.ok) {
       const responseData = await response.json();
-      console.log(responseData);
+      // console.log(responseData);
     }
   } catch (error) {
     console.error(error);
@@ -129,7 +129,7 @@ async function handleSubmit() {
           />
         </div>
       </div>
-      <div class="preview-column">
+      <!-- <div class="preview-column">
         <div class="mb-4">
           <label for="content_preview" class="block text-gray-600"
             >Preview</label
@@ -138,7 +138,7 @@ async function handleSubmit() {
             {@html $formData.content}
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="mt-4">

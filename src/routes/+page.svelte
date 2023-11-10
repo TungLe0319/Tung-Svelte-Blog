@@ -51,6 +51,8 @@
     subTitle: "How Art, Technology and Curiosity Fuel My Life",
     height: 100,
   };
+
+  
 </script>
 
 <div class="whatisme">
@@ -75,7 +77,9 @@
       
 
       <div class="divider my-5"></div>
-      <div class="   flex flex-col mx-20">
+
+
+      <div class=" Blog-Cards-Container  flex flex-col mx-20">
         {#if $AppState.filteredPosts.length > 0}
           {#each $AppState.filteredPosts as post (post.id)}
             <div transition:fade="{{ delay: 150, duration: 200 }}">

@@ -138,6 +138,7 @@ console.log(id);
       id:parseInt(id)
     }
    })
+   
  console.log(post);
  
 

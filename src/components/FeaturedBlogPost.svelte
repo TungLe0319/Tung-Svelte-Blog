@@ -78,7 +78,7 @@
   }
 
   .featured-blogpost img {
-    @apply object-cover  rounded-lg shadow-xl dark:shadow-lg shadow-slate-500 dark:shadow-gray-600/50 hover:shadow-orange-200 transition-all duration-150;
+    @apply object-cover  rounded-lg shadow-xl dark:shadow-lg shadow-slate-400 dark:shadow-gray-600/50 hover:shadow-orange-200 transition-all duration-150;
     height: 100%;
     width: 100%;
     @media only screen and (max-width: 768px) {
