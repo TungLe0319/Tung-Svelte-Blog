@@ -2,56 +2,53 @@
 
 <script>
   import Editor from "@tinymce/tinymce-svelte";
-  import {  MultiSelect } from "flowbite-svelte";
-import { formData } from "../../../store/FormData";
-
+  import { Button, Checkbox, Input, MultiSelect } from "flowbite-svelte";
+  import { formData } from "../../../store/FormData";
 
   /** @type {import('./$types').PageData} */
   export let data;
 
-   let mappedCategories = data.body.map(category => {
+  let mappedCategories = data.body.map((category) => {
     return {
       value: category.name,
-      name: category.name
+      name: category.name,
     };
   });
-  $:categoriesJsonString = JSON.stringify($formData.categories.map(category => ({ name: category })));
+  $: categoriesJsonString = JSON.stringify(
+    $formData.categories.map((category) => ({ name: category }))
+  );
 
+  async function handleSubmit() {
+    try {
+      const { title, img, subtitle, content, published } = $formData;
 
+      if (title === "" || subtitle === "" || content === "") {
+        errorMessage = "Title, subtitle, and content are required.";
+        return;
+      }
 
+      let form = new FormData();
+      form.append("title", title);
+      form.append("img", img);
+      form.append("subtitle", subtitle);
+      form.append("content", content);
+      form.append("categories", categoriesJsonString);
+      form.append("published", published);
 
+      // console.log(form.get('categories'));
+      const response = await fetch("/api/posts", {
+        method: "POST",
+        body: form,
+      });
 
-async function handleSubmit() {
-  try {
-    const { title, img, subtitle, content, published } = $formData;
-
-    if (title === "" || subtitle === "" || content === "") {
-      errorMessage = "Title, subtitle, and content are required.";
-      return;
+      if (response.ok) {
+        const responseData = await response.json();
+        // console.log(responseData);
+      }
+    } catch (error) {
+      console.error(error);
     }
-
-    let form = new FormData();
-    form.append("title", title);
-    form.append("img", img);
-    form.append("subtitle", subtitle);
-    form.append("content", content);
-    form.append("categories", categoriesJsonString);
-    form.append("published", published);
-
-    // console.log(form.get('categories'));
-    const response = await fetch("/api/posts", {
-      method: "POST",
-      body: form,
-    });
-
-    if (response.ok) {
-      const responseData = await response.json();
-      // console.log(responseData);
-    }
-  } catch (error) {
-    console.error(error);
   }
-}
 </script>
 
 <div class="p-4 pt-20">
@@ -85,7 +82,7 @@ async function handleSubmit() {
     <div class=" flex space-x-4">
       <div class="mb-4 w-1/2">
         <label for="img" class="block text-gray-600">Image URL</label>
-        <input
+        <Input
           type="text"
           id="img"
           name="img"
@@ -99,23 +96,20 @@ async function handleSubmit() {
           size="lg"
           items="{mappedCategories}"
           bind:value="{$formData.categories}"
-         
         />
-
-
       </div>
     </div>
 
-    <div class="mb-4">
-      <label class="block text-gray-600">
-        <input
-          type="checkbox"
-          name="published"
-          bind:checked="{$formData.published}"
-          class="mr-2"
-        />
-        Published
-      </label>
+    <div class="mb-4 flex items-center space-x-4">
+    
+      
+<Checkbox   bind:checked="{$formData.published}">Published</Checkbox>
+
+        <Button
+        type="submit"
+        class=""
+        >Create</Button
+      >
     </div>
 
     <div class="two-column">
@@ -123,10 +117,7 @@ async function handleSubmit() {
         <div class="mb-4">
           <label for="content" class="block text-gray-600">Content</label>
           <!-- <Editor bind:value="{content}" /> -->
-          <Editor
-         
-            bind:value="{$formData.content}"
-          />
+          <Editor bind:value="{$formData.content}" />
         </div>
       </div>
       <!-- <div class="preview-column">
@@ -141,13 +132,7 @@ async function handleSubmit() {
       </div> -->
     </div>
 
-    <div class="mt-4">
-      <button
-        type="submit"
-        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        >Create</button
-      >
-    </div>
+ 
   </form>
 </div>
 

@@ -8,7 +8,6 @@
   import type { Post } from "../../src/lib/models/post";
   import { Category, User } from "@prisma/client";
  
-  import { toast } from '../store/Toast'
   export let data;
  
  
@@ -22,6 +21,8 @@
   $AppState.myCursor = data.body.myCursor;
   $AppState.posts = data.body.posts;
   $AppState.filteredPosts = data.body.posts;
+
+
   // Function to filter posts based on the selected category
   function filterPosts(category) {
     if (category === "all") {

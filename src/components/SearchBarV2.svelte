@@ -1,4 +1,4 @@
-<script lang="ts">
+<script >
 import { Search, Button, Dropdown, DropdownItem } from 'flowbite-svelte';
   import { SearchOutline, ChevronDownSolid } from 'flowbite-svelte-icons';
   import { AppState } from "../store/AppState";
@@ -6,7 +6,7 @@ import {debounce} from '../lib/utils/functions'
   import { Category } from '@prisma/client';
   import Pagination from './Pagination.svelte';
  
-export let categories:Category[]
+export let categories
 
 
 // Function to handle input change and filter posts
@@ -59,7 +59,7 @@ function handleCategoryChange(category) {
     <SearchOutline class="w-5 h-5" />
   </Button>
 </form>
-   <Pagination/>
+   <!-- <Pagination/> -->
 </div>
 
 <style lang="scss" scoped>

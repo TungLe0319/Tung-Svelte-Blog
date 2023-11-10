@@ -3,8 +3,15 @@
   import { Timeline, TimelineItem, Button } from "flowbite-svelte";
   import {
     ArrowRightOutline,
+    BriefcaseSolid,
     CalendarWeekSolid,
+    ChartSolid,
+    ChevronRightSolid,
+    CogOutline,
+    DollarSolid,
+    LandmarkSolid,
     LinkedinSolid,
+    RocketSolid,
   } from "flowbite-svelte-icons";
   import {
     Section,
@@ -17,6 +24,10 @@
     Facebook,
     Github,
     Twitter,
+    Content,
+    HeroHeader,
+    FeatureDefault,
+    FeatureItem,
   } from "flowbite-svelte-blocks";
 
   let members = [
@@ -54,8 +65,100 @@
 
 <Hero heroProps="{heroProps}" />
 
-<Section name="team" sectionClass="!py-0 m-0">
-  <TeamWrapper>
+
+
+
+<div class="px-10">
+  
+<Section name="feature">
+  <HeroHeader class="max-w-screen-md mb-8 lg:mb-16" h2Class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white" pClass="text-gray-500 sm:text-xl dark:text-gray-400">
+    <svelte:fragment slot="h2">Designed for business teams like yours</svelte:fragment>
+    <svelte:fragment slot="paragraph">Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</svelte:fragment>
+  </HeroHeader>
+  <FeatureDefault>
+    <FeatureItem>
+      <svelte:fragment slot="icon"><RocketSolid class="text-primary-600 dark:text-primary-300" /></svelte:fragment>
+      <svelte:fragment slot="h3">SvelteKit</svelte:fragment>
+      <svelte:fragment slot="paragraph">Build powerful and efficient web applications using SvelteKit, offering a streamlined development experience.</svelte:fragment>
+    </FeatureItem>
+    <FeatureItem>
+      <svelte:fragment slot="icon"><RocketSolid class="text-primary-600 dark:text-primary-300" /></svelte:fragment>
+      <svelte:fragment slot="h3">Tailwind CSS</svelte:fragment>
+      <svelte:fragment slot="paragraph">Utilize Tailwind CSS for rapid UI development, creating sleek and customizable user interfaces.</svelte:fragment>
+    </FeatureItem>
+    <FeatureItem>
+      <svelte:fragment slot="icon"><RocketSolid class="text-primary-600 dark:text-primary-300" /></svelte:fragment>
+      <svelte:fragment slot="h3">Prisma</svelte:fragment>
+      <svelte:fragment slot="paragraph">Leverage Prisma for a modern database toolkit, facilitating database access and management.</svelte:fragment>
+    </FeatureItem>
+    <FeatureItem>
+      <svelte:fragment slot="icon"><RocketSolid class="text-primary-600 dark:text-primary-300" /></svelte:fragment>
+      <svelte:fragment slot="h3">Node.js</svelte:fragment>
+      <svelte:fragment slot="paragraph">Empower your backend with Node.js, enabling server-side logic and API integrations.</svelte:fragment>
+    </FeatureItem>
+    <FeatureItem>
+      <svelte:fragment slot="icon"><RocketSolid class="text-primary-600 dark:text-primary-300" /></svelte:fragment>
+      <svelte:fragment slot="h3">Tailwind Typography</svelte:fragment>
+      <svelte:fragment slot="paragraph">Implement Tailwind Typography to style your text content, ensuring consistent and beautiful typography across your project.</svelte:fragment>
+    </FeatureItem>
+    <FeatureItem>
+      <svelte:fragment slot="icon"><RocketSolid class="text-primary-600 dark:text-primary-300" /></svelte:fragment>
+      <svelte:fragment slot="h3">Flowbite-Svelte</svelte:fragment>
+      <svelte:fragment slot="paragraph">Integrate Flowbite-Svelte to leverage UI components for a consistent and polished design language in your Svelte applications.</svelte:fragment>
+    </FeatureItem>
+    <FeatureItem>
+      <svelte:fragment slot="icon"><RocketSolid class="text-primary-600 dark:text-primary-300" /></svelte:fragment>
+      <svelte:fragment slot="h3">TinyMCE for Rich Text Editing</svelte:fragment>
+      <svelte:fragment slot="paragraph">Incorporate TinyMCE for a powerful and customizable rich text editing experience in your web applications.</svelte:fragment>
+    </FeatureItem>
+    <FeatureItem>
+      <svelte:fragment slot="icon"><RocketSolid class="text-primary-600 dark:text-primary-300" /></svelte:fragment>
+      <svelte:fragment slot="h3">Auth with SvelteKit</svelte:fragment>
+      <svelte:fragment slot="paragraph">Enable user authentication and authorization functionalities using Auth in SvelteKit applications.</svelte:fragment>
+    </FeatureItem>
+<FeatureItem>
+  <svelte:fragment slot="icon">
+    <RocketSolid class="text-primary-600 dark:text-primary-300" />
+  </svelte:fragment>
+  <svelte:fragment slot="h3">PostCSS</svelte:fragment>
+  <svelte:fragment slot="paragraph">Enhance your CSS workflow with PostCSS, offering a flexible and modular approach to processing and optimizing your styles.</svelte:fragment>
+</FeatureItem>
+
+  </FeatureDefault>
+</Section>
+
+<Section name="content" >
+  <Content>
+    <svelte:fragment slot="h2">About this Project</svelte:fragment>
+    <p class="mb-4 "> This blog project serves as an opportunity for me to strengthen my
+    development skills, troubleshooting abilities, and utilize my creativity.
+    This endeavor involves the creation of a personal blog application where I
+    can share posts about topics within the industry and things I find
+    fascinating.
+    <br /> <br />
+    As I embark on this project, my goal is to master various aspects of web development,
+    from crafting an intuitive user interface to implementing robust backend functionality.Through
+    this app, I also aim to provide readers with insightful content, whether it's
+    about the latest trends in technology, deep dives into coding challenges, or
+    explorations of intriguing subjects.
+
+    <br /><br />
+    I'm committed to delivering a seamless and enjoyable reading experience for users
+    and using this project as an opportunity to expand my knowledge, embrace secure
+    coding practices, and elevate my development skills.
+</p>
+    <p class="mb-4 font-medium">Deliver great service experiences fast - without the complexity of traditional ITSM solutions.Accelerate critical development work, eliminate toil, and deploy changes with ease.</p>
+    <a href="https://github.com/TungLe0319/Tung-Svelte-Blog" class="inline-flex items-center font-medium text-primary-600 hover:text-primary-800 dark:text-primary-500 dark:hover:text-primary-700">
+      Learn more
+      <ChevronRightSolid class="ml-2" size="xs" />
+    </a>
+  </Content>
+</Section>
+
+
+
+<Section name="team" sectionClass="" >
+  <TeamWrapper divClass="py-0">
     <TeamHeader>
       <svelte:fragment slot="label">Us</svelte:fragment>
       <p
@@ -93,7 +196,11 @@
   </TeamWrapper>
 </Section>
 
-<div
+
+
+</div>
+
+<!-- <div
   class=" px-40 py-10 mt-3 text-xl flex flex-col items-center dark:text-white"
 >
   <h2 class="description">
@@ -218,7 +325,7 @@
       </div>
     </TimelineItem>
   </Timeline>
-</div>
+</div> -->
 
 <!-- <div class=" text-center my-2 text-4xl font-2 font-bold">Tech Stack</div>
 <ul class="list grid grid-cols-2 py-4 mt-10 px-28">
