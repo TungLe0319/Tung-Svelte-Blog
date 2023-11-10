@@ -1,5 +1,6 @@
 <script lang="ts">
-import { goto } from '$app/navigation';
+  import { goto } from "$app/navigation";
+  import { page } from "$app/stores";
   import { Card, Badge, Tooltip } from "flowbite-svelte";
   import { svelteTime } from "svelte-time";
   import {
@@ -9,28 +10,34 @@ import { goto } from '$app/navigation';
     PenSolid,
   } from "flowbite-svelte-icons";
   import { AppState } from "../store/AppState";
- import type { Post } from "../lib/models/post";
+  import type { Post } from "../lib/models/post";
 
-  let hCard : false;
-  export let post:Post;
+  console.log($page);
+
+  let hCard: false;
+  export let post: Post;
   let commentsLength = post.comments.length;
   let likesLength = post.likes.length;
 
-function handleEdit(){
-  $AppState.activePost = post
-goto('/auth/edit')
-}
+  function handleEdit() {
+    $AppState.activePost = post;
+    goto("/auth/edit");
+  }
 </script>
 
 {#if post}
-  <div class="blogPost "
-  >
-    <a href={`/blog/${post?.id}`}>
-      <img src={post?.img} alt="Blog-post-img" class="blogPost-image" />
+  <div class="blogPost">
+    <a href="{`/blog/${post?.id}`}">
+      <img src="{post?.img}" alt="Blog-post-img" class="blogPost-image" />
     </a>
     <div class="blogPost-body flex flex-col h-full justify-between">
       <div class="blogPost-body-title-and-subtitle">
-        <a class=" blogPost-link-title font-1 {$AppState.searchQuery !== "" ? 'text-red-500' : ''}" href={`blog/${post?.id}`}>
+        <a
+          class=" blogPost-link-title font-1 {$AppState.searchQuery !== ''
+            ? 'text-red-500'
+            : ''}"
+          href="{`blog/${post?.id}`}"
+        >
           {post?.title}
         </a>
         <div class="blogPost-subtitle font-3">{post?.subtitle}</div>
@@ -43,7 +50,9 @@ goto('/auth/edit')
               <Badge
                 color="none"
                 border
-                class="{$AppState.activeCategory === categories.name?'!text-indigo-300 bg-indigo-500 delay-500 transition-all duration-500  absolute top-0 left-0 text-xl  drop-shadow border-none shadow-md ' :''} font-3 font-semibold text-orange-400 dark:text-orange-300"
+                class="{$AppState.activeCategory === categories.name
+                  ? '!text-indigo-300 bg-indigo-500 delay-500 transition-all duration-500  absolute top-0 left-0 text-xl  drop-shadow border-none shadow-md '
+                  : ''} font-3 font-semibold text-orange-400 dark:text-orange-300"
               >
                 {categories.name}
               </Badge>
@@ -63,7 +72,7 @@ goto('/auth/edit')
           {/if}
 
           {#if commentsLength > 0}
-            <div class="flex space-x-0.5 ">
+            <div class="flex space-x-0.5">
               <MessagesOutline class="border-none outline-none" />
 
               <div class="text-xs font-semibold cursor-default">
@@ -84,12 +93,11 @@ goto('/auth/edit')
         <ClockSolid class="w-2.5 h-2.5 mr-1.5 " />
 
         <time
-          use:svelteTime={{
+          use:svelteTime="{{
             live: true,
             timestamp: post.datePublished,
-            format: "MMMM D, YYYY",
-          }}
-        />
+            format: 'MMMM D, YYYY',
+          }}"></time>
       </Badge>
       <Tooltip
         placement="top"
@@ -97,41 +105,42 @@ goto('/auth/edit')
         class="shadow-lg shadow-slate-300 dark:shadow-slate-600 font-3 font-semibold text-black"
       >
         <time
-          use:svelteTime={{
+          use:svelteTime="{{
             relative: true,
             live: true,
             timestamp: post.datePublished,
-            format: "MMMM D, YYYY",
-          }}
-        />
+            format: 'MMMM D, YYYY',
+          }}"></time>
       </Tooltip>
 
-
-  <button on:click="{handleEdit}">
-          <Badge
-        color="none"
-        border
-        class="text-orange-400 font-3 p-1 font-semibold  cursor-default"
-      >
-        <PenSolid class="w-2.5 h-2.5 mr-1.5 " />
-
-     
-      </Badge>
-       <Tooltip
-        placement="top"
-        color="default"
-        class="shadow-lg shadow-slate-300 dark:shadow-slate-600 font-3 font-semibold text-black"
-      >
-      Edit
-      </Tooltip>
-
-  </button>
+      {#if $page.data.session.user.email === "tung.le0319@gmail.com"}
+        <Badge
+          on:click="{handleEdit}"
+          color="none"
+          border
+          class="text-orange-400 font-3 p-1 font-semibold   cursor-pointer"
+        >
+          <PenSolid class="w-2.5 h-2.5  " />
+        </Badge>
+        <Tooltip
+          placement="top"
+          color="default"
+          class="shadow-lg shadow-slate-300 dark:shadow-slate-600 font-3 font-semibold text-black"
+        >
+          Edit
+        </Tooltip>
+      {/if}
     </div>
   </div>
 {/if}
 
-<div class="lg:hidden ">
-  <Card img={post.img} href={`/blog/${post?.id}`} reverse={hCard} class="mb-4 ">
+<div class="lg:hidden">
+  <Card
+    img="{post.img}"
+    href="{`/blog/${post?.id}`}"
+    reverse="{hCard}"
+    class="mb-4 "
+  >
     <h5
       class="mb-2 text-base font-bold tracking-tight text-gray-900 dark:text-white"
     >
@@ -155,7 +164,7 @@ goto('/auth/edit')
       <div class="likes-comment-container">
         {#if likesLength > 0}
           <div class="flex space-x-1">
-            <HeartOutline  class="dark:text-white"/>
+            <HeartOutline class="dark:text-white" />
             <div class="">
               {likesLength}
             </div>
@@ -181,7 +190,7 @@ goto('/auth/edit')
   }
 
   .blogPost {
-    @apply   py-3 my-4 shadow-lg justify-between px-4 hidden lg:flex flex-col  items-center  lg:flex-row md:flex-row rounded-md relative hover:bg-orange-50 transition-all duration-150 dark:hover:bg-gray-600 dark:bg-gray-800 dark:border dark:border-gray-200/40 hover:-translate-y-2;
+    @apply py-3 my-4 shadow-lg justify-between px-4 hidden lg:flex flex-col  items-center  lg:flex-row md:flex-row rounded-md relative hover:bg-orange-50 transition-all duration-150 dark:hover:bg-gray-600 dark:bg-gray-800 dark:border dark:border-gray-200/40 hover:-translate-y-2;
   }
   .blogPost-image {
     @apply rounded-md  shadow-2xl shadow-gray-400 dark:shadow-gray-700/50 transition-all   duration-300 ease-in-out

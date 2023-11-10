@@ -8,7 +8,7 @@
   import type { Post } from "../../src/lib/models/post";
 
   export let data;
-  // console.log(data);
+  console.log(data);
 
   let posts: Post[] = data.body?.posts;
   let categories = data.body?.categories;
