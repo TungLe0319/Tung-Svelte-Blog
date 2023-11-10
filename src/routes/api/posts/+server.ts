@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { db } from "../../../lib/utils/useDb";
 import { json } from "@sveltejs/kit";
+import { jsonResponse } from "../../../lib/utils/apiUtils.js";
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
@@ -64,7 +65,7 @@ export async function PUT({ request }) {
 
     const categories = putData.get("categories");
     const parsedCategories = JSON.parse(categories);
-    console.log(JSON.parse(categories));
+    // console.log(JSON.parse(categories));
 
     const postToUpdate = await db.post.findUnique({
       where: {
@@ -121,3 +122,44 @@ export async function PUT({ request }) {
     });
   }
 }
+
+/** @type {import('./$types').RequestHandler} */
+ export async function DELETE({request,params}){
+  try {
+
+const putData = await request.formData();
+
+const id = putData.get("id")
+   
+   const post = await db.post.findUnique({
+    where:{
+      id:parseInt(id)
+    }
+   })
+
+
+   if (!post) {
+     return jsonResponse(400, "Failed to find Post");
+   }
+
+   await db.post.delete({
+    where:{
+      id:post.id
+    }
+   })
+
+    return new Response(null, {
+      status: 200, // Status code for success
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ error: "Failed to fetch Posts" }), {
+      status: 500, // Status code for server error
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+ }

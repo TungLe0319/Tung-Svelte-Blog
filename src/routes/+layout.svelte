@@ -5,6 +5,7 @@
   // import "../app.postcss"
   import { fade } from "svelte/transition";
   import { page } from "$app/stores";
+  import Notification from "../components/Notification.svelte";
 
 
 /** @type {import('./$types').LayoutData} */
@@ -24,7 +25,7 @@ posts = data?.posts
       <slot {pageSession} />
     </main>
   {/key}
-
+<Notification/>
   <Footer />
 </div>
 
