@@ -29,29 +29,30 @@ export const actions = {
       const categories = postData.get("categories") 
       const published = postData.get("published") === "true";
       const datePublished = new Date().toISOString();
+const parsedCategories = JSON.parse(categories)
+      console.log(JSON.parse(categories))
 // const mappedCategories = categories.map((c) => ({
 //   id: c.id,
 // }));
 
-      // const newPost = await db.post.create({
-      //   data: {
-      //     title,
-      //     subtitle,
-      //     img,
-      //     content,
-      //     published,
-      //     datePublished,
-      //     author: {
-      //       connect: {
-      //         id: 1,
-      //       },
-      //     },
-      //     categories: {
-      //       connect: mappedCategories,
-      //     },
-      //   },
-      // });
-//  console.log(mappedCategories);
+      const newPost = await db.post.create({
+        data: {
+          title,
+          subtitle,
+          img,
+          content,
+          published,
+          datePublished,
+          author: {
+            connect: {
+              id: 1,
+            },
+          },
+          categories: {
+            connect: parsedCategories,
+          },
+        },
+      });
       return {
         status: 200,
         body: 'adsfsfasdfsgd'
@@ -59,51 +60,4 @@ export const actions = {
    
   },
 
-  // put: async ({ request }) => {
-  //   try {
-  //     const postData = await request.formData();
-  //     const postId = postData.get("id");
-  //     const title = postData.get("title") || "";
-  //     const subtitle = postData.get("subtitle") || "";
-  //     const img = postData.get("img") || "";
-  //     const content = postData.get("content") || "";
-  //     const categories = postData.get("categories") || "Art";
-  //     const published = postData.get("published") === "true";
-  //     const datePublished = new Date().toISOString();
-
-  //     const existingPost = await db.post.findUnique({
-  //       where: {
-  //         id: postId,
-  //       },
-  //     });
-
-  //     if (!existingPost) {
-  //       return {
-  //         status: 404,
-  //         body: JSON.stringify({ error: "Post not found" }),
-  //       };
-  //     }
-
-  //     const updatedPost = await db.post.update({
-  //       where: {
-  //         id: postId,
-  //       },
-  //       data: {
-  //         title,
-  //         subtitle,
-  //         img,
-  //         content,
-  //         published,
-  //         categories: {
-  //           connect: {
-  //             name: categories,
-  //           },
-  //         },
-  //       },
-  //     });
-  //     return {
-  //       body: updatedPost,
-  //     };
-  //   } catch (error) {}
-  // },
-};
+}

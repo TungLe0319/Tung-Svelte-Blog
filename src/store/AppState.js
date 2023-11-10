@@ -7,4 +7,6 @@ export const AppState = writable({
   myCursor:0,
   filteredPosts: [],
   posts: [],
+  activePost:null
 });
+

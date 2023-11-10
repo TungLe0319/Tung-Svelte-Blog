@@ -46,3 +46,52 @@ const responseObject = {
     });
   }
 }
+
+
+export async function PUT({request})  {
+ 
+  try {
+    const putData = await request.formData();
+
+    console.log(putData.get("id"));
+    const id = putData.get("id") || "";
+    const title = putData.get("title") || "";
+    const subtitle = putData.get("subtitle") || "";
+    const img = putData.get("img") || "";
+    const content = putData.get("content") || "";
+    const categories = putData.get("categories");
+    const published = putData.get("published") === "true";
+    const datePublished = new Date().toISOString();
+    const parsedCategories = JSON.parse(categories);
+    console.log(JSON.parse(categories));
+
+    const updatedPost = await db.post.update({
+      where: {
+        id: id,
+      },
+      data: {
+        title,
+        subtitle,
+        img,
+        content,
+        published,
+      },
+    });
+
+    return new Response('23455', {
+      status: 200, // Status code for success
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ error: "Failed to fetch Posts" }), {
+      status: 500, // Status code for server error
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
+   
+  }

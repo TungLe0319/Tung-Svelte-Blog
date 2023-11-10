@@ -7,7 +7,7 @@ import { db } from "$lib/utils/useDb";
 export async function load() {
   try {
     const posts = await db.post.findMany({
-      take: 2,
+     
       include: {
         author: true,
         categories: true,

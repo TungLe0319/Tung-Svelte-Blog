@@ -1,23 +1,25 @@
 <script lang="ts">
-
+import { goto } from '$app/navigation';
   import { Card, Badge, Tooltip } from "flowbite-svelte";
   import { svelteTime } from "svelte-time";
   import {
     HeartOutline,
     MessagesOutline,
     ClockSolid,
+    PenSolid,
   } from "flowbite-svelte-icons";
   import { AppState } from "../store/AppState";
  import type { Post } from "../lib/models/post";
 
   let hCard : false;
-
-
-
   export let post:Post;
   let commentsLength = post.comments.length;
   let likesLength = post.likes.length;
 
+function handleEdit(){
+  $AppState.activePost = post
+goto('/auth/edit')
+}
 </script>
 
 {#if post}
@@ -39,7 +41,7 @@
           {#each post?.categories as categories}
             <div class=" category-name">
               <Badge
-                color="default "
+                color="none"
                 border
                 class="{$AppState.activeCategory === categories.name?'!text-indigo-300 bg-indigo-500 delay-500 transition-all duration-500  absolute top-0 left-0 text-xl  drop-shadow border-none shadow-md ' :''} font-3 font-semibold text-orange-400 dark:text-orange-300"
               >
@@ -75,7 +77,7 @@
 
     <div class="blogPost-date">
       <Badge
-        color="default"
+        color="none"
         border
         class="text-orange-400 font-3 font-semibold  cursor-default"
       >
@@ -103,6 +105,27 @@
           }}
         />
       </Tooltip>
+
+
+  <button on:click="{handleEdit}">
+          <Badge
+        color="none"
+        border
+        class="text-orange-400 font-3 p-1 font-semibold  cursor-default"
+      >
+        <PenSolid class="w-2.5 h-2.5 mr-1.5 " />
+
+     
+      </Badge>
+       <Tooltip
+        placement="top"
+        color="default"
+        class="shadow-lg shadow-slate-300 dark:shadow-slate-600 font-3 font-semibold text-black"
+      >
+      Edit
+      </Tooltip>
+
+  </button>
     </div>
   </div>
 {/if}
@@ -195,7 +218,7 @@
   }
 
   .blogPost-categories {
-    @apply flex  lg:text-sm lg:my-0 my-2   text-xs font-semibold space-x-4 text-teal-600;
+    @apply flex flex-wrap  gap-1   lg:text-sm lg:my-0 my-2   text-xs font-semibold  text-teal-600;
 
     .category-name {
       @apply cursor-default;
