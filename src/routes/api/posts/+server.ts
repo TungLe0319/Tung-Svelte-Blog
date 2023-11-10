@@ -130,23 +130,29 @@ export async function PUT({ request }) {
 const putData = await request.formData();
 
 const id = putData.get("id")
+console.log(id);
+
    
    const post = await db.post.findUnique({
     where:{
       id:parseInt(id)
     }
    })
-
+ console.log(post);
+ 
 
    if (!post) {
      return jsonResponse(400, "Failed to find Post");
    }
 
-   await db.post.delete({
+  const deleted = await db.post.delete({
     where:{
       id:post.id
     }
    })
+
+  //  console.log(deleted);
+   
 
     return new Response(null, {
       status: 200, // Status code for success

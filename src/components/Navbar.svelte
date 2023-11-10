@@ -108,7 +108,7 @@
     <NavUl activeUrl="{activeUrl}" activeClass="active-link" nonActiveClass="">
       <NavLi class="text-lg font-3" href="/" active="{true}">Home</NavLi>
       <NavLi class="text-lg font-3" href="/about">About</NavLi>
-      <NavLi class="text-lg font-3" href="/contact">Contact</NavLi>
+    
     </NavUl>
     <SearchBar posts="{posts}" />
   </div>

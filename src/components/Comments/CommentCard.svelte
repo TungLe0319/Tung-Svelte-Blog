@@ -5,11 +5,8 @@
   import { createEventDispatcher } from "svelte";
   import { fly } from "svelte/transition";
   import {
-    Button,
     Dropdown,
     DropdownItem,
-    Checkbox,
-    Helper,
     Avatar,
     Badge,
   } from "flowbite-svelte";
@@ -17,12 +14,8 @@
   import { svelteTime } from "svelte-time";
 
   export let comment;
- 
-  
-  
 
   let userEmail = $page.data.session?.user?.email;
-  let showOptionMenu = false;
   const dispatch = createEventDispatcher();
 
   async function deleteComment(commentId) {
@@ -47,61 +40,58 @@
         dispatch("commentDeleted", deletedComment);
       }
     } catch (error) {
-      console.error("Failed to Delete");
+      console.error(error);
     }
   }
 
-  function toggleShowOptionMenu() {
-    showOptionMenu = !showOptionMenu;
-  }
+ 
 </script>
 
-<div
-  class="comment-card group relative"
-  in:fly={{ x: -100, duration: 300, opacity: 1 }}
-  out:fly={{ x: 100, duration: 400, opacity: 0 }}
->
-  <div class="user-info">
-    <div class="flex flex-col items-center justify-center">
-      <Avatar src={comment?.user?.image} class="shadow-md shadow-slate-500" />
-      <div class="  text-center font-medium dark:text-white mt-2">
-        {comment?.user?.name}
-        <!-- <div class="text-sm text-gray-500 dark:text-gray-400"></div> -->
+<div class="comment-card group relative" transition:fly>
+  <div class=" w-full">
+    <div class="flex items-center justify-between space-x-3 mb-2">
+      <div class="flex items-center space-x-2">
+        <Avatar
+          size="sm"
+          src="{comment?.user?.image}"
+          class="shadow-sm shadow-slate-500"
+        />
+        <div class="  text-center text-sm dark:text-white mt-2">
+          {comment?.user?.name}
+        </div>
+        <div class="">
+          <Badge color="dark">
+         
+
+            <time
+              use:svelteTime="{{
+                relative: false,
+                live: true,
+                timestamp: comment.createdAt,
+                format: 'MMMM D, YYYY',
+              }}"></time>
+          </Badge>
+        </div>
+      </div>
+
+      <div class="">
+        {#if comment?.user?.email === userEmail}
+          <DotsHorizontalOutline
+            class="dots-menu dark:text-white cursor-pointer outline-none  focus:text-orange-400"
+          />
+          <Dropdown triggeredBy=".dots-menu">
+            <DropdownItem>
+              <button on:click="{deleteComment(comment.id)}" class=""
+                >Delete</button
+              ></DropdownItem
+            >
+          </Dropdown>
+        {/if}
       </div>
     </div>
   </div>
 
   <div class="content-container">
-    {#if comment?.user?.email === userEmail}
-      <Button
-        class=" absolute right-0 p-0 px-1 w-fit  bg-transparent hover:bg-opacity-40 hover:bg-orange-400"
-      >
-        <DotsHorizontalOutline class="text-black" />
-      </Button>
-      <Dropdown class="w-60 p-3 space-y-1 text-sm shadow-lg shadow-slate-400 ">
-        <li class="rounded p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
-          <div class="">
-            <button on:click={deleteComment(comment.id)} class="">Delete</button
-            >
-          </div>
-        </li>
-      </Dropdown>
-    {/if}
-    <div class="created-at">
-      <Badge color="dark">
-        <ClockSolid class="w-2.5 h-2.5 mr-1.5 " />
-
-        <time
-          use:svelteTime={{
-            relative: true,
-            live: true,
-            timestamp: comment.createdAt,
-            format: "MMMM D, YYYY",
-          }}
-        />
-      </Badge>
-    </div>
-
     <div class="content">
       {comment?.content}
     </div>
@@ -110,10 +100,10 @@
 
 <style lang="scss" scoped>
   .comment-card {
-    @apply flex items-center  pr-5 py-1 border-b-2  my-4;
+    @apply flex flex-col items-center  pr-5 py-1 border-b-2  my-4;
   }
   .content-container {
-    @apply flex flex-col w-full;
+    @apply flex flex-col w-full p-3;
   }
 
   .created-at {

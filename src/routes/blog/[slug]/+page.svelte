@@ -4,22 +4,17 @@
   import LikeBlogPost from "$components/LikeBlogPost.svelte";
   import RecentPosts from "$components/RecentPosts.svelte";
   import LinkedInCard from "$components/LinkedInCard.svelte";
-  import { onDestroy, onMount } from "svelte";
+  import { onMount } from "svelte";
   import {
     ClockOutline,
-    ClockSolid,
     HeartOutline,
-    InfoCircleOutline,
     MessagesOutline,
-    UserOutline,
-    UserSolid,
   } from "flowbite-svelte-icons";
   import { svelteTime } from "svelte-time";
   import { Avatar, Badge } from "flowbite-svelte";
 
   /** @type {import('./$types').PageData} */
-export let data;
-  
+  export let data;
 
   /**
    * @type {import('@prisma/client').Prisma.PostInclude<comments:true,author:true,likes:true>}
@@ -100,7 +95,7 @@ export let data;
 
       <div class="post">
         <div class="post-body">
-          <img src={post?.img} alt="Blog-post" class=" post-image" />
+          <img src="{post?.img}" alt="Blog-post" class=" post-image" />
 
           <div class="post-info">
             <Badge
@@ -111,21 +106,19 @@ export let data;
               <ClockOutline class="w-6 h-6 mr-1.5 " />
               <div class="space-x-3">
                 <time
-                  use:svelteTime={{
+                  use:svelteTime="{{
                     live: true,
                     timestamp: post.datePublished,
-                    format: "MMMM D, YYYY",
-                  }}
-                />
+                    format: 'MMMM D, YYYY',
+                  }}"></time>
 
                 <time
-                  use:svelteTime={{
+                  use:svelteTime="{{
                     relative: true,
                     live: true,
                     timestamp: post.datePublished,
-                    format: "MMMM D, YYYY",
-                  }}
-                />
+                    format: 'MMMM D, YYYY',
+                  }}"></time>
               </div>
             </Badge>
 
@@ -134,7 +127,7 @@ export let data;
               border
               class="hover:-translate-y-2 transition-all duration-150  text-base cursor-default py-1 space-x-2"
             >
-              <Avatar src={post.author.image} size="sm" />
+              <Avatar src="{post.author.image}" size="sm" />
               <span> {post.author.name}</span>
             </Badge>
 
@@ -156,23 +149,27 @@ export let data;
             </Badge>
           </div>
 
-
           <div class="post-title">{post?.title}</div>
           <div class="post-subtitle">{post?.subtitle}</div>
-          <hr class="  w-full">
-          <div class="post-content dark:text-white">{@html post?.content}</div>
+          <hr class="  w-full" />
+
+          <article class="   prose   max-w-full">
+            {@html post?.content}
+          </article>
+
+          <!-- <div class="post-content dark:text-white">{@html post?.content}</div> -->
         </div>
       </div>
       <!-- COMMENT FORM  -->
       {#if data?.session}
-        <CommentForm on:commentCreated={handleCommentCreated} {post} />
+        <CommentForm on:commentCreated="{handleCommentCreated}" post="{post}" />
       {/if}
       <!-- COMMENT SECTION  -->
       <div class="comment-container">
         {#each comments as comment (comment.id)}
           <CommentCard
-            on:commentDeleted={handleCommentDeleted(comment.id)}
-            {comment}
+            on:commentDeleted="{handleCommentDeleted(comment.id)}"
+            comment="{comment}"
           />
         {/each}
       </div>
@@ -181,11 +178,15 @@ export let data;
     <!-- Recent Post Section to the right -->
     <div class="recent-posts-container">
       <div class="sticky top-28 z-10">
-        <RecentPosts {recentPosts} />
+        <RecentPosts recentPosts="{recentPosts}" />
         <!-- LINKED IN  -->
         <LinkedInCard />
         <!--  !LIKES -->
-        <LikeBlogPost {post} {liked} on:likeToggled={handleLikeToggled(post)} />
+        <LikeBlogPost
+          post="{post}"
+          liked="{liked}"
+          on:likeToggled="{handleLikeToggled(post)}"
+        />
       </div>
     </div>
   </div>

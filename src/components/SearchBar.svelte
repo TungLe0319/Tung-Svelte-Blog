@@ -24,8 +24,6 @@
         const lowerTitle = title.toLowerCase();
         const lowerSearchTerm = searchTerm.toLowerCase();
         const index = lowerTitle.indexOf(lowerSearchTerm);
-
-        console.log(filteredPosts);
         if (index !== -1) {
           const highlightedTitle =
             title.substring(0, index) +

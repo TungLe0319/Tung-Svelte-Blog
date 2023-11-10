@@ -1,3 +1,11 @@
+<script>
+  import { Section } from 'flowbite-svelte-blocks';
+ 
+  import { Footer, FooterBrand, FooterLinkGroup, FooterLink, FooterCopyright, FooterIcon } from 'flowbite-svelte';
+</script>
+
+
+
 <footer class="bg-zinc-900 text-white">
   <div class="w-full pt-10 flex items-center justify-center bg-zinc-900">
     <div class="md:w-2/3 w-full px-4 text-white flex flex-col">
@@ -7,7 +15,7 @@
         </h1>
 
         <div
-          class="w-full md:w-1/2 footer-section flex justify-center flex-col items-center"
+          class="w-full  footer-section flex justify-center flex-col items-center"
         >
           <div class="mt-8 flex">
             <img
@@ -78,13 +86,10 @@
         </p>
       </div>
       <div class="flex flex-col">
-        <div class="flex mt-24 mb-5 flex-row justify-between items-end">
-          <div class="hidden md:block">
-          </div>
-          <a href="/"> Home </a>
-          <a href="/auth/account" class="link" active-class="active-link">
-            Account
-          </a>
+        <div class="flex mt-24 mb-5  justify-center space-x-10 ">
+     
+          <a href="/about"> About </a>
+        
           <a href="/" class="link" active-class="active-link"> Home </a>
         </div>
         <hr class="border-gray-600" />
@@ -95,6 +100,8 @@
       </div>
     </div>
   </div>
+
+
 </footer>
 
 <style lang="scss" scoped>
