@@ -6,17 +6,19 @@
   import SearchBarV2 from "../components/SearchBarV2.svelte";
   import { AppState } from "../store/AppState";
   import type { Post } from "../../src/lib/models/post";
+  import { Category, User } from "@prisma/client";
 
   export let data;
-  console.log(data);
+ 
+ 
 
   let posts: Post[] = data.body?.posts;
-  let categories = data.body?.categories;
+  let categories:Category[] = data.body?.categories;
   let selectedCategory = "all";
   let filteredPosts = [];
+  let user:User = data.user
 
   $AppState.myCursor = data.body.myCursor;
-
   $AppState.posts = data.body.posts;
   $AppState.filteredPosts = data.body.posts;
   // Function to filter posts based on the selected category
@@ -75,7 +77,7 @@
         {#if $AppState.filteredPosts.length > 0}
           {#each $AppState.filteredPosts as post (post.id)}
             <div transition:fade="{{ delay: 150, duration: 200 }}">
-              <BlogPostCard post="{post}" />
+              <BlogPostCard post="{post}" user="{user}" />
             </div>
           {/each}
         {:else}

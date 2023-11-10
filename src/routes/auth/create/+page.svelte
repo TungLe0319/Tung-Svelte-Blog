@@ -3,66 +3,61 @@
 <script>
   import Editor from "@tinymce/tinymce-svelte";
   import {  MultiSelect } from "flowbite-svelte";
+import { formData, updateFormData } from "../../../store/FormData";
 
 
   /** @type {import('./$types').PageData} */
   export let data;
-  let title = "";
-  let img = "";
-  let subtitle = "";
-  let content = ``;
-  let published = true;
-    let mappedCategories = data.body.map(category => {
+
+   let mappedCategories = data.body.map(category => {
     return {
       value: category.name,
       name: category.name
     };
   });
-  let selected = [];
-let categoriesJsonString
-
-  $:categoriesJsonString = JSON.stringify(selected.map(category => ({ name: category })));
+  $:categoriesJsonString = JSON.stringify($formData.categories.map(category => ({ name: category })));
 
 
-  async function handleSubmit() {
-    try {
-      if (title === "" || subtitle === "" || content === "") {
-        errorMessage = "Title, subtitle, and content are required.";
-        return;
-      }
-
-      let formData = new FormData();
-      formData.append("title", title);
-      formData.append("img", img);
-      formData.append("subtitle", subtitle);
-      formData.append("content", content);
-     formData.append("categories", categoriesJsonString);
-      formData.append("published", published);
 
 
-      console.log(formData.get('categories'));
-      const response = await fetch("/auth/create", {
-        method: "POST",
 
-        body: formData,
-      });
-      if (response.ok) {
+async function handleSubmit() {
+  try {
+    const { title, img, subtitle, content, published } = $formData;
 
-        const responseData = await response.json();
-     console.log(responseData);
-   
-      
-      }
-    } catch (error) {
-      console.error(error);
+    if (title === "" || subtitle === "" || content === "") {
+      errorMessage = "Title, subtitle, and content are required.";
+      return;
     }
+
+    let form = new FormData();
+    form.append("title", title);
+    form.append("img", img);
+    form.append("subtitle", subtitle);
+    form.append("content", content);
+    form.append("categories", categoriesJsonString);
+    form.append("published", published);
+
+    console.log(form.get('categories'));
+    const response = await fetch("/auth/create", {
+      method: "POST",
+      body: form,
+    });
+
+    if (response.ok) {
+      const responseData = await response.json();
+      console.log(responseData);
+    }
+  } catch (error) {
+    console.error(error);
   }
+}
 </script>
 
 <div class="p-4 pt-20">
   <h2 class="text-2xl font-semibold mb-4">Create a New Blog Post</h2>
 
-  <form on:submit="{handleSubmit}">
+  <form on:submit|preventDefault="{handleSubmit}">
     <div class="flex space-x-4">
       <div class="mb-4 w-1/2">
         <label for="title" class="block text-gray-600">Title</label>
@@ -70,7 +65,7 @@ let categoriesJsonString
           type="text"
           id="title"
           name="title"
-          bind:value="{title}"
+          bind:value="{$formData.title}"
           class="w-full border rounded px-3 py-2"
         />
       </div>
@@ -81,7 +76,7 @@ let categoriesJsonString
           type="text"
           id="subtitle"
           name="subtitle"
-          bind:value="{subtitle}"
+          bind:value="{$formData.subtitle}"
           class="w-full border rounded px-3 py-2"
         />
       </div>
@@ -94,7 +89,7 @@ let categoriesJsonString
           type="text"
           id="img"
           name="img"
-          bind:value="{img}"
+          bind:value="{$formData.img}"
           class="w-full border rounded px-3 py-2"
         />
       </div>
@@ -103,11 +98,11 @@ let categoriesJsonString
         <MultiSelect
           size="lg"
           items="{mappedCategories}"
-          bind:value="{selected}"
+          bind:value="{$formData.categories}"
          
         />
 
-  {#each selected as item}
+  {#each $formData.categories as item}
    {item}
   {/each}
       </div>
@@ -118,7 +113,7 @@ let categoriesJsonString
         <input
           type="checkbox"
           name="published"
-          bind:checked="{published}"
+          bind:checked="{$formData.published}"
           class="mr-2"
         />
         Published
@@ -132,7 +127,7 @@ let categoriesJsonString
           <!-- <Editor bind:value="{content}" /> -->
           <Editor
          
-            bind:value="{content}"
+            bind:value="{$formData.content}"
           />
         </div>
       </div>
@@ -142,7 +137,7 @@ let categoriesJsonString
             >Preview</label
           >
           <div class="rounded px-3 py-2">
-            {@html content}
+            {@html $formData.content}
           </div>
         </div>
       </div>

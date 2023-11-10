@@ -1,7 +1,7 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
   import { page } from "$app/stores";
-  import { Card, Badge, Tooltip } from "flowbite-svelte";
+  import { Card, Badge, Tooltip, Button } from "flowbite-svelte";
   import { svelteTime } from "svelte-time";
   import {
     HeartOutline,
@@ -11,15 +11,21 @@
   } from "flowbite-svelte-icons";
   import { AppState } from "../store/AppState";
   import type { Post } from "../lib/models/post";
+  import { User } from "@prisma/client";
 
-  console.log($page);
+import {AdminUser} from '../store/AdminUser'
 
   let hCard: false;
   export let post: Post;
+  export let user:User
+ 
+  
   let commentsLength = post.comments.length;
   let likesLength = post.likes.length;
 
-  function handleEdit() {
+ const  handleEdit =() => {
+    console.log('sdfgsg');
+    
     $AppState.activePost = post;
     goto("/auth/edit");
   }
@@ -113,15 +119,15 @@
           }}"></time>
       </Tooltip>
 
-      {#if $page.data.session.user.email === "tung.le0319@gmail.com"}
-        <Badge
+      {#if user.id === AdminUser.id && user.role === AdminUser.role}
+        <Button
           on:click="{handleEdit}"
           color="none"
           border
-          class="text-orange-400 font-3 p-1 font-semibold   cursor-pointer"
+          class="text-orange-400 font-3  font-semibold p-2  cursor-pointer"
         >
-          <PenSolid class="w-2.5 h-2.5  " />
-        </Badge>
+          <PenSolid class=" w-2.5 " />
+    </Button>
         <Tooltip
           placement="top"
           color="default"
