@@ -4,6 +4,7 @@
   import Editor from "@tinymce/tinymce-svelte";
   import { Button, Checkbox, MultiSelect } from "flowbite-svelte";
   import { goto } from "$app/navigation";
+  import { toast } from "../../../../store/Toast";
  
   /** @type {import('./$types').PageData} */
   export let data;
@@ -60,6 +61,10 @@ async function handleSubmit() {
   if (response.ok) {
       const responseData = await response.json();
      goto(`/blog/${responseData.id}`)
+     toast({
+      message:'SUCCESSFULLY EDITED',
+      color:'green'
+     })
     }
   } catch (error) {
     console.error(error);

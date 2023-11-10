@@ -73,9 +73,7 @@
     <div class="  mt-64 px-24">
       <SearchBarV2 categories="{categories}" />
       
-<button on:click={() => toast('🔥 Svelte is fire')}>
-  Show notification
-</button>
+
       <div class="divider my-5"></div>
       <div class="   flex flex-col mx-20">
         {#if $AppState.filteredPosts.length > 0}
