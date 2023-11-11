@@ -23,7 +23,7 @@ export const load: PageServerLoad = async ({ params }) => {
   };
 
   const getCategories = async () => {
-    const categories = await db.category.findMany();
+    const categories = await prisma.category.findMany();
 
     if (!categories) {
       return fail(400, { message: "Invalid Request" });
@@ -119,7 +119,7 @@ export const actions: Actions = {
     }
 
     try {
-      await db.post.delete({
+      await prisma.post.delete({
         where: {
           id: Number(id),
         },

@@ -1,40 +1,39 @@
-import { db } from "$lib/server/prisma";
+import { prisma } from "$lib/server/prisma";
 import type { Actions, PageServerLoad } from "./$types";
 import { error, fail } from "@sveltejs/kit";
 
 export const load: PageServerLoad = async () => {
   try {
-    const categories = await db.category.findMany();
+    const categories = await prisma.category.findMany();
 
     return {
       body: categories,
     };
   } catch (error) {
-    console.error("Error fetching post:", error);
-    throw error(500, "Internal server error");
+ return fail(500,{message:'Unable to load Categories'})
   }
 };
 
 export const actions: Actions = {
   createPost: async ({ request }) => {
-    const { title, content, img, categories, subtitle, published } =
-      Object.fromEntries(await request.formData()) as {
-        title: string;
-        subtitle: string;
-        img: string;
-        content: string;
-        published: boolean;
-        categories: [];
-      };
+ const formData = await request.formData();
 
-      console.log(content);
+ const title = formData.get("title") as string;
+ const subtitle = formData.get("subtitle") as string;
+ const img = formData.get("img") as string;
+ const content = formData.get("content") as string;
+ const published = formData.get("published") === "true"; // If the checkbox is expected to return a string 'true' or 'false'
+ const categories = formData.getAll("selected[]") as string[];
+ 
+
+  
       
     const datePublished = new Date().toISOString();
 
     console.log(title, img, categories, subtitle);
 
     try {
-      await db.post.create({
+      await prisma.post.create({
         data: {
           title,
           subtitle,
@@ -48,12 +47,13 @@ export const actions: Actions = {
             },
           },
           categories: {
+        
             connect: categories,
           },
         },
       });
 
-      return { status: 201 };
+      return { status: 200 };
     } catch (error) {
       console.error(error);
       return fail(500, { message: "Could not create the Post" });

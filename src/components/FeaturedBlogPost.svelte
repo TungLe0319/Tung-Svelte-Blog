@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Post } from "../lib/models/post";
+  import type { Post } from "$lib/models/post";
   import { Card } from "flowbite-svelte";
   export let featuredPost: Post;
   let hCard = false;

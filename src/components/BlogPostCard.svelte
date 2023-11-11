@@ -10,28 +10,22 @@
     PenSolid,
   } from "flowbite-svelte-icons";
   import { AppState } from "../store/AppState";
-  import type { Post } from "../lib/models/post";
-  import { User } from "@prisma/client";
+  import type { Post } from "$lib/models/post";
 
-import {AdminUser} from '../store/AdminUser'
+  export let post: Post;
 
   let hCard: false;
-  export let post: Post;
-  
-//  console.log($page);
- 
-  
   let commentsLength = post.comments.length;
   let likesLength = post.likes.length;
 
- const  handleEdit =() => {   
+  const handleEdit = () => {
     goto(`/auth/edit/${post.id}`);
-  }
+  };
 </script>
 
 {#if post}
   <div class="blogPost">
-    <a href="{`/blog/${post?.id}`}">
+    <a href="{`/posts/${post?.id}`}">
       <img src="{post?.img}" alt="Blog-post-img" class="blogPost-image" />
     </a>
     <div class="blogPost-body flex flex-col h-full justify-between">
@@ -117,22 +111,15 @@ import {AdminUser} from '../store/AdminUser'
           }}"></time>
       </Tooltip>
 
-
-
-
-
- 
-
-
-  {#if $page.data.session && $page.data.session.user.email === "tung.le0319@gmail.com"}
-     <Button
+      {#if $page.data.session && $page.data.session.user.email === "tung.le0319@gmail.com"}
+        <Button
           on:click="{handleEdit}"
           color="none"
           border
           class="text-orange-400 font-3 outline-none border-none font-semibold p-0.5 cursor-pointer"
         >
           <PenSolid class=" w-4 h-4 " />
-    </Button>
+        </Button>
         <Tooltip
           placement="top"
           color="default"
@@ -140,16 +127,7 @@ import {AdminUser} from '../store/AdminUser'
         >
           Edit
         </Tooltip>
-
-  {/if}
-
-
-
-
-
-
-
-
+      {/if}
 
       <!-- EDIT BUTTON -->
       <!-- {#if user.id === AdminUser.id && user.role === AdminUser.role}

@@ -1,19 +1,19 @@
 // @ts-nocheck
 
 import { PrismaClient } from "@prisma/client";
-import { error } from "@sveltejs/kit";
+import { error, fail } from "@sveltejs/kit";
 
 import { prisma } from "$lib/server/prisma";
+import type { PageServerLoad } from "./$types";
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load({ locals, params }) {
+export const  load:PageServerLoad = async ({  params }) => {
   try {
-    const session = await locals.getSession();
-    const postId = parseInt(params.slug, 10);
+   
 
     const post = await prisma.post.findFirstOrThrow({
       where: {
-        id: postId,
+        id: Number(params.slug),
       },
       include: {
         author: true,
@@ -56,5 +56,7 @@ export async function load({ locals, params }) {
     } else {
       throw error(404, "Post not found");
     }
-  } catch (error) {}
+  } catch (error) {
+    return fail(500,{message:'Failed to get posts and recent posts'})
+  }
 }

@@ -1,44 +1,51 @@
-import { redirect } from "@sveltejs/kit";
+import { fail, redirect } from "@sveltejs/kit";
 import type { PageServerLoad } from "./$types";
 import { PrismaClient } from "@prisma/client";
+import { prisma } from "$lib/server/prisma";
+
 
 
 export const load: PageServerLoad = async (event) => {
-  const db = new PrismaClient();
+
   const session = await event.locals.getSession();
 
-  if (session?.user) {
-    const existingUser = await db.user.findUnique({
+  if (session?.user && session.user.email !== null) {
+    const existingUser = await prisma.user.findUnique({
       where: {
-        email: session?.user.email, // Use session.user.email directly
+        email: session.user.email, // Use session.user.email directly
       },
     });
 
-    if (!existingUser) {
-      try {
-        const newUser = await db.user.create({
-          data: {
-            email: session.user.email,
-            name: session.user.name,
-            role: "USER",
-          },
-        });
+  if (
+    !existingUser &&
+    session?.user &&
+    session.user.email !== null &&
+    session.user.email !== undefined
+  ) {
+    try {
+      const newUser = await prisma.user.create({
+        data: {
+          email: session.user.email,
+          name: session.user.name,
+          role: "USER",
+        },
+      });
 
-        // Log the newly created user
-        console.log("New user created:", newUser);
-        redirect(303, "/");
-      } catch (error) {
-        console.error("Error creating a new user:", error);
-        // Handle the error (e.g., log, return an error response, or redirect as needed)
-      }
+      // Log the newly created user
+      console.log("New user created:", newUser);
+      redirect(303, "/");
+    } catch (error) {
+      console.error("Error creating a new user:", error);
+      return fail(500,{message:'Failed to create newUser'})
     }
+  }
 
-    // You can add more logic here if needed
+ 
 
-    // After creating the user or handling other logic, you can redirect
+   
     throw redirect(303, "/"); // Redirect to the desired location
   }
 
   // Return an empty response if the user is not authenticated
-  return {};
+  return  fail(500,{message:'Not Authenticated'});
 };
