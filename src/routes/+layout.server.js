@@ -12,14 +12,14 @@ export const load = async (event) => {
   // });
 
   const sessionData = await event.locals.getSession();
-  const user = await db.user.findUnique({
-    where: {
-      name: sessionData.user.name,
-      email: sessionData.user.email,
-    },
-  });
+  // const user = await db.user.findUnique({
+  //   where: {
+  //     name: sessionData.user.name,
+  //     email: sessionData.user.email,
+  //   },
+  // });
   return {
-    user,
+    // user,
     session: sessionData,
     pathname: url.pathname,
   };

@@ -17,7 +17,8 @@ import {AdminUser} from '../store/AdminUser'
 
   let hCard: false;
   export let post: Post;
-  export let user:User
+  
+//  console.log($page);
  
   
   let commentsLength = post.comments.length;
@@ -117,8 +118,41 @@ import {AdminUser} from '../store/AdminUser'
       </Tooltip>
 
 
+
+
+
+ 
+
+
+  {#if $page.data.session.user.email === "tung.le0319@gmail.com"}
+     <Button
+          on:click="{handleEdit}"
+          color="none"
+          border
+          class="text-orange-400 font-3 outline-none border-none font-semibold p-0.5 cursor-pointer"
+        >
+          <PenSolid class=" w-4 h-4 " />
+    </Button>
+        <Tooltip
+          placement="top"
+          color="default"
+          class="shadow-lg shadow-slate-300 dark:shadow-slate-600 font-3 font-semibold text-black"
+        >
+          Edit
+        </Tooltip>
+
+  {/if}
+
+
+
+
+
+
+
+
+
       <!-- EDIT BUTTON -->
-      {#if user.id === AdminUser.id && user.role === AdminUser.role}
+      <!-- {#if user.id === AdminUser.id && user.role === AdminUser.role}
         <Button
           on:click="{handleEdit}"
           color="none"
@@ -134,7 +168,7 @@ import {AdminUser} from '../store/AdminUser'
         >
           Edit
         </Tooltip>
-      {/if}
+      {/if} -->
     </div>
   </div>
 {/if}

@@ -54,7 +54,87 @@
 <div class="p-4 pt-20">
   <h2 class="text-2xl font-semibold mb-4">Create a New Blog Post</h2>
 
-  <form on:submit|preventDefault="{handleSubmit}">
+  <!-- <form on:submit|preventDefault="{handleSubmit}">
+    <div class="flex space-x-4">
+      <div class="mb-4 w-1/2">
+        <label for="title" class="block text-gray-600">Title</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          bind:value="{$formData.title}"
+          class="w-full border rounded px-3 py-2"
+        />
+      </div>
+
+      <div class="mb-4 w-1/2">
+        <label for="subtitle" class="block text-gray-600">Subtitle</label>
+        <input
+          type="text"
+          id="subtitle"
+          name="subtitle"
+          bind:value="{$formData.subtitle}"
+          class="w-full border rounded px-3 py-2"
+        />
+      </div>
+    </div>
+
+    <div class=" flex space-x-4">
+      <div class="mb-4 w-1/2">
+        <label for="img" class="block text-gray-600">Image URL</label>
+        <Input
+          type="text"
+          id="img"
+          name="img"
+          bind:value="{$formData.img}"
+          class="w-full border rounded px-3 py-2"
+        />
+      </div>
+
+      <div class=" mt-6 mb-4 w-1/2">
+        <MultiSelect
+          size="lg"
+          items="{mappedCategories}"
+          bind:value="{$formData.categories}"
+        />
+      </div>
+    </div>
+
+    <div class="mb-4 flex items-center space-x-4">
+    
+      
+<Checkbox   bind:checked="{$formData.published}">Published</Checkbox>
+
+        <Button
+        type="submit"
+        class=""
+        >Create</Button
+      >
+    </div>
+
+    <div class="two-column">
+      <div class="editor-column">
+        <div class="mb-4">
+          <label for="content" class="block text-gray-600">Content</label>
+    
+          <Editor bind:value="{$formData.content}" />
+        </div>
+      </div>
+      <div class="preview-column">
+        <div class="mb-4">
+          <label for="content_preview" class="block text-gray-600"
+            >Preview</label
+          >
+          <div class="rounded px-3 py-2">
+            {@html $formData.content}
+          </div>
+        </div>
+      </div>
+    </div>
+
+ 
+  </form> -->
+    <form actions="?/createBlog" method="POST">
     <div class="flex space-x-4">
       <div class="mb-4 w-1/2">
         <label for="title" class="block text-gray-600">Title</label>

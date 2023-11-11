@@ -10,13 +10,14 @@
  
   export let data;
  
+ console.log(data);
  
 
   let posts: Post[] = data.body?.posts;
   let categories:Category[] = data.body?.categories;
   let selectedCategory = "all";
   let filteredPosts = [];
-  let user:User = data.user
+  let user:User = data?.user
 
   $AppState.myCursor = data.body.myCursor;
   $AppState.posts = data.body.posts;
@@ -86,7 +87,7 @@
         {#if $AppState.filteredPosts.length > 0}
           {#each $AppState.filteredPosts as post (post.id)}
             <div transition:fade="{{ delay: 150, duration: 200 }}">
-              <BlogPostCard post="{post}" user="{user}" />
+              <BlogPostCard post="{post}" />
             </div>
           {/each}
         {:else}
