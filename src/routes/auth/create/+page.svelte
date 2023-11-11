@@ -134,7 +134,10 @@
 
  
   </form> -->
-    <form actions="?/createBlog" method="POST">
+   
+  
+  
+  <form action="?/createPost" method="POST">
     <div class="flex space-x-4">
       <div class="mb-4 w-1/2">
         <label for="title" class="block text-gray-600">Title</label>
@@ -183,7 +186,7 @@
     <div class="mb-4 flex items-center space-x-4">
     
       
-<Checkbox   bind:checked="{$formData.published}">Published</Checkbox>
+<Checkbox name="published" >Published</Checkbox>
 
         <Button
         type="submit"
@@ -197,7 +200,7 @@
         <div class="mb-4">
           <label for="content" class="block text-gray-600">Content</label>
           <!-- <Editor bind:value="{content}" /> -->
-          <Editor bind:value="{$formData.content}" />
+          <Editor name="content" bind:value="{$formData.content}" />
         </div>
       </div>
       <!-- <div class="preview-column">

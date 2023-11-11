@@ -27,6 +27,8 @@ export const actions: Actions = {
         categories: [];
       };
 
+      console.log(content);
+      
     const datePublished = new Date().toISOString();
 
     console.log(title, img, categories, subtitle);
@@ -37,7 +39,7 @@ export const actions: Actions = {
           title,
           subtitle,
           img,
-          content,
+          // content,
           published,
           datePublished,
           author: {
@@ -58,21 +60,5 @@ export const actions: Actions = {
     }
   },
 
-  deletePost: async ({ url }) => {
-    const id = url.searchParams.get("id");
-    if (!id) {
-      return fail(400, { message: "Invalid Request" });
-    }
 
-    try {
-      await db.post.delete({
-        where: {
-          id: Number(id),
-        },
-      });
-
-
-      return {status:201}
-    } catch (error) {return fail(500,{message:'Could not delete the post'})}
-  },
 };

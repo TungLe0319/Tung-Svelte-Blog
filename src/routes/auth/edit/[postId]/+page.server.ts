@@ -50,6 +50,8 @@ export const actions: Actions = {
       const content = formData.get("content") as string;
       const published = formData.get("published") === "true"; // If the checkbox is expected to return a string 'true' or 'false'
 
+      console.log(content);
+
       const categories = formData.getAll("selected[]") as string[];
 
       const post = await prisma.post.findUnique({
@@ -79,14 +81,12 @@ export const actions: Actions = {
       // console.log(disconnect);
       // console.log(connect);
 
-
-const disconnectCategories = disconnect.map((categoryName) => ({
-  name: categoryName,
-}));
-const connectCategories = connect.map((categoryName) => ({
-  name: categoryName,
-}));
-
+      const disconnectCategories = disconnect.map((categoryName) => ({
+        name: categoryName,
+      }));
+      const connectCategories = connect.map((categoryName) => ({
+        name: categoryName,
+      }));
 
       await prisma.post.update({
         where: {
@@ -96,7 +96,7 @@ const connectCategories = connect.map((categoryName) => ({
           title,
           subtitle,
           img,
-          content,
+          // content,
           published,
           categories: {
             disconnect: disconnectCategories,
@@ -110,6 +110,25 @@ const connectCategories = connect.map((categoryName) => ({
       };
     } catch (error) {
       return fail(500, { message: "Failed to Update Post" });
+    }
+  },
+
+  deletePost: async ({ url }) => {
+    const id = url.searchParams.get("id");
+    if (!id) {
+      return fail(400, { message: "Invalid Request" });
+    }
+
+    try {
+      await db.post.delete({
+        where: {
+          id: Number(id),
+        },
+      });
+
+      return { status: 201 };
+    } catch (error) {
+      return fail(500, { message: "Could not delete the post" });
     }
   },
 };
