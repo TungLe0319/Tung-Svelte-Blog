@@ -2,37 +2,44 @@
 
 <script lang="ts">
   import Editor from "@tinymce/tinymce-svelte";
-  import { Button, Checkbox, MultiSelect } from "flowbite-svelte";
+  import {
+    Badge,
+    Button,
+    Checkbox,
+    Input,
+    Label,
+    MultiSelect,
+  } from "flowbite-svelte";
   import { goto } from "$app/navigation";
   import { toast } from "../../../../store/Toast";
   import type { PageData } from "./$types";
 
   export let data: PageData;
-  console.log(data);
+  // console.log(data);
 
-  let selected: [];
   $: post = data.post;
-  $: categories = data.categories;
+  // console.log(post);
 
-  let mappedCategories = data.categories.map((c) => {
+  let categories = data.categories.map((c) => {
     return { value: c.name, name: c.name };
   });
-  console.log(mappedCategories);
+
+  let selected = data.post ? data.post.categories.map((c) => c.name) : [];
 </script>
 
 <div class="p-4 pt-20">
   <div class="flex space-x-4">
     <h2 class="text-2xl font-semibold mb-4">Create a New Blog Post</h2>
 
-    <form action="?/deletePost&id=" method="POST">
+    <form action="?/deletePost&id={post.id}" method="POST">
       <Button type="submit">Delete</Button>
     </form>
   </div>
 
-  <form action="?/updatePost" method="PUT">
+  <form action="?/updatePost&id={post.id}" method="POST">
     <div class="flex space-x-4">
       <div class="mb-4 w-1/2">
-        <label for="title" class="block text-gray-600">Title</label>
+        <Label for="title">Title</Label>
         <input
           type="text"
           id="title"
@@ -43,8 +50,8 @@
       </div>
 
       <div class="mb-4 w-1/2">
-        <label for="subtitle" class="block text-gray-600">Subtitle</label>
-        <input
+        <Label for="subtitle" class="">Subtitle</Label>
+        <Input
           type="text"
           id="subtitle"
           name="subtitle"
@@ -55,9 +62,9 @@
     </div>
 
     <div class=" flex space-x-4">
-      <div class="mb-4 w-1/2">
-        <label for="img" class="block text-gray-600">Image URL</label>
-        <input
+      <div class=" w-1/2">
+        <Label for="img">Image URL</Label>
+        <Input
           type="text"
           id="img"
           name="img"
@@ -66,10 +73,13 @@
         />
       </div>
 
-      <div class=" mt-6 mb-4 w-1/2">
+      <div class="  w-1/2">
+        <Label for="sedlected[]">Categories</Label>
+
         <MultiSelect
-          size="lg"
-          items="{mappedCategories}"
+          size="md"
+          name="selected[]"
+          items="{categories}"
           bind:value="{selected}"
         />
       </div>

@@ -10,7 +10,7 @@
  
   export let data;
  
- console.log(data);
+//  console.log(data);
  
 
   let posts: Post[] = data.body?.posts;
