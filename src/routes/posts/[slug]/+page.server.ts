@@ -1,7 +1,6 @@
-// @ts-nocheck
 
-import { PrismaClient } from "@prisma/client";
-import { error, fail } from "@sveltejs/kit";
+
+import { error, fail, type Actions } from "@sveltejs/kit";
 
 import { prisma } from "$lib/server/prisma";
 import type { PageServerLoad } from "./$types";
@@ -32,7 +31,7 @@ export const load: PageServerLoad = async ({ params }) => {
     const recentPosts = await prisma.post.findMany({
       where: {
         id: {
-          not: postId,
+          not: Number(params.slug),
         },
       },
       orderBy: {
@@ -78,14 +77,14 @@ export const actions: Actions = {
         });
       }
 
-      const user = await db.user.findUnique({
+      const user = await prisma.user.findUnique({
         where: {
           email: userEmail,
         },
       });
 
       if (user) {
-        const newComment = await db.comment.create({
+        const newComment = await prisma.comment.create({
           data: {
             postId: parseInt(postId),
             content,
@@ -131,7 +130,7 @@ export const actions: Actions = {
       const commentId = commentData.get("id");
       const creatorEmail = commentData.get("userEmail");
 
-      const creator = await db.user.findUnique({
+      const creator = await prisma.user.findUnique({
         where: {
           email: creatorEmail,
         },
@@ -147,7 +146,7 @@ export const actions: Actions = {
         });
       }
 
-      const existingComment = await db.comment.findUnique({
+      const existingComment = await prisma.comment.findUnique({
         where: {
           id: parseInt(commentId),
         },
@@ -174,7 +173,7 @@ export const actions: Actions = {
       }
 
       // Delete the comment
-      const deletedComment = await db.comment.delete({
+      const deletedComment = await prisma.comment.delete({
         where: {
           id: existingComment.id,
         },
@@ -206,14 +205,14 @@ export const actions: Actions = {
       const commentId = commentData.get("id");
       const content = commentData.get("content") || "";
 
-      const existingComment = await db.comment.findUnique({
+      const existingComment = await prisma.comment.findUnique({
         where: {
           id: parseInt(commentId),
         },
       });
 
       if (existingComment) {
-        const updatedComment = await db.comment.update({
+        const updatedComment = await prisma.comment.update({
           where: {
             id: existingComment.id,
           },
@@ -256,46 +255,46 @@ export const actions: Actions = {
 
 // LIKES
 
-toggleLike: async ({request}) => {
-    try {
-      const likeData = await request.formData();
-      const postId = parseInt(likeData.get("postId"));
-      const userEmail = likeData.get("userEmail");
+// toggleLike: async ({request}) => {
+//     try {
+//       const likeData = await request.formData();
+//       const postId = parseInt(likeData.get("postId"));
+//       const userEmail = likeData.get("userEmail");
 
-      const user = await prisma.user.findUnique({
-        where: { email: userEmail },
-      });
+//       const user = await prisma.user.findUnique({
+//         where: { email: userEmail },
+//       });
 
-      if (!user) return fail(400,{message:'User not found'})
+//       if (!user) return fail(400,{message:'User not found'})
 
-      const post = await prisma.post.findUnique({
-        where: { id: postId },
-      });
+//       const post = await prisma.post.findUnique({
+//         where: { id: postId },
+//       });
 
-      if (!post) return fail(400, { message: "Post not found" });
+//       if (!post) return fail(400, { message: "Post not found" });
 
-      const existingLike = await prisma.like.findFirst({
-        where: { postId: post.id, userId: user.id },
-      });
+//       const existingLike = await prisma.like.findFirst({
+//         where: { postId: post.id, userId: user.id },
+//       });
 
-      if (existingLike) {
-        const deletedLike = await prisma.like.delete({
-          where: { id: existingLike.id },
-          include: { user: true },
-        });
-        return jsonResponse(HttpStatusCode.Ok, deletedLike);
-      }
+//       if (existingLike) {
+//         const deletedLike = await prisma.like.delete({
+//           where: { id: existingLike.id },
+//           include: { user: true },
+//         });
+//         return jsonResponse(HttpStatusCode.Ok, deletedLike);
+//       }
 
-      const newLike = await prisma.like.create({
-        data: { postId: post.id, userId: user.id },
-        include: { user: true },
-      });
+//       const newLike = await prisma.like.create({
+//         data: { postId: post.id, userId: user.id },
+//         include: { user: true },
+//       });
 
-      return jsonResponse(HttpStatusCode.Created, newLike);
-    } catch (error) {
-      return fail(500, {message:'Failed to Toggle Like'});
-    }
-}
+//       return jsonResponse(HttpStatusCode.Created, newLike);
+//     } catch (error) {
+//       return fail(500, {message:'Failed to Toggle Like'});
+//     }
+// }
 
 
 };

@@ -1,4 +1,4 @@
-<script lang="ts" >
+<script lang="ts">
   import CommentCard from "$components/Comments/CommentCard.svelte";
   import CommentForm from "$components/Comments/CommentForm.svelte";
   import LikeBlogPost from "$components/LikeBlogPost.svelte";
@@ -14,37 +14,56 @@
   import { Avatar, Badge } from "flowbite-svelte";
   import type { PageData } from "./$types";
   import type { Comment, Like, Post, Prisma } from "@prisma/client";
+  import type { PostFullType } from "$lib/stores/AppState";
 
+  export let data: PageData;
 
-  export let data:PageData;
+  let post: Prisma.PostGetPayload<{
+    include: {
+      author: true;
+      comments: {
+        include: {
+          user: true;
+        };
+      };
+      categories: true;
+      likes: {
+        include: {
+          user: true;
+        };
+      };
+    };
+  }>;
 
+  let recentPosts: PostFullType[];
 
-let post:Prisma.PostGetPayload<{
-  include:{comments:true,likes:true,author:true}
-}>
+  let comments: Prisma.CommentGetPayload<{
+    include: {
+      user: true;
+    };
+  }>[];
 
-  let recentPosts:Post;
+  let likes: Prisma.LikeGetPayload<{
+    include:{
+      user:true
+    }
+  }>;
 
-
-  let comments : Comment[];
-
-
-  let likes :Like [];
-
-
-  let liked:boolean
+  let liked: boolean;
 
   $: {
-    post = data?.body?.post;
+    post = data?.body?.post!  
     recentPosts = data?.body?.recentPosts;
     comments = data?.body?.post?.comments;
     likes = data?.body?.post?.likes;
   }
-
+$:
   onMount(() => {
-    liked = data?.body?.post?.likes.some(
-      (like) => like.user.email === data.session?.user.email
+  if (likes) {
+      liked = likes?.some(
+      (like) => like?.user?.email === data.session?.user?.email
     );
+  }
   });
 
   /**
@@ -92,7 +111,7 @@ let post:Prisma.PostGetPayload<{
 
           <div class="post-info">
             <Badge
-              color="default"
+              color="none"
               border
               class="hover:-translate-y-2 transition-all duration-150  text-base cursor-default py-2 "
             >
@@ -116,16 +135,16 @@ let post:Prisma.PostGetPayload<{
             </Badge>
 
             <Badge
-              color="default"
+              color="none"
               border
               class="hover:-translate-y-2 transition-all duration-150  text-base cursor-default py-1 space-x-2"
             >
-              <Avatar src="{post.author.image}" size="sm" />
+              <Avatar src="{post.author.image || ''}" size="sm" />
               <span> {post.author.name}</span>
             </Badge>
 
             <Badge
-              color="default"
+              color="none"
               border
               class="hover:-translate-y-2 transition-all duration-150  text-base cursor-default py-2"
             >
@@ -133,7 +152,7 @@ let post:Prisma.PostGetPayload<{
               {post.likes.length}
             </Badge>
             <Badge
-              color="default"
+              color="none"
               border
               class="hover:-translate-y-2 transition-all duration-150  text-base cursor-default py-2"
             >
@@ -146,7 +165,7 @@ let post:Prisma.PostGetPayload<{
           <div class="post-subtitle">{post?.subtitle}</div>
           <hr class="  w-full" />
 
-          <article class="   prose   max-w-full">
+          <article class="   prose max-w-full">
             {@html post?.content}
           </article>
 
@@ -159,11 +178,15 @@ let post:Prisma.PostGetPayload<{
       {/if}
       <!-- COMMENT SECTION  -->
       <div class="comment-container">
-        {#each comments as comment (comment.id)}
+        <!-- {#each comments as comment (comment.id)}
           <CommentCard
             on:commentDeleted="{handleCommentDeleted(comment.id)}"
             comment="{comment}"
           />
+        {/each} -->
+
+        {#each comments as comment (comment.id)}
+          <CommentCard comment="{comment}" />
         {/each}
       </div>
     </div>
@@ -175,11 +198,13 @@ let post:Prisma.PostGetPayload<{
         <!-- LINKED IN  -->
         <LinkedInCard />
         <!--  !LIKES -->
-        <LikeBlogPost
+
+        <!-- TODO - LIKES -->
+        <!-- <LikeBlogPost
           post="{post}"
           liked="{liked}"
           on:likeToggled="{handleLikeToggled(post)}"
-        />
+        /> -->
       </div>
     </div>
   </div>
@@ -262,8 +287,6 @@ let post:Prisma.PostGetPayload<{
   .post-content :global(code) {
     @apply font-mono bg-gray-100 rounded-md p-1;
   }
-
-  
 
   .recent-posts-container {
     @apply lg:w-1/4 xl:w-1/5  mt-8 px-4 pb-5  dark:text-white;
