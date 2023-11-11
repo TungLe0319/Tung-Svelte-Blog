@@ -124,7 +124,7 @@ import {AdminUser} from '../store/AdminUser'
  
 
 
-  {#if $page.data.session.user.email === "tung.le0319@gmail.com"}
+  {#if $page.data.session && $page.data.session.user.email === "tung.le0319@gmail.com"}
      <Button
           on:click="{handleEdit}"
           color="none"

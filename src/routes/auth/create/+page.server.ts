@@ -1,4 +1,4 @@
-import { db } from "../../../lib/utils/useDb";
+import { db } from "$lib/server/prisma";
 import type { Actions, PageServerLoad } from "./$types";
 import { error, fail } from "@sveltejs/kit";
 

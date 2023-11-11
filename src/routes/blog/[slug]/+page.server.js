@@ -3,7 +3,7 @@
 import { PrismaClient } from "@prisma/client";
 import { error } from "@sveltejs/kit";
 
-import { db } from "$lib/utils/useDb";
+import { prisma } from "$lib/server/prisma";
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ locals, params }) {
@@ -11,7 +11,7 @@ export async function load({ locals, params }) {
     const session = await locals.getSession();
     const postId = parseInt(params.slug, 10);
 
-    const post = await db.post.findFirstOrThrow({
+    const post = await prisma.post.findFirstOrThrow({
       where: {
         id: postId,
       },
@@ -31,7 +31,7 @@ export async function load({ locals, params }) {
       },
     });
 
-    const recentPosts = await db.post.findMany({
+    const recentPosts = await prisma.post.findMany({
       where: {
         id: {
           not: postId,

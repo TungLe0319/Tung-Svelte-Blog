@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { jsonResponse, HttpStatusCode } from "../../../lib/utils/apiUtils";
 // @ts-ignore
-import { db } from "$lib/utils/useDb";
+import { prisma } from "$lib/server/prisma";
 
 
 export async function POST({ request }) {
@@ -10,31 +10,31 @@ export async function POST({ request }) {
     const postId = parseInt(likeData.get("postId"));
     const userEmail = likeData.get("userEmail");
 
-    const user = await db.user.findUnique({
+    const user = await prisma.user.findUnique({
       where: { email: userEmail },
     });
 
     if (!user) return jsonResponse(HttpStatusCode.NotFound, "User not found");
 
-    const post = await db.post.findUnique({
+    const post = await prisma.post.findUnique({
       where: { id: postId },
     });
 
     if (!post) return jsonResponse(HttpStatusCode.NotFound, "Post not found");
 
-    const existingLike = await db.like.findFirst({
+    const existingLike = await prisma.like.findFirst({
       where: { postId: post.id, userId: user.id },
     });
 
     if (existingLike) {
-      const deletedLike = await db.like.delete({
+      const deletedLike = await prisma.like.delete({
         where: { id: existingLike.id },
         include: { user: true },
       });
       return jsonResponse(HttpStatusCode.Ok, deletedLike);
     }
 
-    const newLike = await db.like.create({
+    const newLike = await prisma.like.create({
       data: { postId: post.id, userId: user.id },
       include: { user: true },
     });

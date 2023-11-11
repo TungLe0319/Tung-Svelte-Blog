@@ -17,9 +17,6 @@ dependencies:
   '@tinymce/tinymce-svelte':
     specifier: ^1.0.1
     version: 1.0.1
-  highlight.js:
-    specifier: ^11.9.0
-    version: 11.9.0
   sass:
     specifier: ^1.68.0
     version: 1.69.5
@@ -37,6 +34,9 @@ devDependencies:
   '@sveltejs/kit':
     specifier: ^1.20.4
     version: 1.27.4(svelte@4.2.2)(vite@4.5.0)
+  '@tailwindcss/typography':
+    specifier: ^0.5.10
+    version: 0.5.10(tailwindcss@3.3.5)
   '@types/node':
     specifier: ^20.8.3
     version: 20.9.0
@@ -47,11 +47,17 @@ devDependencies:
     specifier: ^1.8.1
     version: 1.8.1
   flowbite-svelte:
-    specifier: ^0.44.18
+    specifier: ^0.44.19
     version: 0.44.19(svelte@4.2.2)
+  flowbite-svelte-blocks:
+    specifier: ^0.5.1
+    version: 0.5.1(svelte@4.2.2)(tailwindcss@3.3.5)
   flowbite-svelte-icons:
-    specifier: ^0.4.4
+    specifier: ^0.4.5
     version: 0.4.5(svelte@4.2.2)(tailwind-merge@2.0.0)(tailwindcss@3.3.5)
+  flowbite-typography:
+    specifier: ^1.0.3
+    version: 1.0.3(tailwindcss@3.3.5)
   postcss:
     specifier: ^8.4.24
     version: 8.4.31
@@ -580,6 +586,18 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
+  /@tailwindcss/typography@0.5.10(tailwindcss@3.3.5):
+    resolution: {integrity: sha512-Pe8BuPJQJd3FfRnm6H0ulKIGoMEQS+Vq01R6M5aCrFB/ccR/shT+0kXLjouGC1gFLm9hopTFN+DMP0pfwRWzPw==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || insiders'
+    dependencies:
+      lodash.castarray: 4.4.0
+      lodash.isplainobject: 4.0.6
+      lodash.merge: 4.6.2
+      postcss-selector-parser: 6.0.10
+      tailwindcss: 3.3.5(ts-node@10.9.1)
+    dev: true
+
   /@tinymce/tinymce-svelte@1.0.1:
     resolution: {integrity: sha512-mjso1Mx9FOPxwou528UmINIcE2hBbUpnC9AEInlvIXutydklfSGSGEeYJ57CBTxzgsMEJGw2LYHGC8R7KoEAeA==}
     dependencies:
@@ -915,6 +933,33 @@ packages:
     dependencies:
       to-regex-range: 5.0.1
 
+  /flowbite-svelte-blocks@0.5.1(svelte@4.2.2)(tailwindcss@3.3.5):
+    resolution: {integrity: sha512-SWmfHitd3PW+W+PlSDs+f+cuTUxtiJb0OX1YZ+pNLEKOhyTUPZtRtsGgz8lxZ6jEnp/Ecjys01G5Aok53+FhWQ==}
+    engines: {node: '>=16.0.0', npm: '>=7.0.0'}
+    peerDependencies:
+      svelte: ^4.0.0
+    dependencies:
+      flowbite: 1.8.1
+      flowbite-svelte: 0.44.19(svelte@4.2.2)
+      flowbite-svelte-icons: 0.4.5(svelte@4.2.2)(tailwind-merge@1.14.0)(tailwindcss@3.3.5)
+      svelte: 4.2.2
+      tailwind-merge: 1.14.0
+    transitivePeerDependencies:
+      - tailwindcss
+    dev: true
+
+  /flowbite-svelte-icons@0.4.5(svelte@4.2.2)(tailwind-merge@1.14.0)(tailwindcss@3.3.5):
+    resolution: {integrity: sha512-IBudEfw9B4UE2gCRMhbRnyE8p7qq7DDMauy0mPVIShzjaN3yVk2AmAHia1JRe9jUC98Wn7xNk/IdJlXeQj19Iw==}
+    peerDependencies:
+      svelte: ^3.54.0 || ^4.0.0
+      tailwind-merge: ^2.0.0
+      tailwindcss: ^3.3.2
+    dependencies:
+      svelte: 4.2.2
+      tailwind-merge: 1.14.0
+      tailwindcss: 3.3.5(ts-node@10.9.1)
+    dev: true
+
   /flowbite-svelte-icons@0.4.5(svelte@4.2.2)(tailwind-merge@2.0.0)(tailwindcss@3.3.5):
     resolution: {integrity: sha512-IBudEfw9B4UE2gCRMhbRnyE8p7qq7DDMauy0mPVIShzjaN3yVk2AmAHia1JRe9jUC98Wn7xNk/IdJlXeQj19Iw==}
     peerDependencies:
@@ -938,6 +983,17 @@ packages:
       flowbite: 2.0.0
       svelte: 4.2.2
       tailwind-merge: 2.0.0
+    dev: true
+
+  /flowbite-typography@1.0.3(tailwindcss@3.3.5):
+    resolution: {integrity: sha512-UbdQFIIOb7xx2TS+QQrqr79B6ZSkSZurxYWzV0npth6Wns3/j7KfeDJoH9QFU+Zs7zjrvejNtyzgzWLWyCrdiA==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || insiders'
+    dependencies:
+      lodash.castarray: 4.4.0
+      lodash.isplainobject: 4.0.6
+      lodash.merge: 4.6.2
+      tailwindcss: 3.3.5(ts-node@10.9.1)
     dev: true
 
   /flowbite@1.8.1:
@@ -1035,11 +1091,6 @@ packages:
       function-bind: 1.1.2
     dev: true
 
-  /highlight.js@11.9.0:
-    resolution: {integrity: sha512-fJ7cW7fQGCYAkgv4CPfwFHrfd/cLS4Hau96JuJ+ZTOWhjnhoeN1ub1tFmALm/+lW5z4WCAuAV9bm05AP0mS6Gw==}
-    engines: {node: '>=12.0.0'}
-    dev: false
-
   /immutable@4.3.4:
     resolution: {integrity: sha512-fsXeu4J4i6WNWSikpI88v/PcVflZz+6kMhUfIwc5SY+poQRPnaf5V7qds6SUyUN3cVxEzuCab7QIoLOQ+DQ1wA==}
 
@@ -1127,6 +1178,18 @@ packages:
 
   /locate-character@3.0.0:
     resolution: {integrity: sha512-SW13ws7BjaeJ6p7Q6CO2nchbYEc3X3J6WrmTTDto7yMPqVSZTUyY5Tjbid+Ab8gLnATtygYtiDIJGQRRn2ZOiA==}
+
+  /lodash.castarray@4.4.0:
+    resolution: {integrity: sha512-aVx8ztPv7/2ULbArGJ2Y42bG1mEQ5mGjpdvrbJcJFU3TbYybe+QlLS4pst9zV52ymy2in1KpFPiZnAOATxD4+Q==}
+    dev: true
+
+  /lodash.isplainobject@4.0.6:
+    resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
+    dev: true
+
+  /lodash.merge@4.6.2:
+    resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
+    dev: true
 
   /magic-string@0.27.0:
     resolution: {integrity: sha512-8UnnX2PeRAPZuN12svgR9j7M1uWMovg/CEnIwIG0LFkXSJJe4PdfUGiTGl8V9bsBHFUtfVINcSyYxd7q+kx9fA==}
@@ -1328,6 +1391,14 @@ packages:
     dependencies:
       postcss: 8.4.31
       postcss-selector-parser: 6.0.13
+    dev: true
+
+  /postcss-selector-parser@6.0.10:
+    resolution: {integrity: sha512-IQ7TZdoaqbT+LCpShg46jnZVlhWD2w6iQYAcYXfHARZ7X1t/UGhhceQDs5X0cGqKvYlHNOuv7Oa1xmb0oQuA3w==}
+    engines: {node: '>=4'}
+    dependencies:
+      cssesc: 3.0.0
+      util-deprecate: 1.0.2
     dev: true
 
   /postcss-selector-parser@6.0.13:
@@ -1642,6 +1713,10 @@ packages:
     engines: {node: '>= 0.8.0'}
     dependencies:
       svg.js: 2.7.1
+    dev: true
+
+  /tailwind-merge@1.14.0:
+    resolution: {integrity: sha512-3mFKyCo/MBcgyOTlrY8T7odzZFx+w+qKSMAmdFzRvqBfLlSigU6TZnlFHK0lkMwj9Bj8OYU+9yW9lmGuS0QEnQ==}
     dev: true
 
   /tailwind-merge@2.0.0:

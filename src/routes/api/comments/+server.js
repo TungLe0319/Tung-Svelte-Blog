@@ -2,7 +2,7 @@
 import { PrismaClient } from "@prisma/client";
 import { error } from "@sveltejs/kit";
 
-import { db } from "$lib/utils/useDb";
+import { db } from "$lib/server/prisma";
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {

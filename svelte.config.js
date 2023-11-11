@@ -19,9 +19,9 @@ const config = {
     vitePreprocess({
       // Add SCSS preprocessing to the Vite preprocessor
       // @ts-ignore
-      style: ({ content }) => {
-        return require("sass").renderSync({ data: content }).css.toString();
-      },
+      // style: ({ content }) => {
+      //   return require("sass").renderSync({ data: content }).css.toString();
+      // },
     }),
   ],
 };
