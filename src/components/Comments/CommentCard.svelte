@@ -1,24 +1,22 @@
-<!-- commentCard.svelte -->
-<script>
+<script lang="ts">
   import { page } from "$app/stores";
-  import { error } from "@sveltejs/kit";
   import { createEventDispatcher } from "svelte";
   import { fly } from "svelte/transition";
-  import {
-    Dropdown,
-    DropdownItem,
-    Avatar,
-    Badge,
-  } from "flowbite-svelte";
-  import { ClockSolid, DotsHorizontalOutline } from "flowbite-svelte-icons";
+  import { Dropdown, DropdownItem, Avatar, Badge } from "flowbite-svelte";
+  import {  DotsHorizontalOutline } from "flowbite-svelte-icons";
   import { svelteTime } from "svelte-time";
+  import type {  Prisma } from "@prisma/client";
 
-  export let comment;
+  export let comment: Prisma.CommentGetPayload<{
+    include: {
+      user: true;
+    };
+  }>;
 
   let userEmail = $page.data.session?.user?.email;
   const dispatch = createEventDispatcher();
 
-  async function deleteComment(commentId) {
+  async function deleteComment(commentId: number) {
     try {
       const shouldDelete = confirm(
         "Are you sure you want to delete this comment?"
@@ -26,9 +24,12 @@
 
       if (shouldDelete) {
         const formData = new FormData();
-        formData.append("id", commentId);
-        // COMMENT CREATOR
-        formData.append("userEmail", userEmail);
+        formData.append("id", commentId.toString());
+      
+        if (userEmail) {
+          // COMMENT CREATOR
+          formData.append("userEmail", userEmail);
+        }
 
         const response = await fetch(`/api/comments`, {
           method: "DELETE",
@@ -43,8 +44,6 @@
       console.error(error);
     }
   }
-
- 
 </script>
 
 <div class="comment-card group relative" transition:fly>
@@ -53,7 +52,7 @@
       <div class="flex items-center space-x-2">
         <Avatar
           size="sm"
-          src="{comment?.user?.image}"
+          src="{comment?.user?.image  || ''}"
           class="shadow-sm shadow-slate-500"
         />
         <div class="  text-center text-sm dark:text-white mt-2">
@@ -61,8 +60,6 @@
         </div>
         <div class="">
           <Badge color="dark">
-         
-
             <time
               use:svelteTime="{{
                 relative: false,
@@ -81,7 +78,7 @@
           />
           <Dropdown triggeredBy=".dots-menu">
             <DropdownItem>
-              <button on:click="{deleteComment(comment.id)}" class=""
+              <button on:click="{()=> deleteComment(comment.id)}" class=""
                 >Delete</button
               ></DropdownItem
             >

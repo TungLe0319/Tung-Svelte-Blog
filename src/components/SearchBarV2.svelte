@@ -1,65 +1,70 @@
-<script >
-import { Search, Button, Dropdown, DropdownItem } from 'flowbite-svelte';
-  import { SearchOutline, ChevronDownSolid } from 'flowbite-svelte-icons';
-  import { AppState } from "../store/AppState";
-import {debounce} from '../lib/utils/functions'
-  import { Category } from '@prisma/client';
-  import Pagination from './Pagination.svelte';
- 
-export let categories
+<script>
+  import { Search, Button, Dropdown, DropdownItem } from "flowbite-svelte";
+  import { SearchOutline, ChevronDownSolid } from "flowbite-svelte-icons";
+  import { AppState } from "$lib/stores/AppState";
+  import { debounce } from "../lib/utils/functions";
+  import { Category } from "@prisma/client";
+  import Pagination from "./Pagination.svelte";
 
+  export let categories;
 
-// Function to handle input change and filter posts
-const handleInputChange = (event) => {
-  $AppState.searchQuery = event.target.value;
-  $AppState.filteredPosts = $AppState.posts.filter((p) =>
-    p.title.toLowerCase().includes($AppState.searchQuery.toLowerCase())
-  );
-};
+  // Function to handle input change and filter posts
+  const handleInputChange = (event) => {
+    $AppState.searchQuery = event.target.value;
+    $AppState.filteredPosts = $AppState.posts.filter((p) =>
+      p.title.toLowerCase().includes($AppState.searchQuery.toLowerCase())
+    );
+  };
 
-// Usage
-const debouncedHandleInputChange = debounce(handleInputChange, 750);
+  // Usage
+  const debouncedHandleInputChange = debounce(handleInputChange, 750);
 
-function handleCategoryChange(category) {
-  $AppState.activeCategory = category;
-  console.log($AppState.activeCategory);
-  $AppState.filteredPosts = $AppState.posts.filter((p) => {
-    const categoryNames = p.categories.map(cat => cat.name);
-    return categoryNames.includes($AppState.activeCategory);
-  });
-
- 
-}
+  function handleCategoryChange(category) {
+    $AppState.activeCategory = category;
+    console.log($AppState.activeCategory);
+    $AppState.filteredPosts = $AppState.posts.filter((p) => {
+      const categoryNames = p.categories.map((cat) => cat.name);
+      return categoryNames.includes($AppState.activeCategory);
+    });
+  }
 </script>
 
-<div class="relative items-center just-center ">
+<div class="relative items-center just-center">
+  <form class="flex" on:submit|preventDefault="{debouncedHandleInputChange}">
+    <div class="relative">
+      <Button
+        class="rounded-e-none whitespace-nowrap border border-r-0 border-primary-700"
+      >
+        {$AppState.activeCategory}
+        <ChevronDownSolid class="w-2.5 h-2.5 ml-2.5" />
+      </Button>
+      <Dropdown classContainer="w-40">
+        {#each categories as label}
+          <DropdownItem
+            on:click="{() => {
+              handleCategoryChange(label.name);
+            }}"
+            class=" w-full {$AppState.activeCategory === label.name
+              ? 'underline'
+              : ''}"
+          >
+            {label.name}
+          </DropdownItem>
+        {/each}
+      </Dropdown>
+    </div>
 
- <form class="flex" on:submit|preventDefault="{debouncedHandleInputChange}">
-  <div class="relative">
-    <Button class="rounded-e-none whitespace-nowrap border border-r-0 border-primary-700">
-      {$AppState.activeCategory}
-      <ChevronDownSolid class="w-2.5 h-2.5 ml-2.5" />
+    <Search
+      on:keyup="{debouncedHandleInputChange}"
+      size="md"
+      class="rounded-none py-2.5"
+      placeholder="Search Mockups, Logos, Design Templates..."
+    />
+    <Button class="!p-2.5 rounded-s-none">
+      <SearchOutline class="w-5 h-5" />
     </Button>
-    <Dropdown classContainer="w-40">
-      {#each categories as  label }
-        <DropdownItem
-          on:click={() => {
-          handleCategoryChange(label.name)
-          }}
-          class=' w-full {$AppState.activeCategory === label.name ? 'underline' : ''}'
-        >
-          {label.name}
-        </DropdownItem>
-      {/each}
-    </Dropdown>
-  </div>
- 
-  <Search on:keyup={debouncedHandleInputChange}  size="md" class="rounded-none py-2.5" placeholder="Search Mockups, Logos, Design Templates..." />
-  <Button class="!p-2.5 rounded-s-none">
-    <SearchOutline class="w-5 h-5" />
-  </Button>
-</form>
-   <!-- <Pagination/> -->
+  </form>
+  <!-- <Pagination/> -->
 </div>
 
 <style lang="scss" scoped>

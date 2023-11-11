@@ -4,32 +4,29 @@
   import FeaturedBlogPost from "../components/FeaturedBlogPost.svelte";
   import Hero from "../components/Hero.svelte";
   import SearchBarV2 from "../components/SearchBarV2.svelte";
-  import { AppState } from "../store/AppState";
-  import type { Post } from "../../src/lib/models/post";
-  import { Category, User } from "@prisma/client";
- 
-  export let data;
- 
-//  console.log(data);
- 
+  import { AppState } from "$lib/stores/AppState";
+  
+  
+  import type { PageData } from "./$types";
 
-  let posts: Post[] = data.body?.posts;
-  let categories:Category[] = data.body?.categories;
+  export let data:PageData;
+
+
+  let posts = data?.posts;
+  let categories = data?.categories;
   let selectedCategory = "all";
-  let filteredPosts = [];
-  let user:User = data?.user
+ 
 
-  $AppState.myCursor = data.body.myCursor;
-  $AppState.posts = data.body.posts;
-  $AppState.filteredPosts = data.body.posts;
-
+  $AppState.myCursor = data?.myCursor;
+  $AppState.posts = data?.posts;
+  $AppState.filteredPosts = data?.posts;
 
   // Function to filter posts based on the selected category
-  function filterPosts(category) {
+  function filterPosts(category: string) {
     if (category === "all") {
-      filteredPosts = posts;
+      $AppState.filteredPosts = posts;
     } else {
-      filteredPosts = posts.filter(
+      $AppState.filteredPosts = posts.filter(
         (post) =>
           post.categories &&
           post.categories.some((cat) => cat.name === category)
@@ -53,8 +50,6 @@
     subTitle: "How Art, Technology and Curiosity Fuel My Life",
     height: 100,
   };
-
-  
 </script>
 
 <div class="whatisme">
@@ -75,15 +70,13 @@
     </div>
 
     <div class="  mt-64 px-24">
-   <div class=" sticky top-20 z-50">
-       <SearchBarV2 categories="{categories}" />
-   </div>
-      
+      <div class=" sticky top-20 z-50">
+        <SearchBarV2 categories="{categories}" />
+      </div>
 
       <div class="divider my-5"></div>
 
-
-      <div class=" Blog-Cards-Container  flex flex-col mx-20">
+      <div class=" Blog-Cards-Container flex flex-col mx-20">
         {#if $AppState.filteredPosts.length > 0}
           {#each $AppState.filteredPosts as post (post.id)}
             <div transition:fade="{{ delay: 150, duration: 200 }}">

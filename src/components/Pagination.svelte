@@ -3,7 +3,7 @@
   import { ArrowLeftOutline, ArrowRightOutline } from "flowbite-svelte-icons";
   let helper = { start: 1, end: 4 };
 
-  import { AppState } from "../store/AppState";
+  import { AppState } from "$lib/stores/AppState";
 
   $: $AppState.activeCategory;
 

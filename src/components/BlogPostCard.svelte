@@ -9,14 +9,13 @@
     ClockSolid,
     PenSolid,
   } from "flowbite-svelte-icons";
-  import { AppState } from "../store/AppState";
-  import type { Post } from "$lib/models/post";
+  import { AppState, type PostFullType } from "$lib/stores/AppState";
 
-  export let post: Post;
+  export let post: PostFullType;
 
   let hCard: false;
-  let commentsLength = post.comments.length;
-  let likesLength = post.likes.length;
+  $: commentsLength = post.comments.length;
+  $: likesLength = post.likes.length;
 
   const handleEdit = () => {
     goto(`/auth/edit/${post.id}`);
@@ -111,7 +110,7 @@
           }}"></time>
       </Tooltip>
 
-      {#if $page.data.session && $page.data.session.user.email === "tung.le0319@gmail.com"}
+      {#if $page.data.session && $page.data.session.user?.email === "tung.le0319@gmail.com"}
         <Button
           on:click="{handleEdit}"
           color="none"
@@ -128,25 +127,6 @@
           Edit
         </Tooltip>
       {/if}
-
-      <!-- EDIT BUTTON -->
-      <!-- {#if user.id === AdminUser.id && user.role === AdminUser.role}
-        <Button
-          on:click="{handleEdit}"
-          color="none"
-          border
-          class="text-orange-400 font-3 outline-none border-none font-semibold p-0.5 cursor-pointer"
-        >
-          <PenSolid class=" w-4 h-4 " />
-    </Button>
-        <Tooltip
-          placement="top"
-          color="default"
-          class="shadow-lg shadow-slate-300 dark:shadow-slate-600 font-3 font-semibold text-black"
-        >
-          Edit
-        </Tooltip>
-      {/if} -->
     </div>
   </div>
 {/if}

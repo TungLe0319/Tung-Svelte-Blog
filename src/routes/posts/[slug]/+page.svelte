@@ -1,4 +1,4 @@
-<script >
+<script lang="ts" >
   import CommentCard from "$components/Comments/CommentCard.svelte";
   import CommentForm from "$components/Comments/CommentForm.svelte";
   import LikeBlogPost from "$components/LikeBlogPost.svelte";
@@ -12,34 +12,27 @@
   } from "flowbite-svelte-icons";
   import { svelteTime } from "svelte-time";
   import { Avatar, Badge } from "flowbite-svelte";
+  import type { PageData } from "./$types";
+  import type { Comment, Like, Post, Prisma } from "@prisma/client";
 
-  /** @type {import('./$types').PageData} */
-  export let data;
 
-  /**
-   * @type {import('@prisma/client').Prisma.PostInclude<comments:true,author:true,likes:true>}
-   */
-  let post;
+  export let data:PageData;
 
-  /**
-   * @type {import('@prisma/client').Post[]}
-   */
-  let recentPosts;
 
-  /**
-   * @type {import('@prisma/client').Comment[]}
-   */
-  let comments = [];
+let post:Prisma.PostGetPayload<{
+  include:{comments:true,likes:true,author:true}
+}>
 
-  /**
-   * @type {import('@prisma/client').Like[]}
-   */
-  let likes = [];
+  let recentPosts:Post;
 
-  /**
-   * @type {boolean}
-   */
-  let liked;
+
+  let comments : Comment[];
+
+
+  let likes :Like [];
+
+
+  let liked:boolean
 
   $: {
     post = data?.body?.post;

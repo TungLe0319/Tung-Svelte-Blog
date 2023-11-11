@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { Post } from "$lib/models/post";
+  import type { PostFullType } from "$lib/stores/AppState";
   import { Card } from "flowbite-svelte";
-  export let featuredPost: Post;
-  let hCard = false;
+  export let featuredPost:PostFullType;
+  let hCard:boolean = false;
 </script>
 
 <a class="hidden lg:block" href="{`/blog/${featuredPost?.id}`}">

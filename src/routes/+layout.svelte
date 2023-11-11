@@ -1,17 +1,15 @@
-<script>
+<script lang="ts">
   import "../app.postcss";
   import Navbar from "../components/Navbar.svelte";
   import Footer from "../components/Footer.svelte";
-  // import "../app.postcss"
   import { fade } from "svelte/transition";
-  import { page } from "$app/stores";
   import Notification from "../components/Notification.svelte";
+  import type { LayoutData } from "./$types";
+  import type { Post } from "@prisma/client";
 
+  export let data:LayoutData;
 
-/** @type {import('./$types').LayoutData} */
-  export let data;
-export let 
-posts = data?.posts
+$: posts = data?.posts as Post[]
   export let pageSession = data?.session;
 </script>
 

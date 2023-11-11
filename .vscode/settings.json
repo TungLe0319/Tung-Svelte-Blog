@@ -3,5 +3,8 @@
   "[svelte]": {
     "editor.defaultFormatter": "svelte.svelte-vscode"
   },
-  "nuxt.isNuxtApp": false
+  "nuxt.isNuxtApp": false,
+  "synthwave84.brightness": 0.2,
+  "cSpell.words": ["flowbite"],
+  "scss.lint.unknownAtRules": "ignore"
 }
