@@ -1,127 +1,105 @@
 <!-- CreateBlogPost.svelte -->
 
-<script lang="ts">
-  import Editor from "@tinymce/tinymce-svelte";
-  import { Button, Checkbox, Label, MultiSelect } from "flowbite-svelte";
-  import { goto, invalidateAll } from "$app/navigation";
-  import { toast } from "$lib/stores/Toast";
-  import type { PageData } from "./$types";
+<script>
   import { formData } from "$lib/stores/FormData";
-  import type { Category } from "@prisma/client";
-  import { applyAction, deserialize } from "$app/forms";
+  import { AppState } from "$lib/stores/AppState";
+  import Editor from "@tinymce/tinymce-svelte";
+  import { Button, Checkbox, MultiSelect } from "flowbite-svelte";
+  import { goto } from "$app/navigation";
+  /** @type {import('./$types').PageData} */
+  export let data;
+  let post = data.body?.post;
+  let id = post.id;
+  let title = post.title;
+  let subtitle = post.subtitle;
+  let img = post.img;
+ let content = post.content
+  let published = post.published;
+  let currentCategories = post.categories.map((c) => c.name);
 
-  export let data: PageData;
-console.log(data);
-
-  $: post = data.post;
-  // console.log(post);
-
-  let categories = data.categories.map((c: Category) => {
-    return { value: c.name, name: c.name };
+  let categories = data.body.categories.map((category) => {
+    return {
+      value: category.name,
+      name: category.name,
+    };
   });
 
-  let selected = data.post
-    ? data.post.categories.map((c: Category) => c.name)
-    : [];
-
-  async function handleSubmit(event: {
-    currentTarget: HTMLFormElement | undefined;
-  }) {
-    try {
-      const data = new FormData(event?.currentTarget);
-
+  async function handleSubmit() {
+   
     
-      data.append("content", post.content);
-
-      $formData.categories.forEach((category) => {
-        data.append("selected[]", category);
+    try {
+      let formData = new FormData();
+      formData.append("id", id);
+      formData.append("title", title);
+      formData.append("img", img);
+      formData.append("subtitle", subtitle);
+      formData.append("content",content );
+      currentCategories.forEach((c) => {
+        formData.append("categories[]", c);
       });
+      formData.append("categories", currentCategories);
+      formData.append("published", published);
 
-      const response = await fetch(event.currentTarget!.action, {
+      const response = await fetch(`/auth/edit/${post.id}`, {
         method: "POST",
-        body: data,
+
+        body: formData,
       });
-
-      const result = deserialize(await response.text());
-
-      if (result.type === "success") {
-        // rerun all `load` functions, following the successful update
-        await invalidateAll();
-      }
-
-      applyAction(result);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   }
 </script>
 
 <div class="p-4 pt-20">
-  <div class="flex space-x-4">
-    <h2 class="text-2xl font-semibold mb-4">Create a New Blog Post</h2>
-
-    <form action="?/deletePost&id={post.id}" method="POST">
-      <Button type="submit">Delete</Button>
-    </form>
-  </div>
-
-  <form
-    action="?/updatePost&id={post.id}"
-    method="POST"
-    on:submit="{() =>handleSubmit}"
-  >
+  <form on:submit="{handleSubmit}">
     <div class="flex space-x-4">
       <div class="mb-4 w-1/2">
-        <label for="title">Title</label>
+        <label for="title" class="block text-gray-600">Title</label>
         <input
           type="text"
           id="title"
           name="title"
-          value="{post.title}"
+          bind:value="{post.title}"
           class="w-full border rounded px-3 py-2"
-          required
         />
       </div>
 
       <div class="mb-4 w-1/2">
-        <label for="subtitle">Subtitle</label>
+        <label for="subtitle" class="block text-gray-600">Subtitle</label>
         <input
           type="text"
           id="subtitle"
           name="subtitle"
-          value="{post.subtitle}"
+          bind:value="{post.subtitle}"
           class="w-full border rounded px-3 py-2"
-          required
         />
       </div>
     </div>
 
-    <div class="flex space-x-4">
-      <div class="w-1/2">
-        <label for="img">Image URL</label>
+    <div class=" flex space-x-4">
+      <div class="mb-4 w-1/2">
+        <label for="img" class="block text-gray-600">Image URL</label>
         <input
           type="text"
           id="img"
           name="img"
-          value="{post.img}"
+          bind:value="{post.img}"
           class="w-full border rounded px-3 py-2"
-          required
         />
+        <img src="{post.img}" alt=" post" class="w-1/3 rounded m-2" />
       </div>
 
-      <div class="w-1/2">
-        <label for="selected[]">Categories</label>
+      <div class=" mt-6 mb-4 w-1/2">
         <MultiSelect
-          size="md"
-          name="selected[]"
+          size="lg"
           items="{categories}"
-          bind:value="{selected}"
-          required
+          bind:value="{currentCategories}"
         />
       </div>
     </div>
 
-    <div class=" my-4 flex space-x-4">
+    <div class="mb-4 flex space-x-2 items-center">
       <Checkbox bind:checked="{post.published}">Published</Checkbox>
       <Button type="submit">Edit</Button>
     </div>
@@ -129,13 +107,91 @@ console.log(data);
     <div class="two-column">
       <div class="editor-column">
         <div class="mb-4">
-          <Label for="content">Content</Label>
-          <Editor  bind:value="{post.content}" />
+          <label for="content" class="block text-gray-600">Content</label>
+
+          <Editor bind:value="{post.content}" />
         </div>
       </div>
     </div>
   </form>
 </div>
+
+{#if $AppState.activePost}
+  <div class="p-4 pt-20">
+    <h2 class="text-2xl font-semibold mb-4">Create a New Blog Post</h2>
+
+    <!-- <form on:submit="{handleSubmit}">
+      <div class="flex space-x-4">
+        <div class="mb-4 w-1/2">
+          <label for="title" class="block text-gray-600">Title</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            bind:value="{title}"
+            class="w-full border rounded px-3 py-2"
+          />
+        </div>
+
+        <div class="mb-4 w-1/2">
+          <label for="subtitle" class="block text-gray-600">Subtitle</label>
+          <input
+            type="text"
+            id="subtitle"
+            name="subtitle"
+            bind:value="{subtitle}"
+            class="w-full border rounded px-3 py-2"
+          />
+        </div>
+      </div>
+
+      <div class=" flex space-x-4">
+        <div class="mb-4 w-1/2">
+          <label for="img" class="block text-gray-600">Image URL</label>
+          <input
+            type="text"
+            id="img"
+            name="img"
+            bind:value="{img}"
+            class="w-full border rounded px-3 py-2"
+          />
+          <img src="{img}" alt=" post" class="w-1/3 rounded m-2">
+        </div>
+
+        <div class=" mt-6 mb-4 w-1/2">
+          <MultiSelect
+            size="lg"
+            items="{categories}"
+            bind:value="{currentCategories}"
+          />
+        </div>
+      </div>
+
+      <div class="mb-4 flex space-x-2 items-center">
+        <Checkbox bind:checked="{published}">Published</Checkbox>
+            <Button
+          type="submit"
+         
+          >Create</Button
+        >
+      </div>
+
+      <div class="two-column">
+        <div class="editor-column">
+          <div class="mb-4">
+            <label for="content" class="block text-gray-600">Content</label>
+
+            <Editor conf="{conf}" bind:value="{content}" />
+          </div>
+        </div>
+      </div>
+
+   
+    </form> -->
+  </div>
+{:else}
+  <div class="text-8xl font-bold font-1 p-44 text-center">NO ACTIVE POST</div>
+{/if}
 
 <style lang="scss" scoped>
   .two-column {

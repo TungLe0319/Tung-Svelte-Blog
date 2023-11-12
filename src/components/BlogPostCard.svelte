@@ -19,6 +19,7 @@
   $: likesLength = post.likes.length;
 
   const handleEdit = () => {
+  $AppState.activePost = post
     goto(`/auth/edit/${post.id}`);
   };
 </script>
