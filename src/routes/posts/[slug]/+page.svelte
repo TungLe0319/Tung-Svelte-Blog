@@ -1,9 +1,9 @@
 <script lang="ts">
   import CommentCard from "$components/PostSlugPage/CommentCard.svelte";
   import CommentForm from "$components/PostSlugPage/CommentForm.svelte";
-  import LikeBlogPost from "$components/LikeBlogPost.svelte";
-  import RecentPosts from "$components/RecentPosts.svelte";
-  import LinkedInCard from "$components/LinkedInCard.svelte";
+  import LikeBlogPost from "$components/PostSlugPage/LikeBlogPost.svelte";
+  import RecentPosts from "$components/PostSlugPage/RecentPosts.svelte";
+  import LinkedInCard from "$components/PostSlugPage/LinkedInCard.svelte";
   import { onMount } from "svelte";
   import {
     ClockOutline,
@@ -16,7 +16,7 @@
   import type { PostFull, PostSemiFull, commentWithUser, likesWithUser } from "$lib/stores/PrismaTypes";
 
   export let data: PageData;
-console.log(data.body?.recentPosts);
+// console.log(data.body?.recentPosts);
 
   let post: PostFull
 
