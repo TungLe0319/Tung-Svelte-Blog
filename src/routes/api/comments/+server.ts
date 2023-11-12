@@ -4,7 +4,7 @@ import { error, fail } from "@sveltejs/kit";
 
 import { prisma } from "$lib/server/prisma";
 
-/** @type {import('./$types').RequestHandler} */
+// /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
   try {
     const commentData = await request.formData();
@@ -12,11 +12,15 @@ export async function POST({ request }) {
     const postId = commentData.get("postId");
     const content = commentData.get("content");
 
-    const userEmail = commentData.get("userEmail") 
+    const userEmail = commentData.get("userEmail")  as string
 
     
 
-    if (content === "") return fail(500,{message:"Fill out required content field"})
+    if (content === "") 
+      return new Response(JSON.stringify(newComment), {
+        status: 500, // Status code for success
+       
+      });
     
 
     const user = await prisma.user.findUnique({

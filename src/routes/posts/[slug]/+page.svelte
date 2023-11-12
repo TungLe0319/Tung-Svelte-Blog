@@ -177,7 +177,7 @@
 
       <!-- //TODO - Create a Second way of CRUD comments  -->
  {#if data?.session}
- <form action="?/createComment" method="POST" class=" p-2 my-4" >
+ <form action="?/createComment" method="POST" class=" p-2 my-4">
   <Label for="content">Comment:</Label>
 <Textarea name="content" wrappedClass="h-4/5">
 
