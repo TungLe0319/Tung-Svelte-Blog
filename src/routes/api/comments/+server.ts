@@ -1,6 +1,6 @@
 // +page.server.ts
 
-import { error, fail } from "@sveltejs/kit";
+import { error, fail, json } from "@sveltejs/kit";
 
 import { prisma } from "$lib/server/prisma";
 
@@ -9,19 +9,14 @@ export async function POST({ request }) {
   try {
     const commentData = await request.formData();
 
-    const postId = commentData.get("postId");
-    const content = commentData.get("content");
+    const postId = commentData.get("postId") as string;
+    const content = commentData.get("content") as string;
 
-    const userEmail = commentData.get("userEmail")  as string
+    const userEmail = commentData.get("userEmail") as string;
 
-    
-
-    if (content === "") 
-      return new Response(JSON.stringify(newComment), {
-        status: 500, // Status code for success
-       
-      });
-    
+    if (content === "") {
+      throw error(400, "Must have content body to create comment");
+    }
 
     const user = await prisma.user.findUnique({
       where: {
@@ -29,41 +24,30 @@ export async function POST({ request }) {
       },
     });
 
-
-    if (!user) return fail(400,{message:"No User"})
- 
-    if (user) {
-      const newComment = await prisma.comment.create({
-        data: {
-          postId: parseInt(postId),
-          content,
-          userId: user.id,
-        },
-        include: {
-          user: true,
-        },
-      });
-
-
-      
-
-      return new Response(JSON.stringify(newComment), {
-        status: 200, // Status code for success
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    } else {
-      // Handle the case when the user is not found
-      return new Response(JSON.stringify({ error: "User not found" }), {
-        status: 404, // Use an appropriate status code
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+    if (!user) {
+      throw error(400, "Invalid Request");
     }
+
+    const newComment = await prisma.comment.create({
+      data: {
+        postId: parseInt(postId),
+        content,
+        userId: user.id,
+      },
+      include: {
+        user: true,
+      },
+    });
+
+    return new Response(JSON.stringify(newComment), {
+      status: 200, // Status code for success
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   } catch (error) {
-    return  fail(500,{message:'Failed to create comment'})
+    // throw error(500, "Unable to Create Comment");
+    console.error(error)
   }
 }
 /** @type {import('./$types').RequestHandler} */
@@ -71,12 +55,12 @@ export async function PUT({ request }) {
   try {
     const commentData = await request.formData();
 
-    const commentId = commentData.get("id");
-    const content = commentData.get("content") || "";
+    const commentId = commentData.get("id") as string;
+    const content = commentData.get("content") as string
 
     const existingComment = await prisma.comment.findUnique({
       where: {
-        id: parseInt(commentId),
+        id: Number(commentId),
       },
     });
 

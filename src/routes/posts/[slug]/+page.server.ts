@@ -59,57 +59,60 @@ export const load: PageServerLoad = async ({ params }) => {
 };
 
 export const actions: Actions = {
-  createComment: async ({ request,cookies }) => {
-  //   try {
-  //     const commentData = await request.formData();
-  // // const session = await event.locals.getSession();
-  //     const postId = commentData.get("postId");
-  //     const content = commentData.get("content") as string;
+  createComment: async ({ request,cookies,locals }) => {
+    try {
+      const commentData = await request.formData();
+  const session = await locals.getSession();
+      const postId = commentData.get("postId");
+      const content = commentData.get("content") as string;
 
-  //     const userEmail = commentData.get("userEmail")  as string;
+      const userEmail = commentData.get("userEmail")  as string;
 
-  //     console.log(content);
+      console.log(content);
       
     
 
-  //     const user = await prisma.user.findUnique({
-  //       where: {
-  //         email: userEmail,
-  //       },
-  //     });
+      const user = await prisma.user.findUnique({
+        where: {
+          email: userEmail,
+        },
+      });
 
-  //     if (!user) {
-  //       return fail(400,{message:'Unable to find user'})
-  //     }
-  //  const newComment = await prisma.comment.create({
-  //    data: {
-  //      postId: Number(postId),
-  //      content,
-  //      userId: user.id,
-  //    },
-  //    include: {
-  //      user: true,
-  //    },
-  //  });
+      if (!user) {
+        return fail(400,{message:'Unable to find user'})
+      }
 
-  //  return new Response(JSON.stringify(newComment), {
-  //    status: 200, // Status code for success
-  //    headers: {
-  //      "Content-Type": "application/json",
-  //    },
-  //  });
+
       
-  //   } catch (error) {
-  //     return new Response(
-  //       JSON.stringify({ error: "Failed to create a comment" }),
-  //       {
-  //         status: 500, // Status code for server error
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //       }
-  //     );
-  //   }
+   const newComment = await prisma.comment.create({
+     data: {
+       postId: Number(postId),
+       content,
+       userId: user.id,
+     },
+     include: {
+       user: true,
+     },
+   });
+
+   return new Response(JSON.stringify(newComment), {
+     status: 200, // Status code for success
+     headers: {
+       "Content-Type": "application/json",
+     },
+   });
+      
+    } catch (error) {
+      return new Response(
+        JSON.stringify({ error: "Failed to create a comment" }),
+        {
+          status: 500, // Status code for server error
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }
   },
 
   // TODO USE urlSEARCH PARAMS
