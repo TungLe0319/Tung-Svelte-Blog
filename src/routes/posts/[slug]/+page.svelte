@@ -14,11 +14,13 @@
   import { Avatar, Badge} from "flowbite-svelte";
   import type { PageData } from "./$types";
   import type { PostFull, PostSemiFull, commentWithUser, likesWithUser } from "$lib/stores/PrismaTypes";
+  import type { Category } from "@prisma/client";
 
   export let data: PageData;
 // console.log(data.body?.recentPosts);
 
   let post: PostFull
+  let categories : Category[]
 
   let recentPosts: PostSemiFull[];
 
@@ -33,6 +35,7 @@
     recentPosts = data?.recentPosts;
     comments = data?.post?.comments!;
     likes = data?.post?.likes!;
+    categories = data?.post?.categories!
   }
 
   onMount(() => {
@@ -81,7 +84,8 @@
         <div class="post-body">
           <img src="{post?.img}" alt="Blog-post" class=" post-image" />
 
-          <div class="post-info">
+       <div class="">
+           <div class="post-info">
             <Badge
               color="none"
               border
@@ -132,6 +136,13 @@
               {post.comments.length}
             </Badge>
           </div>
+
+          <div class="flex gap-2  mt-3 flex-wrap ">
+            {#each categories as category}
+            <Badge  >{category.name}</Badge>
+            {/each}
+          </div>
+       </div>
 
           <div class="post-title">{post?.title}</div>
           <div class="post-subtitle">{post?.subtitle}</div>

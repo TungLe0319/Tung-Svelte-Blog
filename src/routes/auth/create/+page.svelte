@@ -7,7 +7,8 @@
   import type { PageData } from "./$types";
   import { applyAction, deserialize, enhance } from "$app/forms";
   import { goto, invalidateAll } from "$app/navigation";
-
+  import { contentTemplate } from "$lib/stores/BlogTemplate";
+  import { parse } from "svelte/compiler";
   export let data: PageData;
 
   $: categories = data.body?.map((category) => {
@@ -18,31 +19,29 @@
   });
 
   async function handleSubmit(event: {
-    currentTarget: HTMLFormElement | undefined;
+    currentTarget: HTMLFormElement & EventTarget;
   }) {
     try {
-      const data = new FormData(event?.currentTarget);
+      const data = new FormData(event.currentTarget);
       data.append("content", $formData.content);
 
       $formData.categories.forEach((category) => {
         data.append("selected[]", category);
       });
 
-      const response = await fetch(event.currentTarget!.action, {
+      const response = await fetch(event.currentTarget.action, {
         method: "POST",
         body: data,
       });
 
       const result = deserialize(await response.text());
 
-      if (result.type === "redirect") {
-        goto(result.location);
-      } else {
+      if (result.type === "success") {
         await invalidateAll();
-
-        applyAction(result);
-        $formData.content = "";
       }
+
+      $formData.content = "";
+      applyAction(result);
     } catch (error) {
       console.error(error);
     }
@@ -56,7 +55,6 @@
     action="?/createPost"
     method="POST"
     on:submit|preventDefault="{handleSubmit}"
-    use:enhance
   >
     <div class="flex space-x-4">
       <div class="mb-4 w-1/2">
@@ -84,7 +82,7 @@
       <div class="mb-4 w-1/2">
         <label for="img" class="block text-gray-600">Image URL</label>
         <Input
-          type="text"
+          type="url"
           id="img"
           name="img"
           class="w-full border rounded px-3 py-2"

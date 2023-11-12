@@ -128,7 +128,7 @@
       <div class="mb-4 w-1/2">
         <label for="img" class="block text-gray-600">Image URL</label>
         <input
-          type="text"
+          type="url"
           id="img"
           name="img"
           bind:value="{post.img}"
