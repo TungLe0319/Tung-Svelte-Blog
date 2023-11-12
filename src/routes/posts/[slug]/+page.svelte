@@ -11,12 +11,15 @@
     MessagesOutline,
   } from "flowbite-svelte-icons";
   import { svelteTime } from "svelte-time";
-  import { Avatar, Badge } from "flowbite-svelte";
+  import { Avatar, Badge, Button, Label, Textarea } from "flowbite-svelte";
   import type { PageData } from "./$types";
   import type { Comment, Like, Post, Prisma } from "@prisma/client";
   import type { PostFullType } from "$lib/stores/AppState";
+  import { enhance } from "$app/forms";
 
   export let data: PageData;
+
+
 
   let post: Prisma.PostGetPayload<{
     include: {
@@ -57,7 +60,7 @@
     comments = data?.body?.post?.comments;
     likes = data?.body?.post?.likes;
   }
-$:
+
   onMount(() => {
   if (likes) {
       liked = likes?.some(
@@ -66,11 +69,7 @@ $:
   }
   });
 
-  /**
-   * Handle a comment created event.
-   *
-   * @param {Event} event - The comment created event.
-   */
+ 
   function handleCommentCreated(event) {
     const newComment = event.detail;
     comments = [...comments, newComment];
@@ -173,17 +172,37 @@ $:
         </div>
       </div>
       <!-- COMMENT FORM  -->
+
+
+
+      <!-- //TODO - Create a Second way of CRUD comments  -->
+ {#if data?.session}
+ <form action="?/createComment" method="POST" class=" p-2 my-4" >
+  <Label for="content">Comment:</Label>
+<Textarea name="content" wrappedClass="h-4/5">
+
+</Textarea>
+
+<Button type="submit">
+  Submit
+</Button>
+</form>
+ {/if}
+
+
+
+
       {#if data?.session}
         <CommentForm on:commentCreated="{handleCommentCreated}" post="{post}" />
       {/if}
       <!-- COMMENT SECTION  -->
       <div class="comment-container">
-        <!-- {#each comments as comment (comment.id)}
+        {#each comments as comment (comment.id)}
           <CommentCard
-            on:commentDeleted="{handleCommentDeleted(comment.id)}"
+            on:commentDeleted="{() =>handleCommentDeleted(comment.id)}"
             comment="{comment}"
           />
-        {/each} -->
+        {/each}
 
         {#each comments as comment (comment.id)}
           <CommentCard comment="{comment}" />

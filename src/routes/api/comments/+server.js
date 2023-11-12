@@ -1,8 +1,8 @@
 // +page.server.ts
-import { PrismaClient } from "@prisma/client";
-import { error } from "@sveltejs/kit";
 
-import { db } from "$lib/server/prisma";
+import { error, fail } from "@sveltejs/kit";
+
+import { prisma } from "$lib/server/prisma";
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
@@ -12,25 +12,24 @@ export async function POST({ request }) {
     const postId = commentData.get("postId");
     const content = commentData.get("content");
 
-    const userEmail = commentData.get("userEmail") || "";
+    const userEmail = commentData.get("userEmail") 
 
-    if (content === "") {
-      return new Response(JSON.stringify({ error: "User not found" }), {
-        status: 400, // Use an appropriate status code
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    }
+    
 
-    const user = await db.user.findUnique({
+    if (content === "") return fail(500,{message:"Fill out required content field"})
+    
+
+    const user = await prisma.user.findUnique({
       where: {
         email: userEmail,
       },
     });
 
+
+    if (!user) return fail(400,{message:"No User"})
+ 
     if (user) {
-      const newComment = await db.comment.create({
+      const newComment = await prisma.comment.create({
         data: {
           postId: parseInt(postId),
           content,
@@ -40,6 +39,9 @@ export async function POST({ request }) {
           user: true,
         },
       });
+
+
+      
 
       return new Response(JSON.stringify(newComment), {
         status: 200, // Status code for success
@@ -57,15 +59,7 @@ export async function POST({ request }) {
       });
     }
   } catch (error) {
-    return new Response(
-      JSON.stringify({ error: "Failed to create a comment" }),
-      {
-        status: 500, // Status code for server error
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    return  fail(500,{message:'Failed to create comment'})
   }
 }
 /** @type {import('./$types').RequestHandler} */
@@ -76,14 +70,14 @@ export async function PUT({ request }) {
     const commentId = commentData.get("id");
     const content = commentData.get("content") || "";
 
-    const existingComment = await db.comment.findUnique({
+    const existingComment = await prisma.comment.findUnique({
       where: {
         id: parseInt(commentId),
       },
     });
 
     if (existingComment) {
-      const updatedComment = await db.comment.update({
+      const updatedComment = await prisma.comment.update({
         where: {
           id: existingComment.id,
         },
@@ -128,7 +122,7 @@ export async function DELETE({ request }) {
     const commentId = commentData.get("id");
     const creatorEmail = commentData.get("userEmail");
 
-    const creator = await db.user.findUnique({
+    const creator = await prisma.user.findUnique({
       where: {
         email: creatorEmail,
       },
@@ -144,7 +138,7 @@ export async function DELETE({ request }) {
       });
     }
 
-    const existingComment = await db.comment.findUnique({
+    const existingComment = await prisma.comment.findUnique({
       where: {
         id: parseInt(commentId),
       },
@@ -171,7 +165,7 @@ export async function DELETE({ request }) {
     }
 
     // Delete the comment
-    const deletedComment = await db.comment.delete({
+    const deletedComment = await prisma.comment.delete({
       where: {
         id: existingComment.id,
       },
@@ -198,7 +192,7 @@ export async function DELETE({ request }) {
 /** @type {import('./$types').RequestHandler} */
 export async function GET({ url }) {
   try {
-    const comments = await db.comment.findMany({
+    const comments = await prisma.comment.findMany({
       include: {
         user: true,
       },

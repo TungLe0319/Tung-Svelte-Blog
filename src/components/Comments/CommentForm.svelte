@@ -42,6 +42,8 @@
   }
 </script>
 
+
+
 {#if $page.data.session}
   <form on:submit|preventDefault={createComment}>
     <div class="comment-form-container">
