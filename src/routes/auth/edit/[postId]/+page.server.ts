@@ -47,11 +47,19 @@ export const actions: Actions = {
       const subtitle = formData.get("subtitle") as string;
       const img = formData.get("img") as string;
       const content = formData.get("content") as string;
-      const published = formData.get("published") === "true"; // If the checkbox is expected to return a string 'true' or 'false'
+      const published = formData.get("published") === "true";
+     const categoryNames = formData.getAll("selected[]") as string[];
+     const categories = categoryNames.map((name) => ({ name }));
 
-      console.log(content);
+      console.log( content);
+      console.log(categoryNames);
+      console.log(categories);
+      console.log(title);
+      console.log(subtitle);
+      console.log(img);
+      console.log(published);
 
-      const categories = formData.getAll("selected[]") as string[];
+      return
 
       const post = await prisma.post.findUnique({
         where: {

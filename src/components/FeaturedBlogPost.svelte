@@ -5,7 +5,7 @@
   let hCard:false
 </script>
 
-<a class="hidden lg:block" href="{`/blog/${featuredPost?.id}`}">
+<a class="hidden lg:block" href="{`/posts/${featuredPost?.id}`}">
   <div class=" featured-blogpost mx-1">
     <img class="featured-blogpost-img" src="{featuredPost?.img}" alt="post" />
 

@@ -2,64 +2,56 @@
 
 <script lang="ts">
   import Editor from "@tinymce/tinymce-svelte";
-  import {
-    Badge,
-    Button,
-    Checkbox,
-    Input,
-    Label,
-    MultiSelect,
-  } from "flowbite-svelte";
-  import { goto } from "$app/navigation";
-  import { toast } from "../../../../store/Toast";
+  import { Button, Checkbox, Label, MultiSelect } from "flowbite-svelte";
+  import { goto, invalidateAll } from "$app/navigation";
+  import { toast } from "$lib/stores/Toast";
   import type { PageData } from "./$types";
+  import { formData } from "$lib/stores/FormData";
+  import type { Category } from "@prisma/client";
+  import { applyAction, deserialize } from "$app/forms";
 
   export let data: PageData;
-  // console.log(data);
+console.log(data);
 
   $: post = data.post;
   // console.log(post);
 
-  let categories = data.categories.map((c) => {
+  let categories = data.categories.map((c: Category) => {
     return { value: c.name, name: c.name };
   });
 
-  let selected = data.post ? data.post.categories.map((c) => c.name) : [];
+  let selected = data.post
+    ? data.post.categories.map((c: Category) => c.name)
+    : [];
 
-  interface FormData {
-    title: string;
-    subtitle: string;
-    img: string;
-    selected: string;
-    published: boolean;
-    content: string;
-  }
+  async function handleSubmit(event: {
+    currentTarget: HTMLFormElement | undefined;
+  }) {
+    try {
+      const data = new FormData(event?.currentTarget);
 
-  function validateForm() {
-    const formData: FormData = {
-      title: (document.getElementById("title") as HTMLInputElement).value,
-      subtitle: (document.getElementById("subtitle") as HTMLInputElement).value,
-      img: (document.getElementById("img") as HTMLInputElement).value,
-      selected: (
-        document.querySelector('input[name="selected[]"') as HTMLInputElement
-      ).value,
+    
+      data.append("content", post.content);
 
-      published: (
-        document.querySelector('input[name="published"') as HTMLInputElement
-      ).checked,
+      $formData.categories.forEach((category) => {
+        data.append("selected[]", category);
+      });
 
-      content: (document.getElementById("content") as HTMLInputElement).value,
-    };
+      const response = await fetch(event.currentTarget!.action, {
+        method: "POST",
+        body: data,
+      });
 
-    if (
-      !formData.title ||
-      !formData.subtitle ||
-      !formData.img ||
-      !formData.selected ||
-      !formData.content
-    ) {
-      alert("Please fill in all required fields.");
-      return;
+      const result = deserialize(await response.text());
+
+      if (result.type === "success") {
+        // rerun all `load` functions, following the successful update
+        await invalidateAll();
+      }
+
+      applyAction(result);
+    } catch (error) {
+      console.error(error)
     }
   }
 </script>
@@ -76,7 +68,7 @@
   <form
     action="?/updatePost&id={post.id}"
     method="POST"
-    on:submit="{validateForm}"
+    on:submit="{() =>handleSubmit}"
   >
     <div class="flex space-x-4">
       <div class="mb-4 w-1/2">
@@ -137,29 +129,12 @@
     <div class="two-column">
       <div class="editor-column">
         <div class="mb-4">
-          <Label for="content" >Content</Label>
-          <Editor value="{post.content}" />
+          <Label for="content">Content</Label>
+          <Editor  bind:value="{post.content}" />
         </div>
       </div>
     </div>
   </form>
-
-  <script>
-    function validateForm() {
-      const title = document.getElementById("title").value;
-      const subtitle = document.getElementById("subtitle").value;
-      const img = document.getElementById("img").value;
-      const categories = document.querySelector(
-        'input[name="selected[]"]'
-      ).value; // You might need to adjust this based on the MultiSelect component
-
-      if (!title || !subtitle || !img || !categories) {
-        alert("Please fill in all required fields.");
-        return false;
-      }
-      return true;
-    }
-  </script>
 </div>
 
 <style lang="scss" scoped>

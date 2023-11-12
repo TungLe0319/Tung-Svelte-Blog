@@ -15,33 +15,35 @@ export const load: PageServerLoad = async () => {
   }
 };
 
-
-
 //TODO FIX CONTENT NOT PASSING THROUGH
 export const actions: Actions = {
   createPost: async ({ request }) => {
-    const formData = await request.formData();
-
-    const title = formData.get("title") as string;
-    const subtitle = formData.get("subtitle") as string;
-    const img = formData.get("img") as string;
-    const content = formData.get("content") as string;
-    const published = formData.get("published") === "true"; // If the checkbox is expected to return a string 'true' or 'false'
-    const categories = formData.getAll(
-      "selected[]"
-    ) as Prisma.CategoryWhereUniqueInput[];
-
-    const datePublished = new Date().toISOString();
-
-    console.log(title, img, categories, subtitle);
-
     try {
-      await prisma.post.create({
+      const formData = await request.formData();
+
+      const title = formData.get("title") as string;
+      const subtitle = formData.get("subtitle") as string;
+      const img = formData.get("img") as string;
+      const content = formData.get("content") as string;
+      const published = formData.get("published") === "true"; 
+      const categoryNames = formData.getAll("selected[]") as string[];
+      const categories = categoryNames.map((name) => ({ name }));
+      const datePublished = new Date().toISOString();
+
+      // console.log( content);
+      // console.log(categoryNames);
+      // console.log(categories);
+      // console.log(title);
+      // console.log(subtitle);
+      // console.log(img);
+      // console.log(published);
+
+      const newPost = await prisma.post.create({
         data: {
           title,
           subtitle,
           img,
-          // content,
+          content,
           published,
           datePublished,
           author: {
@@ -54,6 +56,7 @@ export const actions: Actions = {
           },
         },
       });
+      // console.log(newPost);
 
       return { status: 200 };
     } catch (error) {
