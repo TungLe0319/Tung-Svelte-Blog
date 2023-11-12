@@ -10,7 +10,7 @@
   import type { PageData } from "./$types";
 
   export let data:PageData;
-console.log(data);
+
 
 
   let posts = data?.posts;
@@ -62,6 +62,7 @@ console.log(data);
       <div class=" featured-post-headliner">
         <h3 class="text-4xl mb-10 font-1 lg:text-white text-shadow-overlay">
           Featured
+        
         </h3>
       </div>
       <div class="featured-blogs-container">

@@ -1,11 +1,13 @@
 <!-- CreateBlogPost.svelte -->
 
-<script>
+<script lang="ts">
   import { formData } from "$lib/stores/FormData";
   import { AppState } from "$lib/stores/AppState";
   import Editor from "@tinymce/tinymce-svelte";
   import { Button, Checkbox, MultiSelect } from "flowbite-svelte";
   import { goto } from "$app/navigation";
+  import { toast } from "$lib/stores/Toast";
+  import type { Category } from "@prisma/client";
   /** @type {import('./$types').PageData} */
   export let data;
   let post = data.body?.post;
@@ -13,38 +15,70 @@
   let title = post.title;
   let subtitle = post.subtitle;
   let img = post.img;
- let content = post.content
+  let content = post.content;
   let published = post.published;
-  let currentCategories = post.categories.map((c) => c.name);
+  let currentCategories = post.categories.map((c: Category) => c.name);
 
-  let categories = data.body.categories.map((category) => {
+  let categories = data.body.categories.map((category: Category) => {
     return {
       value: category.name,
       name: category.name,
     };
   });
 
-  async function handleSubmit() {
-   
-    
+  async function handleUpdate(event: {
+    currentTarget: HTMLFormElement | undefined;
+  }) {
     try {
+      if (confirm("Edit?")) {
+      }
+
       let formData = new FormData();
-      formData.append("id", id);
-      formData.append("title", title);
-      formData.append("img", img);
-      formData.append("subtitle", subtitle);
-      formData.append("content",content );
-      currentCategories.forEach((c) => {
+
+      formData.append("title", post.title);
+      formData.append("img", post.img);
+      formData.append("subtitle", post.subtitle);
+      formData.append("content", post.content);
+      currentCategories.forEach((c: string) => {
         formData.append("categories[]", c);
       });
       formData.append("categories", currentCategories);
-      formData.append("published", published);
+      formData.append("published", post.published);
 
-      const response = await fetch(`/auth/edit/${post.id}`, {
+      await fetch(event.currentTarget!.action, {
         method: "POST",
-
         body: formData,
       });
+
+      toast({
+        color: "green",
+        message: "Post Successfully Updated",
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function handleDelete(event: {
+    currentTarget: HTMLFormElement | undefined;
+  }) {
+    try {
+      if (confirm("Delete?")) {
+      }
+
+      let formData = new FormData();
+
+      await fetch(event.currentTarget!.action, {
+        method: "POST",
+        body: formData,
+      });
+
+      toast({
+        color: "green",
+        message: "Post Deleted",
+      });
+
+      goto('/')
     } catch (error) {
       console.error(error);
     }
@@ -52,7 +86,20 @@
 </script>
 
 <div class="p-4 pt-20">
-  <form on:submit="{handleSubmit}">
+  <div class=" mb-4">
+    <form
+      action="?/deletePost&id={post.id}"
+      method="POST"
+      on:submit|preventDefault="{handleDelete}"
+    >
+      <Button type="submit">Delete Post</Button>
+    </form>
+  </div>
+  <form
+    action="?/updatePost&id={post.id}"
+    method="POST"
+    on:submit|preventDefault="{handleUpdate}"
+  >
     <div class="flex space-x-4">
       <div class="mb-4 w-1/2">
         <label for="title" class="block text-gray-600">Title</label>
@@ -120,7 +167,7 @@
   <div class="p-4 pt-20">
     <h2 class="text-2xl font-semibold mb-4">Create a New Blog Post</h2>
 
-    <!-- <form on:submit="{handleSubmit}">
+    <!-- <form on:submit="{handleUpdate}">
       <div class="flex space-x-4">
         <div class="mb-4 w-1/2">
           <label for="title" class="block text-gray-600">Title</label>

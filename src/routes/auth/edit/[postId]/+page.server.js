@@ -1,5 +1,5 @@
 import { prisma } from "$lib/server/prisma";
-import { error } from "@sveltejs/kit";
+import { error, fail } from "@sveltejs/kit";
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
   try {
@@ -25,7 +25,7 @@ export async function load({ params }) {
 }
 
 export const actions = {
-  default: async ({ params, request }) => {
+  updatePost: async ({ params, request }) => {
     const putData = await request.formData();
 
     const title = putData.get("title") || "";
@@ -36,23 +36,16 @@ export const actions = {
     const published = putData.get("published") === "true";
     const datePublished = new Date().toISOString();
     const categories = categoryNames.map((name) => ({ name }));
-    const postId = Number(params.postId); 
+    const postId = Number(params.postId);
 
-
-
-
-
-
-console.log(content);
-
-
-
-
-
+    console.log(title);
+    console.log(content);
+    console.log(postId);
+  
 
     const post = await prisma.post.findUnique({
       where: {
-        id: postId
+        id: postId,
       },
       include: {
         categories: true,
@@ -62,6 +55,8 @@ console.log(content);
     if (!post) {
       return fail(400, { message: "No Post" });
     }
+
+console.log(post);
 
     const existingCategoryNames = post.categories.map((c) => ({
       name: c.name,
@@ -88,11 +83,6 @@ console.log(content);
         content,
         published,
         datePublished,
-        author: {
-          connect: {
-            id: 1,
-          },
-        },
         categories: {
           disconnect,
           connect,
@@ -100,9 +90,29 @@ console.log(content);
       },
     });
 
+
+     console.log(updatedPost);
     return {
       status: 200,
       body: JSON.stringify(updatedPost),
     };
+  },
+
+  deletePost: async ({ params, request }) => {
+    const post = prisma.post.findUnique({
+      where: {
+        id: Number(params.postId),
+      },
+    });
+
+    if (!post) {
+      return fail(400, { message: "No post found" });
+    }
+
+    await prisma.post.delete({
+      where: {
+        id: Number(params.postId),
+      },
+    });
   },
 };

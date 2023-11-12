@@ -21,7 +21,7 @@
 
   function handleCategoryChange(category:string) {
     $AppState.activeCategory = category;
-    console.log($AppState.activeCategory);
+    // console.log($AppState.activeCategory);
     $AppState.filteredPosts = $AppState.posts.filter((p) => {
       const categoryNames = p.categories.map((cat) => cat.name);
       return categoryNames.includes($AppState.activeCategory!);

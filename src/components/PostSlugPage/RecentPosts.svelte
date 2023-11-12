@@ -1,6 +1,6 @@
 <script>
-  import { Badge, Tooltip } from "flowbite-svelte";
-  import { ClockSolid, InfoCircleOutline } from "flowbite-svelte-icons";
+  import { Badge } from "flowbite-svelte";
+  import { ClockSolid } from "flowbite-svelte-icons";
   import { svelteTime } from "svelte-time";
 
   export let recentPosts;
@@ -12,7 +12,7 @@
   {#each recentPosts as recentPost, index (recentPost.id)}
     <div class="lg:flex space-x-3 my-2 pb-4 border-b-2">
       <div class=" w-1/3">
-        <a class="flex justify-center" href="{`/blog/${recentPost?.id}`}">
+        <a class="flex justify-center" href="{`/posts/${recentPost?.id}`}">
           <img
             src="{recentPost.img}"
             class="recent-post-img"

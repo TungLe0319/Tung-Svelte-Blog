@@ -1,7 +1,7 @@
 import { prisma } from "$lib/server/prisma";
 import type { Prisma } from "@prisma/client";
 import type { Actions, PageServerLoad } from "./$types";
-import { error, fail } from "@sveltejs/kit";
+import { error, fail, redirect } from "@sveltejs/kit";
 
 export const load: PageServerLoad = async () => {
   try {
@@ -58,7 +58,7 @@ export const actions: Actions = {
       });
       // console.log(newPost);
 
-      return { status: 200 };
+     throw  redirect(301,`/posts/${newPost.id}`) ;
     } catch (error) {
       console.error(error);
       return fail(500, { message: "Failed to create post" });

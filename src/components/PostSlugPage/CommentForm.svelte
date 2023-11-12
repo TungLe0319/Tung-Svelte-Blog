@@ -30,7 +30,7 @@
 
       if (response.ok) {
         const newComment = await response.json();
-        console.log(newComment);
+        // console.log(newComment);
         dispatch("commentCreated", newComment);
         content = "";
       } else {

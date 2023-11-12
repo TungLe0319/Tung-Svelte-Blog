@@ -62,7 +62,7 @@ const categoriesData = [
 
 
 
-    console.log('Categories created:', createdCategories);
+    // console.log('Categories created:', createdCategories);
   } catch (error) {
     console.error('Error creating categories:', error);
   } finally {

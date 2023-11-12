@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "vite dev",
+    "dev": "vite dev && npx prisma studio",
     "build": "vite build",
     "preview": "vite preview",
     "updateprismadb": "npx prisma migrate dev --name init"

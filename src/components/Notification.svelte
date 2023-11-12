@@ -26,7 +26,7 @@
 
 <style lang="scss">
   .notifications {
-    @apply fixed top-16 left-16 w-1/2;
+    @apply fixed top-16 right-2 w-1/2;
     z-index: 99999;
   }
 

@@ -1,16 +1,6 @@
 import type { Writable } from "svelte/store";
 import { writable } from "svelte/store";
-import type { Prisma } from "@prisma/client";
-
- export type PostFullType = Prisma.PostGetPayload<{
-  include: {
-    comments: true;
-    author: true;
-    likes: true;
-    categories: true;
-  };
-}>;
-
+import type {  PostSemiFull } from "./PrismaTypes";
 
 
 
@@ -19,9 +9,9 @@ interface AppStateData {
   searchQuery: string | undefined;
   activeCategory: string | undefined;
   myCursor: number | undefined;
-  filteredPosts: PostFullType[];
-  posts: PostFullType[];
-  paginationPosts: PostFullType[];
+  filteredPosts: PostSemiFull[];
+  posts: PostSemiFull[];
+  paginationPosts: PostSemiFull[];
   activePost: any | undefined;
 }
 
