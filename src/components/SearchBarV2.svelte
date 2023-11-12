@@ -1,30 +1,30 @@
-<script>
+<script lang="ts">
   import { Search, Button, Dropdown, DropdownItem } from "flowbite-svelte";
   import { SearchOutline, ChevronDownSolid } from "flowbite-svelte-icons";
   import { AppState } from "$lib/stores/AppState";
   import { debounce } from "../lib/utils/functions";
-  import { Category } from "@prisma/client";
-  import Pagination from "./Pagination.svelte";
+  import type { Category } from "@prisma/client";
+ 
 
-  export let categories;
+  export let categories : Category[];
 
   // Function to handle input change and filter posts
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: { target: { value: string | undefined; }; }) => {
     $AppState.searchQuery = event.target.value;
     $AppState.filteredPosts = $AppState.posts.filter((p) =>
-      p.title.toLowerCase().includes($AppState.searchQuery.toLowerCase())
+      p.title.toLowerCase().includes($AppState.searchQuery!.toLowerCase())
     );
   };
 
   // Usage
   const debouncedHandleInputChange = debounce(handleInputChange, 750);
 
-  function handleCategoryChange(category) {
+  function handleCategoryChange(category:string) {
     $AppState.activeCategory = category;
     console.log($AppState.activeCategory);
     $AppState.filteredPosts = $AppState.posts.filter((p) => {
       const categoryNames = p.categories.map((cat) => cat.name);
-      return categoryNames.includes($AppState.activeCategory);
+      return categoryNames.includes($AppState.activeCategory!);
     });
   }
 </script>
@@ -38,7 +38,7 @@
         {$AppState.activeCategory}
         <ChevronDownSolid class="w-2.5 h-2.5 ml-2.5" />
       </Button>
-      <Dropdown classContainer="w-40">
+      <Dropdown >
         {#each categories as label}
           <DropdownItem
             on:click="{() => {

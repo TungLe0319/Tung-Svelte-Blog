@@ -108,7 +108,7 @@ export async function DELETE({ request }) {
   try {
     const commentData = await request.formData();
     const commentId = commentData.get("id");
-    const creatorEmail = commentData.get("userEmail");
+    const creatorEmail = commentData.get("userEmail") as string;
 
     const creator = await prisma.user.findUnique({
       where: {
@@ -128,7 +128,7 @@ export async function DELETE({ request }) {
 
     const existingComment = await prisma.comment.findUnique({
       where: {
-        id: parseInt(commentId),
+        id: Number(commentId),
       },
     });
 

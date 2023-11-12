@@ -1,6 +1,6 @@
 <script lang="ts">
-  import CommentCard from "$components/Comments/CommentCard.svelte";
-  import CommentForm from "$components/Comments/CommentForm.svelte";
+  import CommentCard from "$components/PostSlugPage/CommentCard.svelte";
+  import CommentForm from "$components/PostSlugPage/CommentForm.svelte";
   import LikeBlogPost from "$components/LikeBlogPost.svelte";
   import RecentPosts from "$components/RecentPosts.svelte";
   import LinkedInCard from "$components/LinkedInCard.svelte";
@@ -11,71 +11,44 @@
     MessagesOutline,
   } from "flowbite-svelte-icons";
   import { svelteTime } from "svelte-time";
-  import { Avatar, Badge, Button, Label, Textarea } from "flowbite-svelte";
+  import { Avatar, Badge} from "flowbite-svelte";
   import type { PageData } from "./$types";
-  import type { Comment, Like, Post, Prisma } from "@prisma/client";
-  import type { PostFullType } from "$lib/stores/AppState";
-  import { enhance } from "$app/forms";
+  import type { PostFull, PostSemiFull, commentWithUser, likesWithUser } from "$lib/stores/PrismaTypes";
 
   export let data: PageData;
+console.log(data.body?.recentPosts);
 
+  let post: PostFull
 
+  let recentPosts: PostSemiFull[];
 
-  let post: Prisma.PostGetPayload<{
-    include: {
-      author: true;
-      comments: {
-        include: {
-          user: true;
-        };
-      };
-      categories: true;
-      likes: {
-        include: {
-          user: true;
-        };
-      };
-    };
-  }>;
+  let comments: commentWithUser[]
 
-  let recentPosts: PostFullType[];
-
-  let comments: Prisma.CommentGetPayload<{
-    include: {
-      user: true;
-    };
-  }>[];
-
-  let likes: Prisma.LikeGetPayload<{
-    include:{
-      user:true
-    }
-  }>;
+  let likes: likesWithUser[]
 
   let liked: boolean;
 
   $: {
-    post = data?.body?.post!  
-    recentPosts = data?.body?.recentPosts;
-    comments = data?.body?.post?.comments;
-    likes = data?.body?.post?.likes;
+    post = data?.body?.post!;
+    recentPosts = data?.body?.recentPosts!;
+    comments = data?.body?.post?.comments!;
+    likes = data?.body?.post?.likes!;
   }
 
   onMount(() => {
-  if (likes) {
+    if (likes) {
       liked = likes?.some(
-      (like) => like?.user?.email === data.session?.user?.email
-    );
-  }
+        (like) => like?.user?.email === data.session?.user?.email
+      );
+    }
   });
 
- 
-  function handleCommentCreated(event) {
+  function handleCommentCreated(event: { detail: any; }) {
     const newComment = event.detail;
     comments = [...comments, newComment];
   }
 
-  function handleCommentDeleted(commentId) {
+  function handleCommentDeleted(commentId:number) {
     // Find the index of the comment to be deleted
     const commentIndex = comments.findIndex(
       (comment) => comment.id === commentId
@@ -90,9 +63,9 @@
     }
   }
 
-  function handleLikeToggled(updatedPost) {
+  function handleLikeToggled(updatedPost:PostFull) {
     liked = updatedPost.likes.some(
-      (like) => like.user.email === data.session?.user.email
+      (like) => like.user.email === data.session?.user?.email
     );
 
     post = updatedPost;
@@ -167,17 +140,13 @@
           <article class="   prose max-w-full">
             {@html post?.content}
           </article>
-
-          <!-- <div class="post-content dark:text-white">{@html post?.content}</div> -->
         </div>
       </div>
       <!-- COMMENT FORM  -->
 
-
-
-      <!-- //TODO - Create a Second way of CRUD comments  -->
- {#if data?.session}
- <form action="?/createComment" method="POST" class=" p-2 my-4">
+      <!-- //TODO - Create a Second way of CRUD comments For some reason this is refreshing teh page, and have to figure out a way to update the Ui properly  -->
+      <!-- {#if data?.session}
+ <form action="?/createComment&d={post.id}" method="POST" class=" p-2 my-4">
   <Label for="content">Comment:</Label>
 <Textarea name="content" wrappedClass="h-4/5">
 
@@ -187,30 +156,21 @@
   Submit
 </Button>
 </form>
- {/if}
-
-
-
+ {/if} -->
 
       {#if data?.session}
         <CommentForm on:commentCreated="{handleCommentCreated}" post="{post}" />
       {/if}
-      <!-- COMMENT SECTION  -->
       <div class="comment-container">
         {#each comments as comment (comment.id)}
           <CommentCard
-            on:commentDeleted="{() =>handleCommentDeleted(comment.id)}"
+            on:commentDeleted="{() => handleCommentDeleted(comment.id)}"
             comment="{comment}"
           />
-        {/each}
-
-        {#each comments as comment (comment.id)}
-          <CommentCard comment="{comment}" />
         {/each}
       </div>
     </div>
 
-    <!-- Recent Post Section to the right -->
     <div class="recent-posts-container">
       <div class="sticky top-28 z-10">
         <RecentPosts recentPosts="{recentPosts}" />
@@ -218,12 +178,11 @@
         <LinkedInCard />
         <!--  !LIKES -->
 
-        <!-- TODO - LIKES -->
-        <!-- <LikeBlogPost
+        <LikeBlogPost
           post="{post}"
           liked="{liked}"
-          on:likeToggled="{handleLikeToggled(post)}"
-        /> -->
+          on:likeToggled="{() => handleLikeToggled(post)}"
+        />
       </div>
     </div>
   </div>

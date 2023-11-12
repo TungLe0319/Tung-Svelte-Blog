@@ -1,11 +1,12 @@
-<script>
+<script lang="ts">
   import { page } from "$app/stores";
   import { createEventDispatcher, onMount } from "svelte";
   import { fly } from "svelte/transition";
   import { Avatar, Tooltip } from "flowbite-svelte";
   import { ThumbsDownOutline, ThumbsUpOutline } from "flowbite-svelte-icons";
-  export let post;
-  export let liked;
+  import type { PostFull } from "$lib/stores/PrismaTypes";
+  export let post:PostFull;
+  export let liked : boolean;
 
   const dispatch = createEventDispatcher();
   async function toggleLikePost() {
@@ -16,7 +17,7 @@
 
     let formData = new FormData();
     formData.append("postId", post.id);
-    formData.append("userEmail", $page.data?.session.user.email);
+    formData.append("userEmail", $page.data.session?.user?.email);
 
     const response = await fetch("/api/likes", {
       method: "POST",

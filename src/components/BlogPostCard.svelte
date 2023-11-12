@@ -9,9 +9,10 @@
     ClockSolid,
     PenSolid,
   } from "flowbite-svelte-icons";
-  import { AppState, type PostFullType } from "$lib/stores/AppState";
+  import { AppState, } from "$lib/stores/AppState";
+  import type { PostSemiFull } from "$lib/stores/PrismaTypes";
 
-  export let post: PostFullType;
+  export let post: PostSemiFull;
 
   let hCard: false;
   $: commentsLength = post.comments.length;

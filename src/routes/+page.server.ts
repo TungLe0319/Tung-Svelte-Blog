@@ -13,13 +13,13 @@ export const load: PageServerLoad = async () => {
     });
     const categories = await prisma.category.findMany();
 
-    const lastPostInResults = posts[1]; // Remember: zero-based index! :)
-    const myCursor = lastPostInResults.id; // Example: 29
+    // TODO PAGINATION
+    // const lastPostInResults = posts[1];
+    // const myCursor = lastPostInResults.id;
 
     return {
-      lastPostInResults,
-      myCursor,
       posts,
+      categories,
     };
   } catch (error) {
     console.error("Error fetching post:", error);

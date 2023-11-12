@@ -10,15 +10,17 @@
   import type { PageData } from "./$types";
 
   export let data:PageData;
+console.log(data);
 
 
   let posts = data?.posts;
   let categories = data?.categories;
   let selectedCategory = "all";
+
  
 
-  $AppState.myCursor = data?.myCursor;
-  $AppState.posts = data?.posts;
+
+  $AppState.posts = data.posts;
   $AppState.filteredPosts = data?.posts;
 
   // Function to filter posts based on the selected category

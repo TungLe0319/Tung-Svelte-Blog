@@ -1,5 +1,3 @@
-
-
 import { error, fail, type Actions } from "@sveltejs/kit";
 
 import { prisma } from "$lib/server/prisma";
@@ -59,59 +57,42 @@ export const load: PageServerLoad = async ({ params }) => {
 };
 
 export const actions: Actions = {
-  createComment: async ({ request,cookies,locals }) => {
+  createComment: async ({ request, locals,params }) => {
     try {
       const commentData = await request.formData();
-  const session = await locals.getSession();
-      const postId = commentData.get("postId");
+      const session = await locals.getSession();
+
       const content = commentData.get("content") as string;
 
-      const userEmail = commentData.get("userEmail")  as string;
+console.log(params);
 
-      console.log(content);
-      
-    
 
       const user = await prisma.user.findUnique({
         where: {
-          email: userEmail,
+          email: session?.user?.email || "",
         },
       });
 
+      console.log(user);
+
       if (!user) {
-        return fail(400,{message:'Unable to find user'})
+        return fail(400, { message: "Unable to find user" });
       }
 
+      const newComment = await prisma.comment.create({
+        data: {
+          postId: Number(params.slug),
+          content,
+          userId: user.id,
+        },
+      });
 
-      
-   const newComment = await prisma.comment.create({
-     data: {
-       postId: Number(postId),
-       content,
-       userId: user.id,
-     },
-     include: {
-       user: true,
-     },
-   });
+      console.log(newComment);
 
-   return new Response(JSON.stringify(newComment), {
-     status: 200, // Status code for success
-     headers: {
-       "Content-Type": "application/json",
-     },
-   });
-      
+      return { status: 200 };
     } catch (error) {
-      return new Response(
-        JSON.stringify({ error: "Failed to create a comment" }),
-        {
-          status: 500, // Status code for server error
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      console.error(error);
+      return fail(500, { message: "Failed to create comment" });
     }
   },
 
@@ -243,50 +224,46 @@ export const actions: Actions = {
     }
   },
 
+  // LIKES
 
+  // toggleLike: async ({request}) => {
+  //     try {
+  //       const likeData = await request.formData();
+  //       const postId = parseInt(likeData.get("postId"));
+  //       const userEmail = likeData.get("userEmail");
 
-// LIKES
+  //       const user = await prisma.user.findUnique({
+  //         where: { email: userEmail },
+  //       });
 
-// toggleLike: async ({request}) => {
-//     try {
-//       const likeData = await request.formData();
-//       const postId = parseInt(likeData.get("postId"));
-//       const userEmail = likeData.get("userEmail");
+  //       if (!user) return fail(400,{message:'User not found'})
 
-//       const user = await prisma.user.findUnique({
-//         where: { email: userEmail },
-//       });
+  //       const post = await prisma.post.findUnique({
+  //         where: { id: postId },
+  //       });
 
-//       if (!user) return fail(400,{message:'User not found'})
+  //       if (!post) return fail(400, { message: "Post not found" });
 
-//       const post = await prisma.post.findUnique({
-//         where: { id: postId },
-//       });
+  //       const existingLike = await prisma.like.findFirst({
+  //         where: { postId: post.id, userId: user.id },
+  //       });
 
-//       if (!post) return fail(400, { message: "Post not found" });
+  //       if (existingLike) {
+  //         const deletedLike = await prisma.like.delete({
+  //           where: { id: existingLike.id },
+  //           include: { user: true },
+  //         });
+  //         return jsonResponse(HttpStatusCode.Ok, deletedLike);
+  //       }
 
-//       const existingLike = await prisma.like.findFirst({
-//         where: { postId: post.id, userId: user.id },
-//       });
+  //       const newLike = await prisma.like.create({
+  //         data: { postId: post.id, userId: user.id },
+  //         include: { user: true },
+  //       });
 
-//       if (existingLike) {
-//         const deletedLike = await prisma.like.delete({
-//           where: { id: existingLike.id },
-//           include: { user: true },
-//         });
-//         return jsonResponse(HttpStatusCode.Ok, deletedLike);
-//       }
-
-//       const newLike = await prisma.like.create({
-//         data: { postId: post.id, userId: user.id },
-//         include: { user: true },
-//       });
-
-//       return jsonResponse(HttpStatusCode.Created, newLike);
-//     } catch (error) {
-//       return fail(500, {message:'Failed to Toggle Like'});
-//     }
-// }
-
-
+  //       return jsonResponse(HttpStatusCode.Created, newLike);
+  //     } catch (error) {
+  //       return fail(500, {message:'Failed to Toggle Like'});
+  //     }
+  // }
 };

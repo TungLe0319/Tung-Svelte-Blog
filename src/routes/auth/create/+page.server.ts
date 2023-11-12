@@ -58,7 +58,7 @@ export const actions: Actions = {
       return { status: 200 };
     } catch (error) {
       console.error(error);
-      return fail(500, { message: "Could not create the Post" });
+      return fail(500, { message: "Failed to create post" });
     }
   },
 };

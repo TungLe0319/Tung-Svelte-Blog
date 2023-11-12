@@ -1,7 +1,5 @@
 <script>
-  import { Section } from 'flowbite-svelte-blocks';
- 
-  import { Footer, FooterBrand, FooterLinkGroup, FooterLink, FooterCopyright, FooterIcon } from 'flowbite-svelte';
+
 </script>
 
 

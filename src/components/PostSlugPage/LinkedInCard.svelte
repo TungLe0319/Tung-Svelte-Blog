@@ -1,4 +1,3 @@
-<script></script>
 
 <div class="mt-10 flex items-center">
   <a
@@ -16,5 +15,3 @@
   </a>
 </div>
 
-<style lang="scss">
-</style>

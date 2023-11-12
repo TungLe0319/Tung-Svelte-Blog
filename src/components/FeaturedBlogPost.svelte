@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { PostFullType } from "$lib/stores/AppState";
+  import type { PostSemiFull } from "$lib/stores/PrismaTypes";
   import { Card } from "flowbite-svelte";
-  export let featuredPost:PostFullType;
-  let hCard:boolean = false;
+  export let featuredPost:PostSemiFull;
+  let hCard:false
 </script>
 
 <a class="hidden lg:block" href="{`/blog/${featuredPost?.id}`}">
