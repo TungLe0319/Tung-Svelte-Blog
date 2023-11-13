@@ -11,12 +11,12 @@
   import { applyAction, deserialize } from "$app/forms";
 
   export let data: PageData;
-console.log(data);
 
-  $: post = data.post;
-  // console.log(post);
+  let post = data.post!;
 
-  let categories = data.categories.map((c: Category) => {
+  let categories: { value: string; name: string }[];
+
+  categories = data.categories!.map((c) => {
     return { value: c.name, name: c.name };
   });
 
@@ -30,8 +30,9 @@ console.log(data);
     try {
       const data = new FormData(event?.currentTarget);
 
-    
-      data.append("content", post.content);
+      if (post?.content) {
+        data.append("content", post.content);
+      }
 
       $formData.categories.forEach((category) => {
         data.append("selected[]", category);
@@ -51,7 +52,7 @@ console.log(data);
 
       applyAction(result);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   }
 </script>
@@ -60,15 +61,15 @@ console.log(data);
   <div class="flex space-x-4">
     <h2 class="text-2xl font-semibold mb-4">Create a New Blog Post</h2>
 
-    <form action="?/deletePost&id={post.id}" method="POST">
+    <form action="?/deletePost&id={post?.id}" method="POST">
       <Button type="submit">Delete</Button>
     </form>
   </div>
 
   <form
-    action="?/updatePost&id={post.id}"
+    action="?/updatePost&id={post?.id}"
     method="POST"
-    on:submit="{() =>handleSubmit}"
+    on:submit="{() => handleSubmit}"
   >
     <div class="flex space-x-4">
       <div class="mb-4 w-1/2">
@@ -77,7 +78,7 @@ console.log(data);
           type="text"
           id="title"
           name="title"
-          value="{post.title}"
+          value="{post?.title}"
           class="w-full border rounded px-3 py-2"
           required
         />
@@ -89,7 +90,7 @@ console.log(data);
           type="text"
           id="subtitle"
           name="subtitle"
-          value="{post.subtitle}"
+          value="{post?.subtitle}"
           class="w-full border rounded px-3 py-2"
           required
         />
@@ -103,7 +104,7 @@ console.log(data);
           type="text"
           id="img"
           name="img"
-          value="{post.img}"
+          value="{post?.img}"
           class="w-full border rounded px-3 py-2"
           required
         />
@@ -115,14 +116,14 @@ console.log(data);
           size="md"
           name="selected[]"
           items="{categories}"
-          bind:value="{selected}"
+        value="{selected}"
           required
         />
       </div>
     </div>
 
     <div class=" my-4 flex space-x-4">
-      <Checkbox bind:checked="{post.published}">Published</Checkbox>
+      <Checkbox checked="{post?.published}">Published</Checkbox>
       <Button type="submit">Edit</Button>
     </div>
 
@@ -130,7 +131,7 @@ console.log(data);
       <div class="editor-column">
         <div class="mb-4">
           <Label for="content">Content</Label>
-          <Editor  bind:value="{post.content}" />
+          <Editor value="{post.content } " />
         </div>
       </div>
     </div>

@@ -2,15 +2,13 @@
 
 <script lang="ts">
   import Editor from "@tinymce/tinymce-svelte";
-  import {  Checkbox, Input, MultiSelect } from "flowbite-svelte";
+  import { Checkbox, Input, MultiSelect } from "flowbite-svelte";
   import { formData } from "$lib/stores/FormData";
-  import type {  PageData } from "./$types";
+  import type { PageData } from "./$types";
   import { applyAction, deserialize, enhance } from "$app/forms";
   import { invalidateAll } from "$app/navigation";
 
   export let data: PageData;
-
-
 
   $: categories = data.body?.map((category) => {
     return {
@@ -43,8 +41,10 @@
       }
 
       applyAction(result);
-      $formData.content =''
-    } catch (error) {}
+      $formData.content = "";
+    } catch (error) {
+      console.error(error);
+    }
   }
 </script>
 

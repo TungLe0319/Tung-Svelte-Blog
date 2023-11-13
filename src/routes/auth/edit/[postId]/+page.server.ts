@@ -1,40 +1,32 @@
 import { prisma } from "$lib/server/prisma";
 import type { Actions, PageServerLoad } from "./$types";
-import { error, fail } from "@sveltejs/kit";
+import { fail } from "@sveltejs/kit";
 
 export const load: PageServerLoad = async ({ params }) => {
-  const getPost = async () => {
-    const post = await prisma.post.findUnique({
-      where: {
-        id: Number(params.postId),
-      },
-      include: {
-        author: true,
-        comments: true,
-        likes: true,
-        categories: true,
-      },
-    });
-    if (!post) {
-      return fail(400, { message: "Invalid Request" });
-    }
+  const post = prisma.post.findUnique({
+    where: {
+      id: Number(params.postId),
+    },
+    include: {
+      categories: true,
+      comments: true,
+      likes: true,
+      author: true,
+    },
+  });
 
-    return post;
-  };
+  if (!post) {
+    return fail(400, { message: "No post found" });
+  }
 
-  const getCategories = async () => {
-    const categories = await prisma.category.findMany();
+  const categories = prisma.category.findMany();
 
-    if (!categories) {
-      return fail(400, { message: "Invalid Request" });
-    }
-
-    return categories;
-  };
-
+  if (!categories) {
+    return fail(400, { message: "No categories found" });
+  }
   return {
-    post: getPost(),
-    categories: getCategories(),
+    post,
+    categories,
   };
 };
 
@@ -48,18 +40,16 @@ export const actions: Actions = {
       const img = formData.get("img") as string;
       const content = formData.get("content") as string;
       const published = formData.get("published") === "true";
-     const categoryNames = formData.getAll("selected[]") as string[];
-     const categories = categoryNames.map((name) => ({ name }));
+      const categoryNames = formData.getAll("selected[]") as string[];
+      const categories = categoryNames.map((name) => ({ name }));
 
-      console.log( content);
+      console.log(content);
       console.log(categoryNames);
       console.log(categories);
       console.log(title);
       console.log(subtitle);
       console.log(img);
       console.log(published);
-
-      return
 
       const post = await prisma.post.findUnique({
         where: {
@@ -73,7 +63,9 @@ export const actions: Actions = {
         return fail(400, { message: "Invalid Request" });
       }
 
-      const existingCategories = post.categories.map((c) => c.name);
+      const existingCategories = post.categories.map((c) => {
+        return { name: c.name };
+      });
 
       // To disconnect categories not present in the received categories list
       const disconnect = existingCategories.filter(

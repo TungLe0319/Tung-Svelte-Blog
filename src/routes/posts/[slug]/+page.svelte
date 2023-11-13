@@ -28,11 +28,16 @@
 
   let liked: boolean;
 
+
+
   $: {
-    post = data?.body?.post!;
-    recentPosts = data?.body?.recentPosts!;
-    comments = data?.body?.post?.comments!;
-    likes = data?.body?.post?.likes!;
+
+    
+    post = data?.post!;
+    // @ts-ignore
+    recentPosts = data?.recentPosts;
+    comments = data?.post?.comments!;
+    likes = data?.post?.likes!;
   }
 
   onMount(() => {

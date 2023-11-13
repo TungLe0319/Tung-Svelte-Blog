@@ -43,10 +43,8 @@ export const load: PageServerLoad = async ({ params }) => {
 
     if (post) {
       return {
-        body: {
-          post,
-          recentPosts,
-        },
+        post,
+        recentPosts,
       };
     } else {
       throw error(404, "Post not found");
@@ -57,14 +55,12 @@ export const load: PageServerLoad = async ({ params }) => {
 };
 
 export const actions: Actions = {
-  createComment: async ({ request, locals,params }) => {
+  createComment: async ({ request, locals, params }) => {
     try {
       const commentData = await request.formData();
       const session = await locals.getSession();
 
       const content = commentData.get("content") as string;
-
-
 
       const user = await prisma.user.findUnique({
         where: {
