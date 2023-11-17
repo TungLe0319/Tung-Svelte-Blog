@@ -82,7 +82,7 @@
           <li
             class="p-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700"
           >
-            <a href="/blog/{post.id}"> {@html post.highlightedTitle}</a>
+            <a href="/posts/{post.id}"> {@html post.highlightedTitle}</a>
           </li>
         {/each}
       </ul>

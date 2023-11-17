@@ -66,26 +66,24 @@
 
 
 <div class="px-10">
+ <div class="flex space-x-2">
 
+    <div class="lg:w-1/2">
+  <div class="flex space-x-2">
   <Section name="content" >
       <HeroHeader class="max-w-screen-md mb-8 lg:mb-16" h2Class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white" pClass="text-gray-500 sm:text-xl dark:text-gray-400">
-  <svelte:fragment slot="h2">About this Project</svelte:fragment>
-<svelte:fragment slot="paragraph">This blog project serves as an opportunity for me to strengthen my
-    development skills, troubleshooting abilities, and utilize my creativity.
-    This endeavor involves the creation of a personal blog application where I
-    can share posts about topics within the industry and things I find
-    fascinating.
-    <br /> <br />
-    As I embark on this project, my goal is to master various aspects of web development,
-    from crafting an intuitive user interface to implementing robust backend functionality.Through
-    this app, I also aim to provide readers with insightful content, whether it's
-    about the latest trends in technology, deep dives into coding challenges, or
-    explorations of intriguing subjects.
+  <svelte:fragment slot="h2">The Project</svelte:fragment>
+<svelte:fragment slot="paragraph">
 
-    <br /><br />
-    I'm committed to delivering a seamless and enjoyable reading experience for users
-    and using this project as an opportunity to expand my knowledge, embrace secure
-    coding practices, and elevate my development skills..</svelte:fragment>
+  This blog project serves as an opportunity for us to strengthen our development skills and delve into the SvelteKit framework. Our objective is to create a personal blog application where we can craft and share engaging posts on various subjects.
+
+    <br><br>
+
+    Users viewing these posts can comment and express their appreciation by giving a "thumbs up" or liking the post. The application also features two search bar components, allowing users to find posts by title or category. We have implemented a PostgreSQL database, with Prisma serving as the Object-Relational Mapping (ORM).
+  
+  
+  
+  </svelte:fragment>
 
   </HeroHeader>
     <a href="https://github.com/TungLe0319/Tung-Svelte-Blog" class="inline-flex items-center font-medium text-primary-600 hover:text-primary-800 dark:text-primary-500 dark:hover:text-primary-700">
@@ -94,6 +92,18 @@
     </a>
 
 </Section>
+
+    
+  </div>
+    
+  </div>
+    <div class="lg:w-1/2 flex items-center justify-center">
+
+      <img src="https://images.unsplash.com/reserve/LJIZlzHgQ7WPSh5KVTCB_Typewriter.jpg?q=80&w=1992&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="rounded-md w-2/3 "/>
+    
+  </div>
+    
+  </div>
 
   
 <Section name="feature" sectionClass="py-0 sm:py-0">
