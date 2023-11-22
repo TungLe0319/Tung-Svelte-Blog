@@ -65,7 +65,7 @@
 
 
 
-<div class="px-10">
+<div class="px-10 pt-10">
  <div class="flex space-x-2">
 
     <div class="lg:w-1/2">

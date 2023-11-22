@@ -15,7 +15,7 @@
     NavUl,
     NavHamburger,
   } from "flowbite-svelte";
-  import { GithubSolid, LinkedinSolid } from "flowbite-svelte-icons";
+  import { ArrowRightToBracketSolid, GithubSolid, LinkedinSolid } from "flowbite-svelte-icons";
   import SearchBar from "./SearchBar.svelte";
 
   export let pageSession;
@@ -42,11 +42,11 @@
   };
 </script>
 
-<Navbar class=" relative h-0  ">
+
   <div
     class:navbar-hidden="{isNavbarHidden}"
     id="navi"
-    class="flex transition-transform duration-300 dark:border-none fixed w-full top-0 z-50 left-0 border-b justify-between px-6 py-1 rounded bg-white dark:bg-gray-900 shadow-md border border-gray-300"
+    class="flex transition-all duration-300 dark:border-none fixed w-full top-0 z-50 left-0  justify-between px-6 py-1 rounded {y>200 ? 'bg-white  shadow':'bg-transparent'} dark:bg-gray-900  "
   >
     <NavBrand href="/">
       <img
@@ -71,7 +71,9 @@
           class="shadow-md cursor-pointer"
         />
       {:else}
-        <a href="/login">login</a>
+        <a href="/login">
+        <ArrowRightToBracketSolid/>
+        </a>
       {/if}
       <NavHamburger class1="w-full md:flex md:w-auto md:order-1" />
       <DarkMode btnClass=" w-6 h-6" />
@@ -111,7 +113,7 @@
     </NavUl>
     <SearchBar posts="{posts}" />
   </div>
-</Navbar>
+
 
 <svelte:window bind:scrollY="{y}" on:scroll="{handleScroll}" />
 
