@@ -38,7 +38,7 @@
       alt: "Tung Le",
       name: "Tung Le",
       jobTitle: "Software Developer",
-      description: "Drives the frontend Design asthetic lorem100 23423412342",
+      description: "Drives the frontend Design aesthetic lorem100 23423412342",
       github: "https://github.com/TungLe0319",
       linkedIn: "https://www.linkedin.com/in/tung-le0319/",
       portfolio:'https://tung.devfoliov2.devopportunities.dev/'
@@ -50,7 +50,7 @@
       name: "Daniel Le",
       jobTitle: "Software Engineer",
       description:
-        "Drives the backend data, database manegment and type safety",
+        "Drives the backend data, database management and type safety",
       github: "https://github.com/daniel-le97",
       linkedIn: "https://www.linkedin.com/in/daniel-le97/",
         portfolio:'https://v2.daniel.devopportunities.dev/'
