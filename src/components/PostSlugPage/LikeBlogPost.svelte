@@ -71,24 +71,32 @@
     >
   {/if}
 
-  <div class="mt-5 flex space-x-0.5">
+  <div class="mt-5 flex flex-wrap gap-2 ">
     {#each post.likes as l (l.id)}
       <div
         in:fly="{{ x: -100, duration: 300, opacity: 1 }}"
         out:fly="{{ x: 100, duration: 400, opacity: 0 }}"
+     
       >
         <Avatar
           data-name="{l.user.name}"
-          class="rounded-full shadow-md shadow-slate-400 dark:shadow-slate-500/20"
-          src="{l.user?.image}"
+          class=" shadow-md shadow-slate-400 dark:shadow-slate-500/20"
+          src="{l?.user?.image
+          !== null
+            ? l?.user?.image
+            : ''}"
+         
         />
+      
         <Tooltip
           triggeredBy="[data-name]"
           on:show="{(e) => (name = e.target.dataset.name)}">{name}</Tooltip
         >
       </div>
     {/each}
+   
   </div>
+  
 </div>
 
 <style lang="scss">
