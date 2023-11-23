@@ -1,31 +1,15 @@
 <script>
-  import Hero from "../../components/Hero.svelte";
-  import { Timeline, TimelineItem, Button } from "flowbite-svelte";
   import {
-    ArrowRightOutline,
-    BriefcaseSolid,
-    CalendarWeekSolid,
-    ChartSolid,
     ChevronRightSolid,
-    CogOutline,
-    DollarSolid,
     GithubSolid,
-    LandmarkSolid,
     LinkedinSolid,
     RocketSolid,
   } from "flowbite-svelte-icons";
   import {
     Section,
-    Portfolio,
-    PortfolioItem,
     TeamWrapper,
-    TeamHeader,
     TeamBody,
     TeamItem,
-    Facebook,
-    Github,
-    Twitter,
-    Content,
     HeroHeader,
     FeatureDefault,
     FeatureItem,
@@ -55,15 +39,12 @@
       linkedIn: "https://www.linkedin.com/in/daniel-le97/",
         portfolio:'https://v2.daniel.devopportunities.dev/'
     },
+   
+
   ];
 
  
 </script>
-
-
-
-
-
 
 <div class="px-10 pt-10">
  <div class="flex space-x-2">
@@ -91,6 +72,8 @@
       <ChevronRightSolid class="ml-2" size="xs" />
     </a>
 
+    
+
 </Section>
 
     
@@ -99,7 +82,7 @@
   </div>
     <div class="lg:w-1/2 flex items-center justify-center">
 
-      <img src="https://images.unsplash.com/reserve/LJIZlzHgQ7WPSh5KVTCB_Typewriter.jpg?q=80&w=1992&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="rounded-md w-2/3 "/>
+      <img src="https://images.unsplash.com/reserve/LJIZlzHgQ7WPSh5KVTCB_Typewriter.jpg?q=80&w=1992&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="rounded-md w-2/3 "  alt='Type writer'/>
     
   </div>
     

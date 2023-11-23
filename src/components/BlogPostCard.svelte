@@ -22,6 +22,8 @@
   $AppState.activePost = post
     goto(`/auth/edit/${post.id}`);
   };
+
+
 </script>
 
 {#if post}

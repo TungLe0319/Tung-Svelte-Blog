@@ -5,6 +5,7 @@
   import RecentPosts from "$components/PostSlugPage/RecentPosts.svelte";
   import LinkedInCard from "$components/PostSlugPage/LinkedInCard.svelte";
   import { onMount } from "svelte";
+  import { fly } from "svelte/transition";
   import {
     ClockOutline,
     HeartOutline,
@@ -15,6 +16,7 @@
   import type { PageData } from "./$types";
   import type { PostFull, PostSemiFull, commentWithUser, likesWithUser } from "$lib/stores/PrismaTypes";
   import type { Category } from "@prisma/client";
+  import { cubicOut, quintOut } from "svelte/easing";
 
   export let data: PageData;
 // console.log(data.body?.recentPosts);
@@ -73,16 +75,25 @@
 
     post = updatedPost;
   }
+
+  const flyParams={
+    y: 100,
+      duration: 500,
+      delay:2000,
+      easing: cubicOut,
+  }
 </script>
 
-{#if data}
-  <div class=" lg:flex mt-16">
-    <div class="post-container">
+
+  <div class=" lg:flex mt-16"  >
+    <div class="post-container"
+   
+    >
       <!-- POST  -->
 
       <div class="post">
-        <div class="post-body">
-          <img src="{post?.img}" alt="Blog-post" class=" post-image" />
+        <div class="post-body"  in:fly={{ delay: 250, duration: 800, x: -100,  opacity: 0.5, easing: quintOut }}>
+          <img src="{post?.img}" alt="Blog-post" class=" post-image"   />
 
        <div class="">
            <div class="post-info">
@@ -142,32 +153,21 @@
             <Badge  >{category.name}</Badge>
             {/each}
           </div>
+          
        </div>
 
-          <div class="post-title">{post?.title}</div>
+          <div class="post-title" >{post?.title}</div>
           <div class="post-subtitle">{post?.subtitle}</div>
           <hr class="  w-full" />
 
-          <article class="   prose max-w-full">
+          <article
+          
+          class="   prose max-w-full dark:text-white/70">
             {@html post?.content}
           </article>
         </div>
       </div>
-      <!-- COMMENT FORM  -->
-
-      <!-- //TODO - Create a Second way of CRUD comments For some reason this is refreshing teh page, and have to figure out a way to update the Ui properly  -->
-      <!-- {#if data?.session}
- <form action="?/createComment&d={post.id}" method="POST" class=" p-2 my-4">
-  <Label for="content">Comment:</Label>
-<Textarea name="content" wrappedClass="h-4/5">
-
-</Textarea>
-
-<Button type="submit">
-  Submit
-</Button>
-</form>
- {/if} -->
+ 
 
       {#if data?.session}
         <CommentForm on:commentCreated="{handleCommentCreated}" post="{post}" />
@@ -182,11 +182,12 @@
       </div>
     </div>
 
-    <div class="recent-posts-container">
+    <div class="recent-posts-container"
+    in:fly={{ delay: 250, duration: 800, x: 100,  opacity: 0.5, easing: quintOut }}
+   >
       <div class="sticky top-28 z-10">
         <RecentPosts recentPosts="{recentPosts}" />
-        <!-- LINKED IN  -->
-        <LinkedInCard />
+   
         <!--  !LIKES -->
 
         <LikeBlogPost
@@ -197,9 +198,7 @@
       </div>
     </div>
   </div>
-{:else}
-  <div class="">NO POST</div>
-{/if}
+
 
 <!-- COMMENT FORM -->
 
@@ -216,7 +215,7 @@
   }
 
   .post-image {
-    @apply rounded-md shadow-xl shadow-slate-400 dark:shadow-lg dark:shadow-gray-600/20 md:w-full xl:w-1/2;
+    @apply rounded-md shadow-xl shadow-slate-400 dark:shadow-lg dark:shadow-gray-600/20 md:w-full xl:w-1/2  object-cover;
   }
   .post-title {
     @apply text-4xl  font-bold pt-5 dark:text-white;

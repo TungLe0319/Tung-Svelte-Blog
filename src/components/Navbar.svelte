@@ -14,6 +14,7 @@
     NavLi,
     NavUl,
     NavHamburger,
+    Tooltip,
   } from "flowbite-svelte";
   import { ArrowRightToBracketSolid, GithubSolid, LinkedinSolid } from "flowbite-svelte-icons";
   import SearchBar from "./SearchBar.svelte";
@@ -46,7 +47,7 @@
   <div
     class:navbar-hidden="{isNavbarHidden}"
     id="navi"
-    class="flex transition-all duration-300 dark:border-none fixed w-full top-0 z-50 left-0  justify-between px-6 py-1 rounded {y>200 ? 'bg-white  shadow':'bg-transparent'} dark:bg-gray-900  "
+    class="flex transition-all duration-300 dark:border-none fixed w-full top-0 z-50 left-0  justify-between px-6 py-1 rounded {y>200 ? 'bg-white dark:bg-gray-900 shadow':'bg-transparent'}   "
   >
     <NavBrand href="/">
       <img
@@ -63,7 +64,7 @@
         <span class="font-bold text-orange-500">G</span>row
       </span>
     </NavBrand>
-    <div class="flex items-center justify-center space-x-5 md:order-2">
+    <div class="flex items-center  dark:text-white  h-auto justify-center space-x-5 md:order-2  ">
       {#if pageSession?.user}
         <Avatar
           id="avatar-menu"
@@ -71,22 +72,31 @@
           class="shadow-md cursor-pointer"
         />
       {:else}
-        <a href="/login">
+        <a href="/login" class=" h-fit">
         <ArrowRightToBracketSolid/>
+          <Tooltip>
+          Login
+        </Tooltip>
         </a>
       {/if}
       <NavHamburger class1="w-full md:flex md:w-auto md:order-1" />
-      <DarkMode btnClass=" w-6 h-6" />
+      <DarkMode btnClass="" />
 
       <a href="https://github.com/TungLe0319" target="_blank">
-        <GithubSolid class="w-6 h-6" />
+        <GithubSolid class="" />
+      
+      
       </a>
+         
+        
+      
+      
       <a href="https://www.linkedin.com/in/tung-le0319/" target="_blank">
-        <LinkedinSolid class=" w-6 h-6" />
+        <LinkedinSolid class=" " />
       </a>
     </div>
     {#if pageSession?.user}
-      <Dropdown placement="bottom" triggeredBy="#avatar-menu">
+      <Dropdown placement="bottom" triggeredBy="#avatar-menu" class="z-50">
         <DropdownHeader>
           <span class="block text-sm">{pageSession?.user?.name}</span>
           <span class="block truncate text-sm font-medium"
