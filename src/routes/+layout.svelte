@@ -18,7 +18,7 @@ $: posts = data?.posts as Post[]
   {#key data?.pathname}
     <main
       class="w-full"
- transition:fade={{ delay: 150, duration: 200 }}
+ transition:fade={{ delay: 0, duration: 200 }}
     >
       <slot {pageSession} />
     </main>

@@ -3,6 +3,7 @@
   import { SearchOutline } from "flowbite-svelte-icons";
   import { onMount } from "svelte";
   import { AppState } from "$lib/stores/AppState";
+  import { fade, fly } from "svelte/transition";
 
   export let posts;
 
@@ -37,6 +38,8 @@
         }
       });
   }
+  
+
 
   // Function to handle input change and filter posts
   function handleInputChange(event) {
@@ -59,18 +62,19 @@
 
 <div class="relative flex items-center just-center">
   <div class="flex absolute inset-y-0 left-0 items-center pl-3 cursor-pointer">
-    <SearchOutline class=" text-black   focus:ring-0 outline-none border-none" />
+    <SearchOutline  class=" text-black   focus:ring-0 outline-none border-none" />
   </div>
   <Input
     id="search-navbar"
-    class="pl-10 bg-transparent border-none outline-none  dark:text-white"
+    class="pl-10 bg-transparent rounded-none  border-x-0 border-t-0
+      border-b-2 border-b-orange-400 outline-none focus:ring-0  dark:bg-transparent focus:outline-none  dark:border-b-orange-400 dark:text-white focus:border-x-0 focus:border-t-0 placeholder:text-black dark:placeholder:text-white"
     placeholder="Search posts..."
     on:input="{handleInputChange}"
   />
 
   {#if filteredPosts.length > 0}
     <div
-      class="search-dropdown absolute top-16 left-0 bg-white border border-gray-300 dark:border-none shadow-md z-10"
+      class="search-dropdown absolute top-16 left-0 bg-white border border-gray-300 dark:border-none shadow-md z-10 max-h-96 overflow-y-scroll"
     >
       <div
         class=" p-1 text-lg font-1 dark:bg-gray-800 dark:text-white outline-none border-none"
@@ -79,14 +83,19 @@
       </div>
       <ul class="dark:bg-gray-800 outline-none border-none shadow-md w-full">
         {#each filteredPosts as post (post.id)}
-          <li
+     
+         <li
+        in:fly={{ x: -100, duration: 300 }}
+           out:fly={{ x: 100, duration: 300 }}
             class="p-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700"
           >
             <a href="/posts/{post.id}"> {@html post.highlightedTitle}</a>
           </li>
+      
         {/each}
       </ul>
     </div>
+    
   {/if}
 </div>
 
