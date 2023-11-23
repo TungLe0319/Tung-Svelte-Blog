@@ -116,7 +116,7 @@
         >
       </Dropdown>
     {/if}
-    <NavUl activeUrl="{activeUrl}" activeClass="active-link" nonActiveClass="">
+    <NavUl activeUrl="{activeUrl}" activeClass="active-link" nonActiveClass=" dark:text-white">
       <NavLi class="text-lg font-3" href="/" active="{true}">Home</NavLi>
       <NavLi class="text-lg font-3" href="/about">About</NavLi>
     

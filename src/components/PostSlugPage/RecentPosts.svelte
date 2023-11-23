@@ -30,9 +30,9 @@
           </div>
         </a>
         <div
-          class=" text-xs font-bold text-gray-500 flex justify-between items-center"
+          class=" text-xs font-bold flex justify-between items-center"
         >
-          <Badge color="default" border class="">
+          <Badge   color="default" border class=" text-orange-400 dark:text-orange-400">
             <ClockSolid class="w-2.5 h-2.5 mr-1.5 " />
             <time
               use:svelteTime="{{

@@ -5,7 +5,9 @@
   import Hero from "../components/Hero.svelte";
   import SearchBarV2 from "../components/SearchBarV2.svelte";
   import { AppState } from "$lib/stores/AppState";
-  
+
+  //create abserver for when a component is in view for svelte
+
   
   import type { PageData } from "./$types";
 
@@ -73,7 +75,7 @@
     </div>
 
     <div class="  mt-64 px-24">
-      <div class=" sticky top-20 z-50">
+      <div class=" sticky top-16 z-50">
         <SearchBarV2 categories="{categories}" />
       </div>
 

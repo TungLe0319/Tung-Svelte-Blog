@@ -34,7 +34,7 @@
     }
   }
 
-  function handleToggledLikePost(likeData) {
+  function handleToggledLikePost(likeData:any) {
     const newLike = likeData;
 
     // Check if the newLike.id is already in the likes array

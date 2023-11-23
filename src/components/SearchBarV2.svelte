@@ -29,7 +29,7 @@
   }
 </script>
 
-<div class="relative items-center just-center">
+<div class="relative items-center justify-center">
   <form class="flex" on:submit|preventDefault="{debouncedHandleInputChange}">
     <div class="relative">
       <Button

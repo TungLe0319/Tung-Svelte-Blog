@@ -89,7 +89,7 @@
       <Badge
         color="none"
         border
-        class="text-orange-400 font-3 font-semibold  cursor-default"
+        class="text-orange-400 dark:text-orange-400 font-3 font-semibold  cursor-default"
       >
         <ClockSolid class="w-2.5 h-2.5 mr-1.5 " />
 

@@ -59,11 +59,11 @@
 
 <div class="relative flex items-center just-center">
   <div class="flex absolute inset-y-0 left-0 items-center pl-3 cursor-pointer">
-    <SearchOutline class="w-4 h-4 text-black " />
+    <SearchOutline class=" text-black   focus:ring-0 outline-none border-none" />
   </div>
   <Input
     id="search-navbar"
-    class="pl-10"
+    class="pl-10 bg-transparent border-none outline-none  dark:text-white"
     placeholder="Search posts..."
     on:input="{handleInputChange}"
   />

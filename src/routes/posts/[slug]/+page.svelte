@@ -76,12 +76,7 @@
     post = updatedPost;
   }
 
-  const flyParams={
-    y: 100,
-      duration: 500,
-      delay:2000,
-      easing: cubicOut,
-  }
+
 </script>
 
 
