@@ -23,7 +23,7 @@
       <div class="flex flex-col justify-between w-2/3">
         <a
           class="hover:text-orange-500 hover:underline transition-all duration-150"
-          href="{`/blog/${recentPost?.id}`}"
+          href="{`/posts/${recentPost?.id}`}"
         >
           <div class="text-sm font-semibold">
             {recentPost.title}

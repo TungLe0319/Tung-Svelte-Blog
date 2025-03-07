@@ -70,11 +70,12 @@
           src="{pageSession?.user?.image}"
           class="shadow-md cursor-pointer"
         />
+      
       {:else}
-        <a href="/login">login</a>
+        <a href="/login" class="font-1">login</a>
       {/if}
       <NavHamburger class1="w-full md:flex md:w-auto md:order-1" />
-      <DarkMode btnClass=" w-6 h-6" />
+      <!-- <DarkMode btnClass=" w-6 h-6" /> -->
 
       <a href="https://github.com/TungLe0319" target="_blank">
         <GithubSolid class="w-6 h-6" />
@@ -95,6 +96,7 @@
           <DropdownItem>
             <a href="/auth/create">Create</a>
           </DropdownItem>
+          
         {/if}
 
         <DropdownDivider />
